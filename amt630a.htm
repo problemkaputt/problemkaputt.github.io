@@ -1,0 +1,64 @@
+<HTML><HEAD>
+ <TITLE>AMT630A</TITLE>
+ <META NAME="GENERATOR" CONTENT="XED">
+ <META NAME="Author" CONTENT="Nocash / Martin Korth">
+ <META NAME="Description" CONTENT="AMT630A video controller for mini TFT"> <META NAME="KeyWords" CONTENT="8031,8051,803x,805x,8051,
+  AMT630,AMT630A,MT630,FLASH,firmware,SPI,spi bus,video,lcd,tft,backlight">
+</HEAD>
+<!----------------->
+<B>AMT630A</B><BR>
+The AMT640A is a relative common video controller chip found in cheap
+mini TFT screens with composite input.<BR>
+Those screens are often sold as "car rear view monitor" (or by similar names),
+although they are essentially fully-fledged portable TVs (minus tuner/speaker,
+and without advanced inputs like S-video or RGB).<BR>
+The chip contains a 8031/8051 microprocessor, with firmware stored on an
+external SPI-bus FLASH memory chip.
+<P>
+Theoretically, it could be used as miniture monitor for gaming consoles.
+Unfortunately, it's working rather disappointing in practice:<BR>
+<LI>(fixed) original firmware has Backlight is at max brightness and cannot be changed.</LI>
+<LI>(fixed) original firmware doesn't recognite C64 video signals.</LI>
+<LI>(fixed) original firmware is having GUI annoying timeouts.</LI>
+<LI>(fixed) original firmware doesn't support proper power-saving in standby mode.</LI>
+<LI>(more or less fixed) PAL60 produces wrong colors.</LI>
+<LI>(more or less fixed) PAL60 forgets to update some scanlines (and draws wrong/older lines).</LI>
+<LI>With 320x240 pix screen, resampling is smeared, possibly a bit uglier than required...
+  <LI>For NTSC, one could theoretically leave blank lines (with black borders)</LI>
+  <LI>For PAL, one could theoretically crop lines (eg. on homecomputers with 200 lines)</LI>
+  </LI>
+<LI>Display seems to have some vertical-interlace-style flickering (even on non-interlaced pictures) (not sure if that's caused by the display or by scanline resampling).
+<P>
+Most of that issues are firmware related, so I've spent 2-3 weeks on
+disassembling it, and a bunch of more weeks on making my own firmware:<BR>
+<A HREF="amt630a.zip">new custom AMT630A firmware</A> (109Kbytes) (includes several improvements, some hardware diagnostics tool, and <A HREF="magicflr.htm">magic floor</A> game)<BR>
+<A HREF="engels.zip">original AMT630A firmware disassembly</A> (256Kbytes) (includes a mess of HLL coded stuff)<BR>
+The source code (and also the disassembly) can be re-assembled
+via <A HREF="x51.htm">no$x51</A>. Rev-engineered AMT630A hardware specs can be also found on the no$x51 page.<P>
+Currently supported display types:
+<LI>Tianma 3.5" 320x240 (4:3) (tested/working)</LI>
+<LI>Noname 3.5" 320x240 (4:3) (not tested, but should work)</LI>
+<LI>Innolux 4.3" 480x272 (16:9) (not tested, but should work)</LI>
+<LI>Innolux 5.0" 480x272 (16:9) (not tested, but should work)</LI>
+<P>
+I would be also interested in dumps from other firmware versions...
+<LI>firmware for screens with other resolutions</LI>
+<LI>firmware with RC-5 infrared IR input support or I2C support</LI>
+<LI>firmware with volume control support</LI>
+<LI>AMT630 firmware (to see if it's similar/compatible to AMT630A)</LI>
+<LI>other older/newer firmware revisions</LI>
+<LI>etc.</LI>
+<BR>
+That stuff would help on finding which I/O ports have which functions (eg. for changing the screen resolution/resampling).
+<P>
+<IMG SRC="630side.jpg" ALT="AMT630A 3.5inch TFT side" WIDTH=200 HEIGHT=222>
+<IMG SRC="630ori35.jpg" ALT="AMT630A 3.5inch TFT original" WIDTH=244 HEIGHT=226>
+<IMG SRC="630rear.jpg" ALT="AMT630A 3.5inch TFT rear" WIDTH=200 HEIGHT=193>
+<BR>Photos showing the original 3.5inch display comes in black/silver case with dangling cables, and rather unfortunate 16:9 form factor despite of the nice small 4:3 display, and my own case with true 4:3 form factor & rear connectors.
+<P>
+<A HREF="http://forums.nesdev.com/viewtopic.php?f=23&t=16825">AMT630A thread in nesdev forum</A> (english)<BR>
+<A HREF="https://www.forum64.de/index.php?thread/78809-amt630a-based-mini-tft-screens/&s=62126d0e382a45c892a7e39dc57c6a425c5389cd">AMT630A thread in forum64</A> (german)<BR>
+<A HREF="email.htm">Email</A>.
+<BR>
+<A HREF="index.htm">Back</A>.
+<P>

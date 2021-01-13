@@ -1,0 +1,203 @@
+<HTML><HEAD>
+  <TITLE>no$gba - nocash gameboy advance / nintendo ds / dsi emulator</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash Martin Korth">
+  <META NAME="Description" CONTENT="Gameboy Advance / Nintendo DS / DSi Debugger for Windows.
+   For professional. Source level debugging, VRAM Viewer, and
+   various other features.">
+  <META NAME="KeyWords" CONTENT="GBA,gba,AGB,agb,emulator,emu,emus,debugger,
+   devtool,devkit,dev,devr,devrs,kit,dev-kit,dev-tool,tool,debuggers,emulators,
+   32bit,nintendo,ports,docs,doc,specs,programming,programmers,console,hand,
+   held,handheld,debugging,emulation,homepage,webpage,page,shareware,cutdown,
+   freeware,professional,support,windows,win9x,win,pc,ibm,multiboot,mb,martin,
+   korth,martin korth,by,from,the,a,and,Martin Korth,nocash,no$,gameboy,game,
+   boy,advance,advanced,coding,coders,code,specifications,dox,reference,9x,io,
+   tech,technical,info,information,informations,details,opcodes,arm,arm7tdmi,
+   thumb,16bit,80x86,386,486,compatible,nocash@work.de,new,newest,update,i/o,
+   updates,demo,demos,cable,no$gba,no$agb,small,good,fast,quality,features,
+   dos,DOS,msdos,drdos,source code,source level,sourcelevel,elf,dwarf,dwarf2,
+   nds,nintendo ds,ds,dual screen,lite,ds-lite,dslite,dsi,twl">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<!---------------------->
+<A NAME="top"></A>
+<CENTER>
+<FONT SIZE=+2><B>No$gba Gameboy Advance / Nintendo DS / DSi Emulator Homepage</B></FONT>
+<P><I>Germany is where people cannot afford to smoke filter cigarretes.</I><P>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR ALIGN=CENTER>
+<TD width=20% bgcolor="#f0f0c0">&nbsp;</TD>
+<TD width=12% bgcolor="#c0c0a0"><A HREF="http://www.megagames.com/gba/gba_emulators.shtml">Gaming</A></TD>
+<TD width=12% bgcolor="#e0e080"><A HREF="gbanew.htm">History</A></TD>
+<TD width=12% bgcolor="#c0c0a0"><A HREF="#debug">Debugger</A></TD>
+<TD width=12% bgcolor="#e0e080"><A HREF="http://ngemu.com/forums/no-gba-discussion.102/">Forum</A></TD>
+<TD width=12% bgcolor="#c0c0a0"><A HREF="index.htm">Home</A></TD>
+<TD width=20% bgcolor="#f0f0c0">&nbsp;</TD>
+</TR></TABLE><P>
+</CENTER>
+<!----------------->
+<BR>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=100%><TR><TD>
+ <B>No$gba Downloads</B> - no$gba v3.03 - 17 Oct 2020<BR>
+ <A HREF="no$gba.zip">  Download no$gba Windows debug version</A> (ca. 1500 Kbytes)<BR>
+ <A HREF="no$gba-w.zip">Download no$gba Windows gaming version</A> (ca. 210 Kbytes)<BR>
+ <A HREF="no$gba-d.zip">Download no$gba DOS gaming version</A> (ca. 200 Kbytes)<BR>
+</TD></TR></TABLE>
+<P>
+<!---------------------->
+<!---
+<B>Donations</B><BR>
+Please <A HREF="donate.htm">donate</A> some money to support the no$xxx projects. I can charge <b>Credit Cards</b> <FONT COLOR="#800000">(new)</FONT>, and receive <b>Bank Transfers</b> and <b>Bitcoins</b>.
+<P>
+--->
+<!---------------------->
+<B>Tech Docs</B><BR>
+ - <A HREF="gbatek.htm">gbatek.htm</A> - GBA/NDS/DSi specs (html)<BR>
+ - <A HREF="gbatek.txt">gbatek.txt</A> - GBA/NDS/DSi specs (txt)<BR>
+<P>
+<!---------------------->
+<B>Exploits</B><BR>
+ - <A HREF="unlaunch.htm">Unlaunch</A> - DSi bootcode exploit, allows to run homebrew code and gain full hw-access without firmware/healthsafety<BR>
+<P>
+<!---------------------->
+<B>Sample Code</B><BR>
+ - <A HREF="magicflr.htm">Magic Floor</A> - A search game with source code for GBA/NDS/DSi/eReader<BR>
+ - <A HREF="wifiboot.htm">Wifiboot</A> - A dslink/dswifi clone in ASM for
+     wifi-uploading code from PC to NDS/DSi (for the PC side use no$gba
+     utility/upload, or the .EXE from original <A HREF="https://github.com/devkitPro/dslink">dslink</A>)<BR>
+<P>
+<HR>
+<!---------------------->
+<TABLE WIDTH=100%><TR><TD WIDTH=200>
+ <IMG SRC="money02.jpg" WIDTH=200 HEIGHT=139><BR>
+</TD><TD>
+ <B>Name your price</B><BR>
+ You can download, test, and use my software & documents for free.<BR>
+ If my work appears useful to you then you can also pay for it.
+ <TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+ <LI>You can <A HREF="https://www.patreon.com/martin_korth">become a patron</A> (internationally, for monthly donations)</LI>
+ <LI>You can <A HREF="https://secure.problemkaputt.de/checkout.php">pay by credit card</A> (internationally)</LI>
+ <LI>You can <A HREF="donate.htm">pay by bank transfer</A> (fees can be quite high from outside European Union)</LI>
+ <LI>You can <A HREF="donate.htm">pay by bitcoin</A> (internationally)</LI>
+ </TR></TD></TABLE>
+</TD></TR></TABLE>
+<P>
+<!---------------------->
+<B>Forums</B><BR>
+ - <A HREF="http://ngemu.com/forums/no-gba-discussion.102/">ngemu</A> - no$gba section in ngemu forums<BR>
+ - <A HREF="http://4dsdev.org/">4dsdev</A> - 3DS developers forum (one can also post DSi stuff there)<BR>
+ - <A HREF="http://forum.gbadev.org/">gbadev</A> - GBA developers forum (also has a NDS section)<BR>
+<P>
+<!---------------------->
+<!---
+<B>Supporting the no$gba project</B><BR><FONT SIZE=-1>
+If somebody would like to help me on the nocash project, here's a list of
+some things that'd be useful to me, for research purposes:<BR>
+ - broken/older DSi DMW-W015 wifi board (for desoldering wifi chips and tracing PCB wires)<BR>
+ - broken NDS/DSi/3DS consoles or mainboards (for desoldering and PCB tracing)<BR>
+ - newer DSi console (with DWM-W024 wifi board)<BR>
+ - 3DS or 2DS consoles (not New3DS, already got one)<BR>
+ - 1-3 spare SDmicro adapters (for making custum cables to easy testing)<BR>
+ - 1-2 old MMC cards (for testing compatibility with non-SD cards)<BR>
+ - windows xp, english version (cdrom and licence/sticker)<BR>
+ - gba infra-red adapter<BR>
+ - gba wifi adapter<BR>
+ - bug reports (detailed info please: say what does not work in which situations)<BR>
+Monetary <A HREF="donate.htm">donations</A> are also valuable support (I have no other income and need to eat, drink, smoke, work, and sleep somewhere, your support can make all that things possible).
+</FONT><P>
+--->
+<!---------------------->
+        <!---
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<CENTER>
+<IMG SRC="btclogo.gif" WIDTH=44 HEIGHT=44><BR>
+<IMG SRC="sepalogo.gif" WIDTH=100 HEIGHT=36><BR>
+<IMG SRC="ibanlogo.gif" WIDTH=100 HEIGHT=30><BR>
+</CENTER>
+</TD><TD>
+ <B>Freeware/donations</B><BR>
+ No$gba is now fully freeware. Optional <A HREF="donate.htm">donations</A>
+ would be very <B>welcome</B> and <B>valuable</B> support for continuing the
+ <A HREF="index.htm">no$xxx</A> projects.
+ <BR>
+ In general, I am aiming at living with little money, and to work just for
+ the fun it. However, in the past two years I ended up with too less money -
+ which isn't really fun - I needed to borrow some money, and currently, a bag
+ of coffee can appear like a big investment (I can still buy coffee, but doing
+ so is making me feel uncomfortable, it's different from past years of big ease,
+ where I would have bought such goods without second thought).
+ <BR>
+ Not to mention the evil end-of-the-month: Without real job and without
+ regular income, it's the day when I need to pay the rent - without getting
+ any money (unless I am lucky and some people have gratefully donated
+ something).
+ <BR>
+ With donations you could really help me.
+ But nevermind, no problem if you don't like to, or if you can't do so.
+</TD></TR></TABLE>
+ <P>
+        --->
+<!---------------------->
+<!---
+<B>Other new projects</B><BR><FONT SIZE=-1>
+ - <A HREF="psx.htm">no$psx</A> - playstation 1 emulator/debugger<BR>
+ - <A HREF="sns.htm">no$sns</A> - super nintendo emulator/debugger<BR>
+And many <A HREF="index.htm">more</A> updated no$xxx versions.
+</FONT><P>
+--->
+<!---------------------->
+
+<B>Questions on how to use no$gba</B><BR>
+Please send any questions on how to use the freeware version to a <A HREF="http://ngemu.com/forums/no-gba-discussion.102/">Forum</A>. Hoping that other users can help you.<BR>
+Non-technical bug reports, eg. <I>"Princess Piggy can't fly in Level 3 of Animal Dreams IV"</I>, that information isn't useful to me, please go post it to a <A HREF="http://ngemu.com/forums/no-gba-discussion.102/">Forum</A> or tell it to somebody else.<BR>
+Technical bug reports, eg. <I>"no$gba crashes on MOV R0,R7 opcodes on ARM7 CPU in NDS mode"</I>, that would be very interesting, please let me know about that things per email!<BR>
+<P>
+
+<B>Freeware Games</B><BR>
+<A HREF="http://www.pdroms.de">pdroms</A>. Homebrew games for GBA and NDS
+and other consoles
+<P>
+
+</FONT><P>
+<!---------------------->
+<HR>
+<!---------------------->
+<A HREF="gba-dev.htm">no$gba debug version homepage</A><BR>
+<A HREF="gbapics.htm">no$gba debug version screenshots</A><BR>
+<P>
+<!---------------------->
+<HR>
+<!---------------------->
+01 Jun 2015<BR>
+DSi emulation booting - finally (8 months work to get there)<BR>
+note: doing this on your computer will require several system files (which you probably don't have) (see DSi Emulation chapter in no$gba help for details)<BR>
+<IMG SRC="dsi-boot.gif" WIDTH=704 HEIGHT=955><BR>
+<!---------------------->
+<HR>
+<!---------------------->
+<A HREF="twl-core.jpg"><IMG SRC="twl-core.gif" WIDTH=600 HEIGHT=601></A><BR>
+DSi mainboard signals, <A HREF="twl-core.jpg">see more</A> (the photos are
+from neimod and scanlime, and probing 0 ohm connections with a multimeter
+was done on my own mainboard).
+About as expected, that project has (almost) completely bricked the console:
+After probing the the SMD pins hundreds of times, the solder pads became
+deformed, producing shortcuts between pins.
+After reassembling the console and half-heartedly cleaning the solder pads,
+the first thing happening was blowing the battery fuse. After repairing the
+fuse and more cleaning it started working with nearly black screens, cleaning
+the backlight pins made it almost working, only the touchscreen and sound
+remained non-functional, and the tapping the power button caused white screens
+instead of doing a warmboot, which was apparently caused by dirt on one of the
+reset pins. Alltogether I've spent several hours on scratching the gaps between
+numerous SMD pins with a needle - and now everything seems to be back
+working.<BR>
+The whole pinout project did take maybe 80 hours, whereas I just want to
+connect some wires to the NAND pins. And then I ended up with: Why not making
+a component list before modding the PCB? And why not probing the pinouts of
+the ribbon cable connectors? And hey, why not spending six more days on
+probing the whole chipset pinout?
+<!---------------------->
+<P><CENTER><HR>
+<A HREF="index.htm">Back to nocash mainpage</A>.<BR>
+<HR>
+<BR>
+</BODY></HTML>

@@ -1,0 +1,238 @@
+<HTML><HEAD>
+  <TITLE>No$sns notes</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED2HTM converter">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="contents"></A><FONT SIZE=+2>&nbsp;Contents</FONT></TD></TR></TABLE><BR>
+<B>Emulator/Debugger</B><BR>
+<A HREF="#emulationcontrols">Emulation Controls</A><BR>
+<A HREF="#emulationfiles">Emulation Files</A><BR>
+<A HREF="#debuggingnotes">Debugging Notes</A><BR>
+<BR>
+<B>SNES Hardware Specs</B><BR>
+<A HREF="fullsnes.htm">fullsnes.htm</A> - complete SNES specs, html version.<BR>
+<A HREF="fullsnes.txt">fullsnes.txt</A> - complete SNES specs, text version.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="emulationcontrols"></A><FONT SIZE=+2>&nbsp;Emulation Controls</FONT></TD></TR></TABLE><BR>
+Below are hotkeys & controls the no$sns emulator.<BR>
+<BR>
+<B>Emulation Hotkeys</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  F1..F9        Toggle Sound Voice 0..7 and Echo on/off
+  Shift+F1..F6  Toggle Video Layers BG0..BG3, OBJ, and SFC-Box/NSS OSD on/off
+  F10           Re-enable all Voices & Video Layers
+  F11           Setup Options
+  F12           Cartridge Menu
+  ESC           Stop Emulation (switch to debugger)
+  Keypad-Div    Soft Reset (Warmboot, as when pushing Reset Button)
+  Keypad-Mul    Hard Reset (Coldboot, as when Power-On)
+  Keypad-Sub    Same as ESC
+  Keypad-Add    Whoosh (run as fast as possible)
+  Backspace     Whoosh (run as fast as possible)
+</TD></TR></TABLE><BR>
+<B>Mouse Controller Emulation (when enabled in setup)</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  Left-Mouse-Button   Pass mouse to SNES Emulation
+  Middle-Mouse-Button Pass mouse to Operation System
+  ESC                 Pass mouse to Operation System
+</TD></TR></TABLE><BR>
+<B>Lightgun Emulation</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  Left-Mouse-Button   Trigger (Scope/Justifier/Macs)
+  Right-Mouse-Button  Cursor-Button (Scope) or Start-Button (Justifier)
+    XXX (Mid-Butt)    Act as Gun2 when HELD-DOWN (Justifier)
+    XXX (Mid-Butt)    Pause (Scope)
+    XXX (Wheel)       Turbo/Normal (Scope)
+</TD></TR></TABLE><BR>
+<B>NTT Data Pad (Joypad with numeric Keyboard)</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  UP/DN/LT/RT             Keys Up/Dn/Lt/Rt (aka Joypad DPAD keys)
+  PGUP/PGDN               Keys Prev/Next Page (aka Joypad Select/Start)
+  BS or DEL               Key CLR
+  END                     Key END
+  ".0123456789"           Keys ".0123456789"
+  Keypad "/*.0123456789"  Keys "#.0123456789"
+</TD></TR></TABLE>Joypad keys A,B,X,Y,L,R can be defined in setup as usually.<BR>
+<BR>
+<B>X-Band Keyboard Emulation</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  QWERTY...               Keyboard
+</TD></TR></TABLE>Note: Unknown/unused keys aren't emulated (eg. the X-Band keyboard might have
+additional function keys, but, if so, corresponding scancodes are unknown).<BR>
+<BR>
+<B>Super Famicom Box</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  INS      XXX            Insert Coin
+  HOME     XXX            RESET Button
+  PGUP     XXX            GAME/TV Button
+  "123456" (or Keypad)    1st..6th Switch Position (from left)
+</TD></TR></TABLE><BR>
+<B>Nintendo Super System (NSS)</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  1..3    Game 1..3 Buttons
+  4       Test Button (unknown purpose) (XXX mapped to unknown I/O bit)
+  5       Service Button (Add Credit) (Service+Instructions = Config Mode)
+  6       DIP-Switch Window (may need to restart game to apply changes)
+  Ins/Del Coin Slot 1..2 Signals (Add N Credits; depending on Coinage)
+  Home    Instructions Button
+  End     Restart Button
+  PgUp/Dn Page Up/Dn Buttons
+</TD></TR></TABLE><BR>
+<B>Voice-Kun Remote Control</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  HOME                    Play                    +10    PLAY   PREV
+  END                     Pause                 .------.------.------.
+  DEL                     Stop                  | INS  | HOME | PGUP |
+  INS                     +10/&gt;10               |------+------+------|
+  PGUP                    Previous Track        | DEL  | END  | PGDN |
+  PGDN                    Next Track            '------'------'------'
+  "0123456789"            Keys "0123456789"       STOP   PAUSE  NEXT
+  Keypad "0123456789"     Keys "0123456789"
+</TD></TR></TABLE>Note: The emulated part is Remote Control to Voice-Kun (but, Voice-Kun to CD
+Player isn't emulated yet).<BR>
+<BR>
+<B>Barcode Reader (Barcode Batter)</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  INS-Key       Paste numeric ASCII string from clipboard and Send barcode
+  DEL-Key       Manually Clear input buffer (without sending)
+  Keypad 0..9   Manually Key-in Barcode digits
+  Keypad Dot    Manually Confirm input and Send (or re-send) barcode
+</TD></TR></TABLE>Note: For the Barcode Battler, only EAN-13 is implemented (since it's unknown
+how/if it supports shorter UPC-A, UPC-E, or EAN-8 barcodes).<BR>
+<BR>
+<B>Twin Tap Push Buttons (Multitap with four Twin Taps)</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  12345678  Buttons for Player 1-8
+</TD></TR></TABLE>Note: In the Shijou Saikyou no Quiz Ou Ketteisen Super game, use the 2nd
+option in main-menu to enter the Twin Tap mode, then select 1-8 players.<BR>
+<BR>
+<B>Miracle Piano Keyboard</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  12345...      1st Octave (12 keys)
+  QWERT...      2nd Octave (12 keys)
+  ASDFG...      3rd Octave (12 keys)
+  ZXCVB...      4th Octave (10 keys)
+  Rshift/Ctrl   4th Octave (last 2)
+  NUM-Dot       5th Octave (1 key)
+  NUM-0..7      Control Buttons 0..7
+  Left Shift    Sustain Foot Pedal
+</TD></TR></TABLE>Note: The miracle sound isn't emulated (as far as known there aren't any
+dumps of it's BIOS and SOUND-ROM existing yet).<BR>
+Note: In the Miracle software, press joypad Select button to enter main menu
+(and to leave title/demo mode).<BR>
+<BR>
+<B>Pachinko Dial</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  Analog Joypad Forward   Pachinko Dial
+  XXX                     Pachinko Button... if there's any?
+</TD></TR></TABLE><BR>
+<B>Exertainment Bicycle</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  Analog Joypad Forward   Pedal Speed
+  Analog Joypad X-Axis    Alias for digital DPAD left/right
+  XXX                     Mode and TV Buttons (unknown how they do work)
+</TD></TR></TABLE><BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="emulationfiles"></A><FONT SIZE=+2>&nbsp;Emulation Files</FONT></TD></TR></TABLE><BR>
+<B>SLOT Folder</B><BR>
+Default location for Game ROM-Images is "SLOT" folder (in same directory as
+"no$sns.exe"). For some strange reason, SNES ROM-Images are conventionally
+having extension .SMC (dates back to an old copier).<BR>
+ZIPped ROM-Images can be loaded if PKUNZIP.EXE is installed (ie. it must be
+somewhere in your "PATH") (if you don't know what that means, put it into a
+folder like C:\WINDOWS\COMMAND or so).<BR>
+<BR>
+<B>BIOS Folder</B><BR>
+The "BIOS" folder (in same directory as "no$sns.exe") should contain
+following files:<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  DSP1.BIN      8Kbytes  ;\
+  DSP1B.BIN     8Kbytes  ; preferably unpadded 8Kbytes (not padded 10Kbytes)
+  DSP2.BIN      8Kbytes  ; and preferably little-endian dumps (not big endian)
+  DSP3.BIN      8Kbytes  ; (more preferably: append it end of SNES rom-image)
+  DSP4.BIN      8Kbytes  ;/
+  ST010.BIN     52Kbytes
+  ST011.BIN     52Kbytes
+  SUFAMI.SMC    256Kbytes (for Sufami Turbo "ST" games)
+  BSX-BIOS.SMC  1024Kbytes (for Satellaview "BS" FLASH cartridges)
+  KROM1.BIN     64Kbytes (Super Famicom Box BIOS)
+  NSS-BIOS.BIN  32Kbytes (Nintendo Super System BIOS) (copy of desired version)
+  NSS-v03b.BIN  32Kbytes (Nintendo Super System BIOS) (newest version) ;\alter-
+  NSS-v03a.BIN  32Kbytes (Nintendo Super System BIOS) (new version)    ; nate
+  NSS-v02.BIN   32Kbytes (Nintendo Super System BIOS) (old version)    ;/names
+  NSS-CHAR.BIN  4.5Kbytes (Nintendo Super System OSD Charset) (M50458-001SP)
+  CX4.BIN       3Kbytes
+  APU.BIN       64 bytes (APU/SPC700 boot ROM)
+  D411.BIN      512 bytes (lockout chip)
+</TD></TR></TABLE>The files aren't included with the emulator. They are required for certain
+games. Alternately (or preferably), the DSPn/ST01n/CX4 ROM-images can be
+appended at the end of the corresponding game ROM-images. The
+SUFAMI/BSX-BIOS/APU files aren't part of game cartridges, so they should/must
+be stored in the BIOS folder, not in game ROMs. The APU file is needed only
+for best emulation accuracy (otherwise no$sns is using a BIOS clone which
+should be working with most games). The D411 file isn't actually
+used/required; except, one can load it into the debugger (just to view the
+disassembled CIC code).<BR>
+Also, following ROMs are newly dumped (but not supported yet):<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  ST018.BIN     128Kbytes
+</TD></TR></TABLE>Following ROMs aren't yet dumped (and thus aren't supported):<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  BIOS-ROM and SOUND-ROM (for Miracle Piano)
+</TD></TR></TABLE>Following ROMs aren't yet dumped (but should work if dumps would exist):<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  MB90082.BIN     9Kbytes  (Super Famicom Box OSD-Charset)     (MB90082-001)
+  ??             ? Kbytes  (Exertainment Bicycle OSD Charset)  (unknown chip)
+</TD></TR></TABLE><BR>
+<B>SFC-Box ROM-Images (Super Famicom Box) (Hotel Box)</B><BR>
+ROM-Images should contain all EPROMs/ROMs from the cartridge, ordered as so:<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  GROM + ROM0(+ROM1(+ROM2(+etc))) (+DSP1)
+</TD></TR></TABLE>The GROM at the begin of the file does also serve as file header:<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  The size of the GROM (1 SHL N kbytes) is found in GROM [0001h].
+  The number of ROMs is found in GROM [0000h].
+  Title & Size of ROM&lt;n&gt; can be found at [[0008h]+n*2]*1000h.
+  Physical IC Socket ID for ROM&lt;n&gt; can be found in GROM at [0008h]+[0000h]*2+n.
+  The presence of a DSP ROM Image is indicated in GROM [0004h].Bit1.
+</TD></TR></TABLE>With that information, one can calculate the file-offsets for each ROM.<BR>
+If desired, one may merge two cartridges images in one file, eg.<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  GROM1+ROM0+ROM1+ROM2+ROM3+DSP + GROM2+ROM0+ROM1
+</TD></TR></TABLE>Before merging GROM+ROMs, make sure that the ROMs are raw-images (without
+512-byte copier headers), and that the DSP ROM is unpadded (8Kbytes), in
+little-endian format.<BR>
+The additional "non-cartridge" ROMs of the SFC-Box (KROM1 and MB90082) should
+be located in a separate BIOS folder; not in the cartridge ROM-Image.<BR>
+<BR>
+<B>NSS Cartridge ROM-Images (Nintendo Super System) (Arcade Cabinet)</B><BR>
+ROM-Images should consist of following components in following order:<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  1. PRG-ROM (the SNES game) (usually 512Kbytes or 1024Kbytes)
+  2. INST-ROM (the Z80 instructions) (32Kbytes)
+  3. PROM (decryption key) (16 bytes)
+</TD></TR></TABLE>The existing cartridges don't contain any coprocessors - if somebody should
+make such cartridges, please insert the coprocessor ROM (eg. DSP1) between
+PRG-ROM and INST-ROM.<BR>
+PROM keys in binary form can be found at http://nocash.emubase.de/nss-keys.zip<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="debuggingnotes"></A><FONT SIZE=+2>&nbsp;Debugging Notes</FONT></TD></TR></TABLE><BR>
+Below are controls, directives, and other stuff for the no$sns debugger.<BR>
+<BR>
+<B>Debug Hotkeys</B><BR>
+The various hotkeys are shown in the menu-bar's drop-down menues. Some of the
+more important ones are:<BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  Cursor-Right  Follow (goto target address of jmp/call/mov opcode)
+  Cursor-Left   Undo-Follow (goto back to previous address)
+  F7/F9         Trace/Run
+  Ctrl+T        Toggle CPU (Main, APU, and, if any: DSP/GSU/SA1/CX4)
+</TD></TR></TABLE><BR>
+<B>SNES-Specific Assembler Directives</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  .nocash/.native   Select Assembler Syntax
+  .snes             SNES Cartridge (normal SNES header checksum)
+  .bsx              Satellaview BS-X FLASH Cartridge (special checksum)
+  .lorom/.hirom     SNES Mapping (select header checksum location)
+  .65c818           Instruction Set for SNES Main CPU
+  .spc700           Instruction Set for SNES Sound CPU
+  .cx4              Instruction Set for SNES CX4 Coprocessor (rarely used)
+  .nss_&lt;xxx&gt;        NSS INST ROM (see magicnss.a22 sample in magicsns.zip)
+  .assume p=nnh     Assume 65c816 8bit/16bit modes (eg. P=30h for 8bit mode)
+  .rom/.code/.text  Define code/data in Cartridge ROM
+  .ram/.data?/.bss  Define uninitialized-data-structures in RAM
+  db 0nnh           Define byte, 8bit (or ASCII text strings)
+  dw 0nnnnh         Define word, 16bit
+  df 0nnnnnnh       Define far/long, 24bit
+  dd 0nnnnnnnnh     Define doubleword, 32bit
+</TD></TR></TABLE><BR>
+<B>Port 21FCh..21FFh - Nocash Debug Extension I/O Ports</B><BR>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD><PRE>  21FCh.W Write ASCII character to Debug Message Window         ;\char_out
+  21FDh.W No function (allows to write 21FCh even in 16bit mode);/
+  21FCh.R Latch 21MHz timer & Read bit0-7 of latched timer      ;\21MHz timer
+  21FDh.R Read bit8-15 of latched timer                         ; (ticks since
+  21FEh.R Read bit16-23 of latched timer                        ; power-up)
+  21FFh.R Read bit24-31 of latched timer                        ;/
+</TD></TR></TABLE>The char_out function can be used with ASCII chars 20h..7Fh, line breaks may
+be send as 0Dh, 0Ah, or 0Dh+0Ah (all three variations supported). The debug
+window uses non-proportional font. There is no automatic line wrapping.<BR>
+<BR>
+</BODY></HTML>

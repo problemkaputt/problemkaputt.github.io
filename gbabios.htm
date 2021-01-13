@@ -1,0 +1,194 @@
+<HTML><HEAD>
+  <TITLE>GBA BIOS FAQ</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash Martin Korth">
+  <META NAME="Description" CONTENT="Gameboy Advance BIOS.
+   Basic info and Tech details.
+  <META NAME="KeyWords" CONTENT="GBA,gba,AGB,agb,BIOS,bios,ROM,rom,image,
+   dump,dumping,rom-image,copy,copying,emulator,emulation,no$gba,nocash,
+   gba.rom, no$gba.rom,gameboy,advance,advanced">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<!---------------------->
+<FONT SIZE=+2>GBA BIOS FAQ</FONT><BR><HR><BR>
+The GBA BIOS is probably the least understood feature of the Gameboy Advance.
+Even though BIOSes are known to be used in PCs for many years, the expression
+often causes total confusion among GBA programmers. This document tries
+to explain all important facts. The document is called "FAQ" assuming that
+many people <I>should</I> frequently ask such questions - this assumption
+appears to be incorrect. The text is covering both very basic questions,
+as well as detailed technical information, and instructions on how to copy
+the BIOS into a ROM-image.
+<P>
+<B>Note:</B> You may skip over the first box if you are not a complete
+idiot or newbie.<BR><BR><BR>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR bgcolor="#e0e0c0"><TD>
+<B>What is a BIOS?</B></TD></TR><TR bgcolor="#f0f0e0"><TD>
+  BIOS - that is the shortcut for Basic Input/Output System - B, I, O, S -
+that's there the name comes from!<BR>
+  Most computers have a BIOS in ROM (Read Only Memory), or in Flash ROM.
+Unlike for <I>CD ROMs</I> and <I>cartridges</I>, this memory is built-in,
+and it cannot be removed from the computer. The computer also haves other
+built-in memory: RAM.<BR>
+  But, RAM does 'forget' its content when the computer is switched off. Only
+ROM can memorize data and program code even when it is off! In fact, a BIOS
+ROM really contains such program code, and never forgets it! The program
+code is used to <I>boot</I> the computer every time when it is switched on.<BR>
+  What does that mean? It means that it <I>initializes</I> the computer,
+and, after <I>initialization</I> it will usually search for attached <I>disk
+drives</I> or <I>cartridges</I>, and then tries to load the actual <I>operating
+system</I> (Windows is an example) or, in case of gaming consoles,
+it loads a <I>game</I> (for example: Super Mario!).<BR>
+  But that is not all. Many BIOSes also include <I>functions</I> which can be
+used to <I>Input/Output</I> data to or from the hardware! The <I>operating
+system</I> and <I>games</I> can use these functions to <I>access</I> the
+hardware, for example, to write text on the screen, or even to read or write
+data from any attached disk drives!
+</TD></TR></TABLE><P>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR bgcolor="#e0e0c0"><TD>
+<B>What is the GBA BIOS?</B></TD></TR><TR bgcolor="#f0f0e0"><TD>
+The gameboy advance includes a small BIOS ROM (built-in in its CPU),
+the program code in this ROM is used for three purposes:<BR>
+<LI><I>The Intro Sequence</I>. Displays the Gameboy logo and Nintendo logo
+each time when the GBA is switched on.</LI><BR>
+<LI><I>The SWI Functions</I>. Maths, initialization, decompression, and other
+functions, which can be used by GBA software.</LI><BR>
+<LI><I>Multiboot Function</I>. Allows to boot the GBA from other computers or
+consoles even if no cartridge is inserted.</LI><BR>
+The original BIOS code is copyrighted by Nintendo, and, for that reason, not
+included in the no$gba package.
+        <TABLE BORDER=0 CELLSPACING=15 CELLPADDING=5 bgcolor="#e0e0c0"><TR><TD>
+<B>Note on Intro sequence:</B> Of course, unlike real hardware, no$gba is not
+bound to the execution of this nag screen, and allows to start the game
+cartridge directly. This is particulary useful for programmers whom are
+probably testing new builts of their programs many-many times per day.<BR>
+This fast boot mechanism can be used also for single-gamepak software.
+        </TD></TR></TABLE>
+</TD></TR></TABLE><P>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR bgcolor="#e0e0c0"><TD>
+<B>How does no$gba emulate the BIOS without original ROM?</B></TD></TR><TR bgcolor="#f0f0e0"><TD>
+No$gba includes some sort of a BIOS 'clone'. This program code is written
+directly in 80X86 language (NB, that causes less CPU overload as when
+emulating ARM opcodes). These 'simulated' functions are
+providing exactly the same return values as the real BIOS, including for
+undocumented and 'undefined' return values, and are fully compatible with
+most or all existing GBA software.<BR>
+        <TABLE BORDER=0 CELLSPACING=15 CELLPADDING=5 bgcolor="#e0e0c0"><TR><TD>
+<B>Drawbacks</B><BR>
+The 'cloned' functions are not providing the same <I>execution time</I> as
+the opcodes which used in the 'real' functions. However, exact timing accuracy
+is normally not so important (except for emulation of unstable program code).<BR>
+The 'cloned' functions do not include <I>sound functions</I> - these are
+required only for games that are using Nintendos sound driver.<BR>
+        </TD></TR></TABLE>
+For best timing accuracy (if using any BIOS functions at all), or for
+support of the sound functions (if needed) you can install a copy of the
+original BIOS in your no$gba folder. See below for more info.
+</TD></TR></TABLE><P>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR bgcolor="#e0e0c0"><TD>
+<B>How to get a copy of the original BIOS?</B></TD></TR><TR bgcolor="#f0f0e0"><TD>
+There are a number of ways - which are unfortunately far too complicated
+for normal people! There are most likely only a mere <I>handful</I> of skilled
+programmers living on this planet whom <I>might</I> be able to solve that
+problem.<BR>
+Fortunately, you do not really need the original stuff because the no$gba
+'clone' BIOS should work with all GBA software.
+If it doesn't: 1) Please let me know of it! 2) Check if your program is
+doing any strange/unstable things 3) Let me know about it anyways (even if
+you did solve the problem, I would still like to know about it, and try to
+find a workaround, so that it cannot trouble you or other people in future).
+</TD></TR></TABLE><P>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR bgcolor="#e0e0c0"><TD>
+<B>Okay, but how are that magic ways to get the copy?</B></TD></TR><TR bgcolor="#f0f0e0"><TD>
+You really want to know? If you aren't <I>afraid</I> of expression
+like soldering, copy protections, and pseudo code examples, read on...
+        <TABLE BORDER=0 CELLSPACING=15 CELLPADDING=5 bgcolor="#e0e0c0"><TR><TD>
+<B>Method 1 - Xboo Package</B><BR>
+The nocash xboo package (download <A HREF="gba-xboo.htm">here</A>) includes
+ready-for-use software for downloading the BIOS from GBA to PC. It also
+includes instructions on how to built a cable connection between GBA link
+port and PC parallel port, the circuit is relative simple: You need only a
+handful of wires (plus plugs, unless you'd connect the cables directly to
+the mainboard). Anyways, that means <I>soldering</I> and dealing with
+<I>hardware</I>, and is probably not suitable for <I>software</I> guys.
+And, of course, it may take up 1-2 hours of your time, even if you have
+wires and soldering iron at hand.
+        </TD></TR><TR><TD>
+<B>Method 2 - Custom Solutions</B><BR>
+If you do already have a working cable connection between PC and GBA then
+you could write a transmit procedure at the GBA side, and a receive procedure
+at the PC side - this could be implemented only by <I>software experts</I>
+- or by people whom already own software for that purpose (for example, some
+hardware debuggers may include a memory transfer function).<BR>
+But not enough, the GBA includes a <I>copy-protection</I>, this can be
+bypassed by following pseudo code formula; used to read one byte (x) from
+address (y), the address range is 0..3FFFh (16KBytes); you could use it,
+for example, to write a program that copies all bytes into Work RAM, and
+then transfer that memory to PC:
+<P>
+<I>x = (MidiKey2Freq(y-(((y AND 3)+1)OR 3), 168, 0) * 2) SHR 24</I>
+<P>
+Explained: The read-protection does not allow the user program to read BIOS
+memory by LDR opcodes. The BIOS CpuSet and CpuFastSet memory copy functions
+could theoretically read from BIOS memory, however, these functions verify
+if the source address is in BIOS area and will silently reject the transfer.
+The MidiKey2Freq BIOS function (SWI 1FH, incoming parameters in r0,r1,r2,
+return value in r0) does not include such verification. It is normally
+intended to read a MidiKey value from memory, and to convert it into a
+frequence value. The above formula undoes this conversion and returns the
+original memory value. This mechanism was discoverd by DarkFader, which is
+cool, his description was kinda dull though, but anyways: thanks!
+        </TD></TR><TR><TD>
+<B>Method 3 - Internet</B><BR>
+If you think of downloading an existing copy from the internet: The good
+news is that there are actually a couple of sites allowing to download
+GBA BIOS ROM-images. That bad news is that <U>most or all</U> of these
+ROM-images are not identical to the ROM used in real GBAs. The files are
+somewhat similiar, containing the usual intro-sequence and so on, but they
+are <U>not compatible</U> with real GBAs, nor with real GBA software.<BR>
+(I don't know why people are spreading this invalid versions, nor where these
+files are coming from. Maybe dumps from older prototypes? Maybe japanese
+GBAs are using a slightly different BIOS version?)<BR>
+Anyways, even if the 'correct' version is available somewhere, the overloads
+of 'incorrect' versions are making it very difficult to find it.
+No$gba includes a checksum verification, and outputs a warning message
+when attempting to use an incorrect BIOS version which is not 1:1 identical
+to that one which is used in real GBAs.
+        </TD></TR></TABLE>
+If you should really get the rom-image, then you can use it with no$gba
+by saving it in your <B>no$gba folder</B> (ie. the directory that contains
+your no$gba executable), save it as <B>filename</B> <I>GBA.ROM</I> or
+<I>NO$GBA.ROM</I> (either one works, but please do not use <I>both</I>
+names). Also, you can enable and disable use of the rom-image in setup
+(enabled by default; of course only if the file is present).
+</TD></TR></TABLE><P>
+<!---------------------->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR bgcolor="#e0e0c0"><TD>
+<B>When to use BIOS Functions?</B></TD></TR><TR bgcolor="#f0f0e0"><TD>
+Your program may, or may not use the BIOS. You are certainly free to use
+your own program code instead of the built-in functions.<BR>
+The built-in functions may be treated as a nice <B>gesture</B>. For example,
+the division function is making it much easier to get started when dealing
+with numbers, and the availability of decompression functions is directing
+the user towards less careless use of memory resources.<BR>
+On the contrary, these rather inefficent functions may become
+<B>contra-productive</B>. For example, a program that relies on a large
+number of calculations would be strongly recommended to use its own maths
+functions, which are (hopefully) more optimized and would provide at least
+twice as fast execution time.
+</TD></TR></TABLE><P>
+<!---------------------->
+Please let me know if you have read and <U>understood</U> this
+document and still have questions or problems.<BR>
+I will <U>not</U> email copies of the copyrighted rom-image to anybody,
+not even to you, sorry.<P>
+<B>References</B><BR>
+<A HREF="gbatek.htm">gbatek.htm</A> - complete GBA specifications,
+including for <A HREF="gbatek.htm#biosfunctions">bios functions</A>.<P>
+<A HREF="gba.htm">Back to no$gba homepage</A><P>
+</BODY></HTML>
+

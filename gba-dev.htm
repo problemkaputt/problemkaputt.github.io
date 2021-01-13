@@ -1,0 +1,355 @@
+<HTML><HEAD>
+  <TITLE>no$gba - nocash gameboy advance / nintendo ds debugger</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash Martin Korth">
+  <META NAME="Description" CONTENT="Gameboy Advance / Nintendo DS Debugger for Windows.
+   For professional use only. Source level debugging, VRAM Viewer, and
+   various other features.">
+  <META NAME="KeyWords" CONTENT="GBA,gba,AGB,agb,emulator,emu,emus,debugger,
+   devtool,devkit,dev,devr,devrs,kit,dev-kit,dev-tool,tool,debuggers,emulators,
+   32bit,nintendo,ports,docs,doc,specs,programming,programmers,console,hand,
+   held,handheld,debugging,emulation,homepage,webpage,page,shareware,cutdown,
+   freeware,professional,support,windows,win9x,win,pc,ibm,multiboot,mb,martin,
+   korth,martin korth,by,from,the,a,and,Martin Korth,nocash,no$,gameboy,game,
+   boy,advance,advanced,coding,coders,code,specifications,dox,reference,9x,io,
+   tech,technical,info,information,informations,details,opcodes,arm,arm7tdmi,
+   thumb,16bit,80x86,386,486,compatible,nocash@work.de,new,newest,update,i/o,
+   updates,demo,demos,cable,no$gba,no$agb,small,good,fast,quality,features,
+   dos,DOS,msdos,drdos,source code,source level,sourcelevel,elf,dwarf,dwarf2,
+   nds,nintendo ds,ds,dual screen,lite,ds-lite,dslite">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<!---------------------->
+<CENTER>
+<FONT SIZE=+2><B>No$gba Gameboy Advance / Nintendo DS Debugger Homepage</B></FONT>
+<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR ALIGN=CENTER>
+<TD width=8% bgcolor="#f0f0c0">&nbsp;</TD>
+<TD width=12% bgcolor="#c0c0a0"><A HREF="gba.htm">Downloads</A></TD>
+<TD width=12% bgcolor="#e0e080"><A HREF="gbanew.htm">History</A></TD>
+<TD width=12% bgcolor="#c0c0a0"><A HREF="gbapics.htm">Screenshots</A></TD>
+<TD width=12% bgcolor="#e0e080"><A HREF="email.htm">Contact</A></TD>
+<TD width=12% bgcolor="#c0c0a0"><A HREF="#links">Links</A></TD>
+<TD width=12% bgcolor="#e0e080"><A HREF="index.htm">Home</A></TD>
+<TD width=8% bgcolor="#f0f0c0">&nbsp;</TD>
+</TR></TABLE><P>
+</CENTER>
+<!---------------------->
+<TABLE bgcolor="#a0ff80" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+  <CENTER><B>The Main Debug Screen consists of
+             Code, Data, Stack, and Registers windows.</B></CENTER>
+  </TD></TR><TR><TD>
+  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=0 bgcolor="#d0ffc0"><TR>
+   <TD WIDTH=3%>&nbsp;</TD>
+   <TD VALIGN=TOP WIDTH=45%>
+     The <B>Code window</B> displays disassembled code and/or <B>source
+     code</B>, the built-in assembler allows to <B>modify</B>, or NOP-out,
+     single opcodes.
+     The <B>status bar</B> gives additional information on the currently
+     selected opcode, for example: "[3001248h]=0114h" for a "ldrh r0,[r1]"
+     opcode.
+     Arrow up/down <B>symbols</B> indicate the jump direction
+     (backwards/forwards, ie. loop/skip) for any branch opcodes, the arrow
+     right symbol indicates jumps to sub-routines.
+     Automatic 'true/false' comments are generated when the current
+     instruction is a conditional opcode, making it much <B>easier</B> to
+     determine if a jump opcode is about to be executed.<BR>
+     The <B>memory addresses</B> of code/data/stack windows can be changed by
+     cursor keys, mouse scroll bars, by <I>search</I> function, or by <I>goto
+     address</I> (or goto label) functions.
+   </TD><TD WIDTH=6%>&nbsp;
+   </TD><TD VALIGN=TOP WIDTH=45%>
+     Another very <B>comfortable</B> feature is the 'follow' function: Pushing
+     right cursor key moves the code window to the <B>target address</B> of the
+     currently selected branch opcode. On load or store opcodes it moves the data
+     window to the target address. Left cursor key moves the window back to the
+     old location(s). That feature also works with return values in stack
+     window.<BR>
+     The <B>Stack window</B> gives a list of pushed and allocated words,
+     including detailed <B>stack information</B> for each word, for example:
+     "pushed r7", "allocated [1Ch]", or "return from game_initialization".<BR>
+     The <B>Data window</B> allows to view (and modify) a memory dump in
+     hexadecimal and ascii text format.<BR>
+     The <B>Registers window</B> displays the CPU registers and flags.
+   </TD><TD WIDTH=3%>&nbsp;
+   </TD></TR></TABLE>
+  </TD></TR><TR><TD><CENTER>
+  The debug user interface is based on nine years of programming, experience,
+  fine tuning, and feedback from users.
+  </CENTER>
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#ffe0c0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+  <CENTER><B>Source Level Debugging and Profiling</B></CENTER>
+  </TD></TR><TR><TD>
+  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=0 bgcolor="#fff0e0"><TR>
+   <TD WIDTH=3%>&nbsp;</TD>
+   <TD VALIGN=TOP WIDTH=45%>
+     The no$gba disassembler displays any <B>labels</B> that are used in
+     source code (and of course, that labels are also recognized in user
+     input). Mixed <B>Thumb and Arm</B> opcodes are automatically disassembled
+     as such.
+     Additionally, your <B>source code</B> can be displayed in <B>stacked</B>
+     view mode, that is, the associated disassembled opcodes are displayed
+     below of each line of source code. For better legibitly, the source
+     lines are drawn by light blue background color, moving the cursor onto
+     a source line displays the corresponding <B>line number</B> and source
+     filename in status bar.<BR>
+     No$gba supports debug info in .ELF, DWARF2, and .SYM formats.
+   </TD><TD WIDTH=6%>&nbsp;
+   </TD><TD VALIGN=TOP WIDTH=45%>
+     No$gba displays the <B>execution time</B> in clock cycles each time when
+     starting and stopping the emulation, eg. after executing a sub-routine.
+     The <B>power gauge</B> displays the current CPU load (assuming that unused
+     CPU time is spent in low power state).
+     The nocash <B>clock cycle comments</B> display the execution time for each
+     disassembled opcode, different view modes are available - it can display
+     formulas (eg. "1N+3S+1I") (optionally split into separate code and data
+     cycles), and it can resolve that formula into actual number of clock
+     cycles (by automatically recursing the current address and waitstate
+     configuration, etc. - the results are <B>kinda interesting:</B> some
+     opcodes take only 1 cycle, others may eat up about 100 cycles).
+     And, it can calculate the sum of cycles for a sequence of instructions.
+   </TD><TD WIDTH=3%>&nbsp;
+   </TD></TR></TABLE>
+  </TD></TR><TR><TD><CENTER>
+  Profiling and clock cycle counting allows to make faster and smoother
+  software, and to free up more CPU time - either for battery power saving,
+  or for additional effects.
+  </CENTER>
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#ffc0c0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+  <CENTER><B>Conditional Breakpoints & Automatic Warnings</B></CENTER>
+  </TD></TR><TR><TD>
+  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=0 bgcolor="#ffe0e0"><TR>
+   <TD WIDTH=3%>&nbsp;</TD>
+   <TD VALIGN=TOP WIDTH=45%>
+     The debugger covers a wide range of <B>breakpoints</B>, which are able
+     to 'freeze' the emulation - even when debugging interrupt handlers.
+     Aside from normal 'stop' breaks, it also supports conditional breaks
+     (for example when writing a specific value to specific address, or
+     when writing or changing a value inside of a specified memory area).
+     Also, there's possibilty to define breakpoints (and text messages) in
+     source code. Of course, basic operations like tracing (either single
+     opcodes, or complete sub-routines) and stopping when reaching the
+     currently selected line are supported as well.
+   </TD><TD WIDTH=6%>&nbsp;
+   </TD><TD VALIGN=TOP WIDTH=45%>
+     Aside from user configured breaks, the debugger also includes built-in
+     <B>warning messages</B> which are (optionally) notifying the user of
+     suspicious operations, such like writes into ROM, accesses of invalid
+     or mis-aligned memory addresses, etc. These features are helpful to
+     locate both 'obvious crashes' as well as 'hidden bugs' which may show up
+     only in certain situations, or only in later builts - or not until the
+     game is released (in fact, no$gba finds bugs in most distributed
+     commercial titles).
+   </TD><TD WIDTH=3%>&nbsp;
+   </TD></TR></TABLE>
+  </TD></TR><TR><TD><CENTER>
+  NB. Such features are likely to be found only in software debuggers -
+  which are more flexible than hardware debuggers.
+  </CENTER>
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#ffe0c0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<CENTER><B>General Emulation Features</B></CENTER>
+</TD></TR><TR bgcolor="#fff0e0"><TD>
+ In <B>multi-player</B> mode, up to four GBAs can be <B>linked</B> together
+ by emulating normal, multiplay, or automatic cable connection, this feature
+ also supports <B>single gamepak</B> software.
+ The video engine supports real <B>blurred colors</B> and dark
+ <B>intensities</B>, giving the same picture as on real GBA/NDS displays, the
+ <B>screenshot</B> function allows to capture the current picture to
+ clipboard or file.
+ The <B>stereo sound</B> emulation provides exact reproduction of all six
+ sound channels. The <B>snapshot</B> function allows to save and restore the
+ state of the complete hardware to or from file.
+ No$gba emulates most <B>GBA/NDS BIOS</B> functions, and can be <I>upgraded</I> by
+ installation of the BIOS rom-image (details <A HREF="gbabios.htm">here</A>),
+ which provides complete emulation of <I>all</I> functions and <I>highest</I>
+ timing accuracy. Of course, no$gba <B>can skip the BIOS intro sequence</B> -
+ you can to start your cartridge directly, without having to see the nintendo
+ logo each time when testing a new built.
+</TD></TR><TR><TD><CENTER>
+ Forget everything that you have experienced with normal emulators.
+ No$gba is not like that.
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#c0ff80" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+  <CENTER><B>I/O Map and VRAM Viewer</B></CENTER>
+  </TD></TR><TR><TD>
+  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=0 bgcolor="#e0ffc0"><TR>
+   <TD WIDTH=3%>&nbsp;</TD>
+   <TD VALIGN=TOP WIDTH=45%>
+     The <B>I/O Map</B> Window lists the name, address, and content of all
+     hardware registers, including undocumented ports. Additionally,
+     the separate control bits are resolved for each register (eg. Bit6 Irq=On,
+     Bit7 Start=Off). All values are, optionally, updated also when the
+     emulation is running.
+     The information can be viewed either in a tabbed window (with tabs for
+     Video, BG0-3, Sound, DMA, Timers, and Other registers), or in all at once in one
+     huge single window, (requires at least 1024x768 pixels screen resolution).
+   </TD><TD WIDTH=6%>&nbsp;
+   </TD><TD VALIGN=TOP WIDTH=45%>
+     The built-in <B>VRAM Viewer</B> allows to view the various BG layers,
+     the BG and OBJ tile memory, OAM content, and color palettes. Moving the
+     mouse arrow onto a specific OBJ or BG tile displays a zoomed copy of that
+     tile, as well as associated attributes (screen position, memory address,
+     color depth and palette, OBJ mode and size, flip or scaling parameters,
+     etc.) BG layers can be viewed with/without grid. A 'laser arrow'
+     indicates the screen position of the currently selected OAM entry.
+   </TD><TD WIDTH=3%>&nbsp;
+   </TD></TR></TABLE>
+  </TD></TR><TR><TD><CENTER>
+  That is punk rock software debugging - it's a bit more than a gameboy
+  connected to a PC user interface by some cables.
+  </CENTER>
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#ffe0c0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+  <CENTER><B>Accuracy</B></CENTER>
+  </TD></TR><TR><TD>
+  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=0 bgcolor="#fff0e0"><TR>
+   <TD WIDTH=3%>&nbsp;</TD>
+   <TD VALIGN=TOP WIDTH=45%>
+    Emulation has been programmed with love in <B>detail</B>. Most operations
+    are having a timing accuracy of +/-0 clock cycles. Opcodes and hardware
+    ports are giving 1:1 same results, bits, and flags as real hardware.
+    The emulation covers undocumented ports, and exactly emulated 'garbage'
+    readback from unused memory areas (which is actually required for many
+    - apparently badly debugged - games).
+   </TD><TD WIDTH=6%>&nbsp;
+   </TD><TD VALIGN=TOP WIDTH=45%>
+    Of course, it is nearly impossible to make a <B>perfect</B> emulator
+    of total accuracy. At least, I am trying to. If you should come accross
+    any details which are not working exactly as one real hardware, please
+    let me know about it! Even if it is only a small glitch and looks
+    unimportant. I'd even love to reproduce the undefined MUL carry flag,
+    even though it is probably not - intentionally - used by any games.
+   </TD><TD WIDTH=3%>&nbsp;
+   </TD></TR></TABLE>
+  </TD></TR><TR><TD><CENTER>
+  I'd recommend to run your game frequently on real hardware (eg. by using
+  flash-cards) for 100% proof bug-testing.
+  </CENTER>
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#c0ffc0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+  <CENTER><B>Performance</B></CENTER>
+  </TD></TR><TR><TD>
+  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=0 bgcolor="#e0ffe0"><TR>
+   <TD WIDTH=3%>&nbsp;</TD>
+   <TD VALIGN=TOP WIDTH=45%>
+    Most of the <B>user interface</B> was designed, and works smoothly on
+    a 66MHz computer. That guarantees no nasty surprises in case that you
+    don't own one of the latest 16GHz models. And, because the debugger
+    does not need to communicate with external hardware it is likely to be
+    ways faster than hardware debuggers.
+   </TD><TD WIDTH=6%>&nbsp;
+   </TD><TD VALIGN=TOP WIDTH=45%>
+    Emulation of the <B>GBAs RISC processor</B> takes up more CPU load,
+    most GBA games are working smoothly and at full speed on 500Mhz computers.
+    If you do have a faster PC you may use the additional CPU time to
+    emulate up to four GBAs at once - in multiplayer mode, or to let the
+    emulation run at quad speed on keystroke (eg. to skip intro sequences).
+   </TD><TD WIDTH=3%>&nbsp;
+   </TD></TR></TABLE>
+  </TD></TR><TR><TD><CENTER>
+  All no$gba program code, both emulation and user interface, is
+  all hand-crafted and pure assembler code.
+  </CENTER>
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#ffe0c0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<CENTER><B>Additional Features</B></CENTER>
+</TD></TR><TR bgcolor="#fff0e0"><TD>
+The built-in <B>manual</B> contains help about debugging functions
+(see <A HREF="gbahlp.htm">help</A> html version),
+as well as complete <B>specifications</B> for the GBA/NDS hardware
+(see <A HREF="gbatek.htm">specs</A> html version).
+The built-in <B>source code assembler</B> provides two-way interfacing
+with the built-in <B>text editor</B>.
+The <B>upload function</B> allows to run small programs (max 256K)
+in Work RAM of attached GBAs by simple <A HREF="gba-xboo.htm">xboo</A> cable
+connection, that feature is significantly faster and more comfortable than
+'flash-cards' even though the limited size restricts it to small games (or
+to fragments of larger games, it might be suitable to test a sound engine
+or intro sequence, for example).
+Also, a <B>disassemble</B> to file function is included.
+</TD></TR></TABLE>
+<P>
+
+<TABLE bgcolor="#ffe0c0" WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<CENTER><B>Contacting me (Martin Korth) - Developers only (no gaming questions)</B></CENTER>
+</TD></TR><TR bgcolor="#fff0e0"><TD>
+ <CENTER><A HREF="email.htm">Contact per email</A></CENTER>
+</TD></TR><TR><TD><CENTER>
+ <B>Caution: Emails with attachments are deleted automatically without notice!</B>
+</CENTER>
+</TD></TR></TABLE>
+<P>
+
+<!---------------------->
+<A NAME="links"></A>
+<TABLE bgcolor="#c0c0c0" BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD>
+<CENTER><B>Related info & tools & links</B></CENTER>
+        </TD></TR><TR bgcolor="#f0f0f0"><TD>
+<A HREF="gbanew.htm">release notes</A><BR>
+Info about newer (and older) no$gba updates.
+        </TD></TR><TR bgcolor="#e0e0e0"><TD>
+<A HREF="gba-xboo.htm">gba-xboo</A> - <FONT SIZE=-1><B>Updated 15th August 2002</B> - new function for downloading the <B>GBA BIOS</B> to file</FONT><BR>
+Stand-alone DOS version of the 'multiboot' upload program and instructions
+on how to built the cable, use that for testing games on real hardware,
+the new version should be also working with fast >100MHz computers.
+        </TD></TR><TR bgcolor="#f0f0f0"><TD>
+<A HREF="gbatek.htm">gbatek.htm</A> and <A HREF="gbatek.txt">gbatek.txt</A>
+ - <FONT SIZE=-1><B>New Feb 2006 with NDS specs</B></FONT><BR>
+Standalone version of the no$gba tech docs in Html and Text format (ca. 500
+KBytes each). Describes the complete GBA/NDS hardware, memory map, I/O ports,
+BIOS functions, cartridge header, undocumented features, CPU instruction set, etc.
+        </TD></TR><TR bgcolor="#e0e0e0"><TD>
+<A HREF="magicflr.htm">magicflr</A><BR>
+Magic Floor, freeware puzzle game for the GBA, includes assembler source code.
+Aside from playing with it, I hope this will delight some programmers whom seem
+to be confused about terms such like interrupts, sound, halts, and multiboot.
+        </TD></TR><TR bgcolor="#f0f0f0"><TD>
+<A HREF="http://gbadev.org/">gbadev.org</A><BR>
+<A HREF="http://www.gbaemu.com/">gbaemu.com</A><BR>
+<A HREF="http://devrs.com/gba/">devrs.com/gba</A><BR>
+Links related with news in gba programming scene. Tools, docs, emulators,
+jobs, competitions, freeware games, demos, examples, etc.
+        </TD></TR><TR bgcolor="#e0e0e0"><TD>
+<A HREF="http://www.pdroms.de">pdroms.de</A><BR>
+Big collection of freeware games. Also check the games/demos section at gbadev.org (see link above).
+        </TD></TR><TR bgcolor="#f0f0f0"><TD>
+<A HREF="gmb.htm">no$gmb</A><BR>
+Emulator/debugger for the old 8bit monochrome gameboy, super gameboy, and color
+gameboy, some of the users killed the program, but it's netherless still a
+useful dev tool with similiar features as no$gba.
+        </TD></TR><TR bgcolor="#e0e0e0"><TD>
+<A HREF="gbapub.htm">gbapub</A><BR>
+The public opinion. Feedback & lyrics on no$gba project...
+"YOu SuCK MAn!!!I'm ThE EVIl!!, and i want to cook your soulI WANT TO MURDER
+YOUyour fucking emulators are PURE TRASH!!!SHUTDOWN YOUR SITE NOW, and use
+another emulator!!!LOSER!!!"
+        </TD></TR><TR bgcolor="#f0f0f0"><TD>
+<A HREF="ereader.zip">ereader.zip</A> - <B>New (June 2007)</B><BR>
+Contains four dotcode games/demos: Magic Floor, e-Reader Camera Viewer demo,
+Yarin's Rotris, and Snowbro's Bomb Sweeper. Including some sample source code.
+</TD></TR></TABLE>
+<!---------------------->
+<P><CENTER><HR>
+<A HREF="index.htm">Back to nocash mainpage</A>.<BR>
+<HR>
+<FONT SIZE=-1>
+2 ^ 10 = 1024 ;
+C programmers should be careful not to misread this notation as exclusive-or.
+</FONT>
+<BR>
+</BODY></HTML>

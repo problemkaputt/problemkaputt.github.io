@@ -1,0 +1,2684 @@
+<B>No$gba Release Notes</B><P>
+
+<PRE>
+
+<A NAME="v302"></A><B>16 May 2020 - version 3.02</B>
+- 3ds/vfp/help: multiply note about FMUL X,X,X.. and FMAC Y,Y,Y.. (thanks kemal)
+- 3ds/gpu/help: added triangle drawing examples (thanks to profi200 for help)
+- 3ds/gpu/help: created I/O map chapters for gpu internal/external registers
+- 3ds/gpu/help: renamed several registers, especially ATTR_BUF related ones
+- 3ds/gpu/help: swapped/renamed width and height to match up with actual usage
+- 3ds/gpu/help: important details/corrections for rendering pipeline registers
+- 3ds/gpu/help: better GPUREG_IRQ_xxx and GPU_MEMCOPY descriptions
+- 3ds/gpu/help: info on undocumented flat shading and striped/dotted modes
+- 3ds/gpu/help: info on undocumented memory traffic and vertex/polygon counters
+- 3ds/gpu/help: added undocumented gpu register stubs (inside of gpu chapters)
+- 3ds/gpu/help: started to rewrite and rearrange unclear gpu descriptions
+- 3ds/gpu/help: removed meaningless sentences alike this register is used to...
+- 3ds/gpu/help: removed nonsense definitions alike unsigned 1bit enable flag
+- 3ds/gpu/help: gpu external registers: added memory control/status registers
+- a22i/float: .float16/24/32/64/80 supports multiple operands (using commas)
+
+<A NAME="v301"></A><B>25 Apr 2020 - version 3.01</B>
+- 3ds/help: added info on arm11/arm9 bootrom 3DS Exception Vectors
+- 3ds/help: added info on bootrom key generator for AES key slots
+- 3ds/help: added more notes/questions on still needed unknown gpu things
+- 3ds/help: more gpu notes from 3dbrew (but isn't yet understood what they mean)
+- 3ds/help: ntrcard on arm11 side: triggers cdma 01h, and interrupt 44h
+- 3ds/help: clarified gamecard insert/pwroff irqs on arm9 and arm11 sides
+- 3ds/help: info on starting/stopping arm11 cpu1 and cpu2/3 cores
+- 3ds/help: details: pad irq 5Bh, memory enable for 08100000h and 1F000000h
+- 3ds/help: added specs for Level 2 Cache (L2C) registers and cache irq 76h
+- 3ds/help: added specs for AXI bus matrix registers (mostly readonly)
+- 3ds/help: added specs ARM7 aka GBA config registers (and guess on gba footer)
+- 3ds/help: added specs for LGYFB gba/nds framebuffer converters (thanks sono)
+- 3ds/help: added specs for RGB-to-RGBA converter (L2B) (new3ds mvd related)
+- 3ds/help: added specs for YUV-to-RGBA converter (Y2R) (camera related)
+- 3ds/help: added many details for CTRCARD registers/seed/protocol
+- dsi/help: added SCFG_CARD_xxx_DELAY specs, better cart power on/off sequences
+- 3ds/help: added chapter with 3DS Console IDs and ID0/ID1 folder names
+- 3ds/help: added mcu reflashing specs via uart cable on tool0 pin
+- 3ds/help: renamed mcu looping-queue-stack-nonsense to battery-backed-ram
+- 3ds/help: added details on mcu i2c-slave devices (fuel gauge and powerman/tsc)
+- 3ds/help: rev-engineered RSA and SHA register details
+- 3ds/help: fixed weird IPC_SYNC aka PXI_SYNC description
+- 3ds/help: added specs for VFP vector-floating-point opcodes/registers
+- 3ds/help: added tsc page 64h/65h/67h/FBh register info (thanks profi200)
+- gba/bios: fixed multiboot-upload crash upon too many slaves or too much data
+- dsi/debug: debugmsg window displays TSC page number alongsides with TSC index
+- a22i/arm: bugfixed shortform for MOV Rd,shift (other than ALU Rd,Rx,shift)
+- a22i/float: added data directives .float16/24/32/64/80
+- a22i/dis: fixed corelink dma reladdr for loops (unsigned, target=$-offset)
+- 3ds/disass: bugfixed RL78 short addr, and "[SFR+1]" for MSBs of SFRs
+- 3ds/debug: added RL78 assembler for MCU code (and RL78 opcode list in help)
+- 3ds/debug: added assembler/disassembler for VFP floating point opcodes
+- 3ds/debug: added assembler/disassembler for CDMA/XDMA corelink dma opcodes
+
+<A NAME="v300"></A><B>27 Nov 2019 - version 3.00</B>
+- dsi/teak/help: mmio info from wwylele's .md files and lauterbach .per files
+- dsi/teak/help: tested/added/clarified more/undocumented teak mmio details
+- 3ds/teak/help: fixed errors in CFG11_SHAREDWRAM_32K_CODE/DATA descriptions
+- 3ds/help: rev-engineered CSND sound/capture specs (mostly same as NDS sound)
+- 3ds/help: rev-engineered most NDMA startup modes and CDMA peripheral IDs
+- 3ds/help: basic notes on New3DS NFC hardware (Near-field communication)
+- 3ds/help: basic specs for New3DS QTM io expander (whatever that is used for)
+- 3ds/help: more or less working specs for New3DS C-stick and ZL/ZR buttons
+- 3ds/help: full specs for accelerometer, and for both gyroscope chip versions
+- 3ds/help: full specs for irda chip (yet no info on irda-software protocol)
+- 3ds/help: full specs for corelink dma registers (still need opcodes though)
+- 3ds/help: scanned SPI bus and I2C bus (with some new device id findings each)
+- 3ds/help: added many i2c irq-sources (routed through gpio registers)
+- 3ds/help: added comprehensive list of unknown lcd-i2c registers
+- 3ds/help: removed lots of dirt from the official arm11 mpcore interrupt specs
+- 3ds/help: rev-engineered event/fault irq numbers for XDMA, OldCDMA, NewCDMA
+- 3ds/help: tested I2C+ARM camera access (and identified left and right cameras)
+- 3ds/help: major rewrite of mcu chapter (focusing on actual info without blurb)
+- tsc/help: added TSC flowcharts for touchscr,microphone,nds-mode and basic init
+- mic/help: rev-engineered microphone, moved mic from unknown to sndex chapter
+- 3ds/help: rev-engineered I2C clock config and manual/fifo SPI clock rates
+- dsi/help: added 8mhz spi bus clock (not 3ds specific) (enable via scfg_ext7)
+- 3ds/help: added complete New3DS XL Component List (and semi-complete Old3DS)
+- 3ds/help: added basic MMU virtual memory table specs (in arm cp15 chapter)
+- 3ds/gpu/help: completely rewritten Top/Bottom Screen/Framebuffer Setup chapter
+- 3ds/gpu/help: added notes on unknown read/write-able bits in PICA registers
+- 3ds/gpu/help: added list of unknown/unused/undocumented PICA registers
+- 3ds/gpu/help: added specs for finalize/interrupt registers PICA(0000h..0035h)
+- setup/controls: allows to use DEL/BS keys (toggles between none and that key)
+- 3ds/cdma/xdma/help: added summary of all Corelink DMA registers and opcodes
+- help/emu/disass: supports invalid arm/libgcc BX PC opcode (thanx scott norton)
+- 3ds/help: better gpio specs, and various details here and there
+- 3ds/help: added stubs with R/W masks for most unknown arm9/arm11 io ports
+- 3ds/debug: assembler/disassembler supports all new ARMv6/ARMv6K opcodes
+- 3ds/debug: start_direct can now load FIRM files to memory (for disass)
+- 3ds/memory: started allocating some 3ds-specific memory (AXI, WRAM, etc)
+- 3ds/arm11/help: arm/thumb opcode encoding specs for new ARMv6/ARMv6K opcodes
+- 3ds/bptwl/help: added notes on (limited) bptwl i2c register emulation
+- 3ds/mcu/help: RL78 opcodes, registers, flags, memory map, SFR I/O map
+- 3ds/cpu/help: added notes on branch prediction affecting waitbyloop timings
+- 3ds/config11/help: rev-engineered details for new3ds clk/mode change register
+- wifiboot: uploader uses non-blocking tcp socket (for abort by keystroke)
+- 3ds/disass: added RL78 disassembler (for 3DS.mcu or New3DS.mcu firmware image)
+- debug/help: included no$gba debug help in gbatek (moved to bottom of text)
+
+<A NAME="v29e"></A><B>10 Jul 2019 - version 2.9e</B>
+- wifiboot uploader: supports uploading 3ds .firm files from no$gba to 3ds
+- wifiboot uploader: new bootinfo block (icon/title and rtc/time)
+- wifiboot/help: added DS Wifi Dslink/Wifiboot Protocol chapter
+- 3ds/help: added notes on SD/MMC Signals and 3DS Hardmodding
+- 3ds/help: 3ds NWM wifi driver info (pool addresses and type1/4/5 variants)
+- 3ds/help: specs for CID/OTP/NCSD/FIRM sectors for 3ds-#.mmc and new3ds-#.mmc
+- setup: added 3ds/new3ds as nds mode variants (for debug view, not emulation)
+- 3ds/aes: supports keyinit as by bootrom per otp (for filesys viewer)
+- 3ds/emmc: loaded from 3DS-1.mmc or New3DS-1.mmc (for filesys viewer only yet)
+- 3ds/bios: loaded from BIOS3DS.ROM (ARM9+ARM11) or BIOS3DS9.ROM+BIOS3DS11.ROM
+- 3ds/help: added file/filesys info and arm11 mpcore/irq register specs
+- wifi/help: added several new details (mostly from newly dumped AR6014 rom)
+- a22i: supports abbrev ALU Rd,Rm,RotateShift (using Rd for both Rd and Rn)
+- wifi/help: added wifi-board pinouts from fccid, and 4kbyte-wifi-flash-specs
+- 3ds/crypt: supports sha256, sha224, aes-cbc, new keyscrambler (keyx/y)
+- filesys viewer: show/decrypt 3ds stuff (partitions and firm/sav blocks)
+- filesys viewer: faster directory loading (abort on first unused 00h entry)
+
+<A NAME="v29d"></A><B>23 Feb 2019 - version 2.9d</B>
+- debug/setup: disabled profiler by default (for fast emulation) (thanks Dwedit)
+- debug/disass: disassembler support for UAL syntax (optional) and ARM11 opcodes
+- dsi/help: added SD_EXT_IRQ_STAT/MASK (insert/eject state and irq for emmc)
+- 3ds/help: added 3DS register specs (thanks 3dbrew.org/wiki/IO_Registers)
+
+<A NAME="v29c"></A><B>08 Feb 2019 - version 2.9c</B>
+- wifiboot: now supports dsi-wifi-hardware with wpa/wpa2 encryption
+- utility/upload: omits nocashio lpt-port-driver for wifi upload (thanx edo9300)
+- dsi/wifi/hack: dsi browser patch for writing all sdio traffic to wifi-log.txt
+- dsi/wifi/help: new chapter for DSi Atheros Wifi - MBOX Transfer Headers
+- dsi/wifi/help: added notes on used WMI params (connect, cipher, pstream, etc)
+- dsi/wifi/help: more details for access point 4/5/6 settings in wifi-flash
+- nds/wifi/help: updated ds download play chapter (and separate beacon chapter)
+- nds/wifi/help: new chapters for WPA/WPA2: handshake, keys/mics, encryption
+- nds/help: added reverse-engineered dldi specs (flashcart driver for homebrew)
+- dsi/help: added several notes on files found in firmware v1.0J (thanks AnKi)
+- dsi/ndma: added support for SDIO startup mode (much alike as SDMMC startup)
+- dsi/boot: init AES Key2.X (for Data Managment export to SD card, thanx zoogie)
+- dsi/help: device list: details on naming for "public & private savedata"
+- dsi/autoload/help: new chapter for auto-loading (formerly in i2c chapter)
+- dsi/autoload/help: added skeleton/info on 2000000h (autoload parameters)
+- dsi/autoload/help: added more details on 2000300h (autoload by title id)
+- dsi/autoload/help: added specs for 2000800h (unlaunch autoload by path\name)
+- dsi/autoload/help: added specs for 2FFD800h (nintendo's title list and flags)
+- dma/gba/nds7: re-fixed dma0/1/2 len, don't crop 16bit to 8bit (thanx normmatt)
+- dsi/bios: added warn if/when using missing RSA keys (missing bios dsi dump)
+- aboutbox: added email/contact page (debug version only, not gaming version)
+- xed editor: fixed scrolling upon backspace in first some lines (thanks yuki)
+
+<A NAME="v29b"></A><B>30 Sep 2018 - version 2.9b</B>
+- web: created no$project patreon page, https://www.patreon.com/martin_korth
+- dsi/emu: allows 8bit vram writes on dsi (if enabled in SCFG_EXT9.bit13)
+- dsi/help: added note on dsi debug blowfish key used when SCFG_OP nonzero
+- carthdr/help: added carthdr[0B0h] "DoNotZeroFillMem"=unlaunch fastboot ID
+- dma/help: added note on dma-fill via 40000Exh being slower than stmia/ndma
+- dsi/help: added note on broken cameras being more common than unknown cameras
+- dsi/tsc/iomap: shows tsc page 0,1,3 registers (page 3 is hidden in aes tab)
+- dsi/tsc/emu: basic emulation for reading/writing tsc page 0,1,3 registers
+- dsi/startdirect: initializes GPIO registers (sound,powerbutt,wifimode)
+- a22i: throws error message on forward references within .pack blocks
+- nds/cart: supports flashcarts with arm9 code below offset 4000h (ievolution)
+- nds/bugfix: resurrected BG0CNT/BG1CNT.bit13 (unlike GBA) (thanks chocoreep)
+- dsi/help: info about ST NAND02G AH0LZC5 emmc chips (thanks barawer+trade girl)
+- dsi/emmc: emulates different eMMC CSD's (matched to four known eMMC CID's)
+
+<A NAME="v29a"></A><B>24 Jul 2018 - version 2.9a</B>
+- emu/dsi/clk: supports ARM9 134MHz mode (but waitstates are too fast for now)
+- bios/help: swi waitbyloop timings for arm7/arm9 rom/cache nds/dsi 67mhz/134mhz
+- cart/emu: supports ds cart reset tricks (via toggling scfg_mc_msb or exmemcnt)
+- dsi/emu/help: scfg_clk.bit7 is read-only on arm9 (value mirrored from arm7)
+- dsi/help: added notes on 'flipnote lenny (or whatever it is called)' exploit
+- dsi/help: solved unknown last bytes in boot info block (SHA1 on 60h-byte area)
+- dsi/mmc-image: alternately accepts no$gba-footer at emmc offset FF800h
+- nds/dsi/cart/help: romctrl notes on (in-)official ways to reset cartridges
+- nds/dsi/cart/help: romctrl notes on wrong and slow 1t-rom timings cart header
+- dsi/debug: reformatted scfg7/scfg9 iomap windows, with new scfg details
+- dsi/teak/help: added offical names for bits in ar/arp/stt/mod (from .dll)
+- dsi/teak/help: many new stt/mod/ar/arp/cfgi/a0e/vtr details (thanks wwylele)
+
+<A NAME="v29"></A><B>14 Jun 2018 - version 2.9</B>
+- webpage: added credit card payment option - plz send money if you like my work
+- dsi/exploit: released unlaunch.dsi (first ever released dsi bootcode exploit)
+- utility/upload: added dslink-compatible wifi upload function (nds/dsi only)
+- utility/upload: wifiboot 2.1 dslink-clone (proper cache init/initback)
+- utility/upload: wifiboot 2.0 dslink-clone (dwm-w024 and arm7i/arm9i areas)
+- dsi/emu/cartloader/help: takes WRAMCNT from MSBs of MBK9 entry in cartheader
+- dsi/emu: mirrors read-only SCFG_EXT7 bits from SCFG_EXT9 and vice-versa
+- arm/cpu/help: notes on cache clean vs invalidate and cache-write-bufferability
+- dsi/help: added caution of forward references in Device List structure
+- dsi/cartloader: rejects large modcrypt areas (eg. crypt.size>arm7i.size)
+- dsi/cartloader: supports small modcrypt areas (eg. crypt.start>arm7i.start)
+- dsi/modcrypt/help: added notes of several weird modcrypt corner cases
+- arm/debug: I/O map cpmem9 shows PU dc/cc/wb (data/code cache and wbufferable)
+- spi/powerman: emulates dslite/dsi registers: powerman[4] and powerman[10h]
+- dsi/korea/help: notes korean font file (diff names, crisp clear, less tiles)
+- dsi/korea/help: korean firmware version numbering as in china, 1.4.6 is newest
+- dsi/help: added note on smaller cert.sys files (for korea or before dsi-shop?)
+- dsi/wifi/emu: emulates sdio cmd5,cmd3,cmd7,cmd15 and reset_control.bit8
+- nds/wifi/help: added description for 48080DAh W_RX_LEN_CROP register
+- dsi/wifi/help: sdio init via cmd5,cmd3,cmd7,cmd15, rtc.fout, scfg/gpio etc
+- dsi/wifi/help: added sdio pins on daughterboard and pinout for ar6013g chip
+- dsi/sdmmc/help: described 40048F6h (bit0 = SD_WRPROTECT_2 for eMMC chip)
+- dsi/scfg/help: details on scfg_ext7 and scfg_a7rom, updated mbk chapter
+- dsi/scfg/emu: emulates scfg_ext7 and scfg_a7rom access right bits
+- dsi/scfg/emu: emulates arm9.mbk1-5 writes in respect to arm7.mbk9 setting
+- dsi/emu: removed most in_32 notyet warnings, added more out_xx notyet warnings
+- dsi/mmc/emu: warning if .mmc file without footer (need CID and Console ID)
+- dsi/help: added notes on bits in SCFG_A9ROM/A7ROM being set-once bits
+- dsi/wifi/help: described 4004C04h.bit8 needed for DWM-W024 in NDS-wifi mode
+- dsi/sdmmc/help: notes on SEND_OP_COND, and on ALL_GET_CID vs max CARD_CLK_CTL
+- dsi/exploits/help: added some notes on recently released exploits and tools
+- dsi/biosdumping/help: notes on voltage errors and CE2 idea from dark_samus
+- dsi/help: added info on valid ARM9+ARM7+ARM9i+ARM7i areas for NDS and DSi mode
+- dsi/help: added info on RSA signatures for newer non-whitelisted NDS carts
+- dsi/carthdr/help: added notes on Access Control entry (request AES keys)
+- dsi/carthdr/help: digest, modcrypt, twl-total can be ZERO (optional entries)
+- dsi/sdmmc: added provisions for SDHC emulation, filesys viewer supports FAT32
+- arm9/emu: allows exception vectors at 00000000h or FFFF0000h (thanks dave)
+- dsi/help: added details on ECC keys/certificates (using ECC curve sect233r1)
+- carthdr/help: added some more cart headers entries for dsi (and nds with rsa)
+- help: specs for DSi RTC extras (up counter, alarm date, and FOUT selection)
+- debug/elf: processes/skips dwarf4/dwarf5 DW_FORM tags (for homebrew PSX games)
+
+<A NAME="v28f"></A><B>23 Jul 2017 - version 2.8f</B>
+- nds/3d/help: note on MTX_PUSH/POP/STORE/RESTORE in Mode1 (thanks staplebutter)
+- nds/3d/emu: matrix stack in mode1 behaves like mode2 (fixes light directions)
+- dsi/mmc: supports MMC commands CMD1 and CMD6 (somewhat needed for libnds)
+- dsi/sd: added warning on trying to use SD card in 4bit mode with pull-up on
+- dsi/i2c: support softreset via bptwl (keeping main ram and bptwl regs intact)
+- dsi/help: added notes on warmboot info at 2003000h (for autostarting a title)
+- dsi/help: more details on 2FFD7BCh (scr,type,hcd,csr,clk_ctl,card_opt,device)
+- bios clone: reproduces div-zero, fixed crash on div-overflow (thanks endrift)
+- gba/io: emulates some more unused bits as non-writeable (thanks endrift)
+- gba/help: note on BLDALPHA being R/W (unlike official specs, thanks endrift)
+- debug/help: note on nds9 debug message ports 4FFFAxxh working on gba/nds7 too
+- setup: renamed "Emu Identification" to "Debug I/O" and enabled it by default
+- gui: fixed window positions/fullscr when taskbar at upper/left (thanks joseph)
+
+<A NAME="v28e"></A><B>11 Feb 2017 - version 2.8e</B>
+- gba/bugfix: forces WAITCNT.15=readonly (for DKong:KingOfSwing, thanks endrift)
+- dsi/teak/a22i: added TeakLite II assembler (supports most TL+TL2 opcodes)
+- dsi/teak/help: specs for teak cpu flags (which opcodes affect which flags)
+- dsi/teak/help: specs for memory mapped I/O ports on teak/dsp side
+- dsi/teak/help: specs for teak CPU registers, details for operand encoding
+- dsi/teak/help: specs for teak st0-2,icr plus undoc stt0-2,mod0-3
+- dsi/emmc: detects/supports debug-version eMMC images (tweaks port 4004024h)
+- dsi/help: cleaned up some RSA descriptions, notes on debug-version RSA keys
+- dsi/help: first attempts on describing SCFG_xxx registers for ARM7 side
+- nds/wifi/help: added details on ds-download-play's openpgp-rsa-sha1 signature
+- dsi/boot: mimmicked support for booting with AR6013 (when WifiFlash[1FDh]=2)
+- dsi/dsdump: released dumping tool for dsi memory areas and chip IDs
+- nds/wifi: released dswifi ASM port (and bugfixes for original dswifi-library)
+- dsi/wifi/a22i: added assembler support for atheros/xtensa instruction set
+- dsi/wifi/disass: fixed bugs for ANY/ALL/4/8 and EXTUI-based SHR pseudo-opcode
+- bugfix: handles 16bit (not 32bit) return value of GetKeyState/GetAsyncKeyState
+- nds/wifi/help: added note on W_IF acknowledging for counter half-overflows
+- dsi/tmd/help: added age ratings and public/private .sav entries in .tmd specs
+- dsi/devicelist/help: added DSi SD/MMC Device List chapter (for carthdr[1D4h])
+- dsi/startdirect: initializes device list, aes keys, etc. (still imperfect)
+- fontfile/help: more info on dsi font file (compression, nitrofont, characters)
+- lz/help: added pseudo code for lzss, lz11, and lzrev decompression
+- bootinfo/help: SHA1 WifiFlash[00h..27h] and eMMCBootInfo[00h..FFh,180h..1FFh]
+- whitelist/help: info on RSA-SHA1's, SHA1-HMAC's and missing RSA check in v1.4E
+- flipnote/help: info on various flipnote files, rsa, md5, xor-encryption
+- rsa/help: added info on rsa basics, rsa pseudo code, rsa big-endian format
+- rsa/help: added note on SWI 23h using OpenPGP Message Format (RFC 4880)
+- rsa/bios: 80x86 dsi bios clone supports RSA bios functions (SWI 20h..23h)
+- nds/bugfix: disables dsi I/O ports in DS mode (avoids misdetecting DS as DSi)
+
+<A NAME="v28d"></A><B>26 May 2016 - version 2.8d</B>
+- dsi/rsa: supports unencrypted "rsa" signatures (via hooked RSA swi functions)
+- dsi/sdmmc: supports NDMA sdmmc start condition (for SD data32 read/write)
+- dsi/sdmmc: supports SD card initialization (CMD0,2,3,7,8,9, ACMD6,13,41,42,51)
+- dsi/sdmmc: created/included empty sd-card-image (file dsi-1.sd, in dsi-sd.zip)
+- dsi/sdmmc: fixed irq-retriggering (recurse irq_stat on irq_mask changes)
+- dsi/sdmmc: adjusts insert/eject and write-protect flags depending on dsi-#.sd
+- dsi/sdmmc: prevents RXRDY in DATA32 mode (@@skip_rxrdy_in_data32_mode)
+- dsi/help: added notes on EMPTY sd-image (dsi-#.sd) (DSi SD/MMC Images chapter)
+- dsi/help: added notes unencrypted signatures (see BIOS RSA Functions chapter)
+- dsi/help: added notes on encrypted twl-*.der files (in "verdata" NARC file)
+- dsi/help: added CRC32 checksums for currently known/dump-able DSi-BIOS areas
+- dsi/debug: shows insternal sd/mmc registers in iomap screen (cid,csd,csr,src)
+- sample: updated magic floor gba/nds version, now with working dsi cart header
+
+<A NAME="v28c"></A><B>07 May 2016 - version 2.8c</B>
+- webpage: added some dev forum links (http://4dsdev.org and http://gbadev.org)
+- help: added "us" to known dsi-regions (including its countries and languages)
+- dsi: re-ordered wram as C-then-B (fixes 3780000h boundary issue on us/sysmenu)
+- dsi/wifi/help: added specs for WMI commands/events (and for BMI boot-commands)
+- dsi/sdmmc/help: added sd/mmc state info (specs when/which command can be used)
+- dsi/softreset: allows rebooting dsi firmware via NUM-* (reinit DSi registers)
+- dsi: can boot NDS games from within DSi mode (tweaks non4MB via fake_scfg_ext)
+- dsi: supports NDS-backwards-compatibility-touchscreen mode (for NDS games)
+- dsi: supports NDS-bios-mapping in DSi mode (for NDS games booted via sysmenu)
+- dsi: supports firmware-coldboot (when bios_intro enabled with nds_mode=DSi)
+- dsi: bugfixed jumps in new wram via addr_code_table (fixes many DSi problems)
+- dsi/help: added DSi Atheros Wifi I2C EEPROM info (access and partial content)
+- debug/gui: fixed system colors used for cpu-flag checkboxes (swapped red/blue)
+- dsi/help: added notes on dumping wifi bios, and on dumping dsi keys from 3ds
+- dsi/help: added flipnote fileformat, added notes on \shared2\0000 file
+- nds7: emulates disabled bios area being FFh-filled (define_nds7_bios_rom)
+- aes: forces instant completion on aes-body-len-zero (boot sysflaw via sysmenu)
+- sdio/wifi: initializes 0500458h to ZERO (indicating not firmware yet uploaded)
+- dsi/bugfix: moved "sdmmc_try_drain_write_buffer" after status/state handling
+- dsi: wifi init mimmicked good enough to run bootcode without WLFIRM 2 error
+- dsi/sdmmc: supports card_irq
+- dsi/i2c: omits ACK response on non-existing devices (especially A0h/E0h cams)
+- dsi/misc: omits arm7 warning on 4004001h access, sets DSi flag in cart.chip.id
+- dsi: emulates SCFG_MC register (else hangs after starting a game in bootmenu)
+- xtensa: auto-resolves special registers mov opcodes to symbolic sfr_xxx names
+- dsi/loader: supports loading AR60xxG.rom (for disass at atheros:8E0000h)
+- dsi/mapping: supports MBK mapping to TEAK memory space (for teak disassembler)
+- dsi/sdmmc: supports WRITE_MULTIPLE command (requires eMMC image with CID+ID)
+- dsi: supports 32bit 4004D00h read, and more 16bit/32bit access for other ports
+- dsi/jpeg/help: added notes on computing jpeg/exif MAC signatures (via AES-CCM)
+- dsi/sdmmc: emulates fifo16/fifo32, irq-edge-triggering, fixed bits, etc.
+- dsi/help: added lots of details on sd/mmc/sdio controller's I/O ports
+- dsi/help: updated dsi exploits chapter (notes on resurrected dsiware hax, etc)
+- dsi/help: addded teak instruction set specs (encoding, syntax, params)
+- dsi/help: added atheros/wifi registers specs (for sdio side and xtensa side)
+- dsi/debug: added teaklite II disassembler (see menubar, window, teak)
+- dsi/wifi/debug: added xtensa disassembler (see menubar, window, atheros)
+- dsi/wifi/help: added xtensa/cpu instruction set and xtensa/cpu register map
+- dsi/sdio: partial sdio/atheros simulation (passing most of "PRE-AUTH" phase)
+- dsi/help: added sdio specs (cmd52/cmd53 and cccr, fbr, cia areas)
+- dsi/boot: fixed initialization of emmc-info in main ram
+- dsi/help: added various details (initial ram, etc.)
+- nds/debug: optional IPC fifo send/recv logging (in tty debug message window)
+- dsi/bptwl: supports writing BPTWL registers (except invalid/readonly ones)
+- debug/tty: displays sd/mmc command names, and resolves sdio func:addr's
+- debug: accepts mirror of 3800000h at 3FF0000h without warning (common on dsi)
+- dsi/help: details on tmd, tickets, and big-endian aes-cbc decryption
+
+<A NAME="v28b"></A><B>01 Jun 2015 - version 2.8b</B>
+- dsi/boot: runs eMMC bootcode (see new "DSi Emulation" chapter in help text)
+- dsi/cartloader: allows secure area above 23bfe00h limit (for dsiware only)
+- dsi/wifi: loads WIFI-DSI.BIN file (else auto-generates dummy wifi calibration)
+- dsi/boot: copies dsi-bios keys to tcm/wram, and console IDs to AES keyslots
+- dsi/help: added notes on initial itcm/wram/aes content after bios-rom-bootcode
+- dsi/debug: displays all known dsi registers in f10-iomap (except cam/tsc)
+- dsi/camera: prevents ndma if camera=off, prevents hang-up upon infinite ndma
+- dsi/aes: bugfixed handling of aes-irq-enable-bit
+- dsi/sdmmc: eMMC command support (CMD2,CMD7,CMD9,CMD10,CMD12,CMD13,CMD18)
+- hwreset: initializes [curr_clks_segment]=-1=none (fixes initial arm7bios clks)
+- hwreset: cleaned up init on reset (among others forced arm9-then-arm7 order)
+- dsi/ndma: supports timer0-3, filldatap, fixed irq details, fixed total limit
+- dsi/ndma/help: details on ndma irq(s), ndma total length, and ndma filldata
+- dsi/gamecart: supports dsi-blowfish encrypted commands (requires dsi bios)
+- dsi/gamecart: supports command 3dh (enter dsi mode, with dsi secure area)
+- dsi/gamecart: supports reset via 40001A4h.bit29=0 on DSi7 side (not tested)
+- dsi/sdmmc: supports SDIO commands, ie. ignores them and throws some error bits
+- dsi/memory: better MBK1..9 initializion on reset, added partial MBK9 support
+- dsi/aes/dma: supports AES_in and AES_out NDMA transfer startup modes
+- dsi/sdmmc/help: renamed nonsense "SEND" command names to "GET" or "SET"
+- dsi/sdmmc/debug: optionally logs sdmmc CMD/param's in tty debug log window
+- dsi/sdmmc: loads sector data from mmc-image file (for sdmmc read command)
+- dsi/sdmmc: obtains CID and CPU ID from mmc-image file (per-console IDs)
+- dsi/sdmmc: initializes sdmmc port 4004800-4004BFFh with some (guessed) values
+- arm/help: fixed "cache debug" numbering: p15,3,C15,Cn,0 (not p15,3,C15,C0,n)
+- layer setup: gouraud shading disable (force all vertices same as 1st color)
+- dsi/help: added info on DSiware files on internal eMMC and on software updates
+- nds/dsi/help: added details header[1Dh]=ds region, and on korean icon/title
+- dsi/help: added details on animated icon/title
+- poc: more accurate "garbage_byte" for memory areas without 8bit read access
+- poc: fixed several details in pocketstation bios clone
+- poc: better timing (freshen_waitcnt, ram/flash wait, 16bit/32bit bus, cpu clk)
+
+<A NAME="v28a"></A><B>03 May 2015 - version 2.8a</B>
+- dsi/help: added little-endian AES pseudo code with double-checked test values
+- dsi/files/help: added camera pit.bin and jpec/exif specs (unknown signature)
+- dsi/files/help: added TWLFontTable.dat specs (with unknown compression)
+- dsi/files/help: added specs/compression for "wifi firmware" (unknown purpose)
+- dsi/files/help: added specs for TWLCFGn.dat (user settings) (as far as known)
+- dsi/files/help: added specs for misc files and log files
+- dsi/files/help: more details for "tad" files (sd card .bin) and for HNB_.lst
+- dsi/files/help: added partial specs on certificate and whitelist stuff
+- dsi/help: notes on emmc decryption being possible for boot code and partitions
+- dsi/mem/help: added info on various main ram regions (2FFxxxxh and 2000400h)
+- debug: filesystem viewer: allows to view eMMC partition trees (like NDS carts)
+- debug: filesystem viewer: double click saves selected file (to fixed filename)
+- dsi/help: specs for eMMC images ("DSi-#.mmc" with "DSi eMMC CID/CPU" footer)
+- gaming version: fixed crash when starting emu without cartridge in nds mode
+- debug version: fixed messed intro screen when booting without cart in nds mode
+- nds/3d/help: added note on invalid gx commands being ignored by hardware
+- nds/3d: made 'invalid gx command' warning optional (as part of bad io warning)
+- gba/help: updated gba/thumb open-bus specs in unpredictable things chapter
+- gba/emu: better prefetch for reads from unused memory by code in WRAM/OAM/BIOS
+- dsi/help: added summary (and complete list) of files/folders on SD/MMC storage
+- layer setup: allows to disable video layers, 3d effects, and 3d hide tests
+- layer setup: allows to disable nds sound channels, and separate sound formats
+- gba/bios-clone: swi cpufastset length rounded-up to n*8 words (thanks ricardo)
+- nds/auxspi: forces spi-busy bit (and unused bits) to zero (thanks Frederic)
+- setup: added "setup_nds_system" in gaming version, too (thanks Kokoji)
+- setup: fixed some crashes on gba/nds/dsi mode changes (mainly tty-related)
+- dsi/help: added MBR, VBR, FAT, and LFN specs to SD/MMC filesystem chapters
+- dsi/help: added console id chapter (cid, 4004d00h, barcode, mac, wfc id)
+- dsi/help: added AES ndma notes (block size, start-ndma before starting aes)
+- dsi/aes: emulates aes-io-ports, and aes-irq (no aes-dma yet though)
+- dsi/aes: ported AES functions to native DSi-style little-endian format
+- dsi/help: updated AES i/o port chapter (many details, additions, corrections)
+- dsi/help: discovered eMMC 120bit CID value (at 2FFD7BCh in main ram)
+- dsi/cartbooter: allows dsiware/system code to exceed 4MB (unlike ROM carts)
+- gui: help-engine on win95/winNT4: forces IDC_ARROW (instead of IDC_HAND)
+- gui: uses GetScrollInfo/SetScrollInfo in help-engine (except for win31...?)
+- dsi/help: identified AIC3000D as TSC2117, added lots of specs from datasheet
+- debug: added SPI logging option (in TTY window) (cart, powerman, flash, tsc)
+- dsibrew: updated the NUS Downloader/database page (some additions/corrections)
+- dsi/help: added note on teak being actually used (by two system utilities)
+- dsi/cartloader: added ".app" to standard extensions (for nus downloader files)
+- dsi/help: added more cart header details (region flags, system/dsiware flags)
+- dsi: emulates dsipstat.bit6=1 (lcd init ready) (needed for dsi system menu)
+- nds/dsi: allows writing dispstat.bit7 (MSB of 9bit LYC) (unlike 8bit gba LYC)
+
+
+<A NAME="v28"></A><B>02 Feb 2015 - version 2.8</B>
+- help: updated gbatek standalone version 2.8 (with fairly complete dsi specs)
+- dsi: no$gba is now having (more or less) working non-experimental DSi support
+- dsi/cartloader: auto-encrypts modcrypt area if needed (requires good sha1hmac)
+- gba/snap: fixed skipping empty-nds-chunks in gba-snapshots (thanks shiny.exe)
+- newmem: avoids borland tasm32/tlink32 linker-error on "arm_memxlat_non_tcm"
+- dsi/help: added list of known regions/countries (only europe is known yet)
+- dsi/help: better ndma description (logical/physical blocks, and repeat modes)
+- wifi/help: added new DSi access points specs (wpa/wpa2, and proxy settings)
+- wifi/help: added formerly unknown NDS access points specs (mtu, ssid length)
+- dsi/help: added average microphone specs for ARM7 side (A/D side is unknown)
+- dsi/emu: supports fake camera access (outputting some dummy snow picture)
+- dma: added warning on unsupported dma/ndma types (wifi,sd/mmc,aes,mic,mainmem)
+- debug: fixed $profiler_id indices for dma-channel/mode names
+- dsi/emu: supports basic aes and sd/mmc init (32bit 44xxh, 16bit 48xxh/49xxh)
+- dsi/emu: supports i2c access (8bit 450xh) and gpio access (16bit 4C0xh)
+- dsi/emu: supports new touchscreen controller (different SPI protocol as NDS)
+- dsi/help: added description for new touchscreen controller (position/status)
+- dsi/help: added notes on touchscreen in nds mode (no pressure & temperature)
+- dsi/help: identified the dsi cameras as Aptina MT9V113 image sensors
+- dsi/help: added initialization/transfer flowcharts for cameras on ARM9 side
+- dsi/help: added initialization flowchart for Aptina cameras on ARM7 side
+- dsi/help: added initialization flowchart for Unknown cameras on ARM7 side
+- dsi/help: added undocumented aptina regs, and aptina REV3 additions
+- dsi/help: added general dsi notes (eg. dsi detection) and info on exploits
+- dsi/help: added notes on basic differences to NDS mode (changed details)
+- dsi/help: added info about (mostly unknown) eMMC encryption (via CID register)
+- dsi/help: added behaviour of SPI powerman (with differences in DSi/NDS modes)
+- gba/nds/dsi/help: added BIOS RAM info (initial RAM content and IRQ/SWI usage)
+- nds/help: cart header[06Eh] Secure Area Delay, and ROMCTRL.Bit28 gap CLKs
+- nds/help: info on rom chip id bit31 cart protocol variant (gap/repeat/delay)
+- xboo: supports dumping carts with rom chip id bit31=1 (protocol differences)
+- dsi/debug: added tty.log options for I2C commands and NDS cartridge commands
+- dsi/debug: prevents warnings on bigger New WRAM areas (unlike 32K for NDS)
+- dsi/debug/emu: allows bigger DSi7/DSi9 bios regions (bigger than NDS7/NDS9)
+- dsi/emu: allows reading/writing more scfg registers (as far as used by games)
+- dsi/emu: initializes more scfg regs on reset (with suspected/guessed values)
+- dsi/i2c/help: added Aptina MT9V113 camera specs (i2c registers and variables)
+- dsi/i2c/help: added many details on bptwl chip (led/volume/misc controller)
+- dsi/help: described power-button modes (auto-reset, irq, forced-power-off)
+- dsi/help: major corrections to I2C control reg, added I2C signals chapter
+- dsi/help: added details like headphone-connect bit, game-cart-insert-bit
+- dsi/cartloader: bugfixed cartloader odd modcrypt lengths (eg. cooking coach)
+- dsi/help: added GPIO specs (data in/out/direction, irq edge/enable)
+- dsi/help: removed dsi cart protocol, instead added cmd_3Dh notes in ds chapter
+- dsi/help: hardware/software info on wiring the eMMC chip to PC card readers
+- dsi/help: info on sd/mmc I/O (from TC6387XB datasheet, tmio_mmc, dsi dumps)
+- dsi/help: added specs for sd/mmc protocols (commands, repsonses, registers)
+
+<A NAME="v27d"></A><B>09 Nov 2014 - version 2.7d</B>
+- nds-mode-option: added poppy nds-lite mode, and new (experimental) dsi mode
+- gba-mode-option: renamed poppy bright color option to poppy nds-lite colors
+- dsi/bios-clone: supports SHA1 swi functions via 80x86 code (swi 24h..29h)
+- cpu/swi: allows executing buggy System Flaw SWI number, when warnings disabled
+- dsi/help: added chipset pin-outs (cpu/ram/nand/snd/tsc/rtc/led/pwr/vol/etc)
+- dsi/help: added pin-outs for all internal connectors on DSi main+dpad boards
+- dsi/help: added dsi component lists for mainboard, wifi, battery, etc.
+- dsi/help: warning on AES little-endian (ctr,mac,key, and 16-byte-xor-blocks)
+- dsi/help: added details about modcrypt and AES special key_x/key_y feature
+- dsi/emu: supports new shared-ram mapping (wram-a,b,c) in emu and debugger
+- dsi/help: added sd/mmc pinouts, card shapes, and onboard NAND-solder pads
+- dsi/help: added notes on DSi memory map (with extra Main RAM and WRAM regions)
+- dsi/help: merged DSi7 and DSi9 BIOS chapters with overall BIOS descriptions
+- dsi/help: added notes on DSi7 and DSi9 IntrWait/VblankIntrWait BIOS bugs
+- dsi/help: added partial I/O maps for SD/NAND (based on linux "tmio_mmc" code)
+- dsi/debug: resolves DSi I/O area 4004xxxh in debugger's code/data windows
+- dsi/emu: added support for new I/O areas at 4004xxxh on ARM7 and ARM9 sides
+- dsi/boot: loads ARM7i and ARM9i areas as specified in DSi cartridge header
+- dsi/boot: loads DSi cartheader to 2FFE000h (instead of NDS header to 27FFE00h)
+- dsi/boot: cartloader resolves modcrypt areas (within @@load_block function)
+- dsi/emu: added provisions for new interrupt sources (IE2/IF2 registers)
+- dsi/debug: disassembler resolves swi names for DSi7/DSi9 bios functions
+- dsi/a22i: computes extended icon/title crc16's (on ".fix" and icon_version)
+- dsi/a22i: fixes sha1's and applies modcrypt (on ".dsi" plus ".fix" directive)
+- dsi/a22i: added ".dsi" directive (produces binary with .dsi extension)
+- dsi/emu: implemented AES in 8086 asm (not mounted to DSi I/O emulation yet)
+- dsi/help: added notes on extended icon/title (new unknown language, new icon)
+- dsi/help: added SHA1 and SHA1-HMAC pseudo code (in BIOS swi chapter)
+- dsi/help: added AES pseudo code (core, key, tables, and AES-CNT and AES-CTR)
+- poc/bios: avoids unsupported 8086-bios irq/fiq/swi emulation (always use bios)
+- dsi/help: added info on blowfish differences (cmd 3Dh, level=1, dsi-key)
+- dsi/help: added info on additional known/unknown dsi cartridge header entries
+- dsi/help: added BIOS dumping chapter (info on what is dumpable on gba/ds/dsi)
+- xboo: added dsi cartridge dumping function (requires dsi7bios and nds-xboo)
+- xboo: allows downloading NDS cart when GBA slot empty (txt_cartridge_missing)
+- mem: faster gba slot access right changes (faster exmemcnt with new memsystem)
+- web/donations: added bitcoin and classic bank details (instead of paypal)
+- web: released pixel-edited dsi mainboard photo with signal names; twl_core.jpg
+
+<A NAME="v27c"></A><B>28 Jul 2014 - version 2.7c</B>
+- webpage: moved from http://nocash.emubase.de/ to http://problemkaputt.de/
+- freeware: both no$gba gaming version and debug version are now fully freeware,
+  donations http://problemkaputt.de/donate.htm are welcome and valuable support
+  (I am working fulltime on no$xxx emulation projects without any other income)
+- snapshots: supports savestates in NDS mode (formerly supported for GBA only)
+- nds/snd: replaced nds_snd_getnext_proc by "proc_id" (snapshot compatibility)
+- gaming version: allows to access recent files menu without cartridge loaded
+- mem: forces gba-slot region to be 00h-filled on deselected cpu (arm7 or arm9)
+- help: nds mem control: notes on gba-slot deselection, and gba-slot open bus
+- help: major cosmetic changes to arm/thumb cpu chapters (parts from no$sns)
+- cpu: exported arm disassembler and arm cpu engine to external include files
+- snapshot: re-included bg2/bg3_refx/y registers (for gba and BOTH nds-engines)
+- snapshot: does freshen_waitcnt_raw before emu-run (needed after snaploading)
+- snapshot: snap-saver skips empty chunks (eg. unused NDS chunks in GBA mode)
+- cpu: supports ldmd/stmd direction (increasing, NOT decreasing) (classic nes)
+- cartloader/gui: reinit game-window size when switching between gba/nds mode
+- mem: with_new_memory_system (completely new memory system: now using separate
+  small macros per memory region, instead of old giant all-in-one macro, this
+  does resolve a terrible mess, does speed-up source code assembling, and does
+  speed-up NDS tcm/wram emulation, and allows to add DSi memory areas in future)
+- snapshot: added new snapshot/battery sna/sav compression option (as in no$psx)
+- setup/sound: volume slider (optionally hardware/mixer or software/multiply)
+- a22i: fixed ".fill" directive (destroyed ecx when fetching 2nd/3rd parameter)
+- help: added "GBA Cart Protections" chapter (namely about "classic nes" stuff)
+- nds: allows nds7bios intrwait bios-bug with any incoming lz77-random values
+- nds: allows jmp to 05ECh without warning (can be used for dumping NDS7 bios)
+- gba: forces rom-mirror (instead "increasing numbers") for "classic nes" series
+- gba: forces eeprom (no flash/sram) for "classic nes" series (game code "Fxxx")
+- mem: moved misaligned_mem_reads to subfunction level (instead macro level)
+- xboo: recognizes DSi's 128K flash id (allows to dump/patch wifi calibration)
+- help: added note on ldmd/stmd transfer order (uses increasing addr for rlist!)
+- help: corrected wifi calibration chapter (version is at 040h, not at 044h)
+- web: changed no$gba forum link: http://ngemu.com/forums/no-gba-discussion.102/
+
+<A NAME="v27b"></A><B>10 Nov 2013 - version 2.7b</B>
+- a22i: prevents unsupported [dest-1] for .pack_lz77 (fixes no$firmware loading)
+- help: added caution on unsupported [dest-1] for LZ77UnCompVram bios function
+- sav: support for 1024kbyte and 8192kbyte nds flash save memory (both untested)
+- sav: dynamically allocates save memory as needed (between 128k and 8192kbyte)
+- bugfix: hwreset preserves gba/sav media creation date (got destroyed in v2.7a)
+- nds/help: added more nds cartridge rom IDs and nds flash IDs (thanks jimmsu)
+- poc/clone: fixed bug in pocketstation bios-clone (added INT_BASE to show_date)
+- poc/loader: accepts checksum for newly discovered "J110" BIOS version
+- poc/emu: applies 4x4 pre-zoom (less tiny window, avoid StretchDIBits failure)
+- poc/help: added notes on BIOS versions (in no$psx help, see there)
+- poc/help: added POC-XBOO circuit and sample code for xboo TTY debug messages
+- poc/xboo: tty debug window (ascii characters transferred via FUNC3 feature)
+- poc/xboo: verify-before-write and skip-if-same (higher lifetime/faster upload)
+- poc/xboo: pocketstation upload/download memcard and download bios functions
+- nds/help: added basic notes on special ds carts (infrared, nand, microsd slot)
+- sound: optional 16bit output (instead of 8bit) (maybe fixes 'noise' problems)
+- gui/setup: uses asia-compatible TabControl instead of unreliable PropertySheet
+
+<A NAME="v27a"></A><B>17 Aug 2013 - version 2.7a</B>
+- flash: nds games with 8Mbit FLASH memory are KEPT UNSUPPORTED, please identify
+  that chips! tools are at http://forum.gbadev.org/viewtopic.php?p=178032#178032
+- nds/infrared: fake response AAh to NTR-Ixxx cart SPI cmd 08h (thanks normatt)
+- nds/cartloader: forces Rune Factory to use EEPROM 64kbyte (thanks BinarySlave)
+- cpu/gba: fixed sram mirror Fxxxxxxh to E00xxxxh (for Croket 2, thanks normatt)
+- cartloader: auto-encrypt secure_area (for unencrypted NDS games WITH firmware)
+- nds/snd: tweaks BIAS=200h (instead 0) on coldboot; avoid firmware boot scratch
+- nds/reset: initialization zerofills more RAM regions and internal registers
+- nds/help: added info on nds/dsi gamecodes (ds cartridge header chapter)
+- nds/help: added some more newly discovered ROM chip IDs (thanks normatt)
+- nds/help: added notes on cartridges with uncommon save memory (nand, microSD)
+- bugfix: adjust_addr_edi_gba/poc: removed silly/buggy bit27=0 (thanks kingcom)
+- nds/boot: init [27FFC40]=0001 (for newer games) (thanks Exophase and drwhojan)
+- nds/boot: init [27FF808,27FF80A,27FF810,27FF860,27FF874,27FF880,27FF884]
+- xboo: init [27FF860,27FF868,27FF874,27FF880,27FF884,27FF890,27FFC40,380F980]
+- nds/cart: mirrors [romsize*N+0..7FFFh] to [8000h..81FFh] (thanks cheryl)
+- dsi/help: started adding basic DSi specs (still far away from completion)
+- nds/bios/help: added note on special temp buffer used by Huffman SWI function
+- cheats: added cheat function also to debug version (as in gaming version)
+- menubar: added recent_files list also to gaming version (as in debug version)
+- video: added fullscreen mode in gaming version (black border/without menubar)
+- bugfix: fixed arm7 stm writeback for rb=r13..r14 (thanks flubba and dwedit)
+- help: added note on texcoord sign+integer+fraction for parameters and result
+- soft-detail: clips texcoord transformation results to 16bit (thanks smealum)
+- soft-renderer: bugfixed front/back-check for clipped polygons (thanks smealum)
+
+<A NAME="v27"></A><B>23 May 2013 - version 2.7</B>
+- help: updated gbatek standalone version 2.7 (around fifty news since 2.5)
+- sizing: added game window sizing support in NDS mode, and in multimachine mode
+- multimachine: fixed some bugs on adding/removing additional NDS machines
+- dos: fixed destroyed ebx register in memory handle resizing function
+- dos: fixed missing nds_color_xlat re-initialization on dos video mode changes
+- dos: fixed wrong resolution in 320x200pix mode (emu-vga mov cx,320 for lowres)
+- gba/help: added partial gba wireless adapter details
+- gba/help: added gameboy player detect/unlock/rumble info (thanks flubba)
+- nds/help: added expansion ram detection/unlocking info (thanks rick lick wong)
+- gui: created own help engine (instead of microcrap's suicidal windows .hlp)
+- gui: added dos/windows help engines to gaming-versions (with short help text)
+- internal: uses new overlay engine for help.pak, xmit-nds.pak, pockclon.pak
+- removed bg_gif feature (no$gmb relict that was probably never used in no$gba)
+- gba/help: added video interlace info (thanks damian yerrik)
+- debugmsg: added optional dma-transfer and serial-port (normal mode) logging
+- debugmsg: changed debug message window to use nonproportional fixedwidth font
+- debugmsg: added new debug I/O ports 4FFFAxxh (alternate to old "mov r12,r12")
+- debugmsg/help: added info on no$gba (and ensata) debug pseudo I/O ports
+- cpu: supports "blx lr" (both arm and thumb) (used by FF4) (thanks X-0D X-0D)
+- cpu: supports 2nd half of thumb-bl-opcode (used by MarioGolfAdvanceTour.gba)
+- a22i: fixed thumb add rd,=adr (unsigned 8bit offset, not 7bit with 1bit sign)
+- a22i: recognizes thumb add/sub rx,ry as short-form for add/sub rx,rx,ry
+- a22i: recognizes thumb labels starting with "b" (were treated as "b{cond}")
+- a22i: accepts thumb ldr/str rd,[sp] with omitted zero-immediate offset
+- pockstat: emulates sony pocketstation (uses arm cpu too, otherwise offtopic)
+- debug: added new emu-detection and string/character-output (via port 4FFFAxxh)
+- laptop/controls: backspace disables delays (same as keypad+ on real keyboards)
+- nds/wifi: emulates aid_low and aid_full masking, stats masking, stats auto_res
+- nds/3d: soft-detail: emulates disp_1dot_depth (if enabled checks all w-coords)
+- nds/3d/help: added note that disp_1dot_depth checks all vertices of the poly
+- nds/3d/help: added note that disp_1dot_depth is actually a 0dot_depth check
+- nds/3d/help: added note that disp_1dot_depth always uses W-coord (not Z-coord)
+- nds/3d: stores disp_1dot_depth changes as pseudo gx command in command buffer
+- nds/3d: soft-detail: emulates depth_equal tolerance, raised frac_z from 5 to 6
+- nds/3d/help: added info on depth_equal tolerance (+/-200h within 24bit range)
+- nds/3d/help: added disabled alpha_blend info (size reduction, rgba overwrite)
+- nds/3d: soft-detail: reduces size of translucent polys if alpha-blend disabled
+- nds/timing-fix: prevents dumbloop-trick on legitimate div/sqrt-busy waitloops
+- nds/3d: soft-detail: bypasses alpha-blending when framebuf alpha=0 (rearplane)
+- nds/3d: soft-detail: bypasses alpha-blending when master-disabled in disp3dcnt
+- nds/3d: soft-accuracy: boxtest uses new soft3d clipping code (for all 6 quads)
+- nds/3d/help: added alpha-blending formulas (for blending polygon vs framebuf)
+- gba-micro/help: added note on slower 256K main ram (crashes when overclocked)
+- gba-micro/help: added case/joypad ascii-arts, mentioned unsupported dmg/cgb
+- gba-micro/help: added pinouts for supply/sio/phones/lcd/backlight/powerchips
+- nds/3d: soft-detail: supports alpha_test_ref (if enabled) (full range 0..31)
+- nds/3d: soft-accuracy: raised div_w resolution from 40000000h/w to FFFFFFFFh/w
+- nds/3d/help: corrected alpha_test_ref (hide if below-or-equal) (instead below)
+- nds/3d/help: added notes on edge-marking problems (with translucent polygons)
+- nds/3d/help: added fog blending formula, added note on fog glitch (1st alpha)
+- nds/3d: soft-detail: applies fog when enabled (depth/flag/color/alpha/mode)
+- nds/3d: soft-detail: explodes fog_table (only if enabled and only if changed)
+- nds/3d: soft-bugfix: fixed transulcent mask (new id only, not new OR old id)
+- debug/profiler: fixed crash in the profiler list window (occured in v2.6b)
+
+<A NAME="v26b"></A><B>24 January 2008 - version 2.6b (bugfix) (hll-debug-ver only)</B>
+- debug/bugfix: fixed a crash that occured with new demangler (pop without push)
+
+<A NAME="v26a"></A><B>23 January 2008 - version 2.6a</B>
+(faster 3d rendering, backup detect, rtc-irq, better texture interpolation,)
+(perfectly accurate edge-marking, translucent-poly-id, shadow-poly support,)
+(capture in vram display mode, debug gui/warnings, cpu/ipc/div/sqrt details)
+- free-download: old no$gba v2.6 gaming version now free for everybody - enjoy
+- debug/symbols: resize function for Alt+L symbol list window (saved in .ini)
+- debug/internal: changed computer_id handling for compatibility with win vista
+- nds/debug: allows nintendo to mis-use clipmtx_result for detecting their emu
+- nds/debug: allows to override mis-declared-thumb-functions by crude $t labels
+- nds/rtc: triggers IRQ when SI changes HI-to-LO (only when SI-IRQ is enabled)
+- hll-version: demangles strange new "_ZN3txt3txtEii" and "_Z3txtii" type labels
+- nds/gba/rcnt: allows to generate SI interrupts manually by toggling RCNT bits
+- nds/gba/rcnt: internally memorizes rcnt-output bits (additionally to inputs)
+- nds/rtc: passes rtc 1Hz/2Hz/4Hz/8Hz/16Hz or per-minute IRQ to rcnt SI input
+- nds/3d: soft-speedup: uses clean 80286 shift opcodes (instead slow 80386 shrd)
+- nds/3d: soft-speedup: new scaled side_clip_x allowed to re-remove pre_add_mask
+- nds/3d: soft-speedup: scaled side_clip_x coords from 0..len to 0..7FFFFFFFh
+- nds/3d: soft-accuracy: texture/color interpolation with variable pre_add_mask
+- nds/details: emulates all newly discovered ipcfifo/div/sqrt technical details
+- nds/help: added tech specs on div/sqrt (readonly results, start/stop timings)
+- nds/help: added tech specs on ipcfifo (edge triggered, underrun, fifo-disable)
+- nds/help: added user settings 076h (language mask) and header 01Dh (ique flag)
+- nds/3d: soft-detail: edge-mark: recurses surrounding depth values (less only)
+- nds/3d/help: added more technical notes on edge marking (depth and polygon_id)
+- nds/a22i: auto generates chinese crc upon .fix directive (only if version=2)
+- nds/help: added info on chinese title in icon/title region (addr/version/crc)
+- cpu/internal: reduced 32bit test/and to 8bit (al/bl/cl/dl instead eax/ebx/etc)
+- cpu/detail: emulates mis-aligned thumb bx/blx and arm bx/blx (with warning)
+- cpu/detail: emulates mis-aligned rd=r15 in arm alu opcodes (thanks jonathan)
+- nds/3d/help: added double-blended-edge-glitch (edge-marking plus anti-alias)
+- nds/3d/help: added translucent-edge-glitch (edge-marking plus anti-aliasing)
+- nds/backup: supports re-detection (games with faulty initial initialization)
+- nds/backup: added bus-width auto detection (redirecting to new general types)
+- nds/backup: added new types (3x general types) (and 1x sanyo, thanks flubba)
+- nds/3d: soft-detail: edge-mark: handles edges at screen border (via clear_id)
+- nds/3d: soft-detail: edge-mark: applies edges in respect to surrounding pixels
+- nds/3d: soft-detail: edge-mark: internally stores edge_flag for possible edges
+- nds/debug: allows some games to initialize not-existing port 4001004h to zero
+- nds/debug: allows nintendo to use faulty ldmib with base-inclusion-writeback
+- nds/debug: allows nintendo to use invalid stmib/ldmib user bank writeback
+- nds/debug: allows nintendo to write more serious nonsense to (R) baseband regs
+- nds/timings: re-fixed arm7/arm9 sync (new arm9-66MHz timings vs arm7-33MHz)
+- nds/video: supports capture from 2d/3d engine in vram display mode (nanostray)
+- nds/help: added note on undoc nds7 port 4001080h (used by ds-lite firmware)
+- nds/help: added optical mouse sensor (slider controller) (thanx daniel palmer)
+- nds/help: added firmware wifi internet access point settings info (thanks cue)
+- nds/help: added user settings 066h (year) and 075h (ext language) (thanks cue)
+- screenshot: converts 32bpp images to 24bpp (smaller and more standard files)
+- nds/3d: soft-detail: prevents rendering of translucent polys with same poly_id
+- nds/3d: soft-detail: supports shadow polygons (mask/render, step 1 and step 2)
+- nds/3d: soft-speedup: scaled perspective correct clp.x from 0..len to 0..7FFFh
+- nds/3d: soft-speedup: mmx: faster texcoord_clipping (no_repeat,repeat,flipped)
+- nds/3d: soft-speedup: pre-calc tex_clip proc, collapsed 32:32 tex_xy to 16:16
+- nds/3d: soft-speedup: pre-explodes edge_color_table, optimized alpha blend
+- nds/3d: soft-speedup: mmx: processes two rgba-pairs and tex_xy-pairs at once
+- nds/3d: soft-speedup: mmx: nonlinear color_rgb and texcoord_xy interpolation
+- nds/3d: soft-detail: stores fog bit in framebuffer (opaque/trans=replace/and)
+- nds/3d: soft-speedup: mmx: linear color_rgb and texcoord_xy interpolation
+- nds/3d: soft-speedup: merged texture addressing and blending into single proc
+- nds/3d: soft-speedup: mmx: faster texture blending (modulate/toon/highlight)
+- nds/3d: soft-speedup: pre-calculates soft3d_tex_blend_proc for blendtype/mmx
+- nds/3d: soft-speedup: uses mmx (if present) (otherwise stays 80386 compatible)
+- nds/3d: soft-speedup: collapsed scanline_rgba from 32:32:32:32 to 8:8:8:8 bits
+- detect: added no$gmb-386/486/cpuid detection, internal: rdtsc (3d/re selftest)
+
+<A NAME="v26"></A><B>18 December 2007 - version 2.6</B>
+- nds/3d: soft-renderer: uses fast linear color/texture interpolation when w1=w2
+- nds/3d: soft-renderer: supports perspective-correct texture (eg. eragon/demo)
+- nds/3d: soft-renderer: supports perspective-correct rgb color interpolation
+- nds/3d: soft-renderer: picks correct vertex/color/attributes on 1dot polygons
+- nds/3d: soft-renderer: prevents polys at existing/possible x1=256 (off-screen)
+- nds/3d: soft-renderer: allows bigger than possible rear-depth (clubhouse dart)
+- nds/3d/debug: vram viewer correctly shows swap buffers as 1st command in tree
+- nds/3d/help: added note on situations where lower/right edges are excluded
+- nds/3d/help: anti-aliasing doesn't work with (opaque) lines and wire-frames
+- nds/3d/help: anti-aliasing isn't used on edge-marked polys/lines/wire-frames
+- nds/3d/help: swap_buffers parameters are applied on the FOLLOWING gxcommands
+- nds/3d/help: swap_buffers does NOT copy re-ports (disp3dcnt/toon_table/etc)
+- nds/3d: soft-renderer: supports w-buffering (games with reversed z working)
+- nds/3d/help: confirmed guessed texture slot locations for rear-plane bitmaps
+- nds/3d: soft-renderer: allows dots on lower/right clip-boundary (off-viewport)
+- nds/3d: soft-renderer: prevents polys at y1=192 or y1=negative (off-screen)
+- nds/3d: soft-renderer: handles faulty viewports (exceeding 192 scanlines)
+- nds/3d: re-renders old frame on master changes (disp3dcnt or port 330h..3BFh)
+- nds/3d: soft-renderer: discards correct vertex of invalid twisted |X| quads
+- nds/3d: soft-renderer: emulates edge-marking (edge_color, opaque, polygon_id)
+- nds/3d: soft-renderer: emulates correct size of line-segments and wire-frames
+- nds/3d: soft-renderer: emulates correct size of edge-marked polygons
+- nds/3d: soft-renderer: emulates correct size of translucent and opaque polys
+- nds/3d: soft-renderer: enulates inwards/outwards/left/right/front/back edges
+- nds/3d: soft-renderer: emulates steep, flat, vertical, horizontal edges
+- nds/3d: soft-renderer: emulates correct rounding of screen coordinates
+- nds/3d: supports direct capture from 3d engine (instead from engine a only)
+- nds/2d/bugfixes: inits engine b on reset, fixed engine b base in vram viewer
+- nds/3d: opengl: internally breaks all polygon strips to separate polygons
+- nds/3d: buffers translucent polys, and renders them later (after opaque polys)
+- nds/3d/help: corrected polygon_attr.bit11 (affects pixels, not whole polygons)
+- nds/3d: soft-renderer: stores alpha in framebuf (unlike evil generic opengl)
+- nds/3d/help: added description on clamped textures (clips to minmax 0,siz-1)
+- nds/3d: soft-renderer: supports texture clamp, repeat, and flip-repeat modes
+- nds/3d: soft-renderer: clips texcoord (only if needed; point1 or point2>max)
+- nds/3d: soft-renderer: supports toon table (and skips green/blue calculations)
+- nds/3d: soft-renderer: does texture blending (modulation,decal,toon,highlight)
+- nds/3d: soft-renderer: explodes texture bitmap and renders texture by texcoord
+- nds/3d: emulates polygon_attr having no effect until next begin_vtxs command
+- nds/3d: soft-renderer: renderer uses linear (quick'n'dirty) color/texcoord
+- nds/3d: soft-renderer: interpolates color and texcoord (if any) on rendering
+- nds/3d: soft-renderer: interpolates color and texcoord (if any) on clipping
+- nds/3d: allocates/stores color/texcoord/screencoord in each buffered vtx-entry
+- nds/3d: soft-renderer: re-ensures range after clipping (for rounding errors)
+- nds/3d: vram viewer: fixed 4x4 texel texture mode1 crash (missing pusha/popa)
+- nds/3d: soft-renderer: optional depth_update for translucent polys (less only)
+- nds/3d: soft-renderer: optional depth_less or depth_equal rendering condition
+- nds/3d: soft-renderer: interpolates depth (z) horizontally and vertically
+- nds/3d: soft-renderer: initializes rear-plane rgba,depth,etc (blank or bitmap)
+- nds/3d: soft-renderer: front/back/linesegment check (on first three vertices)
+- nds/3d: soft-renderer: hides far-plane-intersecting (if enabled in poly_attr)
+- nds/3d: soft-renderer: clips polygons to all six sides of the view-volume
+- web/paypal: added an evil "donate 2.50 and download newest version" button
+- dos: due to the soft-renderer, dos version is now fully supporting 3d video
+- a22i: added LO (usingned lower) as alias for CC (carry clear) (thanks niels)
+
+<A NAME="v25c"></A><B>20 November 2007 - version 2.5c</B>
+- nds/3d: vram viewer: stable handling of old-tree messages (after new reload)
+- nds/bios: 80x86 bios clone supports thumb-mode irq handler (nds9/arm v5 only)
+- webpage: added two nds 3d viewer screenshots, and a nds-wlan-iomap screenshot
+- wifi/debug/cleanup: rearranged/fixed/renamed wlan registers in i/o map window
+- menubar: added pdroms.de (and donate.htm) hyperlinks in help topic of menubar
+- nds/3d: vram viewer: hides the laser pointer for non-vtx/non-postest commands
+- nds/cheats: fixed last some bytes of action replay code 0Eh (thanks hiei)
+- nds/3d: vram viewer: laser outlines for polygon(s) of selected begin_vtxs
+- nds/3d: vram viewer: laser pointer shows cube-outlines for boxtest command
+- nds/3d: vram viewer: ignores vtx_end cmd (reduces amount of tree root entries)
+- cpu/detail: emulates ignored writeback on ldrh rd,[rd],imm (thanks kenobi)
+- nds/3d: vram viewer: laser pointer for pos_test command (as for vtx commands)
+- nds/3d: emulates internal vtx coordinates being overwritten by pos_test cmd
+- nds/3d/help: added caution on pos_test (overwrites internal vtx coordinates)
+- nds/3d: vram viewer: shows viewport rectangle (by red lines drawn on screen)
+- nds/3d: vram viewer: allows to resize tree-view vertically (y2 bottom-aligned)
+- nds/3d: vram viewer: laser arrow: shows corresponding numeric screen x,y,depth
+- nds/3d: supports 3d vs 2d alpha blending (if supported by local opengl driver)
+- nds/3d: temporarily halts arm9-cpu upon gxfifo-overkill (fixes main_siz error)
+- nds/cartloader: accepts faulty homebrew logo crc (warning if other than CF56h)
+- nds/debug: vram viewer fixed crash in guess-tile-usage for 2D tile screens
+- nds/video: aligned empty_vram (crashed unallocated text scroll) (thanks m m)
+- nds/3d/debug/speedup: setredraw=0 when reloading 3d viewer tree (thanks peter)
+- gba/nds/video/speedup: precalculates eva/evb/evy parameters per scanline
+
+<A NAME="v25b"></A><B>03 November 2007 - version 2.5b</B>
+- nds/3d/debug: vram viewer auto-updates 3d tree view (if any) during emulation
+- nds/3d/debug: defaults to disable old/slow 3d debugmsg's (instead vram viewer)
+- nds/3d/mtx: removed v2.5 z-rounding trick, allows to change projection per vtx
+- nds/3d/mtx: gl_projection set to identity (but max depth +1.0 instead +0.99)
+- nds/3d/mtx: all matrix math done by software without using any opengl matrices
+- nds/spi: allows to deselect/disable spi bus without clearing the hold-bit
+- nds/3d/debug: vram viewer displays texture bitmap for currently selected vtx
+- nds/3d/debug: vram viewer draws laser arrow from screen-center to selected vtx
+- nds/3d/debug: vram viewer indicates unused lights and color tables by red line
+- nds/3d/debug: vram viewer shows color/material/shininess/etc for selected vtx
+- nds/wifi/help: added port 24Ch/24Eh/250h, 264h/270h, 2A4h/2C4h, 2C8h/2CCh info
+- nds/3d/speedup/frameskip: renders 3d only when needed (capture and video out)
+- nds/3d/speedup: position vectors multiply only 3x4 matrix (and add 1x4 * w=1)
+- nds/3d/speedup: directional vectors use 3x3 matrix maths (instead slow 4x4)
+- nds/key1/help: renamed crypt_up/down (actually encrypt/decrypt) (thanks simon)
+- nds/3d/stage2/buf: all 3d rendering/lighting/vtxmaths performed from buffer
+- nds/3d/multi: uses a single opengl context shared (and working) for multiplay
+- nds/3d/internal: internally translates gx commands 0..255 to ID codes 0..38
+- nds/wifi/help: added W_TX_HDR_CNT port 194h bit0,1,2 info (thanks Tim Seidel)
+- nds/3d/debug: added new 3d page to vram viewer, treeview for buffered commands
+- nds/3d/buf: stores initial frame settings, reallocs larger buffer when needed
+- nds/3d/buf: stores commands with original params, and results on each mtx cmd
+- nds/3d/buf: buffers all gx commands (for future frameskip and for vram viewer)
+- nds/3d/deguglog: appends current matrix_mode as comment to all matrix commands
+- nds/3d/softlight: fixed shininess_table index (7bit index = 8bit data div 2)
+- nds/wifi: emulates 0000h-to-094h-to-098h, and reset-098h.bit15-via-0B4h.Bit6
+- nds/wifi/help: added 1D0h..1DFh info, added notes on body[2] instead txhdr[2]
+- nds/wifi/help: confirmed 0B4h.Bit6, added 030h.Bit7, added info on 094h/098h
+- nds/wifi/help: removed incorrect/unconfirmed rxbuf_begin/end-latching-info
+- nds/wifi/help: added txhdr[2], port[0C0h], port[0C4h], renamed EXTRA to CMD
+- nds/wifi/help: renamed W_RXUNITS to W_RXTX_ADDR and moved it to status chapter
+- nds/wifi/help: added notes on registers affected by powerforce (and by irq13)
+- nds/wifi: reflects powerforce to rf_status (unreported pictochat-lite problem)
+- cpu/debug: replaced invalid tmb high-opcode error message by optional warning
+- cpu/debug: disassembler shows invalid high-opcodes as such (thanks vladimir)
+- cpu: emulates invalid add/mov/cmp thumb high-opcodes-without-high-registers
+- joysticks: fixed unstable vint_inputs code (occassionallly skipped joysticks)
+- nds/wifi/dslite: debug-iomap recognizes channel-number for type3 RF registers
+- nds/wifi/dslite: emulates type3 RF registers (reading, writing, and initial)
+- nds/wifi: emulates reading from RF chip, emulates initial power-on RF values
+- nds/wifi/help: added RF2958 (aka RF9008) datasheet info (thanks Tim Seidel)
+
+<A NAME="v25a"></A><B>04 October 2007 - version 2.5a</B>
+- debug: fixed @@resolve_clks bug (new timings crashed the clock cycle comments)
+
+<A NAME="v25"></A><B>04 October 2007 - version 2.5</B>
+- help: updated gbatek standalone version 2.5 (about one hundred news since 2.3)
+- vram viewer: supports extended palettes in bg map windows (eg. magnetica demo)
+- nds/help: added ds 3d overview chapter (basics on geometry/rendering engines)
+- nds/help: added ds technical data chapter (containing some basic overview)
+- nds/help: replaced ds various chapter by new ds memory control/timing chapter
+- nds/sound: fixed major unreported bug in 80x86 code sound_bias SWI function
+- nds/3d/help: corrected shininess formula (ie. fixed that max cos 2 angle mess)
+- nds/3d/help: added caution: specular reflection WON'T WORK on camera rotation
+- nds/3d/help: maths basics of vector-by-vector multiply (and purposes thereof)
+- nds/3d/softlight: allows light+color nonsense double def (eg castlevania clip)
+- nds/3d/softlight: much better light-accuracy, and now supports shininess_table
+- nds/3d/softlight: lighting fully calculated by software (without opengl light)
+- nds/timing: split timings for nds7 (fast access) and trashy nds9 (slow access)
+- nds/timing: split addr_clks_table to CODE/DATA addr_clkc_table/addr_clkd_table
+- nds/timing: emulates "half" cycles on 66MHz/nds9 (tcm/cache and n32/2 thumb)
+- nds/timing: emulates nds7 exmemstat gba-slot timing bits (like nds9 exmemcnt)
+- nds/timing/help: added detailed/tested nds7/nds9 code/data memory-timing chart
+- nds/timing/cache: allows more CPU load on bios/mainram when cache is enabled
+- nds/timing: emulates shared N32 access time for two NDS9 thumb 16bit opcodes
+- cpu/speedup: precalculates opcode-timings on interseg-jumps (usually faster)
+- cpu/speedup: faster conditional opcode handling (maybe yet another 3% faster)
+- cpu/speedup: thumb: uses 16bit reads (3% faster on non-32bit-aligned addr's)
+- cpu/speedup: replaced dumb jmp exec_opcode by exec_opcode_mac (ca. 10% faster)
+- cpu/speedup: added more code alignments in cpu-core (not significantly faster)
+- nds/help: added note that 66MHz-nds9 actually runs MUCH SLOWER than 33MHz-nds7
+- nds/cpu: emulates superslow nds9 memory access time (bios,wram,vram,oam,etc)
+- nds/cpu: emulates operand-independend ARM9 multiply time (eg. slow thumb time)
+- nds/wram: emulates wramcnt mapping (no idea if it's used by any games though)
+- nds/3d: adjusted z-rounding (avoid opengl-clip-plane in club house games demo)
+- cpu: emulates cp15-trace-id, debug: disass auto-comments on trace-id and bist
+- nds/help: fixed key1 [scratch] writeback lsw/msw are exchanged (thanks simon)
+- nds/help: cp15 info on trace-id, bist, cache debug/test, supported cache cmds
+- cheat: fixed occassional crash on delete cheat (push/pop) (thanks Hiei Youkai)
+- thanks: rockmanrotties for submarine (timing) and clubhouse (clip) bugreports
+
+
+<A NAME="v24f"></A><B>17 September 2007 - version 2.4f</B>
+- cheat: fixed conditional counter for cbds parameter lines (thanks Hiei Youkai)
+- cheat: raised strnlen to 5kbytes for about 256 codes/line (thanks Hiei Youkai)
+- nds/gba/help: added info on unknown add-ons (gba ir/wifi and nds memory exp)
+- nds/help: added info on ds rumble option paks (thanks bottledlight ds wiki)
+- gba/help: added some very basic info about the gameboy player (thanks flubba)
+- gui: allows to resize debugmsg/cheat/fileslst windows (with anchored buttons)
+- gba/help: added yoshi x/y-axis info (thanks flubba) (still incomplete though)
+- gba/help: added warioware z-axis gyro info (thanks momo vampire for the cart)
+- gba/help: added rumble and fram info (thanks momo vampire for warioware cart)
+- gba/help: added notes on special meaning of 1st (and 4th) letter of gamecode
+- nds/3d: emulates alpha blending master enable/test mode bit (disp3dcnt.bit3)
+- gba/memfill: fixed memfill code (data step/repeat count) (thanks Hiei Youkai)
+- nds/cheat: removed various ARDS checks (accepting addr with unknown offsets)
+- gba/nds: corrected hblank durations (thanks sebastien), no-vblank in lastline
+- gba/nds/help: notes on hblank=0 duration (1006/1606/1613 on gba/nds9/nds7)
+- gba/nds/help: notes on no-vblank-flag in last line, and hblank in ALL lines
+- nds/cheat: removed alignment check for [[X]+Z] (works with uninitialized [X])
+- nds/cheat: changed ARDS enable-code detection (9 lines with specific 4th/9th)
+- multi-cpu-timing: machine_switch_request processed AFTER all event_handlers
+- nds/3d: emulates texture master enable bit in disp3dcnt (thanks peter schraut)
+- nds/3d: emulates material-alpha (rather than only color-alpha) (thanks peter)
+- nds: emulates hinge/unfold irq (additionally to hinge status) (thanks antonio)
+
+<A NAME="v24e"></A><B>03 September 2007 - version 2.4e</B>
+- nds/3d: internal diag screen shows used opengl driver vendor/renderer/version
+- nds: emulates hinge folded/closed (game window wm_poschanged/isiconic check)
+- gba/cheat: fixed some unreported bugs, help: added some missing decrypt info
+- nds/cheat: supports actionreplay/codebreaker codes (freeware/gaming ver only)
+- nds/help: actionreplay/codebreaker specs (thanks kenobi and dualscreenman)
+- nds/help: added info on changing key2 seed (romctrl.15) (thanks chishm/idea)
+
+<A NAME="v24d"></A><B>21 August 2007 - version 2.4d</B>
+- debug/setup: allows to enable/disable user-debugmsg, wifi-log, and 3d-log
+- cpu: emulates undef opcode/copro exception (with warning if no bios/vector=0)
+- wifi/emu: emulates new bits in rx header, and optional auto sequence control
+- cpu/bugfix: arm ldm/stm accidently destroyed mis-alignments (on writeback)
+- wifi/help: added info on port 1C4h, and on some of the 1Bxh ports (rxstat's)
+- wifi/help: added new chapter on transmit errors and automatic ACK responses
+- wifi/help: added info on ports 1A8h,1AAh,1ACh,1AEh (bit0..12 vs. 1B0h..1BFh)
+- wifi/help: discovered new bits in RX header, added notes on MAC addresses
+- wifi/debug: allows to log all packets (with automatic comments on ieee header)
+- wifi/help: added notes on automatic sequence ctrl and auto-modified frame ctrl
+- wifi/emu: tx-engine uses new timers, and emulates length/rate/preamble timing
+- wifi/emu: emulates the various wifi counters and irqs at correct timing
+- debug/setup: memorizes if iomap window was open (if so, re-opens it on boot)
+- debug/emustop: break_requests (esc-key) take place only on current machine
+- debug/internal: replaced ds:bibos swi_retadr/haltstop/intrwait by vals:bios
+- debug/vramviewer: oam viewer supports extended obj palettes (thanks pierre)
+- debug/vramviewer: fixed engine-B palette viewer (thanks pierre for bug report)
+- dslite/help: added info on new TSC chip by AKM (new IN2, different PD bits)
+- dslite/help: added note on near-crt-quality colors and wider viewing angles
+- dslite/help: added custom change-channels-flowchart for new wifi-type3-chips
+- dslite/help: added settings at firmware[0CEh-and-up] for new wifi-type3-chips
+- dslite/xboo: updated nds-pins.gif (added new pin-positions on ds-lite board)
+- dslite/xboo: added 8 extra diodes in data lines (to prevent power-on problem)
+- dslite/help: added lite-specific wifi (W) mirrors, and unused wifi ram/ports
+- dslite/help: added the new backlight level bits in firmware user settings
+- dslite/help: added caution on DS-lite destroying wifi ports 064h and 076h
+- dslite/help: added new powerman backlight/power register (and lost mute-bit)
+- dslite/help: added ID for firmare chip 35PE20P (and supported it in ds-xboo)
+- powerman/help: added unknown bit (mutes volume to zero, if amplifier is on)
+- wifi/emu: emulates initial wifi-port settings and random register (mod 5FDh)
+- wifi/emu: emulates primary wifi irq flag stuck zero while secondary nonzero
+- wifi/emu: emulates corrected ports (004h,0ACh,0AEh,0B0h,0B4h)
+- wifi/emu: emulates new ports (210h, 05Ch/06Ch, 062h/064h) and new mirrors
+- wifi/help: added rx/tx signal/timing charts (rfu pins, aka 19Ch bits)
+- wifi/help: added specs/cautions on primary wifi irq flag (2000214h.Bit24)
+- wifi/help: added new mirrors (on read from 0ACh,0AEh,20Ch,21Ch,298h,2A8h,2B0h)
+- wifi/help: added notes/info on ports 038h,19Ch,214h,21Ch and on W_CONFIG_140h
+- wifi/help: new bits 0EAh.1,008h.13/14 004h.14); extra-TX ports 118h,0EEh,090h
+- wifi/help: corrected ports 004h,0ACh,0AEh,0B0h,0B4h and txstat.bit12-13
+- wifi/help: added info on new ports (110h, 210h, 05Ch/06Ch, 062h/064h)
+- wifi/help: fixed tx_hdr: rate 8bit (not 16bit) defaults to 1Mbit/s if invalid
+- wifi/help: added new bits: port004h.bit0 tx_master, 008h.bit15 beacon_irq1
+- wifi/help: major updates in timers chapter (reloads, IRQ13/14/15, 22MHz, etc)
+- nds/help: pinouts for nds LCD sockets, wifi RFU boards, and powerman chips
+- gui: mousewheel support (win98 or dos/ctmouse) (thanks jasper/idea, tilo/hw)
+
+<A NAME="v24c"></A><B>01 July 2007 - version 2.4c</B>
+- web: updated magicflr.zip (with NDS and e-Reader source) (additionally to GBA)
+- web: uploaded hotmail.htm (hotmail is deleting ALL emails that I am sending)
+- web: updated ereader.zip package (using new bmp/raw/bin/ori/plus directives)
+- ereader/a22i/japan: uses 8bit/16bit charset depending on invalid 8bit chars
+- ereader/help: notes on non-vpk mode, and on z80-wait-opcodes, 5bit-card types
+- ereader/a22i/jap/ori: inserts dummy-sub-titles, and z80-stub to start gba-code
+- ereader/a22i: .ereader_create_bmp/raw/bin .ereader_japan_ori/plus directives
+- debug: supports vert_splitter for code/stack sizing (instead outer-edges only)
+- ereader/loader: supports multi/single .raw/.bin files (auto-converted to bmp)
+- no$fmw: fixed dtcm/pal/oam zerofill init (memory wasn't mapped/enabled there)
+- gui: added OFN_ENABLESIZING to all filemenues (win98 and up; ignored by win95)
+- ereader/a22i: also creates RAW dotcode (multi-strip) (all strips in 1 file)
+- debug: adjusts small-gamescreen size in nds-mode (256x192 instead of 240x160)
+- bios-clone: 80x86-mode redirects nds-callback/gba-sound to rom-image (if any)
+- gui: defaults .hlp window-width to correct 80 columns (not more, not less)
+
+<A NAME="v24b"></A><B>05 June 2007 - version 2.4b</B>
+- ereader/demo's: uploaded ereader.zip (with magicflr, rotris, camera, bombswp)
+- nds/sound: bugfix: fixed snd crash on mul1.5 speed (thanks Giuseppe Marletta)
+- bios-clone: bugfix: gba/nds intrwait set IME=1 (eg. japanese/original ereader)
+- ereader/a22i: vpk compression, good tree values, auto-method1/0 for gba/nes
+- ereader/emu: automatically loads next strip, automatically extracts red-layer
+- ereader/emu: supports homebrew 300dpi .bmp's and scanned 1200dpi .jpg's
+- ereader/emu: emulates ereader hardware (requires ereader bios/bmp/jpg files)
+- ereader/a22i: new .ereader and .title directive, handles .import'ed .nes roms
+- ereader/help: added verify/create error correction (thanks Simon Rockliff)
+- ereader/help: added dotcode, data, program, vpk chapters (thanks Damien Good)
+- ereader/help: rev'ed PGA I/O ports, camera SIO ports, address bar encryption
+- debug: shows "BiosSwi/IrqHandler" labels also for ARM9 (with offset FFFF0000h)
+- bios/help: corrected bios-swi huffman description and added an example to it
+- bios: improved bios-swi huffman decoder (straighter, smaller, and faster)
+- xed: fixed occasional crashes on ctrl,k+n (missing reform in toggle_blocktype)
+- wifi: emulates microsecond counter read/change/start/stop
+- wifi: emulates data transfer from local txbuf to rxbuf of remote console(s)
+- wifi/help: added chapters on the various ieee802.11b frame (=packet) formats
+- wifi/help: added notes on multiboot beacons (and multicart/pictochat beacons)
+- wifi/help: added notes on transfer completion flags in txbuf_loc registers
+- wifi/help: added new values in hardware headers chapter, added unknown chapter
+- wifi/help: added a lot of new bits and registers in transmit control chapter
+- wifi/help: marked all "unused" registers as w_internal (=not used by firmware)
+- wifi: emulates ie/if registers, emulates pending powerforce with powerack
+- wifi/debug: displays wifi registers (and current channel) in I/O map window
+- wifi/help: added chapters on ieee802.11 frames, renamed rxbuf/txbuf registers
+- wifi: fixed rf write, emulates powerforce=8001h (over the hedge)
+
+<A NAME="v24a"></A><B>04 April 2007 - version 2.4a</B>
+- nds/help: added nds-lite case/joypad ascii arts, and nds-lite supply pinout
+- spam: nocash-lite was posted online - new addresses in email.htm or about-box
+- nds/3d: forces instant new gxfifo irq (if any) on attempt to acknowlege it
+- nds/sound: fixed output to sample.wav script file (for diagnostics purposes)
+- nds/adpcm: emulates nds-rounding-error, uses fast-pre-multiplied adpcm tables
+- nds/adpcm: fixed clipping-bug in no$gba, and emulates real nds-clipping-error
+- nds/sound/help: added more ima-adpcm notes (rounding-error and clipping-error)
+- stat: performance indicator counts frames on nds9 only (=60Hz) (instead 120Hz)
+- nds/tsc/debug: displays all tsc channel values in io-map (touchscr, mic, etc.)
+- nds/tsc: prevents penirq if disabled, penirq more in sync with tsc-adc values
+- nds/3d: drains gxfifo before gxfifo dma (fixes mariokart/downhill slowdowns)
+- nds/3d: forces DepthMask=1 on ClearDepth (if it was 0 from translucent/attr)
+- nds/firmware: applies different mac addr to each machine with wifi-crc adjust
+- nds/firmware: forces def.fmw/wifi header (if firmware.bin missing) (downhill)
+- nds/firmware: forces user settings [65h]=FCh=good (if firmware.bin missing)
+- nds/firmware: fixed touchscreen/calib screen coords origin 1,1 (instead 0,0)
+- nds/dos/3d: translates by w, recurses current viewport x1/y1 and width/height
+
+<A NAME="v24"></A><B>21 March 2007 - version 2.4</B>
+- xboo: retested all xboo functions, re-fixed gba-bios dump, faster nds-download
+- nds/2d: fixed crash on empty/unallocated extended-obj-palette-slot (spiderman)
+- nds/3d/help: added various important notes in polygon light parameters chapter
+- nds/3d: recurses directional matrix (as on real nds, instead of gl_normalize)
+- nds/3d: skinning support (by soft_mul_vector, instead opengl modelview matrix)
+- nds/cart/help: added new info on first 2K of secure area (fixed bytes, crc16)
+- nds/gba/xboo: includes cmd/length in checksums (rather than raw data-checksum)
+- nds/xboo: get_info shows nds-backup type (chip-id and status-register bits)
+- nds/2d: fixed unrotated 512x256/512x512 bitmap sizes (thanks Kevin Keeling)
+- nds/dma: prevents dma from accessing tcm (for compatibility with downhill jam)
+- nds/xboo: added download NDS-cart from NDS-slot (slow 2 megabytes per minute)
+- nds/gba/xboo: splits downloads into small blocks (with block-retry on bad crc)
+- nds/cartloader: also accepts already-decrypted-and-destroyed secure-area-id's
+- gba/undoc/help: added newly discovered wram-disable bits (4000800h bits 0,5)
+- nds/cart: emulates correct nds chip-id size-field in respect to rom-image size
+- nds/cart/help: added note on nds-cart chip-id size field (nn+1 megabytes)
+- nds/screenshot: supports dual 256x192pix screens (as simple 256x384 bitmap)
+- nds/3d: supports keep-old-depth-setting for translucent-polygons (DepthMask)
+- nds/3d/rear: supports rear-plane rgba/depth bitmap (killer slow when/if used)
+- nds/3d/io: new 8bit write support, fixed 16bit write (accidently out_32_norm)
+
+<A NAME="v23d"></A><B>23 February 2007 - version 2.3d</B>
+- nds/video/help: added note on unknown tvoutcnt register (nds9 port 4000070h)
+- nds/sio/help: added chapter on (absent) link port (with new bits like ckup)
+- nds/aux/help: added full gba and gba-sp cpu/lcd/chipset pinouts (from no$gmb)
+- nds/aux/help: added SG and SW pins (gba-sp/nds headphone socket) (from no$gmb)
+- nds/3d/help: added projection/rotation/scaling/translation matrix examples
+- nds/3d/help: added edge marking notes, alpha_test_ref notes, and fog notes
+- nds/3d/help: added new shadow polygon chapter, and added toon table notes
+- nds/3d: skips vtx's of (still unsupported) shadow polygons (avoid eragon dirt)
+- nds/3d: speedup: re-creates textures only if teximage_param/pltt_base changed
+- nds/3d: speedup: mtx_mul_4x3/3x3/trans/scale skips fixed values (ie. 0 and 1)
+- nds/sound: init [sb_pos_in_buf_in_clk_cycles]=0 (avoids fatal 'e-2' on reset)
+- nds/3d: supports packed-texture-mode3 (mul3+mul5=div8) (eragon/mariokart demo)
+- nds/microphone: emulates mircophone gain level (powerman reg3 = x1 x2 x4 x8)
+- nds/microphone: wave_in-dma activated only if/as long as enabled in powerman
+- nds/microphone: forwards PC mic-in/line-in to nds-microphone (player 1 only)
+- nds/microphone: emulates muted mic-level (for mic-powerman off=000h, on=800h)
+- dos/nds: supports nds-video (256x192) (dual-screen) (forced 640x480 onepix)
+- dos: dpmi redirects dos32_int10 to dpmi_interrupt_10h (fixes win98 xgra-crash)
+- dos: uses int2fh/1680h under dpmi (not actually supported by cwsdpmi/win98)
+- dos: prevents hlt-opcode under dpmi (hlt crashed cwsdpmi, ignored by win98)
+- initialize: corrected @@zero_fill_vals length (caused crash in dos version)
+
+<A NAME="v23c"></A><B>04 February 2007 - version 2.3c</B>
+- nds/2d: adjusted window width (nds=256, instead gba=240) (famicom wars demo)
+- nds/memory: allows to execute code in vram (used by mariokart demo on nds7)
+- iomap: replaced various "vals" by "io10seg" (matching to nds9/nds7 pages)
+- nds/wifi/xcept: allows nintendo to write 00h/55h/AAh/FFh to read-only BB-ports
+- nds/3d/irq: emulates gxfifo irq (used by lara/brainage demos)
+- nds/3d/help: added notes on how/when to acknowledge gxfifo irq (see gxstat)
+- nds/3d/dma: emulates gxfifo dma (used by submarine demo and possibly others)
+- nds/dma: renamed/renumbered $profiler_id_dma (supporting the eight ds-modes)
+- nds/3d/help: added GXFIFO DMA Overkill on Packed Commands Without Parameters
+- setup: added gba-solar-sensor setting (now also in freeware version setup)
+- setup: removed experimental rear-alpha option (tested / always enabled now)
+- nds/backup: bugfix: forces no nds-backup in gba-mode (fixes fatalunexpected)
+- nds/xboo: added upload-wait/timeout (for remote secure_area_extra_decryption)
+- nds/dma: prevents gba-style dma3-capture on nds (fixes submarine demo freeze)
+- nds/dma: simplified different dma mode bits by dma_kick_mask at mount_system
+- nds/3d/help: added 3d-lockup note (on swapbuffers with incomplete vertex list)
+- a22i: supports "NOT" operator (more or less, crashes on faulty priority order)
+- a22i/bugfix: long/negative multiply in numeric expression (swapped lsw2/msw2)
+- nds/3d: handles 8bit ldrb reads from 3d ports (4000320h and up)
+- gba/nds-cartloader: fixed crash on loading GBA-carts from inside NDS7-mode
+- thanks: RockmanRotties and Diablow for bugreports on demos and fatalunexpected
+
+<A NAME="v23b"></A><B>20 January 2007 - version 2.3b</B>
+- gba/snd: snd_on_off 60h-81h non-writeable while disabled with optional warning
+- gba/snd: fixed snd_on_off (resets only 60h-81h, not 82h-83h) (thanks ludvig)
+- gba/help: described nr52/snd_on_off affected registers (60h-81h reset to zero)
+- gba/help: added noise random generator specs (gba psg channel 4, poly counter)
+- snap/sav: uses new "save_chunks" function (instead separate snapdat_write's)
+- snap/sav: RLU-encoder/decoder supports long-same regions (code 80h dta8 len16)
+- snap/sav-loader: re-allows old/smaller 64K sram/liff blocks (pre 128K flash)
+- snap/sav-loader: raised gba-max liff/sram_siz for to 128K (for new FLASH type)
+- snap/sav-loader: replaced fixed "liff/sram_siz" by variable "memsiz_sram/liff"
+- snap/sav-loader: skips unknown blocks by file-entry (rather by expected entry)
+- gba/help: new Backup IDs chapter (library ID strings, thanks pocketheaven faq)
+- gba/backup: detects 128kbyte FLASH backup (reportedly uses ID "FLASH1M_Vnnn")
+- gba/backup: emulates bankswitched 128kbyte FLASH backup memory (not tested)
+- gba/add-on: emulates gba solar sensor (currently fixed level) (boktai, momov)
+- gba/add-on: emulates gba-cart real time clock (rtc) (boktai, thanks momov)
+- gba/multiplay: refixed slave machine bios-loading (missing v2.2 mount_system)
+- nds/sound: precalculates sample rate timing (for some/minor emulation speedup)
+- nds/backup/help: added description of the new eeprom/flash/fram backup types
+- nds/backup: new: None, EEPROM 8K, EEPROM 64K, FLASH 256K, FLASH 512K, FRAM 32K
+- nds/3d: uses pixelformat with alpha (if supported, ie. not by generic driver)
+- nds/3d: above alpha untested - disabled by default - see setup: 3D Rear Alpha
+- nds/3d: added warning on 3D access with powcnt bit2-3 disabled (thanks anders)
+- nds/snd: fixed hang-up on uninitialized sound frequency (thanks damian yerrik)
+- nds/3d: loads opengl on any opengl-call (not only on swap buffers) (anders)
+- cpu/help: added notes on mis-aligned ldrd/strd (cpu memory alignments chapter)
+- cpu/detail: emulates mis-aligned ldrd/strd (clips lower 2 bits) (not 3 bits)
+- cpu/bugfix: fixed ldrd/strd bugged alignment warning (thanks anders norlander)
+- winxp/xboo: nocashio install bugfix: added "system32\" in CreateService param
+- winxp: supports Alt+key combinations (VK_LMENU instead of unsupported VK_MENU)
+- internal: sorted/re-arranged nds variables (for future nds snapshot support)
+- setup: changed color/depth settings: re-applies nds_color_xlat (backlights)
+- web/paypal: fixed missing CRLF between "=" / "-----END PKC" (thanks francesco)
+- nds/directboot: puts nds7_bios_crc and user_settings_base in RAM (as by BIOS)
+- nds/3d: cleanup: unloads opengl library (if loaded) on exit
+- nds/3d: uses win31-style upside-down-images (required for nvidia geforce)
+- nds/help: new chapter on accessing gba-slot/gba-carts in ds-mode (clks/addr)
+- gba/help: new chapter on gba cart real time clock (rtc) (used in boktai)
+- gba/help: new chapter on gba cart solar sensor (boktai, thanks momov for cart)
+- gba/help: new chapter on gba cart rom-chip 4bit io port (used in boktai)
+- gba/help: added backup eeprom chip names 9853 (mario), and 9854 (boktai)
+- nds/directboot: stores RomChipID in RAM (as by BIOS) (verified by newer games)
+- nds/bugfix: hwreset memclear includes nds7 I/O region (older version didn't)
+- gba/help: added note on ZERO-padded titles in cart-header (eg. in boktai)
+- gba/help: fixed joybus entrypoint in gba-cart-header summary (E0h instead E4h)
+
+<A NAME="v23a"></A><B>4th November 2006 - version 2.3a</B>
+- nds/help: nds-bitmaps can be wrapped (that unlike gba-bitmaps) (thanks remi)
+- nds/video: emulates optional wrap-around (area overflow) for nds bitmap-modes
+- nds/video: emulates read-only 2d-engine-b ports as read-only (thanks remi)
+- nds/3d: texture transformation mode 1 supports negative m[8,9,12,13] values
+- nds/3d/boxtest: fast onscreen pre_check on any of all 8 coordinates of box
+- nds/3d/boxtest: fast offscreen pre_check on all 8 coordinates of whole-box
+- nds/3d/boxtest: fast offscreen pre_check on all 4 coordinates of box-face
+- video/speedup: faster bg drawing when special effects disabled (blend/bright)
+- reg/home: moved all users to usa, avoids paypal-german-language-service (remi)
+- reg/full: new parity and decrypt.jpg encryption by headless marching soldiers
+- reg/full: discontinued free nds-updates for older (than 12 months) gba-users
+- reg/full: registration tool auto-generates invoices for commercial users
+- reg/home: new file-ext .key (some servers now declare .bin as potential virus)
+- sync: forces machine_switch on retrace, forces to be 1st machine after retrace
+- gui/f1_key: HELP_FORCEFILE instead HELP_CONTENTS (preserves current chapter)
+- webpage: added donate buttons on gba,msx,cpc,nes,2k6,zx8,c64 freeware pages
+- email: new email address - please do NOT put it online - due to spam problems
+- nds/3d: bug-fixed GX "nop" command (to have 0 parameters, instead 1 parameter)
+- emu/help: described + emulated gba/nds7 dummy cp14-icebreaker (prefetch data)
+- nds/cpu: emulates cp15 ctrl bit15 (pre-v5 ldr/ldm/pop pc.bit0=thumb disabled)
+- cpu: emulates/ignores misaligned r15 in LDM [Rb],r15 (with optional warning)
+- nds/help: added some basic specs on DS Memory Timings (in DS Various chapter)
+- nds/3d: bugfixed texture transform (imul_op=64bit, instead imul_eax,op=32bit)
+- cpu: emulates empty rlist (load/store r15 on ARMv4, Rb=Rb+/-40h on ARMv4/v5)
+- cpu: emulates writeback-base-included-in-rlist (for all stm/ldm/v4/v5/tmb/arm)
+- cpu/help: added info on invalid rlist's for ARMv4/v5 THUMB/ARM LDM/STM opcodes
+- cpu: bugfixed arm9 q(d)add/sub (xor 7fffffffh instead 7ffffffh, one more f)
+- nds/sound: emulates sound output speaker routing and speaker stereo panning
+- nds/sound: emulates sound-hold (freezes output until hold=0 or next re-start)
+- nds/sound: optionally mono output, optionally disabled, on machine 1 only
+- nds/sound: allows "dumb loops" when reading non-irq-timed sound status regs
+- nds/sound/help: described hold flag (can't hold on restart, apparently bugged)
+- nds/sound/help: described the two different ch(a)+ch(b) addition outputs
+- nds/sound/help: described capture errors (both negative and overflow bugs)
+- nds/sound: emulates minmax clipping, fully emulates all sound capture errors
+- gba/sound: fixed small ch4 glitch (occured when only one stereo side was on)
+- gba/sound: bugfix: recurses channel 3 wave ram bank number/bank size changes
+- gba/sound: emulates minmax clipping, corrected channel-volume vs bias-volume
+- gba/nds/sound/help: rev-engineered Max Output Levels (psg/pcmfifo/bias/clip)
+- nds/sound: emulates capture (routing, adding, mixing, rounding, clipping, etc)
+- nds/sound: emulates sound loop+length and high accuracy frequency timings
+- nds/gba-slot/bugfix: memadr_sram (instead nnn=0Eh) (thanks Chow Kim Foong)
+- nds/sound/help: corrected sample frequency, explained length/loop registers
+- nds/sound: emulates channel volume, channel volume shift, master volume, bias
+- nds/sound: emulates pcm8, pcm16, adpcm, psg wave/duty, psg noise formats
+- nds/sound: emulates all write-only sound ports as such (reads as 00000000h)
+- nds/sound/no$fmw/emu: initializes bias=200h (as done by original firmware)
+- nds/sound: nds_sb_generate_sample invoked by NDS7 (not NDS9) as sound master
+- nds/bugfix: fixed arm9 halfmul opcodes (accidently exchanged opcode lsbs/msbs)
+- debug/disass: fixed smulxy opcode (showed up as "smmuxy" instead of "smulxy")
+- nds/sound/help: described SOUNDCNT bits 8-11 (final audio output selection)
+
+<A NAME="v23"></A><B>4th August 2006 - version 2.3</B>
+- nds/dos: displays nds button X and button Y in redefine keys setup screen
+- gba/bugfix: re-disabled NDS master_bright in GBA mode (port 6Ch is GBA sound2)
+- help: uploaded gbatek txt/htm standalone versions (v2.3 news: 3d video, wifi)
+- nds/help: firmware header chapter (added timestamp/version/type/unused info)
+- wifi/emu: direct boot sets wifi regs (mainly bb) as done by firmware bootcode
+- wifi/emu: emulate serial read/write to BB ports, and write to RF ports
+- wifi/emu: emulates indirect wifi ram read/write access via ports 050h..076h
+- wifi/emu: emulates wifi disable by powcnt2, emulates 8bit/16bit/32bit access
+- wifi/emu: allocates/emulates 8K wifi RAM, emulates used/unused wifi io ports
+- wifi/help: added write range: w_buf_wr_end (074h) and w_buf_wr_step (076h)
+- wifi/help: added missing ports 078h and 09Ch, explained RF index/18bit data
+- wifi/help: added random algorithm, added w_us_comparecnt (compare enable)
+- wifi/help: added notes on read-mirrors when reading from write-only ports
+- wifi/help: added bit-by-bit port descriptions, including unused/always0 bits
+- wifi/help: corrected several (R)/(W)/(R/W) specifications, added r/w bitmasks
+- wifi/help: matched doc to 80 column width, removed too-verbose stuff in iomap
+- wifi/help: added wireless chapter (many thanks stephen stair's ds wifi doc)
+- nds/xcept: allows NDS7 to access 64K region at 4800000h (wireless wifi ports)
+- nds/xcept: allows NDS7 to access 256K mirror at 27C0000h (commercial games)
+- nds/xcept: allows ITCM mirror at 1FF8000h..1FFFFFFh (used by commercial games)
+- nds/rtc: serial transfer timings firmware-compatible (on other edge than bios)
+- nds/firmware: supports 512Kbyte firmware.bin (ie. chinese charset in iQue)
+- nds/emu: emulates 512-byte backup eeprom (as used in metroid demo cartridge)
+- nds/help: corrected auxspicnt (exchanged bit6/bit13, enable and hold flags)
+- 3d/help: cleaned-up 3d matrix chapter (mtx_mode, and clip_mtx descriptions)
+- 3d/help: added chapter on 2D scrolling/specialeffects/window used on 3D/BG0
+- nds/video: emulates display capture from source A=bg/obj, fixed swap_buf time
+- nds/help: added note on capture completion in line 192 (regardless of size)
+- nds/iomap/help: corrected display capture read/write offsets (exchanged them)
+- 3d/2d: emulates hscroll on 3D layer, prevents mosaic and vscroll on 3D layer
+- debug/iomap: fixed position of "W0 W1 Obj Out" and "1st 2nd Target" flags
+- 3d/log: automatic comments on separate bits in poly_attr and teximage_param
+- 3d: supports transparent rear-planes (for underlaying 2D plane) (metroid menu)
+- 3d: enabled GL_NORMALIZE (required for normals when used with scaled matrix)
+- nds/slot/dma: executes BURST only on START 0-to-1 (not on clearing MODE bits)
+- nds/slot: cart transfer ready irq generated ONLY if enabled in 40001A1h.Bit6
+- nds/touchscreen: works also in debug-window (not only in separate game window)
+- nds/touchscreen: initializes calibration also when booted via bios/firmware
+- nds/div/emu/help: DIV0 or MAX overkill: 32bit result is reversed-sign-expanded
+- nds/div/emu/help: reserved mode3 is same as mode1, result/remain sign-expanded
+- nds/div/emu/help: DIV0 sets remain=numer, result=+/-1 (sign opposite of numer)
+- nds/div/emu/help: (-MAX / -1) overflow error returns (-MAX) (instead +MAX)
+- 3d/iomap: added vertex (vtx16), normal vector, light colors, and light vectors
+- 3d/iomap: added box test, pos test, pos test result, vec test, vec test result
+- 3d/iomap: added edge color table, fog table, toon table, shininess table
+- 3d/iomap: added current projection, position, direction, and texture matrices
+- debug: disassembler: fixed Rm,Rs operand order for umull/smull/umlal/smlal
+- 3d: texture mirror repeat (fully software emulated, pre_opengl_1.4 compatible)
+- debug: changed .FNT DefaultChar from 2Eh to FFh (avoids WinXP bug) (jasper)
+- 3d/log: log-file for all GX commands (format: PortNNN/CmdNN cmd_name params)
+- 3d/log: auto-indent within begin/end, auto-wrap-indent for NxN matrix params)
+- nds: re-init fpu-mode for 64bit INTEGER div/sqrt (required after opengl calls)
+- 3d: fixed SCALE command (applied only to one matrix even in simultaneous mode)
+- 3d: fixed mtx_load_4x3 command (applied to both matrices in simultaneous mode)
+- 3d: emu: fixed vec_test (x,y,z,0) (4bit sign, instead 1bit sign+3bit integer)
+- 3d: texcoord-transform fully software emulated (without GL_TEXTURE matrix)
+- gba/help: added note on more complex invalid tiles with multiple BGs (jasper)
+- 3d/help: added decal/modulation/toon/highlight chapter, and texcoord chapter
+- 3d: texture 4x4 texel compressed format (incomplete, without interpolation)
+- 3d: texture translucent formats, palette formats optionally color0 transparent
+- 3d: bugfixed vtx_diff (9bit fraction is meant to be LSBs of 12bit fraction)
+- 3d: material0.bit15 directly sets vertex color (for N's "cube" demonstration)
+- 3d: light/material/normal with forced begin/end-outbreak on GL_LIGHTING change
+- 3d: calls gx_process_fifo to free-up gxfifo (when possible aka no swap active)
+- 3d: get framebuf: reverses red/blue by table (for match-up with nds 2D engine)
+- 3d: explodes (1)-5-5-5 RGB textures to "unpacked" OpenGL RGBA 8-8-8-8 format
+- 3d: supports 16bit I/O-writes (eg. metroid demo: 16bit STRH to CLEAR_DEPTH)
+- 3d: textures (metroid demo: "nintendo/actimagine" shown before intro-movie)
+- 3d/help: added note on END_VTXS being a dummy command (no effect on hardware)
+- 3d/help: added note on depth test, and on POLYGON_ATTR applied at BEGIN_VTXS
+- 3d: enabled Depth Test, and emulated Depth Test modes (either Less, or Equal)
+- 3d/iomap: displays VertexColor setting (Port 480h aka Cmd20h) in F10 screen
+- gba/video: bugfixed rotscal tile-map mode (bugged since v2.2f) (thanks jasper)
+- 3d: converts fixed-point-to-float by FMUL 1/1000h (faster than fscale or fdiv)
+- 3d/help: added notes about clipping, and about light vectors and normal vector
+- 3d: retrieves DIB bitmap data by movsd (glReadPixels doesn't seem to work)
+- 3d: supports begin/end quad/triangle/strips and all variants of vtx-commands
+- 3d: forwards (software calculated) projection/modelview matrices to opengl
+- 3d: supports clear color, clear depth, and applies viewport setting
+- 3d: supports vertex color, and polyonattr alpha/wireframe/front/back settings
+- 3d: pre-calculates 5bit R,G,B,A float values (for fast conversion via table)
+- 3d: calls ChoosePixelFormat (killer-slow) (only if needed, not for 2D games)
+- 3d: retrieves gl- and wgl- and PixelFormat proc addresses (quite fast)
+- 3d: loads Opengl32.dll (killer-slow) (but, only if needed, not for 2D games)
+
+<A NAME="v22f"></A><B>18th June 2006 - version 2.2f</B>
+- cpu/help: added CPU Memory Alignments chapter (and info on mis-alignments)
+- research: discovered wglCreateContext (despite no info in worst opengl specs)
+- gba/video: hides invalid tiles in NDS-in-GBA-mode (invisible, unlike real gba)
+- gba/video: shows invalid tiles in GBA/SP-mode (vertically striped) (jasper)
+- gba/help: unprectiable things: described invalid tiles (thanks jasper vijn)
+- gba/emu/help: corrected Prefetch Disable (1N+1I instead 1S+3I) (jasper vijn)
+- gui: re-fixed game_template for multiple machines (@@total for dual-screen)
+- nds/vram: nds7 emulated vram mirrors every 256K, disabled palette/oam access
+- nds/vram: nds9 ignores 8bit-writes to vram/palette/oam (thanks gary linscott)
+- nds/vram: nds7 allows 8bit-writes to vram (thanks gary linscott)
+- cpu: ignores mis-alignment on NDS9 LDRH/LDRSH (unlike rotated GBA/NDS7 data)
+- nds/debug: filesystem viewer rejects invalid nds headers (eg. passme files)
+- nds: emulates reading 8bit/16bit-fractions from 32bit ipc_fifo_recv register
+- cpu: emulates "ldr pc,[mem]" with misaligned jump-dest (with optional warning)
+- nds/video: avoids divide-by-zero crashes in 3D perspective divisions
+- gba/nds/video: speedup: color special effects by 1x32bit mul (instead 3x5bit)
+- nds/help: fixed extended palette enable bits (dispcnt bit31,30 exchanged)
+- a22i: supports macros (still without params) (.macro &lt;name&gt; / ... / .endm)
+- a22i: supports repeat macros (.rept &lt;count&gt; / ..code or data.. / .endm)
+- nds/video: emulates new nds master brightness up/down effect (port 400X06ch)
+- vram viewer: supports NDS rot/scal mode with text-style 16bit bgmap entries
+- gba/vram/emu/help: strb to vram: write-nothing reduced to 16K in bitmap mode
+- gba/vram/emu/help: strb to vram: write-twice expanded to 80K in bitmap mode
+- nds/video: new rotscal mode with 16bit map entries (400h tiles ext_pal xyflip)
+- nds/video: extended palettes (256-color TEXT, 256-color OBJs, 16bit rotscal)
+- nds/video: emulates large screen bitmap mode (not tested, but should work)
+- nds/reset: also zero-fills 2D Engine B ports (bg0ofs scroll registers, etc.)
+- cartloader: loads .NEF debug-info also for .NDS files (instead only for .SRL)
+- cpu: allows mis-aligned thumb BX R15, auto-aligned to "($+4) AND NOT 2"
+- gba/video: emulates obj-wrap; 64x64 scaled to 128x128 only in UPPER portion
+- nds/help: described obj-wrap; 64x64 scaled to 128x128 in BOTH screen portions
+- nds/video: screen-width for NDS rot/scal-obj (256 pix on NDS, instead 240 pix)
+
+<A NAME="v22e"></A><B>18th May 2006 - version 2.2e</B>
+- no$fmw: detects post-header gap-size (typ. 0h,3E00h,4600h) (old: fixed 3E00h)
+- dos: fixed v2.2d bug: init_gba_color_xlat_table (old: init_color_xlat_table)
+- help: added note on possiblity to move nds7 ROM to (non-)secure area at 200h
+- help: added note about blank secure areas (nintendo devkit, 800h zero-bytes)
+- help: added cart.NEF/SRL/NLF-combo description in symbolic debug info chapter
+- elf/cartloader: crash-fix (occured if newly loaded labels at code-window-addr)
+- cartloader/cmdline: supports spaces in "quoted" path\filenames (thanks peter)
+- screenshots: fixed palette size (set to zero for true color) (thanks jasper)
+- help: changed DMA 4 to DMA 3 (probably makes more sense, thanks jasper vijn)
+- nds/debug: accepts labels below 2000000h (ie. ITCM labels, at 1000000h and up)
+- nds/help/no$fmw: added chinese as extra language (newer/chinese consoles only)
+- vram viewer: OAM redbox works at negative y-coordinate (thanks peter schraut)
+- bugfix: joypad_adjust uses "@@seg" instead "vals" for [local_if_adr] access
+- nds/tcm: 80x86 intrwait [dtcm+3ff8h] works if DTCM is off, or covered by ITCM
+- nds/freeware: stores [memaccess_addr] (required for tcm/interrupt emulation)
+- elf: ignores "@1234" and "@456" style dummy labels (used in ldr rd,=txt_ptr)
+- nds/cartloader: shows warning on 2K-encrypted-carts (if missing biosnds7.rom)
+- nds/cartloader: shows warning on faulty secure area (rom-offset below 4000h)
+- cartloader/cmdline: accepts all "unpacked_extensions" (new ones: nds srl elf)
+- elf: reload/recent files: reinitializes dsk_path (used to load source-lines)
+- nds/controls: joyp/penirq works for BOTH arm7+nds9 (@@skipinp, old: @@skipadj)
+- elf: shows continous source lines from ONE section (hides .nef DUPE sections)
+- elf: ignores strange "$a" and "$d" dummy labels (found in some elf/nef files)
+- nds/cartloader: supports cart.NEF debug info (for cart.SRL binaries) (if any)
+- nds/cartloader: supports (not existing) nds-elf's with zero-based phys.addr
+- internal/cartloader: replaced @@target_rom flag by pre_size detection values
+- internal/cartloader: removed ancient @@elf_method load-by-section-headers
+- nds/cartloader: accepts ext .SRL (nintendo's alias for raw .NDS rom-images)
+
+<A NAME="v22d"></A><B>9th May 2006 - version 2.2d</B>
+- nds/tcm: reset during emulation does reinit memaccess_list (and rebuild_tcm)
+- gba/video: selectable GBA (dark), GBA-SP (med), DS-in-GBA-mode (bright) colors
+- nds/video: emulates backlight on/off/dimming (rgb_xlat per screen / machine)
+- nds/setup: optionally allocates debug-ver 8MB main memory (with reset/remount)
+- nds/help: described wifiwaitcnt (port 4000206h), and displayed it in f10-iomap
+- nds/help: spi 16bit mode bugged (only each 2nd byte appears in 8bit-spidata)
+- nds/iomap: added 32bit auxspi register in iomap (formerly 8bit whatever 1a1h)
+- nds/aux: emulates auxspi port (that still without any backup-memory emulated)
+- nds/help: added cartridge backup chapter, and auxspi in cart ports and iomaps
+- nds/realtime: raised from 50% to 100% speed (delays only on arm9, not on arm7)
+- nds/video: emulates alpha-flag (0=transparent) for direct color BG bitmaps
+- nds/iomap: expanded bg#cnt charbase value to bit2-5 (unlike GBA-style bit2-3)
+- nds/help: added debug_exception_vectors in irq chapter (27FFD9Ch and 380FFDCh)
+- nds/reset: stable multiple_ready initialization (libnds crashed each-2nd-boot)
+- nds/debug: allows stackinfo at non-3000000h region (ie. var nds9 dtcm region)
+- nds/metroid: metroid demo intro-movie is now working (bg bitmap & bitmap obj)
+- nds/iomap: fixed displayed sqrt_result register value (addr 2B4h instead 2A4h)
+- nds/iomap: fixed soundcnt and soundbias registers (addr 50Xh instead ecx+50Xh)
+- nds/video: fixed bitmap obj emulation (also displayed in vram viewer oam page)
+- nds/help: corrected 2D Bitmap OBJ description (boundary=8x8, not boundary=32)
+- nds/video: emulates vram-display-mode (used for metroid intro / upper screen)
+- nds/irq/bios: nds-irq-handlers working without copy of real nds-bios-image
+- profiler: goto function always applied to CODE window (not data/stack window)
+- nds/profiler: treats FFFF0018h as nds9-irq (unlike 00000018h for gba/nds7)
+- nds/emudetail: higher emulation accuracy for read/write-able POSTFLG bits
+- nds/bugfix: fixed SWP opcode (metroid) (ecx was destroyed by anytcm handler)
+
+<A NAME="v22c"></A><B>18th April 2006 - version 2.2c</B>
+- nds/tcm/debug: accepts "odd" (non-16MB-aligned) dtcm-base without warnings
+- nds/help: specified recommended TCM areas (emulation performance friendly)
+- web: added "no$nds" iomap screenshots, changed "gbanotes.txt" for v2.2c
+- dos/help: dynamically counts help line numbers, then allocates helpptrseg buf
+- nds/bugfix: fixed crash on nds-to-gba switch (hack_win_sizes post init_addr)
+- nds/controls: supports new x/y buttons, fixed normal joypad input on nds7
+- nds/debug: adjust_addr supports iopt, vram, and dtcm/itcm (also for 80x86 swi)
+- dma/nds: accepts large word-counts for nds9 dma transfers (max 200000h units)
+- dma/nds: masks-out unused sad,dad,len/cnt bits of nds7/nds9 dma registers
+- dma/nds/help: added note about nds7-dma having same restrictions as gba-dma
+- dma/gba: fixed various "write-only" emulation glitches of various DMA ports
+- dma/gba/nds: supports rarely used 8bit DMA port access (by ldrb/strb opcodes)
+- nds/cp15: emulates fixed cp15 bits, mirrored/unified cp15-pu-region-registers
+- freeware version: re-fixed error-count (ignores bios-bugs, thanks dave murphy)
+- nds/debug: full iomap, 10 tabs (Lcd-A/B/3D,CpMem/SpiRtc/Snd,DmaTmr/IrqIpc-7/9)
+- nds/help: added note about absent cp15 fast context switching extension (fcse)
+- nds/help: added list of read-write/read-only cp15 control register bits
+- nds/tcm: supports move/enable/disable/mirroring, re-supported JUMPs in ITCM
+- nds/tcm: created separate dtcm/itcm/anytcm handlers, mounted where needed
+- nds/ipc: help: added 16 word ipc fifo size, emu: "ipc-clear" sets empty-flag
+- nds/3d/help: added new chapter with 3D video specs (about 70% complete)
+- nds/3d/fifo/pipe/load/push/pop/mul: emulated basic 3D functions (by software)
+- nds/tcm: emulates unused CP15 bits=zero, ITCM not-moveable, ITCM/DTCM priority
+- nds/tcm/help: rev-engineered DTCM vs ITCM priority, and NON-moveable ITCM
+- nds/memory: moved GBA-SRAM address to A000000h (unlike GBA-style E000000h)
+- nds/memory: moved GBA-EEPROM expected address to WS0 (unlike GBA-style WS2)
+- nds/memory: truncated GBA-ROM to WS0 (without GBA-style WS1, WS2 mirrors)
+- snaps: fixed snapshot load/save (memadr_regs instead bugged v2.2 memadr_vals)
+- a22i: definitions by "global equ $" preserve @@local labels (unlike global:)
+- help/htm: eliminated unwanted TABLE-spacing that appeared around PRE sections
+- xboo: fixed silly bug that crept into gba-xboo-mode (@@non_nds -&gt; AFTER ret)
+
+<A NAME="v22b"></A><B>4th February 2006 - version 2.2b</B>
+- help: added credits in about chapter, uploaded gbatek v2.2b standalone version
+- help: removed question marks in video capture chapter (thanks christian auby)
+- help: added bios-dumping method, bypassing biosprot via 5ECh (thanks damien)
+- debugger: hides 2nd gamescreen in gba-mode, and activates it in nds-mode only
+- help: firmware settings RTC Offset, difference in seconds on time/date changes
+- debugger: shows debug window also on cmdline "no$gba file.gba" (unless hidden)
+- xcept: allows passme-entry-style jumps in 27ffxxxh area (mirrors of 23ffxxxh)
+- xcept: allows nds9_irq_vector=zero (only if itcm=enabled, and itcm_base=zero)
+- vram viewer: palette screen: adds engine-b-base, engine-button freshen_options
+- setup: autostart flag (in filemenu) saved with other options in ini/cfg file
+- debugger: search -&gt; goto area -&gt; exchanged 32K and 256K (thanks peter schraut)
+- vram viewer: supports new nds bgmodes (bitmap, large bitmap, rotscal-16bit)
+- dual cpu: provokes instant machine switch on any 27ffxxxh access (libnds stub)
+- cartloader: applies passme-patches only to NDS-header (not to GBA-header)
+- help: added description of bg#cnt size-bits for nds bitmaps and large-bitmap
+- bios: fixed 80x86 bios rlu/lz77 decoders (new v2.2 regr0_adjust damaged flags)
+- help: added KEY2 specs (semi-thanks darkfader for (obviously) incomplete info)
+- iomap/vram viewer: shows correct names of NDS video modes (text,bitmap,etc.)
+- lcd: supports bitmap base (in 16K steps), supports rotated/scaled bitmaps
+- no$fmw: fixed nds7 uninitialized r12, activated DST adjust, fixed DST apply
+- no$fmw: simplified nds7-bios-dump, works without nds-cart, thanks damien good
+
+<A NAME="v22a"></A><B>23nd January 2006 - version 2.2a</B>
+- bugfix: fixed v2.2 instant crash after loading (occured debug versions only)
+
+<A NAME="v22"></A><B>22nd January 2006 - version 2.2</B>
+- help: uploaded new gbatek standalone version v2.2 (with nds specifications)
+- exe/help: replaced upx compressor by nocash packer (without opcode filters)
+- nds: applies bottom lcd (touchscreen) video output to correct window-owmer
+- nds: applies mouse/touchscreen to correct window-owmer (in multi-machine mode)
+- nds: auto-initializes touchscreen calibration (both with/without firmware.bin)
+- nds: no$fmw: included nocash firmware xmit binary as overlay in no$gba.exe
+- help: added notes about new NDS emulation (on things that aren't yet working)
+- exe: exported windows-help to separate upx-compressed overlay (as in dos ver)
+- nds: vram viewer: matched user-grid, bg-scyx, oam-redbox to NDS resolution
+- nds: xboo: saves backup of original firmware header on HDD and in flash memory
+- nds: xboo: includes crypt key in firmware for NDS-decryption (if BIOS dumped)
+- nds: xboo: download functions for dumping NDS firmware, BIOSes, and GBA-carts
+- nds: xboo: patch/restore functions for (un-) installing nocash firmware
+- nds: xboo: help: xboo-circuit optionally fmw/rfu, and dsub/cntr pin numbers
+- nds: xboo: high-speed upload connection Dta7bit/Clk1bit (ca. 700 KBytes/sec)
+- nds: no$fmw: menu: property sheet, check boxes, radio buttons, edit buttons
+- nds: no$fmw: menu: settings/time, touchscreen/temperature calibration, etc.
+- nds: no$fmw: gui: joypad, touchscreen (lower), mouse/touchpad (upper) controls
+- nds: no$fmw: auto adjusts daylight saving time (should work, but not tested)
+- nds: no$fmw: allows to boot NDS-images from NDS-slot, or from NDS-Xboo-cable
+- nds: no$fmw: allows to load/boot small NDS-images to/from firmware memory
+- nds: no$fmw: allows to load/boot NDS/GBA/PASSME-images to/from GBA-flashcards
+- nds: lcd: re-activated rotscal params, working for GBA and BOTH NDS engines
+- nds: lcd: emulates extended affine bitmap modes
+- nds: direct boot: initializes ioports, and cp15, loads newest user settings
+- help: nds: added DMA chapter, GBA-mode chapter, and keypad chapter
+- help: nds: rev.engineered/described RTC interrupt (shared with rcnt SI-line)
+- help: nds: added sound chapters (channels, control, capture, block diagram)
+- nds: emulates touchscreen, wramstat, vramstat, exmemstat
+- help: nds: described undoc wramstat, vramstat, exmemstat, dmafill registers
+- help: nds: added cartridge secure area, icon/title, passme, I/O port chapters
+- help: nds: described how to interprete touch screen calibration values
+- nds: help: CpuFastSet: only 1st QUARTER uses FAST 32-byte-blocks, rest is SLOW
+- nds: resurrecred GBA mode (dis-chains NDS co_vals on NDS to GBA mode switch)
+- a22i: added ".no_auto_run" directive (don't load non-game-cart files into emu)
+- nds: emu: emulates ZERO unused/write-only ports (instead GBA-style prefetch)
+- nds: xboo: replaced 1N4148 diodes by BAT85 diodes for stable SPI connection
+- nds: xboo: added firmware dump/patch items in gui\utility\remote access menu
+- nds: xboo: automatically sends reset & provokes lockdown to get a spi free bus
+- nds: xboo: nocash firmware running in emu, using nds ".pack_lz77/key1/crc16"
+- a22i: new ".pack_nds_key1" directive (only firmw, rev/down, modulo C, level 2)
+- a22i: new ".pack_crc16 dest_label[,initial]" directive (start by .pack_org $)
+- nds: xboo: programmed overall skeleton nocash firmware version
+- a22i: lz77 compress now working (start by ".pack_org" finish by ".pack_lz77")
+- a22i: added new desired origin target parameter to ".pack_org" directive
+- help: corrected length in bit0-20 for CpuSet and CpuFastSet (not in bit0-15)
+- a22i: accepts ARM instructions "ALU Rd,Rm" (abbreviations for "ALU Rd,Rd,Rm")
+- a22i: fixed crash on "MOV R0,XX 1" whereas XX 1 invalid formula (unlike XX+1)
+- cpu: squeeze: ANYMEM removed seq code for areas with same timing as non-seq
+- cpu: squeeze: ANYMEM/mem_read_breaks checks brks, then executes normal ANYMEM
+- cpu: speedup: stores memaccess_addr prior to ANYMEM (instead "nnn OR adr")
+- cpu: speedup: ANYMEM bypasses addr_clks_table for regions with fixed timings
+- nds: help: added cart filesystem chapter, firmware header/settings chapters
+- nds: debug version: added NitroROM filesystem viewer window (if any)
+- nds: direct boot: decrypts 2K secure area (only if rom-image is encrypted)
+- nds: a22i ".fix" directive (plus .nds) encrypts first 2K secure area (if any)
+- nds: a22i ".fix" directive (plus .nds) fixes logo,secure,header,icon CRCs
+- nds: a22i ".nds" directive creates target files with ".NDS" extension
+- nds: direct boot: optionally bypasses ugly slow bios/firmware intro
+- nds: timings: recurses cycles per scanline, scanlines per picture & per vblank
+- nds: dma: moved NDS9 dma-mode bits, DS-gamecart DMA, disabled NDS7 hblank-dma
+- nds: cartloader detects nds-passme images, direct boot works with diff entry
+- nds: cartloader identifies NDS gamecarts by header CRC (switches NDS/GBA mode)
+- nds: help: described cart protocol KEY1-commands in raw/unencrypted format
+- nds: emulates firmware bootmenu, io_lists: emulates nds gamecart
+- nds: lcd-core displays second screen in game window, and in debug mode
+- nds: lcd-core displays second screen, lcd-core handles vram_table
+- nds: allocated DOUBLE sinline_bufseg in EMP-GSET, for GBA-LCD, for 2 screens
+- nds: vram viewer: displays second screen (by engine A/B buttons)
+- nds: vram viewer: supports BG maps, added Engine buttons to all screens
+- nds: creates second nds-machine, and dis-creates it in gba-mode
+- nds: lcd: suppresses lcd_refresh_request on NDS7 machine (lcd by NDS9 only)
+- nds: lcd: emulates OBJs, vram_table, variable boundary, moved dimension bit
+- nds: lcd: disabled undoc green swap in NDS mode (supported in GBA mode only)
+- nds: emulates ANYMEM vram bank-switching in 16K units by new vram_table
+- nds: expanded NDS9 io_lists to 800h+80h (3D_Engine + and 2D_Engine_B area)
+- nds: allows NDS9 firmware to read from DMA reg 40000B0h at least as dummy
+- nds: added EXTKEYIN port 4000136h to NDS7 io_lists
+- nds: expanded NDS7 io_lists to 800h (sound registers), plus dummy WLAN region
+- nds: added new NDS9 io_list entries 400006xh (video), 40000Exh (dmafilldata)
+- nds: emulates access to power managment device and touch screen controller
+- nds: emulates all firmware flash memory commands (write, erase, status, etc)
+- nds: emulates full SPI bus with different modes, irqs, devices etc.
+- nds: help: added Power Managment Device, and SPI bus, and IPC chapter
+- nds: help: added TSC touch screen chapter (touchscr, microphone, temperature)
+- nds: help: added RTC real time clock chapter (port, time, date, alarm, etc)
+- nds: emulates rtc real time clock, uses system time/date & own stat/alarm regs
+- nds: xcept: allows NDS9 firmware to zerofill invalid ports 4000058h/400005Ch
+- nds: xcept: allows NDS7 user code jump to BIOS addr 2DD4h (irq return addr)
+- nds: xcept: allows ITCM high-mirror at 1FF8000h (aka 1000000h aka 0000000h)
+- nds: xcept: allows bios accesses LDR/STR [3FFFFF8h], and LDM [3FFFFD0h],r0-r11
+- nds: xcept: ignores IntrWait bug with R12=18h (firmware decompression garbage)
+- nds: xcept: zero-irq-vector-check on NDS addresses (DTCM+3FFCh and 380FFFCh)
+- nds: xcept: allows/expects nds7 shared ram at (37F8000h aka/instead 3000000h)
+- nds: xcept: allows bios to execute mis-aligned 32bit write to [40001A1h]
+- nds: xcept: allows bios to fill last 32K main RAM at 27F8000h (aka 23F8000h)
+- nds: xcept: allows NDS9 hi_bios jumps FFFF0xxxh and FAKE_TCM 080xxxxh accesses
+- nds: xcept: allows NDS9 BIOS boot at FFFF0194h to write garbage to 27E57FEh
+- nds: xcept: allows NDS debug ver-style 4K mirror at 27FF000h (aka 23FF000h)
+- nds: xcept: allows BIOS-"tricks" memfill/irqvect at 3FFFFxxxh (aka 3800Fxxxh)
+- nds: reproduced ARM7 execution time R0*4 clks in 80x86-emulated WaitByLoop
+- nds: emulates ipc fifo control/status/interrupts, and send / receive queues
+- nds: redirects high ports (4100000h and 4100010h) to nds in_list & out_list
+- nds: cpu2cpu emulates interrupt send/enable (used later on in firmware)
+- nds: cpu2cpu provokes instant machine switch (for firmware 232EEF0h/37FFB38h)
+- nds: emulates nds9 irq/swi exception execution via high-vectors at FFFF0000h
+- nds: added 2nd FAKE_TCM area for firmware dtcm=3000000h (in shared ram area)
+- nds: customized adjust_pc for NDS7 host for split ram at 3000000h and 3800000h
+- nds: customized debug ADJUST_ADDR for NDS7 host (ram at 3000000h and 3800000h)
+- nds: faked gamecart irq, relocated IF (lcd,timer,dma,sio,etc) to NDS addresses
+- mds: debugger shows current machine host (NDS7, NDS9, or GBA) in statusbar
+- nds: emulates FAKE_TCM at fixed/default locations dtcm=0/800000h,itcm=1000000h
+- nds: mounted ARM9 engine, chained-in 2nd vals with co_machine pointer
+- nds: created ANYMEM for ARM9, supporting HI_BIOS area, init ARM9 addrbaselist
+- nds: created NDS9 in_lists and out_lists, emulated SQRT and DIV registers
+- nds: verified all machine loops for use with 2nd nds-machine (except gba-set)
+- nds: dummy feedback for CPU2CPU communication, and for ROMCTRL busy flags
+- nds: mounted new ANYMEM system for NDS7 host, split area nds7 ram/shared ram
+- nds: created nds7 in_lists, expanded IE and IF to 32bit, emulated firmware bus
+- nds: bios loader: shows warning on invalid BIOSNDS7.ROM/BIOSNDS9.ROM checksums
+- webpage: new paypal email address, and new donate page (for freeware projects)
+- help: removed all "(formerly ..)" names, expanded ports from NNNh to 4000NNNh
+- xed32: selectable line-wrap length (65 or 77 columns), fixed line-wrap bug
+- xed32: scrollbar works with &gt;65535 lines, hex-scroll doesn't end at chr(1Ah)
+- lcd: speedup: fixed fatal "test_bg_rotated" bitmap BUG (refx/refy exchanged)
+- cpu: suppressed base-writeback on NDS7:BIOS:1CD4h THUMB ldmia [r0]!,r0,r3
+- cpu: bugfix: illegal opcode "arm_11_ldmib_usr_wb" acted as STM (instead LDM)
+- cpu: emulates invalid "stmib [rb]!,rlist^" (userbank/writeback) (nds firmware)
+- cpu: ignores misaligned thumb target address on "subs r15" (for nds firmware)
+- memory: mount_system switches between GBA and NDS memory allocation & host
+- memory: cleaned initaddrbasemask, new memadr_&lt;typ&gt;, formerly addr_&lt;typ&gt;
+- bios: debug/disass: added complete BIOS datazones and cpuzones for NDS7/NDS9
+- bios: debug/disass: added SWI auto-comments and auto-labels for NDS7/NDS9
+- bios: simulates all NDS7/NDS9 bios SWIs by 80x86 code (except callbacks)
+- help: bios: nds: described all new and changed NDS7/NDS9 bios SWI functions
+- bios: simulates IntrWait swi4/swi5 by 80x86 code (no longer using minibios)
+- anymem: moved memaccess list to vals layer (for gba/nds7/nds9 memory hosts)
+- anymem: cleaned up source by splitting code into separate anym sub-macros
+- anymem: exported warnings to non-macro procs, access_abort "exitm" (saves 12K)
+- help: nds: added firmware flash chip, firmware header, and encryption chapters
+- windows: allows break-out from emucore even if windows sound timer locked-up
+- win98: returns zero on WM_ACTIVATE (to regain full keyboard focus under win98)
+- power saving: HLT opcode in DOS debug/gui/emucore, Sleep(1) in Win98 emucore
+- internal: recombined frameskip handlers for gmb/gba/retro versions
+
+<A NAME="v21b"></A><B>30th May 2005 - version 2.1b</B>
+- cpu/bugfix: logical imm8 ROR 0 (no shift, carry=same) (thanks fredrik olsson)
+- debug: media lifetime window shows FLASH/EEPROM writes-per-sector statistics
+- eeprom: emulates EEPROM combined with 32MB ROM (thanks jamie) (not tested yet)
+- help: added specs for backup EEPROM with 32MB ROM (last 256 bytes at DFFFF00h)
+
+<A NAME="v21a"></A><B>23rd May 2005 - version 2.1a</B>
+- multicart: bugfixed uninitialzed initstackram mem handle (thanks oleg volkov)
+- setup: added sav/sna compression enable option to files setup (debug version)
+
+<A NAME="v21"></A><B>17th May 2005 - version 2.1</B>
+- multicart: remove_machine: also unloads associated ROM, unless memory shared
+- multicart: load into &lt;selected&gt; machine; if none such: allocate new machine(s)
+- multicart: cartloader target selectable (specific machine, or all machines)
+- help: added various NDS chapters, 2D video, memory map & control, arm9 I/O map
+- help: described NDS cartridge header & protocol with some new details
+- cpu: handles CP15 system control coprocessor opcodes and Cn,Cm,N registers
+- debug: disassembler supports all copro opcodes, assembler all except ldc/stc
+- help: cleaned up coprocessor operand names (Pn,Cn instead P#,CRn,etc.)
+- help: corrected sprites/scanline formula (10+n*2 per n pix, not 26 per 8 pix)
+- shareware: changed decrypter extension (microsoft declared .prg as virus)
+
+<A NAME="v20g"></A><B>25th March 2005 - version 2.0g</B>
+- help: described unsupported WRAM-waitstate-control for DS in GBA mode
+- help: described different gba-bios-checksum BAAE1880h for DS in GBA mode
+- help: described gamepak prefetch-disable-bug (plus 2I cycles on any I cycles)
+- timing: emulates gamepak prefetch-internal-clocks (effectively 0I cycles)
+- timing: emulates gamepak prefetch-disable-bug (plus 2I cycles) (for rtype3)
+- timing: fine-adjusted power-on scanline time (required for unstable rtype3)
+- dos/vga: zoom3x/scale3x in 800x600 pix mode (non-tweaked fullscreen-style)
+- dos/vga: performance indicator displayed okay also in 15bit..24bit color modes
+
+<A NAME="v20f"></A><B>17th March 2005 - version 2.0f</B>
+- dos/vga: changed truedacs (gui) and color_xlat_table (gba) for 64K colors
+- dos/vga: alternately uses 64K colors if 32K colors unsupported (LS-563)
+- dos/vga: vesa modeset bit14=1 to enable linear buf (required for LS-563)
+- dos/dpmi: calls int21h/48h via int31h (win95b sound &lt;seg&gt; instead &lt;descr&gt;)
+
+<A NAME="v20e"></A><B>15th March 2005 - version 2.0e</B>
+- dos/dpmi: added bullshit dpmi support (for windows dos-box and arcade-box)
+- dos/dpmi: discovered ability to use 4GB descriptor limit for linear memory
+- dos/dpmi: discovered conventional mem at linear address zero (undoc feature)
+- dos/dpmi: discovered video ram/bios at linear A0000h/B8000h/C0000h (undoc)
+- dos/dpmi: uses decriptor access rights privilege level 3 (lowest, required)
+- dos/dpmi: terminates by INT 21h/4Ch from WITHIN protected mode (required)
+- dos/dpmi: avoids PSP/Environment descriptor values (instead segment values)
+- dos/dpmi: supports relocate-able 32bit code (bloated, but required for dpmi)
+- dos/dpmi: compatible with cwsdpmi (r5) and windows (95b; still without sound)
+- dos/dpmi: supports slow virtual memory (if desired, on PCs with "small" RAM)
+- dos: loads executable "objects" only; without help overlay (reloc side-effect)
+- bugfix: fixed joypad irq-OR-mode (using only mask 3FFh bits) thanks nat ryall
+
+<A NAME="v20d"></A><B>1st February 2005 - version 2.0d</B>
+- dos: horizontal/vertical centering in various vmodes (by software / vram-addr)
+- dos: uses linear framebuf (vesa2.0, if any, non-pagefault, fast 640pix modes)
+- dos: added tweaked 256/512pix vmode horizontal-centering option (by CRT regs)
+- dos: merged various video mode options into single option (scale/zoom/debug)
+
+<A NAME="v20c"></A><B>29th January 2005 - version 2.0c</B>
+- dos: dumm: exitmessage optionally quite & keep vmode (hidden arcadebox option)
+- dos: dumm: clear sinlinebufseg on allocation (instead no$gba-this-is-asm logo)
+- dos: uses hires video mode for 2 players, adjusted position for 2-12 players
+- dos: fixed osshell paramblock segment adjust (must be done before downcast)
+- dos: fixed 4K-page allocation/alignment (required for freedos with lbacache)
+- dos: uses 640x480pix or illegal video mode 512x400pix for scale2x effect
+- video: optionally scale2x (240x160pix converted to 480x320 with smooth edges)
+
+<A NAME="v20b"></A><B>18th January 2005 - version 2.0b</B>
+- debug: F3-key doesn't treat BLS/BLE/BLT opcodes as sub-routine-calls (BL)
+- controls: re-activated helixe POV joystick signals - after some months either
+- help: corrected several typos in gbatek specs - thanks to Sebastian Rasmussen
+
+<A NAME="v20a"></A><B>29th September 2004 - version 2.0a</B>
+- debug: fix: shutdown message immediately even if 1st/traced opcode at emu_run
+- cartload: memorizes recent cartnames last 9 shown in windows version file-menu
+- bios: bugfix: softreset by 80x86 code switches from thumb state to arm state
+- debug: numeric expression decoder accepts uppercase hex/oct/bin in debugger
+- speedup: faster cpu_arit_add_flags emulation (and cmc-less cpu_arit_sub_flags)
+- debug: online assembler can create LDR=IMM if it finds match/fREE/blank memory
+- debug: online assembler can "edit" existing "ldr{cond} rd,=imm" pseudo opcodes
+- curious: help/ass/dis/emu: described/supported older retro ARMv1,2,3 versions
+- armv5: emulated all new/changed ARMv5TE opcodes (disabled in no$gba of course)
+- armv5: a22i/disassembler: (qadd/sub, mul16bit, cpsr.q, ldrd/strd/pld, vect.hi)
+- armv5: help: ARMv5TE (qadd/sub, mul16bit, cpst.q, ldrd/strd/pld, mcrr/mrrc)
+- debug: search menu with new quick-link goto-memory-area function (and goto pc)
+- bugfix: re-fixed flash backup writes (same ebx*8 bug as eeprom, thanks celebi)
+- armv5: a22i/disassembler: recognize new ARMv5 opcodes (bkpt,blx reg/imm,clz)
+- armv5: help: described new ARMv5 opcodes (bkpt, blx reg/imm, clz, copro.2)
+- armv5: help: described changed ARMv5 opcode behaviour (mul.cy, pop/ldm/ldr.pc)
+- armv5: help: new chapter describes differences between ARMv1 through ARMv5
+- webpage: added notice needing help about sick debug info specifications
+- emudetail: accepts thumb BX opcode with reserved bits&lt;&gt;0 (suspicious warning)
+
+<A NAME="v20"></A><B>9th September 2004 - version 2.0</B>
+- webpage: just being moving to http://nocash.emubase.de, added xboo screenshot
+- xboo: updated standalone version, new up/download switches, header auto-fix
+- cartloader: redraws debug screen (if any) moved to new cartridge entrypoint
+- media: run-length compressed SAV/SNA files (simple, but better than nothing)
+- emudetail: allows reading from second wave ram bank (in diag cpu data cycles)
+- help: described newly discovered Halt behaviour (depends on IE AND IF only)
+- emudetail: allows low power HALT to pass through even if CPSR.I=SET or IME=0
+- emudetail: emulates CPU spsr bit4 being always set - even writing zero to it
+- internal: removed A22i pack_dest buffer (did allocate 256K - even if unused)
+- bugfix: re-fixed eeprom writes (crashed on new lifetime counters, bad ebx*8)
+- debug: now also supports memory &lt;read&gt; breaks (thanks joe for giving the kick)
+- emudetail: prevents eeprom backup mirrors at addresses&gt;10000000h (upper 4bit)
+- emudetail: emulates various bios prefetch even when not having bios rom-image
+- emudetail: emulates power-up bios prefetch even when booted &lt;with&gt; bios intro
+- help: explained "SO During Inactivity" details, added note on SIODATA32
+- help: described flashcard write/erase/detection (thanks to jeff's cartlib)
+- xboo: simplified pull-up ascii arts drawing in cable connection schematic
+- xboo: CAUTION: changed reset signal (if any) now also drags select+start low
+- xboo: automatically closes upload box on uploads only (not after downloads)
+- a22i: fixed bad crash on invalid parameters in "adrl" pseudo instructions
+- help: refined ascii arts for link plug/cable schematics (using underscores)
+- help: added gba sp power supply/headphones info in tech data and aux chapters
+- help: added gba sp case dimensions ascii arts picture in tech data chapter
+- gba sp: got old SP from marcel and replaced damaged oscillator
+- emudetail: emulates VCOUNT=99h on direct FLASH/ROM-cartridge start entrypoint
+- xboo: flashcard write and erase (erase phase simultaneously with cable upload)
+- xboo: flashcard skips writing/erasing blocks if old block did have same crc
+- xboo: flashcard highspeed 16MB/sec mechanism analyses remote/local checksums
+- xboo: flashcard upload rejected if missing or if too small for rom-image
+- xboo: flashcard upload automatically chosen if xboo image bigger than 256K
+- xboo: new utility function shows detected info (without downloading anything)
+- xboo: detects type/size/presence of remote flashcarts, flashbackup, srambackup
+
+<A NAME="v19c"></A><B>29th August 2004 - version 1.9c</B>
+- shareware: changed .prg MIME type to "data/binary" (against "virus" filters)
+- media: logs writes per sector for EEPROM and FLASH in SAV and SNA files
+- controls: ignores POV if joyGetDevCaps HASPOV=0 (should fix "up/down" problem)
+- shareware: added "Hello &lt;Firstname&gt;" in auto-generated registration emails
+- media/snaps: included FLASH and EEPROM and video REFXY registers in snapshots
+- xboo/help: removed notes about giveio/totalio due to built-in nocashio driver
+- media: emulates 64KByte FLASH backup memory (used by Sonic, thanks Kirk again)
+- bios: emulates RCNT=800Xh when booted from ROM (required for Sonic Advance)
+- gui: forces "OK" and "Cancel" setup buttons (instead local language mixup)
+- bugfix: even cartchipsizes were incorrectly rounded-up to double-of-even-size
+- bugfix: rlu-compressed length (nocashio driver crash, and no$gba startup logo)
+
+<A NAME="v19b"></A><B>22nd August 2004 - version 1.9b</B>
+- shareware: how-to-buy by paypal/cash/cheque/etc txt (webpage below price list)
+- shareware: got a verified paypal account (meanwhile available in germany too)
+- shareware: new installation instructions in shareware registration emails
+- shareware: included decrypt.com in .zip package (loader for emailed .prg)
+- internal stats: shows cart CRC-32 (if any use though ultraslow with big carts)
+- dos: fixed crash in loader of UPXed (released) version, nobody noticed it ;-(
+- dos: faked get_or_resize_memory function (non-virtual, dumb slow rep_movsb)
+- shareware: new decrypt proggy working (also compatible with DOS PE header)
+- shareware: base64 attachment decrypt.prg (avoids .com/exe "virus" filters)
+- help: added ascii arts GBA picture in tech data (shape, dimensions, buttons)
+- xboo: uninstall nocashio - seems to have been nonfunctional in freeware 1.9/a
+- xboo: download closes and deletes output file on errors/aborts during download
+- xboo: download cart: displays "press START+SELECT text" (unless burst mode)
+- help: media: flash backup specs (thanks Kirk Zathey for donating a Sonic cart)
+- media: sram: emulates 64K area truncated to 32K SRAM size, or 0K size if none
+- xboo: download at single speed burst via general purpose code in fast sram
+- xboo: download displays cartridge title (or BIOS) and download size in kbytes
+- xboo: download cart auto-detects cartsize, skips if no cartridge inserted
+- xboo: download via separate buffer (without scattering emulation romseg)
+- xboo: download switches into BURST-MODE after completion (instead dumb reset)
+- xboo: download (and wait ready) can be aborted by ESC key / CANCEL button
+- xboo: download bios function, download cart function, no piracy text message
+- xboo: download increased bios/midikey delay from 3x15us to 4x15us (for P200)
+- xboo: download wait ready function by SO=LOW signal (instead fixed delay)
+- xboo: corrected silly typo: use 560 ohm pull-ups (no not-existing 570 ohm)
+- shareware: inserts new decryption data in regkey (similiar fullver gif data)
+- shareware: new home-use encryption proggy with three new encryption layers
+- controls: ignores POV joystick signals with Helixe reg key - after 3 months
+- dos: uses all available memory (instead fixed 6MB), new big page table in xms
+- shareware: autogenerates random password, auto-appends password to reg emails
+
+<A NAME="v19a"></A><B>30th July 2004 - version 1.9a</B>
+- freeware: fixed vertical size in 3-12 player mode (with cymenubar, thanx zool)
+- cheats: displays/prompts for modifiers (eg. ?? ## NN values) instead checkbox
+- cheats: silly bloated large bitmap type symbols (codebreaker,gameshark,parv3)
+- cheats: shows "error in line ###" on load errors, codes saved automatically
+- cheats: keyb: toggle by SPC, delete by DEL, cancel button: undo recent changes
+- cheats: add/edit/delete functions for code/type/comment, optionally RAW codes
+- cheats/help: described codebreaker, gameshark v1/v2, actionreplay v3 (gbatek)
+- cheats: interpretes codebreaker, gameshark v1/v2, and actionreplay v3 codes
+- cheats: supports various decryption, changed encrypt-seeds, and crc formulas
+- cheats: mastercode/on/off/invalid symbols in cheat list (doubleclick on/off)
+- files.lst: new tiny icons (green and blue "A" symbols instead old 8bit carts)
+- shareware: full debugger (only excluding profiler and dwarf2 and demangler)
+- cheats: loads cheat codes from file, displays descriptions in cheats window
+- debug: demangler resolves _(Q2)4name(3bla).other --&gt; name::(bla::)other
+- debug: demangler resolves destructors "_._4name" --&gt; tilded "name::~name"
+- debug: demangler string buffer created for sort by name and general displaying
+- sound: supports backwards/decrementing dma source address (freeware elite)
+- setup: disabled single-gamepak mode by default (maybe less confusing)
+
+<A NAME="v19"></A><B>12th July 2004 - version 1.9</B>
+- webpage: new freeware page, new email.htm page, changed various details
+- help: changed some stuff in readme.txt (mainly related to new freeware users)
+- nocashio: uninstall function in utility menu (results okay,nothing-to-do,fail)
+- nocashio: fixed incorrect SC_MANAGER_ALL_ACCESS and SERVICE_ALL_ACCESS values
+- cartloader: removed no$gmb-mbc/rom/ramsize-relicts in cartridge header warning
+- dos: bugfix: diskgetdirplain_withdrv gets "d:\" plus fpathlen-&lt;3&gt; chars path
+- freeware: windows version screenshot to clipboard, dos version xboo & err stat
+- debug: demangler displays mangled c++ labels (profiler tree & alt+l only yet)
+- profiler: fixed crash on add_machine (profiler alloc killed multiplayer alloc)
+- freeware: added previously missing xboo port/delay options in freeware setup
+- vram viewer: fixed crash in OAM screen (happened on "prohibited" obj shape)
+
+<A NAME="v18b"></A><B>30th June 2004 - version 1.8b</B>
+- freeware: new error statistics window (summary of hidden bugs, quality rating)
+- freeware: added menubar with various gaming functions in game window
+
+<A NAME="v18a"></A><B>27th June 2004 - version 1.8a</B>
+- crashfix: XPs SetCurrentDirectoryA ERROR_NOACCESS caused by mis-aligned stack
+- webpage: added gba-fnt.gif and gba-cond.gif screenshots and description
+- dos: crashfix ensures nested task bit cleared in unzip/dos-shell pmode_kicks
+- dos: dumm version bugfixes hack mmm_text=b8000h and added "pusha" in setvga80
+
+<A NAME="v18"></A><B>24th June 2004 - version 1.8</B>
+- webpage: added profiler screenshots, about box screenshot, new email address
+- gui: io/vram/debmsg/profiler captions got no$gba icon (instead microsoft icon)
+- email: got a new spam-free email address (******@elbinsel.de, 21st june 2004)
+- profiler: path window goto optionally to "first" or "current" opcode in proc
+- profiler: double-click tree/path/list item moves to procaddr (or goto button)
+- profiler: minibios uses normal "add lr,=back" (instead tricked "mov lr,back")
+- debug: "str rd,[sp,-4]!" logs stackinfo (alias "stmfd [sp]!,rd" or "push rd")
+- internal: rlu-packed no$gba intro-picture (19K-&gt;2.5K), bugfixed rlu (nocashio)
+- cpu: emulates/warns invalid ARM.10.post.indexing with W=1 (goldroad: bar.gba)
+- profiler: moved setup options directly into profiler window (cyles, sub-procs)
+- profiler: supports "ldr pc,[sp],4" as alias for "pop pc" (for homebrewn games)
+- profiler: bugfixed path re-allocation (crashed on path deeper than 512 levels)
+- profiler: help: added new profiler window and profiler compatibility chapters
+- profiler: list window can be sorted by addr/name/calls/cycle columns
+- speedup: symbol table sorted by address (faster profiler and debugger lookup)
+- debug: bugfix: new numeric expressions decoder re-accepts uppercase labels
+- dma: profiler: fifo dma by GETMEM (real mem waitstates, and profiler support)
+- dma: profiler: DMAs displayed in profiler (as "sub-routines" or "interrupts")
+- dma: emulates real DMA timings: 2N+2(n-1)S+2I, previously 2(n)N, (notyet 4I)
+- dma: help: reverse engineered & described DMA transfer timings: 2N+2(n-1)S+xI
+- profiler: displays current "path" (like tree or stacks, but with irq nesting)
+- profiler: window split into property sheet tabs (tree, path, and list)
+- profiler: resizeable, stores variable pref position/size of profiler window
+- vram viewer: bugfix: reapplies old property sheet size when re-opening window
+
+<A NAME="v17h"></A><B>1st June 2004 - version 1.7h</B>
+- elf/cleanup: disksetdirz creates system directories -only- if not existing
+- profiler: optionally shows total cycles, cycles per call, cycles per second
+- profiler: added clear-counters buttons (resets counters without erasing tree)
+- profiler: allocates separate profiling buffers for each emulated machine
+- profiler: optionally raw time, with sub-routines, with/without halt+intrwait
+- profiler: optionally collapses or expands all items when opening profiler
+- profiler: shows procedures with missing (or overseen) return opcodes as "(?)"
+- profiler: shows number of calls (NNNx), number of cycles (NN,NNN,NNN)
+- profiler: arrays split into tree+path, optionally places IRQs on top of tree
+- profiler: allows to return by BX Rd, or MOV PC,RD wirh Rd (LR or else)
+- profiler: scans higher-level return addresses (resynchronizes if lost track)
+- profiler: supports bl -&gt; bx rd opcode combination (traget rd), esc-key closes
+- profiler: shows IRQ + Entry + BIOS function names, ignores addr.0 (thumb-bit)
+- profiler: supports various mechanisms for entering/leaving irq/swi handlers
+
+<A NAME="v17g"></A><B>25th May 2004 - version 1.7g</B>
+- profiler: watches "bx lr", "pop pc", "mov pc,lr", "pop rd/bx rd" for exit
+- profiler: watches "bl", "add lr/bx", and "add lr/ldr pc" for entering procs
+- profiler: tree view shows all executed (sub-) routines (still without cycles)
+- nocashio: prompts to install driver on xboo upload or snespad access
+- nocashio: parallel port access under win nt,2k,xp by sergey's nocashio.sys
+- webpage: moved from "www.work.de/nocash" to "work.typo3.work.de/nocash"
+- debug: new window shows list of all symbols (Alt+L) (sorted by name or addr)
+- run: added single-frame-step hotkey (keypad-"/", in emu mode and debug mode)
+- elf: removed script.txt (wasn't required at all, bug was fixed in 1.7d ;-) )
+- controls: supports POV-joysticks (aka good old digital, non-analogue sticks)
+- test: disksetdir: nested access error message (maybe done by multi-processors)
+
+<A NAME="v17f"></A><B>30th April 2004 - version 1.7f</B>
+- elf: disksetdir fatal error additionally shows windows GetLastError value
+- elf: suppresses load/allocate of unused files in source info (eg. hdr files)
+
+<A NAME="v17e"></A><B>29th April 2004 - version 1.7e</B>
+- elf: bugfix: @@trysetdir_esi skips setdirplain on empty directory names
+- elf: writes list of loaded source directories + files to file script.txt
+
+<A NAME="v17d"></A><B>29th April 2004 - version 1.7d</B>
+- cleanup: added pusha/popa in setdirplain procedure (maybe fixes any crashes)
+- elf: suppressed rom-area warning on attempts to map fileheader to 1FFFFXXh
+- elf: translates source paths "/cygdrive/x/" to actual "x:\" (nintendo tools)
+- elf: optionally accesses elf as memory mapped file (avoids slow virtual mem)
+- elf: optionally loads all source lines at once (slower, but maybe more stable)
+- elf: moved writing " &gt; " in source lines after load_src (which crashed strn)
+- cleanup: vram viewer uses normal getmem (with anz_mem_handles updated)
+- help: added note that Nintendo no longer supports Amtel-Flash (thanks doug)
+- cprot: encrypted the decryption floppy disk proggy by licence.key data
+- video: sets SetStretchBltMode (prevents 16 color HALFTONE on matrox megashit)
+- help: fixed typo in VRAM addresses (601NNNNh instead 61NNNNNh, thanks vegard7)
+- internal: displays current and desired directory on setdirectory fatal errors
+- a22i: fixed bad parameter error occured with mis-aligned END (implied .pool)
+- debug: new numeric expression decoder can be used in debugger (eg. ctrl+g..)
+- debug: setup allows to change default numeric-input format (radix 16 or 10)
+- a22i: numeric forward references working with all operators (eg. mul div xor)
+- a22i: numeric default format define-able by ".radix 16/10/8/2" hex/dec/oct/bin
+- a22i: numeric expression priority ordering (eg. ()=highest, *,/=med, +,-=low)
+- a22i: numeric boolean operators EQ,NE,GE,GT,LE,LT or =,&lt;&gt;,&gt;=,&gt;,&lt;=,&lt; or ==,!=
+- a22i: numeric operators MOD,MUL,DIV,SHL,SHR,AND,OR,XOR or aliases EOR,&gt;&gt;,&lt;&lt;
+- a22i: supports decimal number format defined as &dNNN (even if radix not 10)
+- a22i: supports roman number format defined as &rNNN (eg. &rCXXIV = 124)
+- a22i: supports octal number format defined as &oNNN or NNNo or 0oNNN
+- a22i: clean-up: split testvalw into separate number and operator decoding
+- a22i: added new ".errif &lt;expression&gt;" directive (user error if non-zero)
+- a22i: quoted 'txt' or "txt" opcode-operands may be longer than 1 character
+- help: removed middle colon from older 32bit numbers (NNNN:NNNN -&gt; NNNNNNNN)
+- help: sys control chapter added note about forced non-sequential 128K-blocks
+- help: sys control chapter added note about not-working (data-) prefetch
+- help: added pseudo code for SWI 37 multiboot checksum/encryption calculation
+
+<A NAME="v17c"></A><B>28th October 2003 - version 1.7c</B>
+- dwarf2: bugfix: restores no$gba home directory after on-the-fly source loading
+- vram viewer: vram window resizeable (graphics zoomed, text/details preserved)
+- font: allows to disable patched 7x15 font in case of problems (in other setup)
+- vram viewer: oam screen small user screen adjusted to exact 240x160 pix size
+- vram viewer: fixed BG map scyx rectangle/wrapping (red line text scroll pos)
+- vram viewer: fully suppors large BG maps (text & rotscal, drawing & details)
+- dos: always updates dizzy dacs in text mode (even if true color graphics mode)
+- dos: forwards xtxt mouse-pointer from mmm_text to actual vram (xtxt mode only)
+
+<A NAME="v17b"></A><B>23th October 2003 - version 1.7b</B>
+- sound: fixed various channel 3 wave ram size & bank selection bugs (tauceti3)
+- help/sound: corrected channel 3 bank selection bits (bit 5,6 mis-exchanged)
+- help/sound: corrected channel 3 sample rate (2097152Hz instead 131072Hz)
+- statscr: displays sound 1-4 frequency (Hz) and Timer 0-3 frequency (Hz & clks)
+- joysticks: setup allows to re-assign gba buttons by pc button-stroke in setup
+- joysticks: supports more than 4 buttons (getJoyPosEx via gba-def.def file)
+- dwarf2: loads source level source files on the fly only when needed (speedup)
+- internal: uses hdc from BeginPaint when available instead from separate GetDC
+- dwarf2: memorizes recent source line number/address (source lookup speedup)
+
+<A NAME="v17a"></A><B>24th September 2003 - version 1.7a</B>
+- debug font: patched WinXP triangle symbol (arrow right), GetDC after HideCaret
+- vram viewer: worked on bg layers bigger than 256x256, still incomplete yet
+- vram viewer: shows bg/layer mode name in bg map screens (text, bitmap, etc)
+- gui: "deselects" debug font after use (maybe that "deallocates" something)
+- dwarf2: skips duplicated header/include files (loading version was VERY slow)
+
+<A NAME="v17"></A><B>15th September 2003 - version 1.7</B>
+- webpage: screenshots of most important debug screens allow to preview no$gba
+- webpage: new layout colored boxes giving presentation of the various features
+- webpage: got a new www.work.de/nocash ftp password and access rights, yipieh!
+- emu: any of the below "prefetch" bullshit actually fixes super Mario Bros ;-)
+- emu: recent_bios_prefetch now also set before passing to USER IRQ handler
+- emu: recent_bios_prefetch set on EXIT from swi/irq (instead fake on ENTERING)
+- emu: recent_bios_prefetch moved into vals area (for snapshots & multi players)
+- reg: adjusted registration fee to $5000, looks more valuable... and reasonable
+- emu: bugfixed stopping prescaled timers (freeze by OLD prescaler, thanks matt)
+- parser: online asmbox accepts simple commands: run,reload,exit,reset,date,etc.
+- xcept: allows IntrWait/r0=0 to write to BIOS:0631h (programming trick or bug)
+- a22i: .strict directive insists on "label:" definitions (instead just "label")
+- a22i: accepts "SWP{B} Rd,[Rn]" as alias for "SWP{B} Rd,Rd,[Rn]" (ie. Rd=Rm)
+- debug: value-at-cursor for [R15,OFFS] points to $+8+OFFS (instead R15+OFFS)
+- debug: nocash disassembler syntax resolves "stmfd/ldmfd [r13]!" as "push/pop"
+- debug: search function can be aborted by esc; disassembling all mem takes time
+- dwarf2: uses other background color for source code lines (typ. light blue)
+- debug: search function scans all 32bit mem (except unused/mirrors) (old=64K)
+- dwarf2: on special opcode line+NN: inserts NN-source lines (instead skip NN-1)
+- dwarf2: loads & displays source files from current (elf file's) directory
+- dwarf2: sourcelevel viewer allows to select custom source TAB-size in setup
+- debug profiling: cpu-power-bar optionally updated only once every 1..6 frames
+- debug font: changed patched 7x15 font to older/smaller ver 200h (instead 300h)
+- disass: prohibits "ldrb rd,[pc,offs]" to show up as "ldrb rd,=immediate32bit"
+- a22i: accepts signed 8bit/16bit data (dcb/dcw), fixed blind-data online crash
+- internal: moved debugscreen "init_new_color/font" into inside of "draw_area"
+- debug: bugfixed labels-ending-with-square-bracket (eg. cond break "[label]!")
+- dwarf2/elf: ignores/suppresses unwanted dummy labels (eg. ".gcc2_compliled.")
+- vram detail: 8bit writes to OBJ+OAM are ignored (only BG+PAL are doubled)
+- dwarf2: multiline disline (can show more than 1 line per disassembled opcode)
+- dwarf2: bugfix: 5-byte LEB128s values (eg. nintendo-nonsense DC,FF,FF,FF,0F)
+- dwarf2: ignores incorrect too-short nintendo-bugged "prologue length" entries
+- dwarf2: bugfix: skips empty include directory list, finds all compile units
+- dwarf2: moving cursor on source text shows line number & filename in statusbar
+- dwarf2/elf: loads symtab & strtab by section name (instead section flag guess)
+- cartloader and XED-standalone: look up for file in original-current directory
+- xed: hexedit mode (commandline /b switch), new minimize box in standalone mode
+- dwarf2: stores pointers to file/directory names in new table (file-indexed)
+- dwarf2: uses separate tables for line-address and line-info (faster lookup)
+- debug: ctrl+g (goto) accepts indirect addresses such like [r4] or [label]
+- hack: re-fixed data window editing (left/right digit of byte were exchanged)
+- video: emulates window coordinates x1&gt;x2 and y1&gt;x2 (treated as x2=240, y2=160)
+
+<A NAME="v16c"></A><B>18th July 2003 - version 1.6c</B>
+- dwarf2: optionally displays source line numbers (not yet actual source lines)
+- cartloader/elf: rejects any code/data outside of usual ROM area (with warning)
+- debug/font: changed new patched font to use OUT_RASTER_PRECIS (hope it helps)
+- help: added info on I,F CPSR bits on exception execution (particulay for SWI)
+- cpu: bugfix: IRQs disabled by SWI opcode (undocumented in original ARM docs)
+- dwarf2: loads line numbers from .debug_info, .debug_line, debug_abbrev, etc.
+- dwarf2: loads the whole elf-file into RAM (maybe slower, but easier to deal)
+
+<A NAME="v16b"></A><B>15th July 2003 - version 1.6b</B>
+- debugmsg: added clock cycle counter operands (%lastclks%, %totalclks%, etc.)
+- iomap: implemented user clock cycle counter (with manual reset button)
+- help: added hyperlink to debugging chapter in the menu bar of the debug window
+- help: profiling & performance monitoring chapter (clk comments, counters, etc)
+- iomap: optionally merges all six tab-pages into one large "all-in-one" window
+- debug: displays recent "Execution Time: nnn Cycles" in status bar on emu stop
+- sound: bugfixed bit positions for FIFO A/B volume and FIFO B stereo registers
+- debug: inserts space characters between all bytes in datawindow (if room)
+- debug: supports non-standard windows color schemes (hack,iomap,tv,warn,gadaba)
+- debug/xed: creates patched 7x15 font (proper arrows, ditherings, One's & L's)
+- debug: disass scrollup/center dynamically increases walkback (eg ascii dzones)
+- xed: improved vertical scrollbar (up/dn buttons, up/dn keys, thumb dragging)
+- debug: disass shows datazones as 0NNh/0xNN (old=NN), uses best-match 2^N width
+- debug: disass shows jmp direction (up/down/right arrow for back-,forward,call)
+- debug: disass shows true/false if program counter points to conditional opcode
+- debug: clock cycle comments (normal, detailed formulas, resolved clks, sum)
+- debug: shows unused/unmirrored memory areas as garbage (instead mirrored data)
+- debug: codewindow horizontally resizeable, 60..120 columns (old was 60 fixed)
+- debug: codewindow cursor up & pageup avoid hangup on wraps from FFFFFFFF to 0
+- debug: disassembler resolves exception vectors (at address 0..18h) as labels
+- help: described undoc bios functions HardReset, CustomHalt, GetBiosChecksum
+- xed: xed setup settings are now actually loaded/saved to/from no$gba.ini file
+- xed: new options allow to explode/collapse TABs automatically on load-/saving
+- xed: new option allows to save backups as "\recycled\xed_bak.~nn"
+- xed: assembler/compiler compatibility: bestfill TABs suppressed in quoted text
+- setup: hides the "?" question mark in the caption of the setup property sheet
+- help: fixed chapters with 1st letter "K" in index (ie. Keypad instead "eypad")
+- xed: F8+T truncates ending spaces, F8+T/M recover curlinadr,blockbeg/end etc.
+
+<A NAME="v16a"></A><B>23rd June 2003 - version 1.6a</B>
+- xed: aside from TABs, F8+T also collapses CRCRLF as CRLF, explodes LF as CRLF
+- hotkeys: F5,F6 toggles FIFO A,B sound, Shift+F1..F5 toggles BG0..3,OBJ layers
+- hotkeys: added help emulation hotkeys chapter, changed SnapSave=F8 (old=F5)
+- cpu/timing: emulates sequential/nonsequential gamepak cycles (LDM/STM opcodes)
+- a22i: bugfixed Thumb/STMIA opcode (has been badly assembled as LDMIA instead)
+- setup/xcept: added &lt;enable&gt; all warnings option (additional to disable & user)
+- setup: memorizes recent screen xy-position of vram viewer and i/o map windows
+- aboutbox: added email address in about box again (commercial/fullversion only)
+- xed: somewhat added F11-key setup screen (most xed options still not working)
+- xed: somewhat added vertical scrollbar (more or less basically half working)
+- xed: somewhat supports selecting (onscreen-) text by mouse (left button+move)
+- xed: new commandline option allows to use XED as RAW editor (no$gba /x fname)
+- xed: 32bit version supports column-block copy to cursor, cut/copy to clipboard
+- xed: fixed block-read (and paste) towards xloc after end of line (spc padding)
+- xed: additionally supports mainstream clipboard cut, copy, paste functions
+- xed: imported and re-written DOS-XED help text (about, hotkeys, cmdline, etc.)
+- xed: allows to access help contents/gba/cpu/xed-specs from inside of editor
+- screenshot: fixed bmp header filesize entry, fixed PRNSCR hotkey in debug mode
+- screenshot: optionally copies screenshot to clipboard (instead saving to file)
+- debug: changed vertical size to max 120 lines (instead old dos-style 60 lines)
+- debug: allows F3-key to stepover HALTs (ie. STRB [4000301], runs to next line)
+- a22i: accepts "XOR" as alias for "EOR", accepts "CALL" as alias for "BL"
+- a22i: accepts thumb-style shortform "ALU Rd,Imm" as alias for "ALU Rd,Rd,Imm"
+- debug: combo-input boxes dropdown editing behaves more like nocash DOS version
+- debug: toolbar window (for F3/F7 Trace, GBA/ARM Specs, Reload Cart, Edit File)
+- vram viewer/bg map screens: bugfixed palette HEX-values & added "BGP" text
+- help: added note that 8MB ROM exists (used by zelda) (cartridge rom chapter)
+- help: described game code ("A" is for ABC, most people believed it's for AGB)
+- debug/stack/snap: stack usage info loaded/saved in snapshot files
+- debug/stack: displays stack usage in stack window (horizontally resize-able)
+- debug/stack: moves cursor to BOTTOM of window (used area) (eg ctrl+g,emu-stop)
+- debug/stack: logs stack usage in memory (on PUSH/STMFD SP!, and on SUB SP)
+
+<A NAME="v16"></A><B>25th May 2003 - version 1.6</B>
+- help: described undocumented behaviour of "unused bits" in SIOCNT and RCNT
+- irq: instantly executes pending IRQs when enabled in CPSR.I (via MSR or SPSR)
+- irq: instantly executes pending IRQs when enabled in IE or IME
+- link/rcnt: RCNT LSBs also in multiplay mode (input current SC,SD,SI,SD state)
+- link/rcnt: slave GENERAL PURPOSE mode reflects proper SD to MULTIPLAY master
+- debug: re_read_io for siocnt/rcnt
+- colors: emulates real blurred color-mixing (same as CGB, but different ramp)
+- link/performance: emu-speed meter updated only when ALL gba frames ready
+- link/biosless-multiboot: transfers header data to slave wram (for fzero ID)
+- link/biosless-multiboot: allows repeat 620Y-&gt;720x endless (for fzero startkey)
+- link/biosless-multiboot: allows repeat 6200-&gt;720x endless (instead max x64K)
+- multiplay/biosless-multiboot: returns send-data also as well to master
+- multiplay/biosless-multiboot: forces slave in 115k multiplay mode after boot
+- multiplay/biosless-multiboot: always SD=good (regardless of slave siocnt)
+- multiplay: bugfixed all-gba-ready SD=good (old version reversed siocnt / rcnt)
+- multiplay: emulates timing depending on number of slaves, proper slave busybit
+- dos: truecolor - text cursor, mouse arrow
+- dos: truecolor - supports 15bit/24bit depth (game screen & debug text output)
+- dos: copyprot fullversion password prompt after first-time installation
+- dos: copyprot/loading fullversion with cartridge and alpha blending support
+- dos: redef keys setup supports L+R buttons, and redefkey merged with cpc/msx
+- sounds: 2nd may: 1st time tested stereo, bugfix: exchanged ALL left/right
+- colors: 1st may: 1st time tested color emulation on color monitor/color mode
+- dos: supports wide 256x200 pixels low resolution emulation mode optionally
+- dos: virtual vram page number working okay after screen resolution switches
+- p200: nocash project gets commercial - this version was made on a pentium
+  sucks 200MHz with bloody color monitor and plug'n'wait stereo sound card
+
+<A NAME="v15b"></A><B>1st May 2003 - version 1.5b</B>
+- xboo: changed default speed to medium/medium (more stable with normal ports)
+- debug: "set register" function moved into online assembler (without ctrl+r)
+- cartloader: reload-cartridge hotkey (ctrl+r) (formerly used as "set register")
+- elf: resolved thumb/arm zones as far as information present (in symbol table)
+- elf: loads executables by normal &lt;program&gt; headers (which must be valid exist)
+- setup: new defaults: warnings disabled, game window autodestroyed with debug
+- vram viewer: displays "tile/map"-info for bitmaps (addr, depth, enlarged tile)
+- vram viewer: unused BG layers blank filled (eg. BG 0,1,3 in bitmap modes)
+- vram viewer: displays bitmaps (current frame as bg2, frame 0+1 as tiles 1+2)
+- debug: replaced '&gt;' program counter symbol by square box symbol (8bit charset)
+- debug: input boxes bugfixed for register plus offset (eg. ctrl+g, "r7+10")
+
+<A NAME="v15a"></A><B>11th February 2003 - version 1.5a</B>
+- link/help: noted incoming master zero-data (SI=GND) for FAST-ONE-WAY uploads
+- link/help: added old'n'new / socket'n'plug schematics in aux link port chapter
+- link/normal: bugfixed internal clock rate, bugfixed 32bit data clock rate
+- link/normal: supports FAST-ONE-WAY normal-mode upload with multiplay-cables
+- link/setup: added new "multiplay" cable type option (and automatic cable type)
+- link/setup: link strategy option split into single pak + cable type options
+- link/multi: slaves timing synchronized to master timing
+- link/multi: slaves BUSY bit automatically set/reset by masters START bit
+- link/multi: casts [12Ah] send-data from all units to [120h..126h] of all units
+- link/multi: fast instant multiboot transfer for multiplay mode respectively
+
+<A NAME="v15"></A><B>4th February 2003 - version 1.5</B>
+- webpage: added some more detailed notes about discontinued freeware version
+- bios: automatically uses 80x86 code if GBA.ROM not found (not accurate though)
+- link: reapplies master as dummy-slave-owner when adding/resetting a new slave
+- link: warning on missing multiboot entrypoint, or on non-zero reserved field
+- link: ignores warning about bug in original bios-intro slave boot procedure
+- link: emulated biosless SLAVE multiboot code (required if GBA.ROM is missing)
+- link: forces fast instant 80x86-code multiboot if bios-intro disabled in setup
+- bios: emulated SWI 37 MultiBoot by 80x86 code (optional speedup instant xmit)
+- bios: emulated SWI 31 MidiKey2Freq by 80x86 code (for optional small speedup)
+- link: tested single gamepak with new diag.a22 multiboot function (normal mode)
+- help: corrected swi 37 multiboot (r0 instead r7)
+- link: single gampak link option (cartridge rom locked out in slave units)
+- freeware: discontinued freeware version upon crackers request - cu good bye
+
+<A NAME="v14c"></A><B>15th January 2003 - version 1.4c</B>
+- dos: arjzip-preview rejected except in f12-menu (eg. not editfile,assfile,etc)
+- cartloader: saves old battery/eeprom data to &lt;oldcartname&gt;.SAV instead newname
+- cartloader: deallocates old ROM and saves SAV (thanks matt, also snaploader)
+- dos: sound engine initial sampbufhead=10 (instead =2) avoids DMA overrun noise
+- debug: f8-key: run until current subroutine ends (eg.next higher POP PC/BX LR)
+- dos: sound emulation (sound blaster, pc speaker, covox/lpt, gravis ultrasound)
+- dos: faked newint03 recovers old interrupt enable flag, added cpu detection
+- dos: also hooks smooth 1024hz RTC timer INT70 (with realmode es:bx expire flg)
+- debug: shows used GBA CPU time vs free HALT INTRWAIT time (regs/bar + f10/nn%)
+- dos: no$gba.exe may be renamed, cpsr flags displayed, stack x-width adjusted
+
+<A NAME="v14b"></A><B>4th January 2003 - version 1.4b - DOS related only - first DOS version</B>
+- dos: internal memory (de-)allocation manager (supports best-fit allocation)
+- dos: exeloader supports upx'ed progdata (working relocation and decompression)
+- dos: keyb and timer interrupts double-hooked in protected mode and real mode
+- dos: raw-dos/extended-mem A20 enable (not sure if required EACH pmode_kick?!)
+- dos: xcept warning messages in dynamic textboxes with automatic line wrapping
+- dos: upx 32bit/pe help text overlay de/compression (and max compress size&gt;64K)
+- dos: also working in raw dos mode (ie. without vcpi/emm386 interface)
+- dos: keyboard game controls 32bit interrupt hooked within int descriptor table
+- dos: hires 640x480 detects & supports VESA bios/driver or tseng ET4000 chipset
+- dos: includes 16bit loader for 32bit mainprog as 'stub' directly in no$gba.exe
+- dos: virtual 32bit vram addressing (selects 64K vram banks upon page faults)
+- dos: successful exitback from 32bit to dos with clean vcpi/xms deallocation
+- dos: 32bit/exe working & alive with 16bit/dos!! (mem alloc, filesys, dos INTs)
+- help: added note that KEYCNT interrupt is not suitable for normal user input
+- help/webpage: removed $1000 single user licence (there was no real/commercial
+  interest, except that a lot of kids believed that it was addressed to gamers)
+
+<A NAME="v14a"></A><B>14th December 2002 - version 1.4a</B>
+- dos: started loader.exe, loads the 32bit exe, with old viewpoint pmode code
+- video: supresses un-rotated bitmap drawing if refxy was rewritten within frame
+- i/o map: resolves curr scanline (vcount) and irq scanline in gmb LY/LYC terms
+- xcept: additional warning info (cpu/irq/dma, read/write/jump, target addrress)
+- help: added typical minimum/maximum memory sizes in lcd vram overview chapter
+- video: fine-adjusted scanline drawing time in relation to display DMA/IRQs
+- dma: fixed [regpc] prefetch emulation for dmasad=unused memory (mattdeadbeef)
+- gui: small 5x12pix font uses APP850.FON if DOSAPP.FON doesn't exist (486micha)
+
+<A NAME="v14"></A><B>5th December 2002 - version 1.4</B>
+- help: uploaded second standalone version of gbatek docs (txt & htm format)
+- eeprom/sram: excluded eeprom in cutdown version (cutdown supports sram only)
+- help: added note about internal bg reference point registers (rotscal chapter)
+- video: rotscal uses &lt;internal&gt; refxy, fallback on &lt;rewrite&gt; (1000 thanks matt)
+- video: truncates TEXT TILE MEMORY to max 64K (wraps 601XXXXh to 600XXXXh)
+- video: truncates ROTSCAL BG MAP to max 64K (wraps 601XXXXh to 600XXXXh, matt)
+- eeprom/sram: initialized on loadrom (FF-filled), loaded/saved to .SAV file
+- rom: emulates garbage reads from unused area (that is not mirror of ROM area)
+- help: updated WAITCNT description, moveed Cart Header into Cartridges chapter
+- help: new chapters about cartridge ROM,SRAM,EEPROM (and briefly Flash,DACS)
+- help: revised the 80000A0h-8000FFFh multiboot/slave copy-protection text
+- xcept: renamed "Address out of range (mirror)" into "Invalid or mirrored addr"
+- eeprom: emulated serial external backup eeprom, eeprom bus-width auto-detected
+- setup: added backup media option: none, auto, sram32k, small/large eeprom
+- sram: emulated 16/32bit read/write to/from 8bit SRAM (with optional warning)
+- setup: replaced the silly oversized/textless sample-rate trackbar by combobox
+- dma: step-by-step transfer (slower, but handles bad addresses/range overflows)
+- 26 Oct 02: downloaded other EMUs, 28 Oct 02: purchased Fzero+SuperMarioAdvance
+- i/o map: displays banked CPU registers (irq,svc) (or usr if cpsr=irq/svc)
+- i/o map: displays name of current SIO/RCNT mode, displays WRAM 256K waitstates
+- i/o map: displays WS1,WS2, bugfixed WS0 bit position, moved to "Timer" screen
+- i/o map: displays internal/current DMA sad/dad, displays greenswap register
+- i/o map: subclassed DMA Timing=3 for DMA0-3 (reserved,fifo,fifo,video capture)
+- help: minor changes to unpredictable things chapter (ROM,SRAM,UNUSED mirrors)
+- cpu: emudetail high-memory 10000000h-FFFFFFFFh emulated as unused (no mirrors)
+- io: emudetail writing to greenswap (port 002h) strips unused bits mask 0001h
+- debug: animate (repeated trace) stops on debug warnings (eg. suspicios opcode)
+- xed: during scrolling forces statusbar UpdateWindow (eg. PgDown line-numbers)
+- win31/win95+explorer: forcefully adds 5x12 terminal debug font (dosapp.fon)
+- win31/compatib: processes WM_KEYDOWN directly instead using CreateAccelerator
+- win31/compatib: uses SetTimer/18.2hz if timeSetEvent/1024hz failed/unsupported
+- win31/compatib: draws cpu-flag checkboxes &lt;mirrored&gt; by &lt;SetDIBitsToDevice&gt;
+- win31/only: redirects metrics SM_CXYEDGE (3D, 2pix) to SM_CXYBORDER (1pix)
+- win31/only: uses WM_RBUTTONUP to simulate WM_CONTEXTMENU (right mouse button)
+- win31/only: debug windows scrollrange reduced to max 15bit (instead 16bit)
+- win31/only: uses exact ysize for setup combo boxes (doesn't have auto-adjust)
+- win31/only: suppresses additional/unsupported fileselect template (cart/snap)
+- win31/only: simulates LB_SETCOUNT by repeated LB_ADDSTRING (files.lst menu)
+- win31/only: debug font uses ANSI courier new (doesn't have OEM courier new)
+- win31/bugfix: fixed unsaved EDI screen-dest for XED double-keys (eg. Ctrl-K,B)
+- win31/bugfix: data/code splitter ReleaseCapture(-N/A-), apply only if captured
+- win31/bugfix: added ReleaseDC for each GetDC (device context 'memory' leaks)
+- win31/bugfix: fixed missing pusha/popa in hack/splitter/xed/game_class_procs
+- internal: cleaned up hdd (now 150 MB free space!), renamed path of no$-project
+- dos: reached zero linker errors, linked non-relocatable (exe is raw code+data)
+- idiag: internal diagnostics screen shows size of currently loaded cartridge
+- dos: moved vram-screen-select to headline (more room), palette and oam screens
+- dos: 640x480pix vram viewer displays user screen, bg maps, bg/obj tile viewer
+
+<A NAME="v13b"></A><B>23rd September 2002 - version 1.3b</B>
+- help: added note about SWI 01h RegisterRamReset dispcnt destroyed/forced blank
+- palette viewer: displays R,G,B intensity bars (to the right of R,G,B values)
+- oam viewer: displays rot/scal selection,parameters,address, displays x/y-flip
+- oam viewer: displays all 3x16bit attr/dat values (directly as stored in OAM)
+- bg map viewer: marks unused/disabled BG layers by diagonal red-line
+- tile viewer: user selectable depth (either for ALL, or only for UNKNOWN tiles)
+- palette viewer: displays 16bit color definition (additionally to R,G,B values)
+- tile viewer: if all used tiles in a row are same depth, used for the whole row
+- tile viewer: if all used OBJs are of same depth, used for unused OBJs also
+- tile viewer: if all used BG tiles're same depth, used for unused BG tiles also
+- tile viewer: autodetects depth+palette of used tiles (by examing bgmaps+oam)
+- tile viewer: merged 4bit and 8bit tiles in one screen (8bit tiles stretched)
+- tile viewer: new option for masking BGMAP/BITMAP areas in tile viewer
+- tile viewer: removed old 8bit gameboy related options, better tile-details
+- tile viewer: autodetects vram/tile usage (depth 4bit, 8bit, bg-map, or unused)
+- tile viewer: created 3 tile screens (each representing 32K out of 96K vram)
+- font: removed small 5x8 pix no$gba.fnt, uses 5x12 terminal/dosbox font instead
+- oam viewer: bug fix: now invalidates all OBJs during running emulation
+- oam viewer: shows currently selected OBJ enlarged (drawn at actual size x2)
+- oam viewer: shows OBJs larger than 8x8 pixels (drawn at best fit in oam map)
+- dos: cartloader warnings working in 80x25 text format (xboo-like dynamic box)
+- dos: 1st-time built without import32.lib, reduced linker errors from 80 to 12
+- help: corrected SWI 0Ah ArcTan2 (two parameters, X and Y, thanks Randy Linden)
+- keyb: fixed keyboard accel entrysiz (6 instead 5) (showed up as stuck b-key)
+- disass: indicates thumb code by drawing (T) in symbolic mode, ie. &lt;addr&gt; (T)
+- debug: also displays irq/swi/reset/debug-handler addresses as "bios-labels"
+
+<A NAME="v13a"></A><B>9th September 2002 - version 1.3a</B>
+- debug: cursor right/data follow (eg. "ldr r2,[r4,8h]" --&gt; DATA window to r4+8)
+- debug: displays SWI function-names as "bios-labels" (if symbolic info loaded)
+- debug: displays "longlabels" in statusbar (if code window abbrev as "longla+")
+- internal: killed separate "ass" arm assembler file (merged with "ext" pack)
+- help: added notes about elf file support in symbolic debug info chapter
+- dos: added dos-style xboo/multiboot upload box (height increases dynamically)
+- vram viewer: oam screen displays all 128 OBJs, uses &lt;gba-ratio&gt; game screen
+- snapshots: loading+saving (uncompressed though) (including multiple machines)
+- cartloader: new warnings on missing rom-entry-point, or bad fixed-value-96h
+- video: uses VCOUNT only (removed internal sinline_ly/sinline_adr variables)
+- sound: added previously missing 'eintcount' (caused dirty timing-accuracy)
+- cpu/except: fixed the new jump-range warning (didn't worked at all, whoops)
+- screenshots: uncompressed 8/16/24bit truecolor bitmaps (instead 8bit GIFs)
+
+<A NAME="v13"></A><B>28th August 2002 - version 1.3</B>
+- help: first-time uploaded standalone version of gbatek docs (txt & htm format)
+- help: removed some question marks, moved "cpu usage" info to other chapters
+- video: emulates forced blank (display disabled, the screen becomes white)
+- intro: displays no$gba picture in small game window on startup (dumb bitmap)
+- xcept: new hotkey (ctrl+e) to enable/disable all warnings, shown in statusbar
+- cpu/xcept: suspicious opcode warning (opcode 00000000h, ANDEQ r0,r0,r0 ZF=0/1)
+- fullprot: password box repaired (showed up more than daily on some computers)
+- bios: optionally emulates bios by 80x86 code (fast,less accurate,except sound)
+- i/o map: deciphered bios irq flgs, fixed bit10 fifo timer select (16bit value)
+- dos: added dos-style i/o map screens + values (toggled by TAB in fullscr mode)
+- i/o map: re-formatted video page (detailed window/special effects layer bits)
+- help: updated color special effects chapter (various details, corrections...)
+- a22i: supports ".fill length[,size[,filldata]]" only size=1=byte works though
+- irq/xcept: added warning upon uninitialized IRQ vector (ie. [3007FFCh]=0)
+- i/o map: fixed aaaa,bbbb,cccc,dddd type values (bug was aaaa,bbbb,bbbb,aaaa)
+- breaks: membreaks [adr]!/? also working in I/O area (instead normal mem only)
+- minibios: break requests delayed AFTER halt/intrwait (now also in minibios)
+- minibios: fixed built-in bios SWI 4/5 (now pushes LR and functions exchanged)
+- cpu/xcept: jump address warnings (jumps into bios/io/vram/sram/unused/mirrors)
+- cpu/xcept: suspicious opcode warning (LDRT/STRT, and opcode 0000h=LSL r0,r0,0)
+- cpu/xcept: warning if loading mis-aligned ARM address into R15 by ALU ops
+- cpu: clock cycles for thumb ADD/MOV with Rd=R15 (slower as normal MOV/ADD)
+
+<A NAME="v12e"></A><B>15th August 2002 - version 1.2e</B>
+- bios: xboo/standalone version includes new download-gba-bios-to-file function
+- gui: new option automatically place game window in upper-right of debug window
+- gui: changed size of small game window in 5x8pix font mode (width/2, height/2)
+- vram viewer: fixed y-position of red box (scrolled area in bgmap screens, jon)
+- setup: fixed player#2..12 keyboard setup (mess-missed L/R buttons, thanks jon)
+- dos: started working on dos version (win/exe with dos-style GUI parts working)
+- video: emulates semitransp objs (still not perfect: allows OBJ-to-OBJ transp)
+- debug: code & data scrollbars working (range excludes unused memory/mirrors)
+- bios: warning if incorrect gba bios version (eg. older incompatible prototype)
+- video: fixed special effect bug brightness down (and up) (thanks matt)
+
+<A NAME="v12d"></A><B>5th August 2002 - version 1.2d</B>
+- help: added cartridge/multiboot header overview (summary, one line per entry)
+- help: corrected cartridge header KEY-number entry 09Eh (it's not a palette)
+- sym/elf: displays labels in "ldr Rd,=Imm" and "add Rd,=Imm" lines (pool/adr)
+- elf: loads labels from symtab/strtab (similiar .sym, but without tmb/arm/data)
+- elf: cartloader loads elf binaries (apparently used by intellectual c coders)
+
+<A NAME="v12c"></A><B>30th July 2002 - version 1.2c</B>
+- arj/zip: cartloader works with directories (eg. Folder/File.ext -&gt; File.ext)
+- internal: simplified color version vram viewer (always 16bit depth internally)
+- help: noted that Bg/ObjAffineSet use only 8bit angles (lower 8bit ignored)
+- video: emulates color special effects (alpha blending, brightness up/down)
+- help: window description (x2, y2, priority, master/enable bits, obj window)
+- help: updated description of bitmap modes (bg2, rotscal, 8bit transp, obj 16k)
+- sound: fixed 8bit writing to MSBs of SOUNDBIAS register (used by bios intro)
+- video: emulates window 0 and window 1, obj window, and outside of window(s)
+- video: emulates transparent BG color 0 also in 8bit bitmap mode
+- video: simplified all scanline drawing to 16bit depth, mono greenswap working
+- sio: emulates master bit and slave id number in multiplay mode
+- sio: emulates normal mode SI input (opponents SO), fixed 8bit STRB [SIOCNT+0]
+- help: corrected dma description, added video capture dma, wait 2 cycles note
+- dma: emulates "video capture" dma (dma channel 3, start timing 3)
+
+<A NAME="v12b"></A><B>15th July 2002 - version 1.2b</B>
+- help: updated dma/fifo sound description (signed 8bit data, 32kHz resampling)
+- help: corrected description of soundbias register (16MHz PWM, thanks aleksi)
+- sound: bias level emulated (allows "manual" sample output by writing to 088h)
+- sio: simultaneous emulation working (machine switch, 8bit/32bit normal link)
+- sio: add/remove_machine working (multiple machines memory de/allocation)
+- help: fixed bugged HLP/HTM bold headlines (eg. mkno$emp &gt;&gt;062h - SOUND1CNT_L)
+- help: updated swi/bios description of Division, Decompression, IntrWait
+- help: described GBA memory access time in Memory Map & System Control chapters
+- help: described S+N+I data+code+jump cycles/waitstates in CPU Cycles chapter
+- help: described undocumented "green swap" feature I/O 002h/bit0 (thanks shawn)
+- video: emulated "green swap" feature (15bit/24bit color only, not 8bit mono)
+- io: emulates unused fragment zero-readback eg. 08Ah, instead prefetch eg. 08Ch
+- cartloader: blank-pads unused mem after file end (eg. 45K file in 64K buffer)
+- breaks: fixed [200E000]! being badly remapped as [200C000]! (gmb echo relict)
+
+<A NAME="v12a"></A><B>4th July 2002 - version 1.2a</B>
+- controls: adjusted stick0/stick1 keystroke bits for GBA keyinput register
+- controls: enabled stick0/stick1/snespad controls (been somehow outcommented)
+- help: described undoc register 800h default/fastest 256K WRAM waitstates
+- cpu: tested+fixed LDM+STM amod IB+DA indexing offset 4 (instead of n*4)
+- internal: cleaned up io-core, removed relicts, ensured vals-data alignment
+- tracing: processes "events" ie. vcount, timers, etc. are updated during trace
+- debugmsg: added %r0%,%r1%,..,%r15% parameters, and %pc%,%lr%,%sp% aliases
+- xcept: ignores another bug in the gba bios (memcopy instead memfill in intro)
+- keyb: default L/R-Buttons changed to Left/Right-Alt keys (or L,R keys 2nd set)
+- cpu: emulates variable 256K-WRAM waitstates (undoc "wramcnt" register, 800h)
+- cpu: emulates variable ws0,ws1,ws2,sram game pak waitstates (waitcnt register)
+- xcept: added mem 'range' warning message on reads from 0-3FFFh (readprot bios)
+- debug: del-key in code window clears source code breaks (.brk --&gt; nop)
+- timers: fine-tuned timer start delayed 2 cycles, timer stop delayed 1 cycle
+- i/o map: re-freshed timer counter registers after emu-run and tracing
+- cpu: always uses time accurate GET/PUTMEM in ARM mode, too (not only for I/O)
+- cpu: refixed thumb POP PC (bugged when used more accurate GETMEM stuff)
+- a22i: recognizes "PUSH/POP{cond}" as ARM-alias for "STM/LDM{cond}FD [R13]!,"
+- help: updated arm+thumb summaries (detailed syntax, cycles, flags, expl.)
+- help: thumb chapter added execution time, and affected flags for all opcodes
+- cpu: emulated exact S,N,I code/data/jump cycles for all thumb+arm opcodes
+- a22i: accepts // as alias for CRLF (eg. "dcb 1,2 // dcw 1234h" in one line)
+
+<A NAME="v12"></A><B>26th June 2002 - version 1.2</B>
+- fullprot: decrypter inserts username (clean and x-times encrypted in exefile)
+- fullprot: added decription picture (thanks to ina+ulf for scanning the pic)
+- fullprot: key-generator creates custom decryption proggy with username encoded
+- fullprot: activated first-time-installation password box / re-removed hellobox
+- regkeys: moved fullprot @@abs values into newer registration key files
+- hellobox: added (previously empty) first-time hello box text in fullversion
+- fullprot: new 6/2002-@@move/xchg_stuff in fullversion encrypter/decrypter
+- help: added protection chapter, describes cutdown/fullprot, misuse warning
+- help: rewritten the registering chapter, cleaned up the contents chapter
+- help: described the new local+global break conditions (similiar no$gmb breaks)
+- vram viewer: displays rotation/scaling bg maps (8bit map entries, 256 colors)
+- cartloader: removed tetris as default romname
+- f10key i/o map screen: fixed oversize width of tabcontrol and fifo groups
+- exe/upx/i32: removed -9 switch, it's been much too slow on this computer
+- cpu/io: supports thumb-LDM/STM to I/O area, get/putmem macros (star shooter)
+- disass: hides LDR/STR-zero-offsets, ie. [r5,0] displayed as plain [r5]
+- debug: cursor-right on SWI opcode moves directly to the SWI BIOS procedure
+- debug/disass: status bar displays [address]=content for ldr/str/swp opcodes
+- disass: fixed undisplayed "b" in "swpb" opcode (missing inc xdi)
+- disass: optionally shows native ARM/C64-style syntax (fancy {rlist}, #0xHex)
+- a22i: "..ds", ".space", and "defs" aliases for "%" (sic), db/dw/dd for dcb/w/d
+- a22i: "x=n", ".equ x,n", and ".define x n" aliases for "x equ n"
+- a22i: ignores .global/.extern/.thumb_func, and quotes in .include "filename"
+- a22i: redirects "#directive" into ".directive"
+- a22i: accepts ASL as alias for LSL, and "LSL Rd,Imm" for "LSL Rd,Rd,Imm" (etc)
+- a22i: new conditions ".ifdef" and ".ifndef", .bss/.text alias for .data?/code
+- a22i: fixed nested ".else", and fixed recovering from unexpected ".endif"
+- a22i: treats "@@@" and "@ ..." and "@*" and "@..." as ";..." comments
+- cpu: accepts meaningless LDR|STR{B}T as alias for LDR|STR{B} (1bitBallWall)
+- a22i/edit: filemenu shows names with extension .S for "hll/c-based asm coders"
+- a22i: recognizes "align" alias for ".align" / each without param as ".align 4"
+- a22i: fixed thumb mode "add/cmp RdHi,op" (xored bits to eax instead opcode)
+- disass: resolves "sub Rd,r15,disp" as "sub Rd,=addr" (negative relative addr)
+- help: added mailing address and bank account in registering chapter
+- a22i: automatically inserts a literal .pool at the end of the source code file
+- a22i/help: new chapter about asm directives, syntax, pseudo instructions, etc.
+- a22i/help: new chapter about online assembler and a22i source code assembler
+- a22i: recognizes "code16" and ".code 16" as alias for ".thumb" (..32 for .arm)
+- a22i: recognizes ".end" as alias for "end", and defb/defw/defd for dcb/dcw/dcd
+- a22i: recognizes .ascii/.byte/.hword/.long as aliases for dcb/dcb/dcw/dcd
+- a22i: accepts negative immediates for ADD/SUB and CMP/CMN (opcodes exchanged)
+- a22i: recognizes "adr Rd,Imm" as alias for "add Rd,=Imm" (aleksi source)
+- a22i: recognizes "ltorg" and ".ltorg" as aliases for ".pool" aka "..ltorg"
+- a22i: re-fixed blindlabel lockup when entering dcb/dcw/dcd in online assembler
+- xcept: allows to access -all- 16bit I/O ports as 32bit ports (RCNT, etc.)
+- xboo/no$gba: uses msctls_progress&lt;32&gt; for win2000 (no$msg/xboo/bung/fcomp/x51)
+- xboo/no$gba: added missing burst boot description + sample code in help text
+- xboo/standalone: added new config file xboo.cfg (for default port/delays)
+- xboo: software "pull-ups" and delays (optionally for cables without resistors)
+- xboo: speedup, optimized chksum/transfer program code (for real CPUs&lt;=66MHz)
+- xboo: slowdown, delays after each transfer-word (for lame CPUs&gt;=100MHz)
+- xboo: timings, uses i/o waitstates for timing, fully cpu-speed independent
+- breaks: global and local break conditions working (eg. r0=100, r2&gt;=r0, etc.)
+
+<A NAME="v11c"></A><B>31th May 2002 - version 1.1c</B>
+- disass/sym: faster insinlist for larger amounts of datafields from sym file
+- breaks/help: added chapter about Breakpoints in Debugging help text manual
+- breaks: cpu-core handles [2000000]! and [2000000..20001ff]? style mem breaks
+- breaks: allows to define conditional breaks with 32bit addresses (ctrl+b)
+- internal: recombined z80/gui and gmb/gack family insin/clr/delin/list code
+- disass/sym: loads arm/thumb info, and data fields from debug info .SYM file
+- a22i: stores addresses of byte/word/dword/ascii data fields in .SYM file
+- a22i: stores addresses of arm/thumb program code memory fields in .SYM file
+- disass: home-key moves to "r15 AND 0e000000h" (typically begin of RAM or ROM)
+- disass: ignores non-user-memory labels/symbols (eg. "width equ 30")
+- disass: implemeted CPU state zones (arm/thumb), pre-def BIOS cpu state areas
+- disass: supports 32bit "dcd" datazones
+- disass: multiboot header RAM datazone (cutdown & fullversion with &lt;=256K ROM)
+- disass: resolves GBA bios datazones, treats I/O+palette+OAM as DCW datazones
+- video: speed-up by using color xlat macros instead of call's to procedures
+- vram viewer: oam screen supports laser pointer/red box at signed x/y positions
+
+<A NAME="v11b"></A><B>22nd May 2002 - version 1.1b</B>
+- debug main screen: added separate bg0-bg3 in vram viewer "window" menubar
+- vram viewer: some new GBA details in OAM screen (instead old no$gmb relicts)
+- video: emulated BG mosaic/vsize (tested ok) and OBJ mosaic/vsize (not tested)
+- bugfix: fixed bad lockup that occured in v1.1a public cutdown versions
+- help: added note that bios RegisterRamReset/clear-OAM does NOT disable OBJs
+
+<A NAME="v11a"></A><B>18th May 2002 - version 1.1a</B>
+- webpage: uploaded "Magic Floor" puzzle game with sample source code included
+- a22i: implemented .code and .data? directives (aliases for old .rom and .ram)
+- bios/xcept: ignores swi=1/bit5=0 garbage write to unused io-port 114h
+- fullprot: created new/gba reg keys, fullversions run only with key
+- fullprot: improved registration key code confusion
+- help: updated the description of the cutdown version
+- video: emulates not-displayed OBJ tile numbers 0-511 in bitmap BG modes
+- sound: fixed lock-up on dma-sound-output when sound output disabled in setup
+- fullprot: improved protection of encrypted full version (forcefield/tables)
+- bg gif: draws background gif at 8bit/pix (even if emu uses 15 or 24 bits)
+- vram viewer: created separate map-screens for each bg layer bg0-3
+
+<A NAME="v11"></A><B>24th April 2002 - version 1.1</B>
+- video: fixed bg mode 0 double map-ysiz (shr eax,6 (instead 5) for 4000h-&gt;100h)
+- cutdown: split into separate sound and color versions as additional protection
+- io/dma: emulates address reload upon dma re-start (bios dma-fifo intro sound)
+- sound: emulates digital FIFO/DMA sound channels (not sure if volume+stereo ok)
+- i/o map: bldcnt deciphered (not sure if there may be only ONE target each ?)
+- i/o map: deciphers mosaic bits, and bldalpha and bldy (eva,evb,evy)
+- help: re-sorted bit numbers in sound chapters (incrementing 0..15 ordering)
+- help: added note about buffer synchronization in DMA/FIFO sound chapter
+- i/o map: displayed channel 3 waveram banks, deciphered sound control bits
+- i/o map: deciphers keycnt irq enable/condition bits
+- i/o map: deciphers waitcnt bits, displays bios irq vector [3007FFFh]
+- io/timers: added auto-reload for count-up timers
+- io/timers: changed timer IRQ address to 202hex (instead 202 decimal)
+- io/timers: repaired badly inverted count-up bit
+- internal: changed dma/timer macro param ch to chn (ch could be a 8086 reg)
+- sound: implemented "FM" channels 1-4 (from no$gmb, with GBA modifications)
+- internal: replaced cs32:[gba_intcount] by vals [gba_eintcount] (multi gbas)
+
+<A NAME="v10e"></A><B>17th April 2002 - version 1.0e</B>
+- video: added init_color_xlat_table at startup (fixes initially black colors)
+- io/dma: emulates vhblank & hblank dma transfers, and repeated dma transfers
+- io/dma: emulates mixed incrementing/decrementing dma, and increment-reload
+- cpu: fixed thumb ror flags (80x86 ror opcode didn't support zero/sign flags)
+- cpu: emulated misdocumented mull V-flag (apparently -same-, not "destroyed")
+- cpu: repaired jump addresses to muls/mlas/umulls.. (instead mul/mla/umull..)
+- cpu: dis-inverted "cmn" opcode carry (ie. addition-style instead subtraction)
+- cpu/xcept: optionally ignores access to cpsr_c in user mode without warning
+- help: added note about 'hidden' H-Blanks in DISPSTAT description
+- io: writing to DISPSTAT msb and/or lsb may directly generate new IRQs
+- io: repaired v-counter interrupt in scanline 0, emulated hblank stat/irqs
+- io: emulates 32bit read from dispstat+vcount as one 32bit value
+- help: corrected return value of Div (and DivArm) functions (r3 instead of r2)
+- i/o map: deciphered control bits for dma, timers, video, and interrupts
+- i/o map: split into separate tabbed screens (video,bg,dma,sound,timers,other)
+- cartloader: added .mb as gameboy file extension (used by some multiboot demos)
+- video: repaired text mode scrolling/size (took size from bgoffs instead bgcnt)
+
+<A NAME="v10d"></A><B>11th April 2002 - version 1.0d</B>
+- xcept/debug: moves codewindow cursor onto -previous- opcode (=fault position)
+- cpu: emulates misaligned LDM/STM/PUSH/POP base register (warning optional)
+- cpu: thumb POP PC ignores PC/Bit0 (always stays in thumb state even if Bit0=0)
+- a22i: fixed address operand shifting for thumb mode BL instruction
+- a22i: fixed misplaced PC/LR operands for thumb mode PUSH/POP instructions
+- video: uses BIG color translation table with 32K entries (eventually faster)
+- video: fixed exchanged red/blue, and 24bit-black-blue, hopefully okay now :-)
+- cpu: emulated reading of unused cpsr/spsr bits (bits 8-27)
+- cpu/xcept: emulates not-existing spsr in user/system mode (alu,msr,mrs,ldm)
+
+<A NAME="v10c"></A><B>9th April 2002 - version 1.0c</B>
+- video: colors are not tested (included test-rgb.gba for testing on rgb-vga)
+- vram viewer: colors in palette screen, tile screen, enlarged tile, bg map
+- disass/dump to file: rejects too large/signed 32bit length (thnx randy+costis)
+- video: emulates gba-display-style 'truncated' color intensities (optionally)
+- video: color emulation, 15bit and 24bit output
+
+<A NAME="v10b"></A><B>5th April 2002 - version 1.0b</B>
+- help: described debug messages, SYM files, debug hotkeys, installation
+- cpu/disass/a22i: supports .msg 'string' debug messages (raw text only yet)
+- bios: warning message if accessing SWIs other than 2-5 (if GBA.ROM not found)
+- bios: built-in mini BIOS supports IRQs and SWI 2-5 (used if GBA.ROM not found)
+- cpu: uses separate GETMEM and PUTMEM for SWP opcode (xcept and io handling)
+- xcept/flat32: refreshes debugscreen -before- display textbox/warning messages
+- xcept/setup: provides strict and bios-compatible memory range checks
+- xcept/setup: abbreviated to Halt/IntrWait warning message (formerly clipped)
+- cpu/memory: emulates read-protected bios area, and unused 4000-1FFFFFF memory
+- help: corrected description of BIOS memory read-protection
+- io/memory: emulates unused I/O area 400h and up, and undoc port 800h/mirrors
+- a22i: recognizes MOV as alias for both MSR and MRS opcodes
+- a22i: recognizes the newer "_csfx" extension/combinations for MSR opcode
+- cpu/memory: emulates 64K+32K+32K vram mirrors
+- cpu/memory: emulates mis-aligned data memory accesses (aligned/rotated)
+- cpu/memory: write-protects readonly memory
+- xcept/setup: new/optional warning on writing to readonly memory
+- xcept/setup: new/optional warning if memory addresses out of range
+- xcept/setup: new/optional warning for 8bit writes to palette/vrom/oam
+- xcept/setup: made "Alignment" warnings optional (separately for read/write)
+- xcept/setup: made "Bad I/O" and "Reserved CPSR Bits" warnings optional
+- xcept/setup: killed old 8bit options, moved some options from other to xcept
+- debug/setup: changed emulator identification from HL=0CA5H to R0=0CA5H
+- debug/setup: renamed the follow registers HL,BC,DE,SP,PC to R0..R15
+- bios: added filename "GBA.ROM" in bios-not-found error message at startup
+- xcept: allows RegisterRamReset to write zero's to unused I/O ports
+- help: added HEX values for SWI-function numbers and CPU-mode CPSR values
+- help: corrected reset function (SWI 0 and SWI 1) descriptions
+
+<A NAME="v10a"></A><B>22nd March 2002 - version 1.0a</B>
+- cartloader: fixed fileselect double\\backslash path glitch (also for no$gmb)
+- arjzip/preview: long filenames, cmdline/files.lst ARJ:GBA format (from zx81)
+- arjzip/preview: autoload if containing 1 file (even misnamed X.GBA in Y.ZIP)
+- arjzip/preview: allows to select 1 file if containing multiple files (zx81)
+(Requires ARJ.EXE and/or PKUNZIP.EXE installed in a PATH directory.)
+
+<A NAME="v10"></A><B>13th March 2002 - version 1.0 - first public release</B>
+- cutdown: startup message box
+- cpu: rev-engineered/emulated LSL/LSR/ASR/ROR with Register-00 shift amounts
+- cpu: rev-engineered/emulated THUMB LSL/LSR/ASR with Immediate-00 shift amounts
+- a22i: supports pseudo instruction "LDR Rd,=Immediate" by using literal ".pool"
+- debug: displays non-symbolic addresses at beginning of datazone lines
+- debug: disassembler automatically comments SWI opcodes, eg. "swi 2 ;Halt"
+- debug: keystroke/mousebutton breaks wait for completion of BIOS-Halt-handler
+- debug: F2-breaks and source code breaks (.brk aka mov r11,r11) working 12/01
+- cpu/io: emulated I/O access through ARM mode 32bit ldm/stm instructions
+- video: displays truncated left/right offscreen normal and xflipped objs
+- setup: optional speedup if emulator caught in Halt/IntrWait-less 'dumb' loops
+- video: rotating/scaling OBJs working, rotated/scaled left/right offscreen OBJs
+- setup: optional warning message if Halt/IntrWait not used for longer period
+- setup: optionally displays topmost screenlines dark as caused by real shadows
+- setup: option for executing nintendo-logo bios boot procedure upon reset
+- video emulation: variable bg map size in bg modes 0-2
+- video emulation: bg rotation/scaling in all bg modes 1-5, yflip in mode 0-1
+- video emulation: supported tilebased bg mode 2, and 32K-bitmap bg modes 3,5
+- vram viewer: user screen, bg0 map, bg0 tiles, palette viewer
+- debug/stck: fixed initial stackwindow position, displays 32bit stack data
+- setup: initially defaults to debug font size matching for local display
+- news: russian cosmonauts have successfully repaired the mir, 18th Oct 2001
+- io/help: rev-engineered, described, and emulated Timers (counter/reload/ctrl)
+- a22i: fixed LDR/STR Rd,[Rb,Rm] stack fault lockup
+- io: emulated reading from writeonly or unused io-addresses
+- cpu/reset: initializes all CPU registers (especially stack ptrs) as by BIOS
+- cpu: fixed STM [Rb],...,R15 (probably rarely used though)
+- a22i: assembler recognizes ADD Rd,=RelativeAddress in ARM and THUMB modes
+- multiboot: added multiboot upload function, and cable description, etc.
+- keyb: emulated L/R buttons, added SNESPAD support for GBA (both not tested)
+- setup: immediately recognizes changed debug fontsize without re-opening hack
+
+<A NAME="v01"></A><B>27th August 2001 - version 0.1 -  first nonpublic beta release</B>
+- emailed devrs (and received not so much feedback, and lost interest)
+- most or all tested games/demos working (chaos89 turned out to be really dull)
+- various news, in short, cpu and simple video/keyboard emulation are working
+
+<A NAME="v00"></A><B>July 2001 - version 0.0 - cpu only - unreleased</B>
+23th July 01 - emailed devrs (and received lots of feedback)
+20th July 01 - a22i source code assembler, resolves forward references, sym file
+19th July 01 - a22i online assembler for 16bit THUMB instruction set
+18th July 01 - a22i online assembler for 32bit ARM instruction set
+17th July 01 - debugger 32bit addressing (frb,dta,brk lists), F4-key crackbreaks
+15th July 01 - cpu_arit_add/sub_flags chaos89 traces forever without lockup
+14th July 01 - memory emulation, adjust_addr gba_rom/ramseg, traces 13 opcodes
+12th July 01 - succesfully traces through first four (4) opcodes in chaos89 :-)
+11th July 01 - assembled TMB emulation core with 0 errors (and lots of notyets)
+10th July 01 - assembled ARM emulation core with 0 errors (and lots of notyets)
+5th July 01 - beach; completed gba-cpu primary ARM/TMB jump lists
+4th July 01 - beach; parts of displayed registers in debugger
+3rd July 01 - beach; finished TMB disassembler untested
+2nd July 01 - finished ARM disassembler tested with chaos89.bin
+1st July 01 - programming started (arm 32bit disassembler)
+
+ARM doc started 27th March 2001, finished 30th March 2001
+GBA doc started 22nd March 2001, finished 31st March 2001
+
+<I>The freeware debug version was discontinued after version 1.4c, due to piracy attacks.<BR>
+Restrictively, version 1.5 and up was available to registered commercial users only.<BR>
+Version 1.9 and up are free for gamers, the debug version can be registered by hobby users.<BR>
+Version 2.7c and up are freeware.</I><P>
+
+<A NAME="sum"></A><B>No$gba Version Summary</B>
+<A HREF="#v302">v3.02 - 16 May 20 - added lots of 3ds gpu specs</A>
+<A HREF="#v301">v3.01 - 25 Apr 20 - details on y2r,l2b,lgyfb,vfp,rsa,sha,mcu,l2c,axi,ctracrd,etc.</A>
+<A HREF="#v300">v3.00 - 27 Nov 19 - fairly complete 3ds hardware specs, teak mmio specs</A>
+<A HREF="#v29e">v2.9e - 10 Jul 19 - more 3ds specs, wifiboot 3ds/firm uploader, 3ds filesys</A>
+<A HREF="#v29d">v2.9d - 23 Feb 19 - added basic 3ds reference, disass arm11/ual, profiler disabled</A>
+<A HREF="#v29c">v2.9c - 08 Feb 19 - rev-engineered DSi-wifi with wpa/wpa2, and some more details</A>
+<A HREF="#v29b">v2.9b - 30 Sep 18 - re-fixed nds ext palette, dsi 8bit vram, tsc iomap</A>
+<A HREF="#v29a">v2.9a - 24 Jul 18 - details on teak and other hw, 134MHz, alternate footer</A>
+<A HREF="#v29" >v2.9  - 14 Jun 18 - unlaunch.dsi exploit, arm7 scfg stuff, and various details</A>
+<A HREF="#v28f">v2.8f - 23 Jul 17 - several details for gba/nds/dsi (gui,sdmmc,swi,io,3d,i2c)</A>
+<A HREF="#v28e">v2.8e - 11 Feb 17 - teak specs, rsa specs, xtensa/teak asm, dsi-wifi-dumper, etc.</A>
+<A HREF="#v28d">v2.8d - 26 May 16 - sd card emulation, support for unencrypted rsa signatures</A>
+<A HREF="#v28c">v2.8c - 07 May 16 - supports dsi firmware, bugfixes, much more dsi specs</A>
+<A HREF="#v28b">v2.8b - 01 Jun 15 - supports dsi bootcode/launcher, plus some pocketstation details</A>
+<A HREF="#v28a">v2.8a - 03 May 15 - several emulation details, lots of info on eMMC filesystem</A>
+<A HREF="#v28" >v2.8  - 02 Feb 15 - working dsi-emulation (about maybe 50% complete)</A>
+<A HREF="#v27d">v2.7d - 09 Nov 14 - basic dsi-core (main ram, wram, cartloader, swi's)</A>
+<A HREF="#v27c">v2.7c - 28 Jul 14 - nds-snapshots, new memory system, freeware</A>
+<A HREF="#v27b">v2.7b - 10 Nov 13 - bigger nds flash.sav, 16bit audio, poc-xboo</A>
+<A HREF="#v27a">v2.7a - 17 Aug 13 - fullscreen, fixes/details, started DSi research</A>
+<A HREF="#v27" >v2.7  - 23 May 13 - various gba/nds/cpu/gui improvements and details</A>
+<A HREF="#v26b">v2.6b - 24 Jan 08 - small bugfix (hll-debug-ver only)</A>
+<A HREF="#v26a">v2.6a - 23 Jan 08 - faster/better/shadow/edge/polyid/capture/backupdetect/etc.</A>
+<A HREF="#v26" >v2.6  - 18 Dec 07 - 3d soft-renderer</A>
+<A HREF="#v25c">v2.5c - 20 Nov 07 - some nice stuff</A>
+<A HREF="#v25b">v2.5b - 03 Nov 07 - 3d frameskip, 3d vram viewer, wifi details</A>
+<A HREF="#v25a">v2.5a - 04 Oct 07 - debug version bugfix</A>
+<A HREF="#v25" >v2.5  - 04 Oct 07 - more and faster (softlight/speedup/timing)</A>
+<A HREF="#v24f">v2.4f - 17 Sep 07 - couple of nice details</A>
+<A HREF="#v24e">v2.4e - 03 Sep 07 - nds ards/cbds cheats</A>
+<A HREF="#v24d">v2.4d - 21 Aug 07 - lots of new info on wifi and ds-lite</A>
+<A HREF="#v24c">v2.4c - 01 Jul 07 - details (ereader and gui)</A>
+<A HREF="#v24b">v2.4b - 05 Jun 07 - DS Wifi, GBA e-Reader</A>
+<A HREF="#v24a">v2.4a - 04 Apr 07 - DS adpcm sound and 3D gxfifo irq fixes</A>
+<A HREF="#v24" >v2.4  - 21 Mar 07 - DS 3D skinning, rear-plane bitmap, screenshots</A>
+<A HREF="#v23d">v2.3d - 23 Feb 07</A>
+<A HREF="#v23c">v2.3c - 04 Feb 07</A>
+<A HREF="#v23b">v2.3b - 20 Jan 07</A>
+<A HREF="#v23a">v2.3a - 04 Nov 06</A>
+<A HREF="#v23" >v2.3  - 04 Aug 06</A>
+<A HREF="#v22f">v2.2f - 18 Jun 06</A>
+<A HREF="#v22e">v2.2e - 18 May 06</A>
+<A HREF="#v22d">v2.2d - 09 May 06</A>
+<A HREF="#v22c">v2.2c - 18 Apr 06</A>
+<A HREF="#v22b">v2.2b - 04 Feb 06</A>
+<A HREF="#v22a">v2.2a - 23 Jan 06</A>
+<A HREF="#v22" >v2.2  - 22 Jan 06</A>
+<A HREF="#v21b">v2.1b - 30 May 05</A>
+<A HREF="#v21a">v2.1a - 23 May 05</A>
+<A HREF="#v21" >v2.1  - 17 May 05</A>
+<A HREF="#v20g">v2.0g - 25 Mar 05</A>
+<A HREF="#v20f">v2.0f - 17 Mar 05</A>
+<A HREF="#v20e">v2.0e - 15 Mar 05</A>
+<A HREF="#v20d">v2.0d - 01 Feb 05</A>
+<A HREF="#v20c">v2.0c - 29 Jan 05</A>
+<A HREF="#v20b">v2.0b - 18 Jan 05</A>
+<A HREF="#v20a">v2.0a - 29 Sep 04</A>
+<A HREF="#v20" >v2.0  - 09 Sep 04</A>
+<A HREF="#v19c">v1.9c - 29 Aug 04</A>
+<A HREF="#v19b">v1.9b - 22 Aug 04</A>
+<A HREF="#v19a">v1.9a - 30 Jul 04</A>
+<A HREF="#v19" >v1.9  - 12 Jul 04</A>
+<A HREF="#v18b">v1.8b - 30 Jun 04</A>
+<A HREF="#v18a">v1.8a - 27 Jun 04</A>
+<A HREF="#v18" >v1.8  - 24 Jun 04</A>
+<A HREF="#v17h">v1.7h - 01 Jun 04</A>
+<A HREF="#v17g">v1.7g - 25 May 04</A>
+<A HREF="#v17f">v1.7f - 30 Apr 04</A>
+<A HREF="#v17e">v1.7e - 29 Apr 04</A>
+<A HREF="#v17d">v1.7d - 29 Apr 04</A>
+<A HREF="#v17c">v1.7c - 28 Oct 03</A>
+<A HREF="#v17b">v1.7b - 23 Oct 03</A>
+<A HREF="#v17a">v1.7a - 24 Sep 03</A>
+<A HREF="#v17" >v1.7  - 15 Sep 03</A>
+<A HREF="#v16c">v1.6c - 18 Jul 03</A>
+<A HREF="#v16b">v1.6b - 15 Jul 03</A>
+<A HREF="#v16a">v1.6a - 23 Jun 03</A>
+<A HREF="#v16" >v1.6  - 25 May 03</A>
+<A HREF="#v15b">v1.5b - 01 May 03</A>
+<A HREF="#v15a">v1.5a - 11 Feb 03</A>
+<A HREF="#v15" >v1.5  - 04 Feb 03</A>
+<A HREF="#v14c">v1.4c - 15 Jan 03</A>
+<A HREF="#v14b">v1.4b - 04 Jan 03</A>
+<A HREF="#v14a">v1.4a - 14 Dec 02</A>
+<A HREF="#v14" >v1.4  - 05 Dec 02</A>
+<A HREF="#v13b">v1.3b - 23 Sep 02</A>
+<A HREF="#v13a">v1.3a - 09 Sep 02</A>
+<A HREF="#v13" >v1.3  - 28 Aug 02</A>
+<A HREF="#v12e">v1.2e - 15 Aug 02</A>
+<A HREF="#v12d">v1.2d - 05 Aug 02</A>
+<A HREF="#v12c">v1.2c - 30 Jul 02</A>
+<A HREF="#v12b">v1.2b - 15 Jul 02</A>
+<A HREF="#v12a">v1.2a - 04 Jul 02</A>
+<A HREF="#v12" >v1.2  - 26 Jun 02</A>
+<A HREF="#v11c">v1.1c - 31 May 02</A>
+<A HREF="#v11b">v1.1b - 22 May 02</A>
+<A HREF="#v11a">v1.1a - 18 May 02</A>
+<A HREF="#v11" >v1.1  - 24 Apr 02</A>
+<A HREF="#v10e">v1.0e - 17 Apr 02</A>
+<A HREF="#v10d">v1.0d - 11 Apr 02</A>
+<A HREF="#v10c">v1.0c - 09 Apr 02</A>
+<A HREF="#v10b">v1.0b - 05 Apr 02</A>
+<A HREF="#v10a">v1.0a - 22 Mar 02</A>
+<A HREF="#v10" >v1.0  - 13 Mar 02</A>
+<A HREF="#v01" >v0.1  - 27 Aug 01</A>
+<A HREF="#v00" >v0.0  - 23 Jul 01</A>
+</PRE>
+<A HREF="gba.htm">Back to no$gba page</A><P>

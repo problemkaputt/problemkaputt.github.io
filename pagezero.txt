@@ -1,0 +1,4086 @@
+PAGEZERO - nocash C64 specifications
+------------------------------------
+
+Specifications
+--> C64 Specs
+--> VIC20 Specs
+--> C16/PLUS4 Specs
+--> CPU 65XX Microprocessor
+
+C64 Specs
+---------
+
+C64 Overviews
+--> C64 Technical Data
+--> C64 I/O Map
+--> C64 Interrupts and NMIs
+
+C64 I/O Specs
+--> C64 Memory Banking and Datasette
+--> C64 Video Controller
+--> C64 Sound Interface
+--> C64 Complex Interface Adapters
+
+Other
+--> Disk Drive
+--> CPU 65XX Microprocessor
+--> Z80 Microprocessor Cartridge
+--> KERNAL Functions
+--> External Connectors
+
+C64 Technical Data
+------------------
+
+COMMODORE 64 (C64)
+
+Microprocessor
+  6510A 8bit CPU, 1.02 MHz (NTSC) or 0.98 MHz (PAL), Compatible with 6502
+Memory
+  64Kbytes RAM (used for both work RAM and video RAM)
+  16Kbytes KERNAL/BASIC ROM
+  4Kbytes Character ROM (156 unique chars & many duplicated/inverted chars)
+  1024x4bit Color RAM
+Display
+  40x25 Character Text mode, or 320x200 (or 160x200) Pixels Bitmap mode
+  40x25 Color attributes used for both Text and Bitmap modes
+  High resolution allows two colors (out of 16) per 8x8 tile
+  Low resolution allows four colors (out of 16) per 4x8 tile
+  8 Sprites (each HiRes 24x21 one color, or LowRes 12x21 three colors)
+  Horizontal and vertical sprite magnification (normal and double size)
+  Sprite-to-Sprite and Sprite-to-Background collision detection
+6581 Sound Interface Device
+  3 independent tone generators - each with 9 octaves
+  Each voice includes programmable ADSR generator (Attack, Decay,
+  Sustain, Release) and control of sawtooth, triangle, square,
+  variable pulse and noise waveforms
+  Full filtering capabilities with low, high and band pass filters
+  External sound input
+Keyboard
+  66 Keys, including not more than two (2) cursor keys
+Connectors
+  User port
+  Serial port (for Printer or Disk drive)
+  ROM cartridge port
+  2 Joystick/paddle ports
+  2 Video ports (Monitor or TV)
+  C1530 Cassette drive interface port (aka Datasette)
+Power Supply
+  External Supply, +5V DC and 9V AC(!).
+
+C64 I/O Map
+-----------
+
+CPU On-Chip I/O Port
+  0000      MOS 6510 CPU On-Chip I/O Port Direction
+  0001      MOS 6510 CPU On-Chip I/O Port Data - Memory and Datasette
+D000-D02E MOS 6566 VIDEO INTERFACE CONTROLLER (VIC)
+  D000      Sprite 0 X Pos
+  D001      Sprite 0 Y Pos
+  D002      Sprite 1 X Pos
+  D003      Sprite 1 Y Pos
+  D004      Sprite 2 X Pos
+  D005      Sprite 2 Y Pos
+  D006      Sprite 3 X Pos
+  D007      Sprite 3 Y Pos
+  D008      Sprite 4 X Pos
+  D009      Sprite 4 Y Pos
+  D00A      Sprite 5 X Pos
+  D00B      Sprite 5 Y Pos
+  D00C      Sprite 6 X Pos
+  D00D      Sprite 6 Y Pos
+  D00E      Sprite 7 X Pos
+  D00F      Sprite 7 Y Pos
+  D010      Sprites 0-7 X Pos (msb of X coord.)
+  D011      VIC Control Register (1)
+  D012      Read Raster / Write Raster Value for Compare IRQ
+  D013      Lightpen Latch X Pos
+  D014      Lightpen Latch Y Pos
+  D015      Sprite display Enable: 1 = Enable
+  D016      VIC Control Register (2)
+  D017      Sprites 0-7 Expand 2x Vertical (Y)
+  D018      VIC Memory Control Register
+  D019      VIC Interrupt Flag Register
+  D01A      IRQ Mask Register: 1 = Interrupt Enabled
+  D01B      Sprite to Background Display Priority
+  D01C      Sprites 0-7 Multi-Color Mode Select
+  D01D      Sprites 0-7 Expand 2x Horizontal (X)
+  D01E      Sprite to Sprite Collision Detect
+  D01F      Sprite to Background Collision Detect
+  D020      Border Color
+  D021      Background Color 0
+  D022      Background Color 1
+  D023      Background Color 2
+  D024      Background Color 3
+  D025      Sprite Multi-Color Register 0
+  D026      Sprite Multi-Color Register 1
+  D027      Sprite 0 Color
+  D028      Sprite 1 Color
+  D029      Sprite 2 Color
+  D02A      Sprite 3 Color
+  D02B      Sprite 4 Color
+  D02C      Sprite 5 Color
+  D02D      Sprite 6 Color
+  D02E      Sprite 7 Color
+  D02F-D03F Not used (always FFh)
+  D040-D3FF Mirrors of above VIC registers (repeated each 40h bytes)
+D400-D7FF MOS 6581 SOUND INTERFACE DEVICE (SID)
+  D400      Voice 1: Frequency Control - Low-Byte
+  D401      Voice 1: Frequency Control - High-Byte
+  D402      Voice 1: Pulse Waveform Width - Low-Byte
+  D403      Voice 1: Pulse Waveform Width - High-Nybble
+  D404      Voice 1: Control Register
+  D405      Envelope Generator 1: Attack / Decay Cycle Control
+  D406      Envelope Generator 1: Sustain / Release Cycle Control
+  D407      Voice 2: Frequency Control - Low-Byte
+  D408      Voice 2: Frequency Control - High-Byte
+  D409      Voice 2: Pulse Waveform Width - Low-Byte
+  D40A      Voice 2: Pulse Waveform Width - High-Nybble
+  D40B      Voice 2: Control Register
+  D40C      Envelope Generator 2: Attack / Decay Cycle Control
+  D40D      Envelope Generator 2: Sustain / Release Cycle Control
+  D40E      Voice 3: Frequency Control - Low-Byte
+  D40F      Voice 3: Frequency Control - High-Byte
+  D410      Voice 3: Pulse Waveform Width - Low-Byte
+  D411      Voice 3: Pulse Waveform Width - High-Nybble
+  D412      Voice 3: Control Register
+  D413      Envelope Generator 3: Attack / Decay Cycle Control
+  D414      Envelope Generator 3: Sustain / Release Cycle Control
+  D415      Filter Cutoff Frequency: Low-Nybble (Bits 2-0)
+  D416      Filter Cutoff Frequency: High-Byte
+  D417      Filter Resonance Control / Voice Input Control
+  D418      Select Filter Mode and Volume
+  D419      Analog/Digital Converter Game Paddle 1 (0-255)
+  D41A      Analog/Digital Converter Game Paddle 2 (0-255)
+  D41B      Oscillator 3 Random Number Generator
+  D41C      Envelope Generator 3 Output
+  D41D-D41F Not used (always 00h)
+  D420-D7FF Mirrors of above SID registers (repeated each 20h bytes)
+Color RAM
+  D800-DBFF Color RAM (1000 Nybbles, plus 24 unused Nybbles)
+DC00-DCFF MOS 6526 Complex Interface Adapter (CIA) #1
+  DC00      Data Port A (Keyboard, Joystick, Paddles): Game Port 2
+  DC01      Data Port B (Keyboard, Joystick, Paddles, Lightpen): Game Port 1
+  DC02      Data Direction Register - Port A
+  DC03      Data Direction Register - Port B
+  DC04      Timer A: Low-Byte
+  DC05      Timer A: High-Byte
+  DC06      Timer B: Low-Byte
+  DC07      Timer B: High-Byte
+  DC08      Time-of-Day Clock: 1/10 Seconds
+  DC09      Time-of-Day Clock: Seconds
+  DC0A      Time-of-Day Clock: Minutes
+  DC0B      Time-of-Day Clock: Hours + AM/PM Flag (Bit 7)
+  DC0C      Synchronous Serial I/O Data Buffer
+  DC0D      CIA Interrupt Control Register (Read IRQs/Write Mask)
+  DC0E      CIA Control Register A
+  DC0F      CIA Control Register B
+  DC10-DCFF Mirrors of above CIA1 registers (repeated each 10h bytes)
+DD00-DDFF MOS 6526 Complex Interface Adapter (CIA) #2
+  DD00      Data Port A (Serial Bus, RS-232, VIC Memory Control)
+  DD01      Data Port B (User Port, RS-232)
+  DD02      Data Direction Register - Port A
+  DD03      Data Direction Register - Port B
+  DD04      Timer A: Low-Byte
+  DD05      Timer A: High-Byte
+  DD06      Timer B: Low-Byte
+  DD07      Timer B: High-Byte
+  DD08      Time-of-Day Clock: 1/10 Seconds
+  DD09      Time-of-Day Clock: Seconds
+  DD0A      Time-of-Day Clock: Minutes
+  DD0B      Time-of-Day Clock: Hours + AM/PM Flag (Bit 7)
+  DD0C      Synchronous Serial I/O Data Buffer
+  DD0D      CIA Interrupt Control Register (Read NMIs/Write Mask)
+  DD0E      CIA Control Register A
+  DD0F      CIA Control Register B
+  DD10-DDFF Mirrors of above CIA2 registers (repeated each 10h bytes)
+Reserved
+  DE00-DEFF Reserved for Future I/O Expansion
+  DF00-DFFF Reserved for Future I/O Expansion
+
+The two open I/O slots are for general purpose user I/O, special purpose I/O
+cartridges (such as IEEE), and have been tentatively designated for enabling
+the Z-80 cartridge (CP/M option) and for interfacing to a low-cost high-speed
+disk system.
+  DE00-DEFF   Open I/O slot #1 (CP/M Enable)             256 Bytes
+  DF00-DFFF   Open I/O slot #2 (Disk)                    256 Bytes
+
+C64 Interrupts and NMIs
+-----------------------
+
+Possible IRQ (Maskable Interrupt Request) Sources
+  Expansion Port <-- /IRQ-pin
+  VIC <-- Lightpen Trigger
+  VIC <-- Sprite to Sprite Collision
+  VIC <-- Sprite to Background Collision
+  VIC <-- Raster Compare Match
+  CIA #1 <-- Timer A Interrupt
+  CIA #1 <-- Timer B Interrupt
+  CIA #1 <-- TOD Alarm Interrupt
+  CIA #1 <-- Serial Port Interrupt
+  CIA #1 <-- FLAG <-- Cassette Read
+  CIA #1 <-- FLAG <-- Serial Bus SRQ
+VIC/CIA registers allow to enable/disable all IRQ sources separately, and to
+determine which source(s) have caused the IRQ (except that Cassette Read and
+Serial Bus SRQ are sharing the same CIA bits). The CPU can disable all IRQs by
+setting the I-flag.
+The CPU shares the same vector, located at [FFFEh], for BRK opcode and for
+IRQs. The KERNAL ROM (if it is enabled) pushes the reqisters A,X,Y on stack,
+examines the B-flag, and does then redirect to IRQ=[0314h] or BRK=[0316h].
+
+Possible NMI (Non-Maskable Interrupt) Sources
+  Expansion Port <-- /NMI-pin
+  Memory Controller <-- Trigger/Capaciator <-- Keyboard RESTORE-key
+  CIA #2 <-- Timer A Interrupt
+  CIA #2 <-- Timer B Interrupt
+  CIA #2 <-- TOD Alarm Interrupt
+  CIA #2 <-- Serial Port Interrupt
+  CIA #2 <-- FLAG <-- User Port <-- Custom Hardware connected to Pin B
+  CIA #2 <-- FLAG <-- User Port <-- RS-232 Adapter: Received Data Input
+  CIA #2 <-- FLAG <-- User Port <-- Centronics Printer Adaper: Busy
+CIA registers allow to enable/disable all CIA NMI sources separately, and to
+determine which CIA source(s) have caused the NMI (different types of hardware
+may be connected to the user port though). The CPU cannot disable NMIs by
+setting the I-flag.
+The NMI vector is located at [FFFAh], the KERNAL ROM (if it is enabled)
+redirects NMIs to vector [0318h], without pushing any registers.
+The RESTORE-keys trigger/capaciatior prevents switch bounce, the memory
+controller issues only a short NMI pulse at the time when the key gets pressed
+(this prevents a stuck NMI signal, allowing CIA2 to generate new NMIs even when
+the key is kept held down).
+  probably possible to "disable" the RESTORE-key by
+  a not-acknowledged CIA interrupt signal ???
+Caution: Because the RESTORE-key cannot be disabled by software, your program
+<must> provide valid NMI vector(s) which must point to a RTI opcode or other
+NMI handler, otherwise the C64 crashes when touching the RESTORE-Key.
+
+C64 Memory Banking and Datasette
+--------------------------------
+
+0000h - MOS 6510 Data Direction
+  Bit  Expl.
+  0-7  Direction for Bit 0-7 of Port 0001h  (0=Input, 1=Output)
+In the C64, this would be usually configured as 2Fh (101111b), so that Bit 4 is
+used as input, Bit 0-3,5 as outputs, Bit 6-7 don't care.
+
+0001h - MOS 6510 Micro-Processor On-Chip I/O Port - Memory & Cassette
+For Cassette Data Input see Port DC0Dh (CIA #1 Interrupt Control).
+  Bit  Expl.
+  0    /LORAM Signal (*)        (0=RAM, 1=BASIC ROM at A000-BFFF)
+  1    /HIRAM Signal (*)        (0=RAM, 1=Kernal ROM at E000-FFFF)
+  2    /CHAREN Signal (*)       (0=Character ROM, 1=I/O at D000-DFFF)
+  3    Cassette Data Output     (Pulse)
+  4    Cassette Switch Sense    (0=Switch Opened, 1=Switch Closed)
+                                (0=play button down)
+  5    Cassette Motor Control   (0=Motor On, 1=Motor Off)
+  6-7  Not used
+(*) In general, Bit 0-3 are following the above specifications, however, some
+combinations of these bits (and of some expansion port pins) will result in
+special memory modes, see Memory Configurations table below.
+
+Memory Configurations
+The table below shows which IO and ROM areas are enabled, depending on the
+value (0-3) of the lower two bits of Port 0001h, and on the expansion ports
+/GAME and /EXROM pins.
+     Normal Operation   8K Expansion            16K Expansion
+ Val /game=/exrom=high  /game=high,/exrom=low   /game=low,/exrom=low
+  0  RAM                RAM                     IO/C,KERNAL
+  1  IO/C               IO/C                    IO/RAM
+  2  IO/C,KERNAL        IO/C,KERNAL             IO/C,KERNAL,ROMH
+  3  IO/C,KERNAL,BASIC  IO/C,KERNAL,BASIC,ROML  IO/C,KERNAL,ROMH,ROML
+Note on IO/C (or IO/RAM): Bit 2 of Port 0001h (/CHAREN) selects between
+IO-Ports and CHARACTER-ROM (or RAM). Any disabled ROM areas (ie. not listed in
+the table) contain RAM.
+
+Memory Map
+  Addr  Bytes  Content
+  0000  2      IO                   ;CPU On-chip I/O ports (no RAM here)
+  0002  254    RAM                  ;BIOS system data
+  0100  256    RAM                  ;CPU Stack
+  0200  1.5K   RAM                  ;BIOS system data
+  0800  30K    RAM                  ;Normal BASIC Program space
+  8000  8K     RAM or ROML          ;Optional Cartridge ROML space
+  A000  8K     RAM or BASIC or ROMH ;BASIC ROM, or ROMH space
+  C000  4K     RAM                  ;RAM only
+  D000  4K     RAM or IO or CHAR    ;I/O Ports+Colour RAM or CHAR ROM
+  E000  8K     RAM or KERNAL        ;KERNAL ROM
+Even if ROM is enabled, it is possible to write to underlaying RAM, and the
+display controller always reads from RAM - allowing to use the same memory area
+for ROM and VRAM.
+
+Expansion ROM Cartridges
+Commodore 64 Expansion Cartridges are automatically started if the first nine
+bytes of the cartridge ROM at location 8000h contain specific data:
+  8000h-8001h Cold Start Vector
+  8002h-8003h Warm Start Vector
+  8004h-8008h ASCII ID Code "CBM80" with Bit7 set in the first 3 letters
+
+Ultimax video game console mode (/GAME=LOW,/EXROM=HIGH)
+Rarely used memory mode used for Ultimax video games. The upper 60K of RAM, and
+all ROM in the C64 are disabled. Ports 0000h and 0001h have no effect on memory
+mapping, but may cause problems when attempted to be used as RAM???.
+  E000-FFFF=ROMH, 8000-9FFF=ROML, D000-DFFF=IO, 0000-0FFF=RAM, other=N/A
+The game is started directly by CPU Entrypoint vector at [FFFCh].
+Note that the 2K byte "expansion RAM" for the ULTIMAX, if required, is accessed
+out of the COMMODORE 64 and any RAM in the cartridge is ignored.
+
+XXX...Explanation for the bits of $0001:
+  7 - unused (Flash 8: 0=8MHz/1=1MHz)
+  6 - unused (C128: ASCII/DIN sense/switch (1=ASCII/0=DIN))
+Note to bit 6: This bit is used to select either the ASCII or the DIN character
+ROM of a C128. When data direction is set to INPUT, the charset is selected
+externally with the ASCII/DIN key.
+
+C64 Video Controller
+--------------------
+
+MOS 6566 VIDEO INTERFACE CONTROLLER (VIC)
+
+I/O Registers
+--> C64 VIC Control Registers
+--> C64 VIC Sprite Registers
+--> C64 VIC Color Registers
+
+Display Data
+--> C64 VIC Background Display Modes
+--> C64 VIC Sprite Display
+--> C64 VIC Character Sets
+
+Timings
+--> C64 VIC Rendering
+--> C64 VIC Dimensions and Timings
+
+C64 VIC Control Registers
+-------------------------
+
+D011h - VIC Control Register 1
+  Bit  Name  Expl.
+  7    RC8   Raster Compare Bit 8       (See below, Port D012h)
+  6    ECM   Extended Color Text Mode   (0=Normal, 1=Extended)
+  5    BMM   Bitmap Mode                (0=Text, 1=Bitmap)
+  4    DEN   Display Enable             (0=Blank/Border Color, 1=Enable BG/MOB)
+  3    RSEL  Row Select Display Height  (0=24 Rows, 1=25 Rows)
+  0-2  Y0-2  Smooth Scroll Y Position   (0-7)
+
+D016h - VIC Control Register 2
+  Bit  Name  Expl.
+  6-7  -     Unused
+  5    RES   ALWAYS SET THIS BIT TO 0 !   ---  Huh, what/why ???
+  4    MCM   Multi-Color Mode             (0=Disable, 1=Enable)
+  3    CSEL  Column Select Display Width  (0=38 Columns, 1=40 Columns)
+  0-2  X0-2  Smooth Scroll to X Position  (0-7)
+
+D012h - Raster Register
+Reading from RC0-8 returns the current scanline.
+Writing to RC0-8 defines the raster compare IRQ scanline.
+  Bit  Name  Expl.
+  0-7  RC0-7 Raster Compare/Scanline
+For both reading and writing, the most significant bit (RC8) is located in Bit
+7 of Port D011h.
+The visible display window is in range 51-251 (33h-FBh). - That are, 201 lines
+???
+When the current raster matches the written value, the raster interrupt latch
+is set.
+
+D013h - Lightpen Latch X Position (LPX) (Divided by two)
+D014h - Lightpen Latch Y Position (LPY)
+The lightpen input latches the current screen position into LPX,LPY on a
+low-going edge. The LPX value is cut down to 8bits (that is the usual 9bit X
+Position divided by two).
+The lightpen latch may be triggered only once per frame, and subsequent
+triggers within the same frame will have no effect. To eliminate dirt, read LPX
+and LPY for at least 3 frames, and confirm that all are (approximately) at the
+same position.
+
+D018h - VIC Memory Control Register
+Selects the Video Matrix Base Address in steps of 1024 bytes (400h), and the
+Character Base Address in steps of 2048 bytes (800h). In Bitmap modes Bit 1-2
+are ignored, thus using steps of 8192 bytes (2000h).
+  Bit  Name  Expl.
+  4-7  VM#   Video Matrix Base Address Bit 13-10
+  1-3  CB#   Character Dot-Data Base Address Bit 13-11
+  0    -     Not used
+In the C64, Bit 14-15 of Video Matrix/Character Base are controlled by CIA #2
+Data Port A (Port DD00h, Bit 0-1), values 0-3 specify VRAM addresses
+CXXXh,8XXXh,4XXXh,0XXXh, in exactly this (reversed) order.
+Caution: Selection of specific Character Base Address redirects to character
+ROM:
+  1000h or 9000h  -->  1st half of Character ROM (D000h)
+  1800h or 9800h  -->  2nd half of Character ROM (D800h)
+When actually selecting D000h or D800h as Base, charcter ROM is NOT accessed
+??? Instead underlaying RAM ??? When Bitmap memory crosses 1XXXh area, ROM is
+(NOT) accessed also ???
+VRAM may be located under ROM, and can be displayed even if overlaying ROM is
+enabled ???
+
+Note: Color RAM is always located at D800h-DBFFh, regardless of above.
+
+D019h - VIC Interrupt Flag Register
+  Bit  Name  Expl.
+  7    IRQ   Set on Any Enabled VIC IRQ Condition       (0=None, 1=IRQ)
+  4-6  -     Not used
+  3    ILP   Lightpen Triggered IRQ Flag                (0=None, 1=IRQ)
+  2    IMMC  Sprite to Sprite Collision IRQ Flag        (0=None, 1=IRQ)
+  1    IMBC  Sprite to Background Collision IRQ Flag    (0=None, 1=IRQ)
+  0    IRST  Raster Compare IRQ Flag                    (0=None, 1=IRQ)
+Reading returns the (latched) interrupt flags. Writing "1" into Bit(s) 0-3
+acknowledges (clears) the respective interrupt flag(s).
+
+D01Ah - Interrupt Enable Register
+  Bit  Name  Expl.
+  4-7  -     Not used
+  3    ELP   Lightpen Triggered              (0=Disable, 1=Enable)
+  2    EMMC  Sprite to Sprite Collision      (0=Disable, 1=Enable)
+  1    EMBC  Sprite to Background Collision  (0=Disable, 1=Enable)
+  0    ERST  Raster Compare                  (0=Disable, 1=Enable)
+
+C64 VIC Sprite Registers
+------------------------
+
+D000h,D002h,D004h,D006h,D008h,D00Ah,D00Ch,D00Eh - Sprite 0-7 Position X
+Value 24 is the left-most visible pixel (in 40-column mode).
+"X locations 23 to 347 ($17-$157) and Y locations 50 to 249 ($32-$F9) are
+visible." Ah yes, this results in a horizontal range of 325 (321 when using
+hex-format), and vertical range of 200, undeclared plus/minus parts offscreen
+areas ??? Sprites are smoothly moved at 1pix resolution even when using
+magnification or lowres/multicolor ???
+
+The PAL dot clock counter operates in range 0..1F7h (63 CPU cycles * 8 dots),
+respectively a MOB at value 1F7h appears one pixel left from a MOB at value 0.
+MOBs at 1F8h..1FFh are not displayed.
+Early NTSC units use range 0..1FFh (64*8), allowing to use values 0..1FFh.
+Most (newer) NTSC units use range 0..207h (65*8), respectively, it is probably
+impossible to position MOBs at the next 8 pixels at the left from position 0.
+
+
+D001h,D003h,D005h,D007h,D009h,D00Bh,D00Dh,D00Fh - Sprite 0-7 Position Y
+Value 50 is the first line (in 25-row mode).
+MOB display is activated when the MOB enable bit is set, and the MOB vertical
+position setting matches the current raster value, and only if it isn't already
+activated. Once when activated, the MOB will be displayed in the next 21
+scanlines (or 42 scanlines if magnified), during this time, changes to the MOB
+enable bit, or to the MOB vertical position setting have no effect.
+
+D010h - Sprite 0-7 Position X (Upper Bit)
+Most significant X position bits for Sprite 0-7 in Bits 0-7 respectively.
+
+D015 - Sprites 0-7 Enable
+  Bit  Name  Expl.
+  0-7  M#E   Sprite 0-7 Enable        (0=Hidden, 1=Display)
+
+D017 - Sprites 0-7 Expand Vertical (Y)
+  Bit  Name  Expl.
+  0-7  M#YE  Sprite 0-7 Expand Y      (0=Normal, 1=Magnified by two)
+
+D01B - Sprites 0-7 to Background Display Priority
+Selects the Sprite-to-Background priority of each sprite. Even when using
+"Behind BG" priority, sprites still have priority above "Bkgd #0 or multi-color
+bit pair 01". (???)
+  Bit  Name  Expl.
+  0-7  M#DP  Sprite 0-7 Priority   (0=Above BG, 1=Behind BG)  OR VICE-VERSA ???
+The VIC first processes the Sprite-to-Sprite priority (that is, Sprite 0 having
+highest, and Sprite 7 having lowest priority). And then, only (!) the sprite
+with highest priority is displayed above/behind background.
+
+D01C - Sprites 0-7 Multi-Color Mode Select
+  Bit  Name  Expl.
+  0-7  M#MC  Sprite 0-7 Multi Color   (0=Normal, 1=Multi Color)
+Increases the Sprite color depth to 4 colors (2 bits), using horizontally
+magnified Low Resolution 12x21 dots.
+
+D01D - Sprites 0-7 Expand Horizontal (X)
+  Bit  Name  Expl.
+  0-7  M#XE  Sprite 0-7 Expand X      (0=Normal, 1=Magnified by two)
+When combining Expand-X and Multi-Color, the sprite is magnified twice, each
+dot is then sized as four normal pixels horizontally.
+
+D01E - Sprite to Sprite Collision Detect (Read Only)
+When non-transparent pixels of two (or more) sprites overlap each other,
+collision bits for each of these sprites will be set.
+  Bit  Name  Expl.
+  0-7  M#M   Sprite 0-7 Collision Flag  (0=Normal, 1=Collision)
+Collisions are detected even if sprites are located offscreen.
+The IMMC IRQ Bit becomes set when this register changes from 00h to a non-zero
+value.
+This register is automatically cleared after reading.
+
+D01F - Sprite to Background Collision Detect
+When non-transparent pixels of any sprites overlap non-transparent background
+pixels, collision bits for any such sprites will be set.
+"For special applications, the display data from the 0-1 multicolor bit pair
+also does not cause a collision. This feature permits their use as background
+display data without interfering with true MOB collisions." ???
+  Bit  Name  Expl.
+  0-7  M#D   Sprite 0-7 Collision Flag  (0=Normal, 1=Collision)
+Offscreen collisions may occur in 38 column mode if overlapping the two
+horizontally offscreen hidden columns.
+The IMBC IRQ Bit becomes set when this register changes from 00h to a non-zero
+value.
+This register is automatically cleared after reading.
+
+C64 VIC Color Registers
+-----------------------
+
+Color Codes
+All registers below are 4bit registers, of which the upper 4bits are unused,
+the lower 4bits define a color by using the following codes:
+  0   Black        8   Orange
+  1   White        9   Brown
+  2   Red          10  Light red
+  3   Cyan         11  Dark grey
+  4   Purple       12  Medium grey
+  5   Green        13  Light green
+  6   Blue         14  Light blue
+  7   Yellow       15  Light grey
+Note: In Multi-Color Character Mode, only color codes 0-7 can be used in Color
+RAM because Bit 3 of the color nybble is used to select the resolution.
+
+D020 - Border Color
+Also, this color is used when DEN=0.
+
+D021 - Background Color 0
+D022 - Background Color 1
+D023 - Background Color 2
+D024 - Background Color 3
+
+D025 - Sprite Multi-Color Register 0
+D026 - Sprite Multi-Color Register 1
+
+D027-D02E - Sprite 0-7 Colors
+  Sprite  0     1     2     3     4     5     6     7
+  Port    D027  D028  D029  D02A  D02B  D02C  D02D  D02E
+
+D800-DBFF - Color RAM 1024 Nybbles
+Contains 1000 Color Nybbles for each of the 40x25 background characters, which
+are used for all Character Modes and for Multi-Color Bitmap Mode (but not for
+Standard Bitmap Mode).
+Note: Additional 24 nybbles exist at the end of the Color RAM, these might be
+used for whatever (4bit-) data storage.
+
+Bitmap Color Attributes
+In both Standard and Multi-Color Bitmap mode, the 1000 bytes in the Video
+Matrix VRAM area are containing color attributes for each of the 40x25 bitmap
+character regions, the whole 8bit of each byte are used, allowing to select two
+4bit colors.
+
+C64 VIC Background Display Modes
+--------------------------------
+
+Mode Selection
+Background modes are selected by BMM, MCM, ECM bits in VIC Control Registers 1
+and 2 (Port D011h, D016h):
+  BMM ECM MCM  Mode Name
+  0   0   0    Standard Character Mode
+  0   0   1    Multi-Color Character Mode
+  0   1   0    Extended Color Character Mode
+  0   1   1    Reserved
+  1   0   0    Standard Bitmap Mode
+  1   0   1    Multi-Color Bitmap Mode
+  1   1   0    Reserved
+  1   1   1    Reserved
+
+Video Memory
+Memory usage in character modes:
+  2048 Bytes    Character Data         (256 tiles)
+  1000 Bytes    Video Matrix Data      (40x25 tile numbers)
+  1000 Nybbles  Color RAM              (40x25 color attributes)
+Memory usage in Bitmap modes:
+  8000 Bytes    Character Data         (40x25 tiles) - Addressed by CB13
+  1000 Bytes    Video Matrix Data      (40x25 color attributes)
+  1000 Nybbles  Color RAM              (40x25 color attributes)
+
+Standard Character Mode (MCM=0, ECM=0, BMM=0)
+Normal Resolution 8x8 pixel character, two colors:
+  0   BG color 0 (Port D021h)          (0-15)
+  1   Color as selected by Nybble      (0-15)
+
+Multi-Color Character Mode (MCM=1, ECM=0, BMM=0)
+Nybble MSB=0 : Normal Resolution 8x8 pixel character, two colors:
+  0   BG color 0 (Port D021h)          (0-15)
+  1   Color as selected by Nybble LSBs (0-7)
+Nybble MSB=1 : Low Resolution 4x8 pixel character, four colors:
+  0   BG color 0 (Port D021h)          (0-15)
+  1   BG color 1 (Port D022h)          (0-15)
+  2   BG color 2 (Port D023h)          (0-15)
+  3   Color as selected by Nybble LSBs (0-7)
+XXX Prio
+
+Extended Color Character Mode (MCM=0, ECM=1, BMM=0)
+Normal Resolution 8x8 pixel character, two colors with custom BG color:
+  0   BG Color 0-3 (Port D021h-D024h)  (0-15)
+  1   Color as selected by Nybble      (0-15)
+In this mode, only character 0-63 can be used (first 512 Bytes of Character
+RAM). The two MSBs of the Map Data are used to select one of the four BG
+colors.
+
+Standard Bit Map Mode (MCM=0, BMM=1)
+Normal Resolution 320x200 pixels, 40x25 tiles of 8x8 pixels of two colors:
+  0   LSBs of video matrix entry       (0-15)
+  1   MSBs of video matrix entry       (0-15)
+In this mode, the Color RAM is not used.
+
+Multi-Color Bit Map Mode (MCM=1, BMM=1)
+Low Resolution 160x200 pixels, 40x25 tiles of 4x8 pixels of four colors:
+  0   BG Color 0 (Port D021h)          (0-15)
+  1   MSBs of video matrix entry       (0-15)
+  2   LSBs of video matrix entry       (0-15)
+  3   Video Matrix Color Nybble        (0-15)
+
+-- Special BG Modes --
+
+Reserved Modes (ECM=1, with BMM=1 and/or MCM=1)
+In these modes, the picture appears to be always Black (regardless of any
+Background or Border color registers, and regardless of VRAM address 3FFFh).
+
+Display Disable (DEN=0)
+The DEN bit is checked in scanline 48, if it is been set in that line, at least
+for a few clock cycles, then screen matrix fetches will be enabled, otherwise
+matrix data will not be fetched (so the CPU will run without waitstates), and
+character data will be fetched from VRAM address 3FFFh.
+Furthermore, the DEN bit is checked in scanline 51 in 25-row mode, and in
+scanlines 51 through 55 in 24-row mode, if it has been cleared in one or more
+of that scanline(s), then the whole picture will be drawn at border color,
+neither BG nor MOBs will be displayed.
+Mid-frame changes to the DEN bit have no effect (until the next checks occur
+in lines 48 and up).
+
+C64 VIC Sprite Display
+----------------------
+
+Up to eight sprites (aka MOBs, Moveable Object Blocks) can be displayed on the
+screen.
+
+Standard MOB (M#MC=0)
+Normal Resolution, 24x21 pixels, one color:
+  0   Transparent                       (-)
+  1   Sprite Color (Port D027h-D02Eh)   (0-15)
+
+Multi-Color MOB (M#MC=1)
+Low Resolution, 12x21 pixels, three colors:
+  0   Transparent                       (-)
+  1   Sprite Multi Color 0 (Port D025h) (0-15)
+  2   Sprite Color (Port D027h-D02Eh)   (0-15)
+  3   Sprite Multi Color 1 (Port D026h) (0-15)
+
+MOB Tiles
+Each MOB Tile occupies 63 bytes of memory (first 3 bytes for the upper row,
+next 3 bytes for the next row, and so on). Tile data can be defined at any
+addresses in the 16K VRAM area in steps of 64 bytes (leaving one unused byte
+between each MOB tile). Theoretically allowing to define up to 256 MOB tiles,
+practically some of the memory will be required for BG Character Data and Video
+Matrix though.
+
+MOB Tile Numbers
+The eight bytes at the end of the Video Matrix area are used to specify the MOB
+Tile Numbers for each MOB. (Ie. the total size of the Video Matrix is 1024
+Bytes, first 1000 bytes used for BG, followed by 16 unused bytes, followed by 8
+MOB Tile Numbers at addresses 3F8h-3FFh in the matrix).
+The 8bit tile numbers are directly addressing MOB Tiles in the 16K VRAM area,
+in steps of 64 bytes.
+The MOB Tile Numbers are read from the video matrix at the end of every raster
+line.
+
+C64 VIC Character Sets
+----------------------
+
+The C64 character sets (fonts) are relative complicated. The BIOS handles
+characters by using some kind of uppercase-only ASCII format. The actual
+hardware uses either one of two ROM fonts which are both not using normal ASCII
+format. Alternately, user defined fonts can be defined in RAM. The mapping of
+the native C64 characters is as such:
+  CHR  ASCII CHARSET     ROM CHARSET 1     ROM CHARSET 2
+  0Xh  \\\\\\\\\\\\\\\\  @ABCDEFGHIJKLMNO  @abcdefghijklmno
+  1Xh  \\\\\\\\\\\\\\\\  PQRSTUVWXYZ[\]^\  pqrstuvwxyz[\]^\
+  2Xh   !"#$%&'()*+,-./   !"#$%&'()*+,-./   !"#$%&'()*+,-./
+  3Xh  0123456789:;<=>?  0123456789:;<=>?  0123456789:;<=>?
+  4Xh  @ABCDEFGHIJKLMNO  \\\\\\\\\\\\\\\\  \ABCDEFGHIJKLMNO
+  5Xh  PQRSTUVWXYZ[\]^\  \\\\\\\\\\\\\\\\  PQRSTUVWXYZ\\\\\
+  6Xh  \\\\\\\\\\\\\\\\  \\\\\\\\\\\\\\\\  \\\\\\\\\\\\\\\\
+  7Xh  \\\\\\\\\\\\\\\\  \\\\\\\\\\\\\\\\  \\\\\\\\\\\\\\\\
+Backslashes (\) indicate special ROM graphic symbols, or non-printable 'ASCII'
+control codes. For both ROM character sets, 80h-FFh are color-inverted
+duplicates of 00h-7Fh.
+
+ASCII Characters
+The BIOS is processing strings in cutdown 6bit ASCII format; characters 20h-5Fh
+are 64 normal ASCII punctation marks, numbers, and upppercase-only letters
+(with exceptions 5Ch pounds symbol instead backslash, and 5Fh arrow left symbol
+instead underscore).
+
+ROM Character Sets
+The C64 includes a 4KBytes character set ROM, theoretically offering space for
+512 different characters (practically it contains only 156 unique, not
+duplicated, and not inverted characters).
+However, 256 characters can be displayed at once, so the ROM is split into two
+sets of 256 characters each. Now the video controller doesn't support invert
+attributes, so each of these sets is split into 128 normal characters
+(00h-7Fh), and 128 identical (but color-inverted) characters (80h-FFh).
+
+C64 and VIC20 Character Sets
+The C64 and VIC20 are using the same sets of characters and symbols. The C64
+however is using a bold characters (to compensate the higher screen
+resolution). On VIC20, the horizontal-line characters 40h/43h are different, on
+C64 these chars contain identical bold-lines. And, on the C64, a pixel got
+changed in the two inverted "@" symbols.
+
+ROM Character Set 1
+Character set 1 contains 126 different characters (two are duplicated 20h=60h,
+and 40h=43h) which include the above mentioned 64 ASCII characters (ASCII
+40h-5Fh moved to ROM 00h-1Fh though, software can easily translate this as
+"ASCII AND 3Fh"), and 62 graphic symbols.
+
+ROM Character Set 2
+This character set includes 29 new characters which cannot be found in set 1.
+01h-1Ah are now lowercase. Uppercase characters moved to 41h-5Ah (by
+overwriting some graphic symbols), three 3 graphic symbols at 5Fh, 69h, 7Ah
+have changed. Additionally, 5Eh has been changed equal to E6h (ie. inverted
+66h).
+
+Japanese Kanji Character Set
+Set 1 is same as English Set 1, except that the Pound symbol has been replaced
+by a Yen symbol. In Set 2, 00h-3Fh are same as Set 1 (uppercase (!) chars,
+numbers, punctation marks, and Yen symbol), 40h-7Fh contain Kanji characters
+and some line-drawing symbols. In both sets, 80h-FFh are inverted.
+
+RAM Character Set
+When defining characters in RAM, up to 256 different characters can be defined.
+(Using 80h-FFh for duplicated inverted characters is a 'feature' of the C64
+character ROM, the actual display hardware allows to use 80h-FFh for whatever
+purpose.)
+
+C64 Memory Addresses
+ROM characters can be read out by the CPU at addresses D000h-DFFFh (requires to
+disable I/O area temporily which uses same addresses). However, the display
+controller uses different addresses to read out ROM character data:
+  SET  CPU Address   VIC Addresses
+  1    D000h-D7FFh   1000h-17FFh or 9000h-97FFh
+  2    D800h-DFFFh   1800h-1FFFh or 9800h-9FFFh
+RAM characters can be stored at any memory addresses (at increments of 800h),
+except, obviously not at 1000h-1FFFh or 9000h-9FFFh. Also, Character data must
+be in the same 16K bank as Video Matrix data.
+
+C64 VIC Rendering
+-----------------
+
+Internal Registers used for Vertical Rendering
+  YY_POS     3bit  internal counter (vertical position in current char row)
+  PIC_ON     1bit  internal flag (picture output enable)
+  BORDER     1bit
+  CHAR_ADDR 10bit  internal screen matrix address (of current char row)
+  ROW_BUF  40x12bit  internal buffer for 8bit tile numbers & 4bit colors
+If DEN was set in line 48 then: At the begin of each of the scanlines 48..247:
+the lower 3bits of the raster value [D012h] and of control register 1 vertical
+scroll [D011h] are compared against each other, if they match, then PIC_ON will
+be set, YY_POS will be reset to zero, and 40 bytes will be copied from the
+screen matrix to ROW_BUF through normal 8bit databus (which halts the CPU for
+40 cycles), simultaneous 40 color values are copied from color ram to ROW_BUF
+through separate 4bit color-databus (which doesn't cause additional
+waitstates).
+If PIC_ON is set: 40 bytes of Tile data are fetched from [ROW_BUF]*8+YY_POS
+(this takes place during Phase ? and doesn't cause waitstates), and tile-row
+are displayed (unless BORDER is set), and, at the end of the scanline, YY_POS
+is incremented, if it overflows then PIC_ON will be reset, and CHAR_ADDR will
+be incremented by 40.
+IF PIC_ON is cleared: Tile data is fetched from memory with all 14 address
+lines high (ie. from 3FFFh plus the VIC Base address in CIA #2 Data Port A). If
+BORDER is off, then color 0 of that tile data is displayed as background color
+as usually, but the character color (color ram) is always BLACK. Screen output
+with PIC_ON cleared may happen if a 25-row screen is vertically scrolled, or if
+software is repeatedly setting the vertical scroll value to a value different
+than the current raster value, or if the vertical border is opened, or if DEN
+was not set in line 48.
+During vertical blank, CHAR_ADDR is reset to zero.
+
+
+C64 VIC Dimensions and Timings
+------------------------------
+
+The visible width and height of the screen border is about 3-4 characters, at
+the left, right, top, and bottom of the 40x25 character area, the exact size
+may depend on the TV set or monitor used.
+
+  Item          NTSC            PAL
+  Oscillator    14.318181 MHz   17.734472 MHz
+  Divider       Osc/14          Osc/18
+  System Clock  1.022727 MHz    0.985248 MHz
+  Frame Rate    ca. 60Hz        ca. 50Hz
+  Scanlines     263             312
+  Clks/Line     65              63
+
+More detailed...?
+  NTSC: 6567R5 6A:         64 cycles/line x 262 lines.
+  NTSC: 6567R8 and newer:  65 cycles/line x 263 lines.
+
+CPU Waitstates
+Each CPU clock cycle is split into one half cycle for Video DMA (Phase 1), and
+one half cycle for CPU access (Phase 2).
+Most of the Video DMA takes place during Phase 1, without waitstates:
+40 bytes BG character data per scanline, 8 bytes MOB tile numbers per scanline,
+and (for each enabled MOB in that line only) the middle byte of the MOB
+character data. Additionally, DRAM Refresh takes place during Phase 1.
+However, some video DMA takes place during Phase 2, with waitstates:
+40 bytes screen/matrix data in the first scanline of each of the 25 character
+rows (these scanlines are often referred to as "bad lines" as they leave less
+cycles to the CPU, simultaneously the 40 color nybbles are fetched through a
+separate 4bit data bus), and (for each enabled MOB in that line only) the 1st
+and 3rd byte of the MOB character data.
+Notes: The wait signal is brought low a few cycles in advance, to notify the
+CPU that the bus is about to be used for DMA (the CPU is probably halted
+immediately on the notification in must cases? in some cases it may to execute
+some cycles, until the actual DMA takes place, and/or even some more cycles if
+an opcode-cycle doesn't require to use the bus?) typically a 40 bytes BG matrix
+access results in 3+40 waitstates, a 2 bytes MOB access results in 3+2
+waitstates. For the MOB accesses, the three extra cycles may overlap with the
+cycles from the previous MOB (there are 3+2+2 waitstates if MOB 0 and 1 are
+used, and 3+2+3+2 if MOB 0 and 7 are used, respectively, the CPU runs faster
+with  continuously arranged MOBs). MOB data is fetched even if the MOB isn't
+visible (positioned in the border area), for vertically magnified MOBs, data is
+fetched in all 42 lines (not only each 2nd line).
+
+eventually the CPU may keep
+
+allowing the CPU to
+phase 2 accesses are
+
+C64 Sound Interface
+-------------------
+
+MOS 6581 SOUND INTERFACE DEVICE (SID)
+
+D400/D407/D40E - Voice 1/2/3 Frequency Control - Low-Byte
+D401/D408/D40F - Voice 1/2/3 Frequency Control - High-Byte
+
+D402/D409/D410 - Voice 1/2/3 Pulse Waveform Width - Low-Byte
+D403/D40A/D411 - Voice 1/2/3 Pulse Waveform Width - High-Nybble
+Defines a 12bit waveform pulse width (the four MSBs of the high-register are
+unused).
+
+D404/D40B/D412 - Voice 1/2/3 Control Register
+  Bit  Expl.
+  7    Select Random Noise Waveform, 1 = On
+  6    Select Pulse Waveform, 1 = On
+  5    Select Sawtooth Waveform, 1 = On
+  4    Select Triangle Waveform, 1 = On
+  3    Test Bit: 1 = Disable Oscillator 1/1/1
+        - That is "1/1/1" for all voicechannels ???
+  2    Ring Modulate Osc. 1/2/3 with Osc. 3/1/2 Output, 1 = On
+  1    Synchronize Osc. 1/2/3 with Osc. 3/1/2 Frequency, 1 = On
+  0    Gate Bit: 1 = Start Att,Dec,Sus, 0 = Start Release
+
+D405/D40C/D413 - Envelope Generator 1/2/3: Attack / Decay Cycle Control
+  Bit  Expl.
+  4-7  Select Attack Cycle Duration:  0-15
+  0-3  Select Decay Cycle Duration:   0-15
+
+D406/D40D/D414 - Envelope Generator 1/2/3: Sustain / Release Cycle Control
+  Bit  Expl.
+  4-7  Select Sustain Cycle Duration: 0-15
+  0-3  Select Release Cycle Duration: 0-15
+
+  ----- Control Registers -----
+
+D415 - Filter Cutoff Frequency: Low-Nybble (Bits 2-0)
+D416 - Filter Cutoff Frequency: High-Byte
+
+D417 - Filter Resonance Control / Voice Input Control
+  Bit  Expl.
+  4-7  Select Filter Resonance: 0-15
+  3    Filter External Input: 1 = Yes, 0 = No
+  2    Filter Voice 3 Output: 1 = Yes, 0 = No
+  1    Filter Voice 2 Output: 1 = Yes, 0 = No
+  0    Filter Voice 1 Output: 1 = Yes, 0 = No
+
+D418 - Select Filter Mode and Volume
+  Bit  Expl.
+  7    Cut-Off Voice 3 Output: 1 = Off, 0 = On
+  6    Select Filter High-Pass Mode: 1 = On
+  5    Select Filter Band-Pass Mode: 1 = On
+  4    Select Filter Low-Pass Mode: 1 = On
+  0-3  Select Output Volume: 0-15
+
+D419 - Paddle Analog/Digital Converter X-Axis (0-255)
+D41A - Paddle Analog/Digital Converter Y-Axis (0-255)
+Before reading analog input, select paddle 1 or 2 (by writing to CIA#1 Data
+Port A) and perform a "ldy #$80; lop: nop; dey; bpl lop" delay.
+
+D41B - Oscillator 3 Random Number Generator
+D41C - Envelope Generator 3 Output
+
+C64 Complex Interface Adapters
+------------------------------
+
+DC00-DC0F  MOS 6526 Complex Interface Adapter (CIA) #1
+DD00-DD0F  MOS 6526 Complex Interface Adapter (CIA) #2
+
+--> C64 CIA #1 Data Ports (Keyboard, Joystick)
+--> C64 CIA #2 Data Ports (Serial, VIC, User Port)
+--> C64 CIA #1/#2 Timers, Interrupt, and Control Registers
+
+C64 CIA #1 Data Ports (Keyboard, Joystick)
+------------------------------------------
+
+DC00 - CIA #1 Data Port A (Keyboard, Joystick, Paddles)
+  Bit  Dir. Expl.
+  7-0  Out  Select Keyboard Column 7-0    (0=Select, 1=Not select)
+  7-6  Out  Select Analog Paddle      (01b=Paddle 1, 10b=Paddle 2) ???
+  5    -    Used for Keyboard only              (See above, Bit 7-0)
+  4    In   Joystick 2 Fire                     (0=Pressed, 1=Released)
+  3    In   Joystick 2 Right, Paddle 2 Y-Button (0=Moved/Pressed, 1=Released)
+  2    In   Joystick 2 Left, Paddle 2 X-Button  (0=Moved/Pressed, 1=Released)
+  1    In   Joystick 2 Down                     (0=Moved, 1=Released)
+  0    In   Joystick 2 Up                       (0=Moved, 1=Released)
+Analog paddle input can be read from Port D419h and D41Ah (SID).
+--> Keyboard Matrix
+
+DC01 - CIA #1 Data Port B (Keyboard, Joystick, Paddles, Lightpen)
+  Bit  Dir. Expl.
+  7-0  In   Keyboard Row 7-0 Input              (0=Pressed, 1=Released)
+  7    Out  Timer B Toggle/Pulse Output         (Output from Timer B)
+  6    Out  Timer A Toggle/Pulse Output         (Output from Timer A)
+  5    In   Used for Keyboard only              (See above, Bit 7-0)
+  4    In   Joystick 1 Fire (or Lightpen)       (0=Pressed, 1=Released)
+  3    In   Joystick 1 Right, Paddle 1 Y-Button (0=Moved/Pressed, 1=Released)
+  2    In   Joystick 1 Left, Paddle 1 X-Button  (0=Moved/Pressed, 1=Released)
+  1    In   Joystick 1 Down                     (0=Moved, 1=Released)
+  0    In   Joystick 1 Up                       (0=Moved, 1=Released)
+Lightpen can be plugged to Game Port 1 only, the signal is wired to VIC and to
+CIA Port B, software can process lightpens through VIC Ports D013h/D014h.
+
+Combined Keyboard and Joystick Use
+The joystick ports cannot be disabled - use of joysticks will disturb keyboard
+input! Joystick 1 signals always produce garbage keystroke, Joystick 2 signals
+produce garbage only if keyboard keys are down simultaneously. Software that
+wishes to allow to switch between keyboard and joystick should use code as
+such:
+  1) Read joysticks
+  2) Read keyboard columns
+  3) Read joysticks again
+That procedure should be invoked once per "frame", any received keyboard
+signals in Step 2 should be ignored if joystick signals were received in Step 1
+or 3. Ideally, to eliminate problems caused by switch bounce, keyboard signals
+should be also ignored if joystick signals were received in the previous or
+next frame (in case of next frame: requiring keyboard handling to be delayed by
+one frame).
+
+Joystick 1 and 2
+The C64 Programmers Reference Guide and C64 Schematics used some odd confusing
+declarations for the two joystick ports:
+  1st Joystick = Joystick A = JOY B = CIA Port A (DC00h) = Port 2
+  2nd Joystick = Joystick 1 = JOY A = CIA Port B (DC01h) = Port 1
+In result, some programmers have choosen to use DC00h (requires stick plugged
+into Port 2), others to use DC01h (plugged into Port 1); making it necessary to
+re-connect the joystick to the desired socket about every time when loading a
+different game.
+Any programs of better quality should work with both ports, regardless of the
+current connection. And of course such programs should also provide keyboard
+controls (preferably Q,A,O,P and Space) for users whom don't own a joystick at
+all.
+
+C64 CIA #2 Data Ports (Serial, VIC, User Port)
+----------------------------------------------
+
+DD00 - CIA #2 Data Port A (Serial Bus, RS-232, VIC Memory Control)
+  Bit  Dir. Expl.
+  7         Serial Bus Data Input
+  6         Serial Bus Clock Pulse Input
+  5         Serial Bus Data Output
+  4         Serial Bus Clock Pulse Output
+  3         Serial Bus ATN Signal Output
+  2         User / RS-232 Data Output / CNTR "/Strobe"
+  1-0  Out  VIC Memory Bank XOR 3  (Default=3, see VIC Port D018h)
+
+DD01 - CIA #2 Data Port B (User Port, RS-232)
+  Bit  Dir. Expl.
+  7    Out  Timer B Toggle/Pulse Output         (Output from Timer B)
+  6    Out  Timer A Toggle/Pulse Output         (Output from Timer A)
+  7         User / RS-232 Data Set Ready
+  6         User / RS-232 Clear to Send
+  5         User
+  4         User / RS-232 Carrier Detect
+  3         User / RS-232 Ring Indicator
+  2         User / RS-232 Data Terminal Ready
+  1         User / RS-232 Request to Send
+  0         User / RS-232 Received Data
+
+RS-232 Interface
+Aside from its native Serial Bus interface, the C64 BIOS also supports RS-232
+protocol, by using CIA#2 Data Port A Bit 2, CIA#2 Port B Bit 0-4, 6-7, and
+Interrupt Control Register Bit 4.
+The signals are output/input by user port as TTL signals (0V/5V). A RS-232
+adapter/cable would be thus required to convert the signals into +/-12V
+signals.
+
+Parallel Centronics Printer Port
+Original Commodore Printers are connected to the Serial Bus, most other
+printers are using parallel ports (some C64 software such like GEOS may support
+parallel printers).
+Recommended connection for User port adapter would be CIA#2 Data Port A Bit 2
+(/Strobe), CIA#2 Port B Bit 0-7 (Data), and Interrupt Control Register Bit 4
+(Busy), and the adapter should drag the Auto-LF signal to ground.
+
+Serial Bus
+A printer and up to four disk drives can be connected to the serial bus. To
+access a specific device, the computer must enable the ATN signal, and then
+send the device number. The specified device should then communicate with the
+computer, and all other devices should ignore any data on the serial bus -
+until a new ATN signal is send to select a new device.
+Device numbers can range from 00h to 1Fh. The following codes are used by the
+Commodore 64 to stand for the CBM devices listed below:
+  00            Keyboard
+  01            Datassette(TM)
+  02            RS-232C device
+  03            CRT display
+  04            Serial bus printer
+  08            Serial bus disk drive unit 1
+  09            Serial bus disk drive unit 2
+  0A            Serial bus disk drive unit 3
+  0B            Serial bus disk drive unit 4
+The KERNAL redirects device numbers 0-3 to internal hardware (as shown in the
+table), normally only device numbers 04h-1Fh are used for serial bus.
+BUG: Device number 1Fh is used to deselect devices by UNTLK/UNLSN, it should
+never be used to select a device.
+
+C64 CIA #1/#2 Timers, Interrupt, and Control Registers
+------------------------------------------------------
+
+Below registers are mostly the same for CIA#1 and CIA#2, however, separate
+registers for each CIA exist, for example each is having 2 Timers, resulting in
+a total of 4 Timers.
+
+DC02/DD02 - CIA #1/#2 Data Direction Register - Port A
+DC03/DD03 - CIA #1/#2 Data Direction Register - Port B
+  Bit  Expl.
+  7-0  Data Direction for Port A/B Bits 7-0 each  (0=Input, 1=Output)
+When Timer-Output-to-Port-B is enabled in control register below, Bit 6 and/or
+7 of Port B are forcefully set to output state regardless of the direction
+specified in this register.
+Note: Even when output direction is selected, the port still receives external
+LOW signals, reading from the data register does then return the external
+inputs ANDed with the local outputs (for example, Sorcery reads from DC00h
+while being configured as output).
+
+DC04/DD04 - CIA #1/#2 Timer A: Low-Byte
+DC05/DD05 - CIA #1/#2 Timer A: High-Byte
+DC06/DD06 - CIA #1/#2 Timer B: Low-Byte
+DC07/DD07 - CIA #1/#2 Timer B: High-Byte
+Reading from this register returns the timers current counter value. Writing
+initializes the latched prescaler (reload) value. The 16bit prescaler is copied
+into the actual counter registers upon any of the following situations: 1) on
+timer underflow, 2) on "force load", 3) when writing to the timer-high-byte
+while the timer is stopped.
+
+DC08/DD08 - CIA #1/#2 TOD 1/10 Seconds (00h-09h BCD)
+DC09/DD09 - CIA #1/#2 TOD Seconds (00h-59h BCD)
+DC0A/DD0A - CIA #1/#2 TOD Minutes (00h-59h BCD)
+DC0B/DD0B - CIA #1/#2 TOD Hours (12h,01h-11h BCD) + AM/PM Flag (Bit 7)
+        Is that eventually 00-11 or actually 12,01-11 Hours ???
+The Time-of-Day Clock (TOD) can be operated by 50Hz or 60Hz input, in either
+case the clock input should be properly specified in Control Register A. The
+TOD input frequency is gained from the 9V AC power supply, which is itself
+gained from the wall socket (eg. US 110V/60Hz, or German 230V/50Hz), the
+frequency (and accuracy) are thus depending on the local energy provider.
+When reading Hours, all TOD registers are latched (ie. frozen, but kept
+counting in background), until 1/10 Seconds is read.
+When writing Hours, all TOD registers are completely stopped, until 1/10
+Seconds is written.
+When "Set Alarm" mode is selected in Control Register B, writing to TOD
+registers sets the Alarm-Time rather than the current Clock-Time. (Reading
+still returns the current time, Alarm is write-only).
+
+DC0C/DD0C - CIA #1/#2 Synchronous Serial I/O Data Buffer
+8bit shift register for serial input/output.
+
+DC0D/DD0D - CIA #1/#2 CIA Interrupt Control Register (Read Flags/Write Mask)
+  Bit  Expl.
+  7    Any enabled interrupt (0=None, 1=Yes) / Set-Clear Flag (0=Clear, 1=Set)
+  6-5  Not used                         (always read out as zero)
+  4    FLAG External IRQ/NMI Input,
+         CIA #1 - IRQ - Cassette Read, Serial Bus SRQ Input
+         CIA #2 - NMI - User, RS-232 Received Data Input, CNTR Busy
+  3    Serial Port Interrupt
+  2    Time-of-Day Clock Alarm Interrupt
+  1    Timer B Interrupt
+  0    Timer A Interrupt
+Reading from this register returns interrupt request flags, reading
+automatically clears all IRQ flags (including such that are disabled by
+interrupt mask), bit 7 indicates whether any enabled interrupts are present,
+ie. bit 7 is set if (IRQ_flags AND IRQ_enable)<>0.
+Writing to this register may either set or reset interrupt mask enable bits,
+depending on the Set-Clear flag in bit 7 of the written value, any written "0"
+bits are kept unaffected, any written "1" bits are set to the value of bit 7.
+
+DC0E/DD0E - CIA #1/#2 Control Register A
+  Bit  Expl.
+  7    Time-of-Day Clock Frequency      (0=9VAC/60Hz, 1=9VAC/50Hz)
+  6    Serial Port I/O Mode Output      (0=Input, 1=Output)
+  5    Timer A Counts                   (0=System 02 Clock, 1=CNT Signals)
+  4    Timer A Force Load               (0=No, 1=Yes)
+  3    Timer A Run Mode                 (0=Continuous, 1=One-Shot)
+  2    Timer A Output-to-Port-B Mode    (0=Pulse, 1=Toggle)
+  1    Timer A Output-to-Port-B Enable  (0=Disable, 1=Enable)
+  0    Timer A Start/Stop               (0=Stop, 1=Start)
+
+DC0F/DD0F - CIA #1/#2 Control Register B
+  Bit  Expl.
+  7    Time-of-Day Write Mode           (0=Set Clock, 1=Set Alarm)
+  6-5  Timer B Mode Select:
+         0 = Count System 02 Clock Pulses
+         1 = Count Positive CNT Transitions
+         2 = Count Timer A Underflow Pulses
+         3 = Count Timer A Underflows While CNT Positive
+  4-0  Same as for above Timer A, but for Timer B respectively.
+
+VIC20 Specs
+---------
+
+VIC20
+--> VIC20 Tech Data
+--> VIC20 Memory and I/O Map
+--> VIC20 Video and Audio
+--> VIC20 Versatile Interface Adapters (VIA 1 and 2)
+--> VIC20 Pinouts for Input/Output Devices
+
+Other
+--> CPU 65XX Microprocessor
+--> KERNAL Functions
+
+VIC20 Tech Data
+---------------
+
+"PEEK and POKE commands are very effective especially in animation,
+and for sophisticated programming such as bouncing a ball."
+This fundamentel piece of information has been obtained from:
+Programmers Reference Guide for VIC 20 Personal Computer, compiled from the
+experience of Commodore's international programming staffs in more than half a
+dozen countries.
+
+VIC-20 Tech Details
+  CPU: 6502A, 1.02 MHz (NTSC), 1.11 MHz (PAL)
+  ROM: 16K Basic/Kernal ROM, 4K Character ROM (2 sets of 256 characters)
+  RAM: 5K RAM (expandable to 40K RAM max), 1Kx4bit Color RAM
+  Video: 22x23 tiles, 176x184 pix (1bit HiRes), or 88x184 pix (2bit MultiColor)
+  Color: 16 Color Palettte, 2 or 4 Colors (Hires/Multi), 1 unique color/tile
+  Sound: 3x Square Wave, 1x Noise, 1x Volume (shared for all 4 channels)
+  Ports: One Joystick port, User Port, Expansion Port, Serial Port, Cassette
+  Keyboard: Matrix with 8x8 Keys, plus Restore Key
+
+VIC-1001
+Japanese VIC20, NTSC based. Modified Kernal and Character ROMs for Kanji.
+
+VC-20
+European VIC20, PAL-based, called VC-20 (in germany at least). Changed Kernal
+matched to PAL timings.
+
+VIC20CR
+Cost Reduced (CR) revision with minor changes. Eight of the 1Kx4bit SRAMs have
+been replaced by two 2Kx8bit SRAMs. The Audio output is merged with a new
+external Audio input from Expansion Port. The Video signal is directly output
+to both Video pins (without any loop/capacitor on either pin).
+
+VIC20 Memory and I/O Map
+------------------------
+
+VIC20 Memory Map
+  Addr. Size Expl.
+  0000h  1K  RAM (BIOS,KERNAL,STACK)
+  0400h  3K  Expansion RAM
+  1000h  4K  RAM (3.5K BASIC/USER, 0.5K Screen RAM)
+  2000h 24K  Expansion RAM (or ROM)
+  8000h  1K  Character ROM Uppercase and all Symbols (Normal)
+  8400h  1K  Character ROM Uppercase and all Symbols (Reversed)
+  8800h  1K  Character ROM Upper/lowercase and some Symbols (Normal)
+  8C00h  1K  Character ROM Upper/lowercase and some Symbols (Reversed)
+  9000h      I/O Area (VIC Chip, VIA1, VIA2)
+  9400h      Color RAM (1024x4bit)
+  9800h      Expansion I/O Area 2
+  9C00h      Expansion I/O Area 3
+  A000h  8K  Expansion ROM (or RAM)
+  C000h  8K  BASIC ROM
+  E000h  8K  KERNAL ROM
+
+VIC20 RAM Expansions
+The VIC has three memory expansion areas, one for 3K RAM, and one for 8K..24K
+RAM, and one for 8K ROM (or RAM). The built-in 4K RAM are located in the middle
+of the first two areas. The following rules apply to RAM:
+  Basic RAM must be located in a continous memory block.
+  Screen RAM must be located in built-in 4K RAM.
+  Color RAM address bit9 must match Screen RAM address bit9.
+Respectively, to provide as much Basic RAM as possible, the locations of Basic,
+Screen, and Color RAM change depending on installed RAM Expansions:
+  Expansion  Total RAM  Basic RAM    Screen RAM   Color RAM    Basic Space
+  None       5K         1000h-1DFFh  1E00h-1FFFh  9600h-97FFh  3.5K
+  3K         8K         0400h-1DFFh  1E00h-1FFFh  9600h-97FFh  6.5K
+  8K..35K    13K..40K   1200h-7FFFh  1000h-11FFh  9400h-95FFh  11.5K..27.5K
+Notes: The 3K area isn't used by Basic when adding 8K RAM (or more). RAM in the
+third expansion area at A000h cannnot be used by Basic.
+
+VIC20 ROM Expansion
+Expansion ROM is automatically started if the first 9 bytes at A000h contain
+specific data:
+  A000h-A001h Cold Start Vector (invoked after RESET with S=FFh, D=0, I=1)
+  A002h-A003h Warm Start Vector
+  A004h-A008h ASCII ID Code "A0CBM" with Bit7 set in the last 3 letters
+
+VIC20 I/O Map
+9000h-900Fh - VIC (Video, Sound, Lightpen, Paddles)
+  9000h  Horizontal Screen Origin, and Interlace
+  9001h  Vertical Screen Origin
+  9002h  Horizontal Screen Size, and Screen Base
+  9003h  Vertical Screen Size, Raster, and Character Size
+  9004h  Raster Value
+  9005h  Video Memory Base Addresses
+  9006h  Lightpen Horizontal
+  9007h  Lightpen Vertical
+  9008h  Paddle X Position
+  9009h  Paddle Y Position
+  900Ah  Voice 1 Square/Bass
+  900Bh  Voice 2 Square/Alto
+  900Ch  Voice 3 Square/Soprano
+  900Dh  Voice 4 Noise
+  900Eh  Sound Volume, and Auxiliary Color
+  900Fh  Screen Color, Border Color, and Reverse Mode
+9110h-911Fh - VIA1 (NMI, Cas, Joy, Serial, User Port, Restore Key)
+9120h-912Fh - VIA2 (IRQ, Cas, Joy, Serial, Keyboard, 60Hz Jiffy)
+  91x0h  Input/Output Register B (IRB/ORB)
+  91x1h  Input/Output Register A (IRA/ORA)
+  91x2h  Data Direction Register B (DDRB)
+  91x3h  Data Direction Register A (DDRA)
+  91x4h  T1 Low-order Counter/Latch (T1C_L)
+  91x5h  T1 High-order Counter/Latch (T1C_H)
+  91x6h  T1 Low-order Latch (T1L_L)
+  91x7h  T1 High-order Latch (T1L_H)
+  91x8h  T2 Low-Order Latch/Counter (T2C_L)
+  91x9h  T2 High-Order Counter (T2C_H)
+  91xAh  Shift Register (SR)
+  91xBh  Auxiliary Control Register (ACR)
+  91xCh  Peripheral Control Register (PCR)
+  91xDh  Interrupt Flag Register (IFR) (Request/Acknowledge)
+  91xEh  Interrupt Enable Register (IER) (Enable/Disable)
+  91xFh  Input/Output Register A' (IRA'/ORA')
+
+VIC20 Mirrors
+There are no memory mirrors, except in the I/O-0 area at 9000h-93FFh, the
+devices are selected as such: VIA1 by A4=1, VIA2 by A5=1, and [probably ?] VIC
+by A8=0. Most of the mirrors are selecting more than one device at once.
+
+VIC20 Empty Memory Regions
+The following regions are empty (unless used by expansion hardware):
+RAM/ROM Expansion Areas, I/O Expansion Areas, Upper Nybbles in Color RAM, and
+locations in Internal I/O Area with A4=0, A5=0, A8=1.
+The Data bus is shared for CPU and Video DMA (one half clock cycle each), so
+when the CPU reads from empty memory regions it will receive the value from the
+previous DMA transfer (a byte from Screen RAM or Character ROM/RAM during
+picture drawing, or garbage DMA fetches somewhere from 101Ch or 181Ch or else
+during blanking periods).
+
+Basic/Kernal RAM in First Kilobyte
+--> KERNAL First Kilobyte RAM (0000h-03FFh)
+
+VIC20 Video and Audio
+---------------------
+
+Video Interface Chip (VIC) 6560 (NTSC) or 6561 (PAL)
+
+The VIC20 supports only one video mode, which behaves similiar as the C64's
+"Multi-Color Character Mode" (MCM=1, ECM=0, BMM=0), with smaller resolution,
+with some color limitiations, and without moveable objects.
+
+- Fully expandable system with a 16K byte address space
+- Screen grid size up to 192 Horizontal by 200 vertical dots
+- Up to 600 locations on TV
+
+9000h Horizontal Screen Origin, and Interlace (NTSC=05h, PAL=0Ch)
+  Bit7   Interlace mode   (0=Off/Normal, 1=On) (NTSC Only) (PAL: No Effect)
+  Bit6-0 Left Border width (in FOUR pixel steps)
+Interlace reduces the Frame Rate from 60Hz to 30Hz; intended to blend the VIC
+picture with a picture from another source.
+
+9001h Vertical Screen Origin (NTSC=19h, PAL=26h)
+  Bit0-7 Upper Border Height (in TWO pixel steps)
+
+9002h Horizontal Screen Size, and Screen Base (96h) (16h for 8K Expansion)
+  Bit7   Screen Base A9          (1 = +0200h) (see Port 9005h), and
+         Color RAM Base A9       (0=9400h, 1=9600h)
+  Bit6-0 Number of video columns (Default = 22 columns; 176 pixels)
+The maximum column setting is 27 or 31 for NTSC, and 34 or 32 for PAL (?).
+Attempts to use bigger values are rejected (the maximum setting is used
+instead). The maximum settings might exceed the visible area of the TV Set?
+
+9003h Vertical Screen Size, Raster, and Character Size (2Eh or AEh)
+  Bit7   Bit 0 of Raster value (Bits 8-1 are in Port 9004h)
+  Bit6-1 Number of video rows  (Default is 23 rows; 184 pixels)
+  Bit0   Character size (0=Normal 8x8, 1=Large 8x16)
+Note: The 8x16 mode allows to access twice as much Character RAM (4K at
+1000h-1FFFh), respecticely Screen RAM occupies only half as much memory, and
+can be squeezed between CPU Stack and IRQ/NMI verctors (0.25K at 200h-2FFh).
+
+9004h Raster Value (Current Scanline) (Read only)
+  Bit7-0 Bits 8-1 of Raster value (Bit 0 is in Port 9004h)
+The counter starts at 000h at the begin of the Upper Border area. The current
+scanline within the Picture area can be calculated as such:
+  ([9004h]-[9001h]) * 2 + [9003h].Bit7
+
+9005h Video Memory Base Addresses (F0h) (C0h for 8K Expansion)
+Screen memory for 22x23 tiles of 8x8 pixels occupies a bit less than 200h bytes
+(0.5K), or about half as much for 8x16 tiles. Character memory for 256 tiles
+occupies 800h bytes (2K) (8x8 tiles), or 1000h (4K) bytes (8x16 tiles). The
+base is NOT required to be aligned to that numbers.
+  Bit Expl.
+  7   Screen Base A13    (0=ROM, 1=RAM) (Must be RAM, obviously)
+  6   Screen Base A12    (1 = +1000h)
+  5   Screen Base A11    (1 = +0800h)
+  4   Screen Base A10    (1 = +0400h)
+  -   Screen Base A9     (1 = +0200h) (A9 defined in Port 9002h)
+  3   Character Base A13 (0=ROM, 1=RAM)
+  2   Character Base A12 (1 = +1000h)
+  1   Character Base A11 (1 = +0800h)
+  0   Character Base A10 (1 = +0400h)
+The VIC uses a 16K address space, the VIC VA13 address line equals the to
+inverted CPU CA15 address line. Table below shows which regions of the 16K area
+can (or cannot) be accessed by the VIC chip:
+  CPU          VIC               Content
+  0000h-03FFh  (see note)        1K Internal RAM
+  0400h-0FFFh  No                3K Expansion RAM
+  1000h-1FFFh  Characters/Screen 4K Internal RAM
+  8000h-8FFFh  Characters        4K Character ROM
+  9000h-9FFFh  No                4K I/O Area
+The VIC can access the RAM at 0-3FFh, however, even when Kernal and Basic are
+not used, that region is shared with the CPU Zero Page area (000h-0FFh), CPU
+Stack (100h-1FFh), and IRQ/BRK/NMI Vectors (314h-319h).
+Expansion RAM (even if installed) cannot be used because the Expansion Port
+outputs only the CPUs CA0-CA13 address signals (not the VA0-VA13 signals).
+
+9006h - Light pen Horizontal (00h)
+9007h - Light pen Vertical (00h)
+  Bit7-0 Light pen position in pixels (00h=upper/left)
+"When the scan passes the area where the pen is, a signal is sent to the VIC
+chip. When this signal is received, the VIC chip will record the exact location
+of the scan in two registers.
+The light pen trigger is connected to pin 6 of the game port. The light pen
+trigger input can also be reached from pin 7 of the user port. Note that you
+can't use a joystick and a light pen at the same time, because the same line
+that is used as the light pen trigger input is used as the joystick fire button
+input (you would get false readings).
+The VIC chip constantly keeps track of the scan position on the television in
+two registers. When the light pen trigger input is brought low, the VIC freezes
+the two registers. You can then read and use this information. After reading
+the two registers, the trigger line will be cleared, so that scan information
+can be placed again in the two registers."
+
+9008h Paddle X Position (FFh)
+9009h Paddle Y Position (FFh)
+  Bit7-0 Paddle Input (0-FFh) (A/D converted variable resistance)
+Note: Paddle Buttons can be read from VIA1/PortA Bit4, and VIA2/PortB Bit7.
+
+900Ah Voice 1 Square - 3995Hz/NTSC, 4329Hz/PAL (00h) (Bass)
+900Bh Voice 2 Square - 7990Hz/NTSC, 8659Hz/PAL (00h) (Alto)
+900Ch Voice 3 Square - 15980Hz/NTSC, 17320Hz/PAL (00h) (Soprano)
+900Dh Voice 4 Noise - 31960Hz/NTSC, 34640Hz/PAL (00h)
+  Bit 7   Sound Enable    (0=Off, 1=On)
+  Bit 6-0 Sound Frequency (0-127); F = Baseclock / (127-X)
+Each Voice uses a different Baseclock (see above PAL/NTSC Voice values).
+Not sure what happens on division by zero?
+
+900Eh - Sound Volume and Auxiliary Color (00h)
+  Bit 7-4  Auxiliary color (0-15) (Color 3 for Multi-Color tiles)
+  Bit 3-0  Volume for all Sound channels (0=Off, 15=Loudest)
+
+900Fh - Screen Color, Border Color, and Reverse Mode (1Bh)
+  Bit 7-4 Background/Screen Color (0-15) (Color 0 of all tiles)
+  Bit 3   Character Reverse Mode  (0=Inverted, 1=Normal)
+  Bit 2-0 Border Color            (0-7) (also Color 1 of Multi-Color tiles)
+
+9400h-97FFh - Color RAM (1024x4bit) (see Port 9002h for used area)
+Allows to select Hi-Res or Multi-color mode for each tile, and to assign one
+custom color for each tile. The other tile color(s) are defined in I/O Ports,
+shared for all tiles.
+  Bit7-4  Not used          (returns garbage when reading)
+  Bit3    Resolution/Depth  (0=Hi-Res 8x8, 2 color, 1=Multi-Color 4x8, 4 color)
+  Bit2-0  Character Color   (0-7) (Indepent color for each tile)
+Note: Only 506 entries are used at default resolution of 22x23 characters, the
+remaining 518 entries can be used as general purpose 4bit RAM.
+
+Hi-Res and Multi-Color Tile Colors
+  Hi-Res   Multi-Color  Color Source
+  Color 0  Color 0      Screen color (0-15)    (Port 900Fh, Bit4-7)
+  -        Color 1      Border color (0-7)     (Port 900Fh, Bit0-2)
+  Color 1  Color 2      Character color (0-7)  (Color RAM)
+  -        Color 3      Auxiliary color (0-15) (Port 900Eh, Bit4-7)
+Each byte in Character RAM defines one row of a tile. The color of leftmost
+pixel for each row is located in the most-significant bit(s).
+
+VIC20 Color Code Table
+Screen Color and Auxiliary Color can be in range 0-15.
+Border Color and Charater Colors (Color RAM) can be only 0-7.
+  0 Black               8 Orange
+  1 White               9 Light Orange
+  2 Red                10 Light Red (Pink)
+  3 Cyan (Green+Blue)  11 Light Cyan
+  4 Purple (Red+Blue)  12 Light Purple
+  5 Green              13 Light Green
+  6 Blue               14 Light Blue
+  7 Yellow (Green+Red) 15 Light Yellow
+Note: On the C64, some of the Light (pastelized) colors have been replaced.
+
+--> C64 VIC Character Sets
+
+VIC20 Video Timings
+  Type          NTSC 60Hz       PAL 50Hz
+  Oscillator    14.318181 MHz   17.734472 MHz
+  Divider       Osc/14          Osc/16
+  System Clock  1.022727 MHz    1.108405 MHz
+  Visible       ???x???         ???x???
+  Scanlines     261             312
+  Clks/Line     65 clks         71 clks
+  Clks/Char     2 clks          2 clks
+
+Non-blocking Video DMA
+The VIC performs two DMA operations for each character row: One read from
+Screen/Color RAM (via 12bit databus). And one read from Character RAM/ROM (via
+8bit databus). The bus-frequency is twice the CPUs clock-frequency, there's one
+half cycle available to the CPU and DMA each, that allows video DMA to take
+place without halting the CPU.
+
+VIC20 Versatile Interface Adapters (VIA 1 and 2)
+------------------------------------------------
+
+9110h-911Fh - 6522 VIA#1 (NMI, Cas, Joy, Serial, User Port, Restore Key)
+9120h-912Fh - 6522 VIA#2 (IRQ, Cas, Joy, Serial, Keyboard, 60Hz Jiffy)
+--> Versatile Interface Adapter 6522 (VIA)
+
+VIA #1 Port B - 9110h=Data, 9112h=Direction (User Port)
+  Bit  Pin(s)       Purpose/Example
+  PB0  USR.C        RS232 Received data (Sin)          (0=Low)
+  PB1  USR.D        RS232 Request to Send (RTS)        (0=Low)
+  PB2  USR.E        RS232 Data terminal ready  (DTR)   (0=Low)
+  PB3  USR.F        RS232 Ring indicator (RI)          (0=Low)
+  PB4  USR.H        RS232 Received line signal (DCD)   (0=Low)
+  PB5  USR.J        Not used with RS232                (0=Low)
+  PB6  USR.K        RS232 Clear to send (CTS)          (0=Low)
+  PB7  USR.L        RS232 Data set ready (DSR)         (0=Low)
+
+VIA #1 Port A - 9111h/911Fh=Data, 9113h=Dir (User Port, Joy, Cas, Serial)
+  Bit  Pin(s)       Purpose/Example
+  PA0  SIO.4        Serial CLK IN                  (0=Low)
+  PA1  SIO.5        Serial DATA IN                 (0=Low)
+  PA2  JOY.1/USR.4  Joy S0 Up    ;JOY S0,S1,S2,S4 controlled by VIA #1 Port A
+  PA3  JOY.2/USR.5  Joy S1 Down  ;JOY S3: see VIA #2 Port B
+  PA4  JOY.3/USR.6  Joy S2 Left/Paddle Switch X    (0=Low)
+  PA5  JOY.6/USR.7  Joy S4 Fire/Lightpen           (0=Low)
+  PA6  CAS.6/USR.8  Cassette switch sense          (0=Low)
+  PA7  SIO.3/USR.9  Serial ATN out                 (1=Low) (Inverted)
+
+VIA #1 Timers, Shift, Auxiliary, Peripheral, Interrupts (Port 9114h-911Eh)
+  Item Pin(s)       Purpose/Example
+  T1                Timer 1
+  T2                Timer 2
+  SHFT              Shift register
+  CA1  KEYB         Restore key                    (0=Low=Pressed)
+  CA2  CAS.3        Cassette motor control         (?=On)
+  CB1  USR.B        Interrupt signal for received RS-232 data
+  CB2  USR.M        Transmitted RS-232 data
+  /INT CPU.6/EXP.W  CPU Non Maskable Interrupt (and Expansion Port) (NMI)
+
+VIA #2 Port B - 9120h=Data, 9122h=Direction (Keyboard, Cas, Joy)
+  Bit   Pin(s)      Purpose/Example
+  PB0-7 COL.0-7     Keyboard Column scan           (0=Low)
+  PB3   COL.3/CAS.5 Cassette write line            (0=Low)
+  PB7   COL.7/JOY.4 Joy S3 Right/Paddle Switch Y   (0=Low)
+In Keyboard Matrix, VIC20 COLUMNS equal to C64 ROWS with Bit3,7 exchanged.
+--> Keyboard Matrix
+
+VIA #2 Port A - 9121h/912Fh=Data, 9123h=Direction (Keyboard)
+  Bit   Pin(s)      Purpose/Example
+  PA0-7 ROW.0-7     Keyboard Row scan              (0=Low)
+In Keyboard Matrix, VIC20 ROWS equal to C64 COLUMNS with Bit0,7 exchanged.
+
+VIA #2 Timers, Shift, Auxiliary, Peripheral, Interrupts (Port 9214h-921Eh)
+  Item Pin(s)       Purpose/Example
+  T1                Timer 1 (used for 60Hz Jiffy clock interrupt)
+  T2                Timer 2
+  SHFT              Shift register
+  CA1  CAS.4        Cassette read line          (0=Low)
+  CA2  SIO.4        Serial CLK OUT              (1=Low) (Inverted)
+  CB1  SIO.1        Serial SRQ IN               (0=Low)
+  CB2  SIO.5        Serial DATA OUT             (1=Low) (Inverted)
+  /INT CPU.4/EXP.19 CPU Interrupt Request (and Expansion Port) (IRQ)
+
+VIC20 Pinouts for Input/Output Devices
+--------------------------------------
+
+VIC20 Joystick Port - Game I/O - 9pin DSUB
+From left-to-right: Pin 1-5 in upper row, Pin 6-9 in lower row.
+  Pin Control   Name  Purpose
+  1   VIA1.PA2  JOY0  Up
+  2   VIA1.PA3  JOY1  Down
+  3   VIA1.PA4  JOY2  Left/Paddle Switch X
+  4   VIA2.PB7  JOY3  Right/Paddle Switch Y
+  5   VIC.POTY  POTY  Paddle Position Y
+  6   VIA1.PA5  JOY4  Fire/Lightpen
+  7   -         5V    +5V (max 100mA)
+  8   -         GND   Ground
+  9   VIC.POTX  POTX  Paddle Position X
+
+VIC20 Audio/Video - 5pin DIN
+Anti-clockwise, from upper-left to upper-right: Pin 3,5,2,4,1.
+  1  +5V REG (max 10mA)
+  2  GND
+  3  AUDIO
+  4  VIDEO LOW  (VIC20: via 3.9uH & capacitor, VIC20CR: shortcut with Pin 5)
+  5  VIDEO HIGH (direct output without loop/capacitor, otherwise same as Pin 4)
+
+VIC20 Serial I/O - 6pin DIN
+Anti-clockwise, from upper-left to upper-right: Pin 5,4,3,2,1. Middle: Pin 6.
+  1  SERIAL SRQ IN
+  2  GND
+  3  SERIAL ATN OUT
+  4  SERIAL CLC IN/OUT
+  5  SERIAL DATA IN/OUT
+  6  /RESET (or N.C.)
+
+VIC20 Cassette/Datasette Port - 12pin Edge (only 6 pins actually used)
+From left-to-right: Pin 1-6 in upper row, short-cut with Pin A-F in lower row.
+  A-1  GND
+  B-2  +5V
+  C-3  CASSETTE MOTOR  (VIA1.CA2) (+9V)
+  D-4  CASSETTE READ   (VIA2.CA1)
+  E-5  CASSETTE WRITE  (VIA2.PB3)
+  F-6  CASSETTE SWITCH (VIA1.PA6)
+
+VIC20 User I/O Port - 24pin Edge
+From left-to-right: Pin 1-12 in upper row, Pin A-F,H,J-N in lower row.
+  1 GND  Ground                    A GND Ground
+  2 5V   +5VDC max 100mA           B CB1 RS232 Interrupt for Sin
+  3 /RES /RESET                    C PB0 RS232 Received data (Sin)
+  4 PA2  JOY0 Up                   D PB1 RS232 Request to Send (RTS)
+  5 PA3  JOY1 Down                 E PB2 RS232 Data terminal ready  (DTR)
+  6 PA4  JOY2 Left/Paddle Switch X F PB3 RS232 Ring indicator (RI)
+  7 PA5  JOY4 Fire/Lightpen        H PB4 RS232 Received line signal (DCD)
+  8 PA6  Cassette switch sense     J PB5 Not used with RS232
+  9 PA7  SERIAL ATN OUT            K PB6 RS232 Clear to send (CTS)
+  10 9V  9VAC Phase 1 max 100mA    L PB7 RS232 Data set ready (DSR)
+  11 9V  9VAC Phase 2 max 100mA    M CB2 RS232 Transmitted data (Sout)
+  12 GND Ground                    N GND Ground
+
+VIC20 Expansion Port - 48 pin (24/24) female edge connector
+From left-to-right: Pin 1-22 in upper row, Pin A-F,H,J-N,P,R-Z in lower row.
+  Pin      Name    Description
+  2-9      CD0-7   Data bus Bits 0-7
+  B-S      CA0-13  Address bus Bits 0-13 (upper bits decoded in /IO,/RAM,/BLK)
+  10-12    /BLK1-3 8K decoded RAM/ROM blocks 1,2,3 at 2000h,4000h,6000h
+  13       /BLK5   8K decoded ROM block 5 at A000h
+  14-16    /RAM1-3 1K decoded RAM blocks 1,2,3 at 0400h,0800h,0C00h
+  T-U      /IO2-3  I/O blocks 2,3 (located at 9800h,9C00h) (eg. IEEE adapter)
+  17       VR/W    Read/Write line from VIC chip (high-read, low-write)
+  18       CR/W    Read/Write line from CPU chip (high-read, low-write)
+  V        PHI2    Phase 2 system clock
+  19       /IRQ    6502 Interrupt Request ("keyboard scan and system clock")
+  W        /NMI    6502 Non Maskable Interrupt (WARMSTART, RUN/STOP-RESTORE)
+  X        /RESET  6502 RESET pin
+  21       +5V     Supply
+  1,22,A,Z GND     System ground
+  20       (NC)    Not connected
+  Y        SNDIN   Not connected (VIC20), or Audio In (VIC20CR)
+"Memory expansion will normally use the VR/W signal. Other devices may need the
+CR/W signal." -- Is that correct... or vice-versa ?
+
+Power Supply Input
+VIC20: 2pin; 9VAC
+VIC20CR: 7pin; 9VAC and +5VDC (same as in C64)
+Internally, all mainboards are running at raw 5VDC, the other voltages are used
+only to increase the room temperature, and for external hardware: Cassette
+Motor (9VDC), and User Port (9VAC).
+
+VIC20 Pin Configuration 6560 - 40pin
+  1     N.C.
+  2     COMP COLOR
+  3     SYNC & LUMINANCE
+  4     R/W
+  5-16  DB11-0
+  17,18 POTX,POTY
+  19    SOUND OUT
+  20    GND
+  21-34 A0-13 (Note: A13 is gained from /BLK4 signal)
+  35,36 P01,P02 Clock Out, NTSC: X/14 = 1.02MHz, PAL: X/16 = 1.11MHz
+  37    LPEN
+  38,39 X02,X01 Clock In, NTSC: 14318181Hz, PAL:17734472Hz
+  40    VCC 5VDC
+
+C16/PLUS4 Specs
+---------------
+
+--> C16/PLUS4 Tech Data
+--> C16/PLUS4 Memory and I/O Map
+--> C16/PLUS4 Keyboard, Joystick, Cassette, Serial, Sound, User Port
+--> C16/PLUS4 Interrupts (Raster and Timers)
+--> C16/PLUS4 Memory Control (CPU and Video)
+--> C16/PLUS4 Video - Control
+--> C16/PLUS4 Video - Cursor and Color
+--> C16/PLUS4 Video - Rendering
+--> C16/PLUS4 Video Modes
+--> C16/PLUS4 Dimensions and Timings
+--> C16/PLUS4 Pin-Outs
+
+Other
+--> Disk Drive
+--> CPU 65XX Microprocessor
+--> KERNAL Functions
+
+C16/PLUS4 Tech Data
+-------------------
+
+C16
+  CPU 7501/8501 - 6502 compatible with on-chip 7bit I/O Port
+  16K DRAM (3FFEh bytes can be used) (shared as WRAM and VRAM)
+  32K ROM (BASIC V3.5, separate KERNALs for PAL-B and NTSC-M)
+  TED (Text Editing Device) for Video, Sound, Timers, Keyboard
+  Four cursor keys (unfortunately arranged all in one row)
+
+    Character graphics, high resolution graphics, Enhanced Colour Mode and
+    reverse characters
+    Multicolour graphics (4x8 character or graphics cells)
+    Writable horizontal and vertical sync counters
+    Horizontal raster position register
+    Same chip for both NTSC-M and PAL-B
+       1.NTSC:  14318181/16 Hz
+         NTSC = 0.894886 MHz (single), or 1.789773 MHz (twice)
+       2.PAL:   17734472/20 Hz
+         PAL  = 0.886724 MHz (single), or 1.773447 MHz (twice)
+    Double clock mode for faster operation
+
+
+C116
+Same as C16, slightly re-arranged mainboard. Equipped with a cheaper short-way
+flat keyboard, without shift-lock key, however it's having the four cursor keys
+re-arranged in compass directions.
+
+Plus/4
+Expanded C16, with 64K DRAM (about 61K can be used), additional 32K on-board
+Function ROM (3-plus-1 word processor), User Port with RS232 interface and 8bit
+parallel port, changed connection for Cassette Sense. Lacks 5VDC outputs on
+Serial and Audio/Video Ports. Different Power supply input (9VAC and 5VDC).
+
+C16/PLUS4 Memory and I/O Map
+----------------------------
+
+C16 and Plus/4 Memory Map
+  0000h-0001h   I/O CPU 7501/8501 On-chip I/O Port
+  0002h-7FFFh   RAM
+  8000h-BFFFh   RAM or LO ROM (Basic, Function LO, Cart 1 LO, Cart 2 LO)
+  C000h-FBFFh   RAM or HI ROM (Kernal, Function HI, Cart 1 HI, Cart 2 HI)
+  FC00h-FCFFh   RAM or HI ROM (Kernal)
+  FD00h-FF3Fh   I/O Area
+  FF40h-FFFFh   RAM or HI ROM (Kernal, Function HI, Cart 1 HI, Cart 2 HI)
+The C16 and C116 contain only 16K built-in RAM which is mirrored across the
+whole 64K address space (the mirrors cannot be disabled, so expansion RAM
+cannot be installed), the full 16K can be accessed at 0002h-4001h (that
+includes mirrors of the two hidden bytes at 0000h-0001h).
+Further RAM at 4000h-FFFFh built-in in Plus/4 only.
+
+Character Set in Kernal ROM
+  D000h-D7FFh  256 non-inverted tiles
+
+Kernal FC00h-FCFFh (Banking Routines)
+  FCF1h-FCF3h  Jump to interrupt routine for cartridge
+  FCF4h-FCF6h  Jump to cartridge reenable routine
+  FCF7h-FCF9h  Jump to long fetch routine
+  FCFAh-FCFCh  Jump to long jump routine
+  FCFDh-FCFFh  Jump to long interrupt routine
+Memory at FC00h-FCFFh is always Kernal ROM (or RAM), Function ROM or Cartridge
+ROM is disabled in this region.
+
+I/O Map
+7501/8501 CPU On-chip I/O Registers
+  0000h - CPU 7501/8501 On-Chip I/O Port Direction
+  0001h - CPU 7501/8501 On-Chip I/O Port Data (Cassette, Serial, User Port)
+7700 Decoded I/O Addresses
+  FD00h-FD0Fh - User Port RS232 Controller 6551A (Plus/4 Only - Not C16/C116)
+  FD10h-FD1Fh - Cassette Sense / User Port 8bit Parallel I/O
+  FD30h-FD3Fh - 6529B Keyboard Column Output Latch
+  FDD0h-FDDFh - ROM Bank Latch
+7360/8360 TED I/O Registers
+  FF00h - Timer 1 Counter/Reload LSB
+  FF01h - Timer 1 Counter/Reload MSB
+  FF02h - Timer 2 Counter LSB
+  FF03h - Timer 2 Counter MSB
+  FF04h - Timer 3 Counter LSB
+  FF05h - Timer 3 Counter MSB
+  FF06h - Video Control Register 1
+  FF07h - Video Control Register 2
+  FF08h - Keyboard / Joystick Latch
+  FF09h - Interrupt request register
+  FF0Ah - Interrupt mask register
+  FF0Bh - Raster interrupt register
+  FF0Ch - Hardware-cursor position MSB (2bit) (Bit7-2 unused)
+  FF0Dh - Hardware-cursor position LSB (8bit)
+  FF0Eh - Sound 1 Frequency LSB (8bit)
+  FF0Fh - Sound 2 Frequency LSB (8bit)
+  FF10h - Sound 1 (or 2 ?) Frequency MSB (2bit) (Bit7-2 unused)
+  FF11h - Sound control register
+  FF12h - Bitmap/Character Memory Control and Sound 2 Frequency MSB
+  FF13h - System Clock and Character Memory Control
+  FF14h - Screen/Color Memory Control
+  FF15h - Background Color 0
+  FF16h - Background Color 1
+  FF17h - Background Color 2
+  FF18h - Background Color 3
+  FF19h - Border Color
+  FF1Ah - Current Character Position MSB (2bit) (Bit7-2 unused)
+  FF1Bh - Current Character Position LSB (8bit)
+  FF1Ch - Current Scanline MSB (1bit) (Bit7-1 unused)
+  FF1Dh - Current Scanline LSB (8bit)
+  FF1Eh - Actual position of horizontal scanning. R/W!.
+  FF1Fh - Flashing Counter and Character Scanline Index
+7360/8360 TED Strobe Outputs
+  FF3Eh - CPU/Screen/Color ROM Enable
+  FF3Fh - CPU/Screen/Color RAM Enable
+
+FD20h-FD2Fh, FD40h-FDCFh, FDE0h-FEFFh, FF20h-FF3Dh
+Unused portions of the I/O Area. Known fragments are: FD20h-FD2Fh accessed by
+the kernal power-up routines, but nothing inside the PLUS/4 or C16 is at this
+address. FDE0h-FEFFh for Disk DMA. FF20h-FF3Dh contains RAM/HI-ROM.
+
+Expansion ROM Header
+  8000h-8002h  Entrypoint (started by JSR 8000h)
+  8003h-8005h  Another Entrypoint, not used by BIOS (?)
+  8006h        Desired Entry Time (00h=Never, 01h=Immediately, 02h..FFh=Later)
+  8007h-8009h  ASCII ID "CBM"
+
+C16/PLUS4 Keyboard, Joystick, Cassette, Serial, Sound, User Port
+----------------------------------------------------------------
+
+FD30h-FD3Fh - 6529B Keyboard Column Output Latch
+The lower 4 address bits are don't care, normally FD30h is used.
+  7-0  Keyboard Column 7-0 Selection     (0=Select, 1=Deselect)
+The 6529B chips appears to be bi-directional, so reading from this port does
+(probably?) usually receive the state of the outputs, however, if two keys are
+pressed in the same row, then one column output may appear on two column
+inputs.
+
+FF08h - Keyboard/Joystick Strobe (W) and Row Input Latch (R)
+Write: Output unlatched Joystick column & strobe keyboard/joystick row latch.
+  7-3  Not used
+  2    Joystick 1         (0=Select, 1=Deselect)
+  1    Joystick 2         (0=Select, 1=Deselect)
+  0    Not used
+Read: Latched keyboard/joystick row input (latched at time of above write)
+  7-0  State of Row 7-0 for any selected columns (0=Pressed, 1=Released)
+  7    Joystick 2 Fire    (0=Pressed, 1=Released)
+  6    Joystick 1 Fire    (0=Pressed, 1=Released)
+  3    Joystick 1/2 Right (0=Moved, 1=Released)
+  2    Joystick 1/2 Left  (0=Moved, 1=Released)
+  1    Joystick 1/2 Down  (0=Moved, 1=Released)
+  0    Joystick 1/2 Up    (0=Moved, 1=Released)
+Flowchart: Output latched keyboard column to FD30h, then output unlatched
+joystick column to FF08h, then read latched row input from FF08h.
+The Keyboard Matrix is almost same as on C64, a couple of keys have been
+reassigned, mainly because the C16 has four (instead two) cursor keys.
+--> Keyboard Matrix
+
+0000h - CPU 7501/8501 On-Chip I/O Port Direction
+Selects Data Direction for Register 0001h. Should be always ??h.
+
+0001h - CPU 7501/8501 On-Chip I/O Port Data (Cassette, Serial, User Port)
+  Bit Dir Expl.
+  7   In  Serial Data In (and PLUS/4: Cas Sense) (0=Low, 1=High)
+  6   In  Serial Clock In                        (0=Low, 1=High)
+  5   -   Not used (no pin-out on 7501/8501)     (N/A)
+  4   In  Cassette Read                          (0=Low, 1=High)
+  3   Out Cassette Motor                         (0=9VDC, 1=Off) (Inverted)
+  2   Out Serial ATN Out (and PLUS/4: User Port) (0=High, 1=Low) (Inverted)
+  1   Out Serial Clock Out, Cassette Write       (0=High, 1=Low) (Inverted)
+  0   Out Serial Data Out                        (0=High, 1=Low) (Inverted)
+Switch Serial Clock/Data Outputs HIGH before reading Clock/Data Inputs.
+
+FD10h-FD1Fh - Cassette Sense / User Port 8bit Parallel I/O
+  7-0 User Port 6529B, 8bit Parallel I/O   (PLUS/4 Only)
+  2   Cassette Sense In                    (C16 and C116 Only)
+Note: On the PLUS/4, the Cassette Sense signal has moved to Port 0001h/Bit7,
+exchanging the J8,J9 jumpers switches the Plus/4 to C16 compatible mode.
+
+FD00h-FD0Fh - User Port RS232 Controller 6551A (Plus/4 Only - Not C16/C116)
+The Plus/4 contains a built-in ACIA 6551A RS232 Controller (unlike C64 and
+VIC20 which require external controller). To use RS232, one still requires a
+User Port to DSUB adapter; with TTL to RS232 voltage conversion. The downside
+is that the FD00h-FD0Fh cannot control the associated User Port pins directly
+as general purpose parallel I/O pins.
+
+FF0Eh - Sound 1 Frequency LSB (8bit)
+FF0Fh - Sound 2 Frequency LSB (8bit)
+FF10h - Sound 1 (or 2 ?) Frequency MSB (2bit) (Bit7-2 unused)
+FF12h - Sound 2 (or 1 ?) Frequency MSB (2bit) (Bit7-2 see Memory Control)
+The soundregister-value can be calculated as
+  reg=1024-(111860.781/frq[Hz]) (NTSC)
+  reg=1024-(111840.45 /frq[Hz]) (PAL)
+
+FF11h - Sound control register
+  Bit7    D/A mode. See below for more.
+  Bit6    Sound #2 noise on/off. If You set both, the square will sound.
+  Bit5    Sound #2 squarewave on/off.
+  Bit4    Sound #1 squarewave on/off.
+  Bit0-3  Volume. Maximum value is 8. //OR:// 0=Off, F=Highest
+To play samples, the TED can switch the sound generators to constant level
+outputs. D/A is then done by changing the volume register setting. Each
+generator can generate frequencies from 100Hz to 23kHz.
+
+C16/PLUS4 Interrupts (Raster and Timers)
+----------------------------------------
+
+/IRQ Sources: Raster, and 3 Timers
+/NMI Sources: None (the 7501/8501 CPU doesn't have a /NMI input)
+/RES Sources: Power up, and Reset Button
+
+FF09h - Interrupt request register
+  Bit7  Set on Any-Enabled-IRQ Condition  (0=None, 1=IRQ)
+  Bit6  Timer 3 Interrupt Request         (0=None, 1=IRQ / Acknowledge)
+  Bit5  Unused
+  Bit4  Timer 2 Interrupt Request         (0=None, 1=IRQ / Acknowledge)
+  Bit3  Timer 1 Interrupt Request         (0=None, 1=IRQ / Acknowledge)
+  Bit2  Lightpen Interrupt Request        (Not implemented?)
+  Bit1  Raster Interrupt Request          (0=None, 1=IRQ / Acknowledge)
+  Bit0  Unused
+Reading returns the (latched) interrupt flags. Writing "1" into Bit(s) 6,4-1
+acknowledges (clears) the respective interrupt flag(s).
+
+FF0Ah - Interrupt mask register
+  Bit7  Unused
+  Bit6  Timer 3 Interrupt        (0=Disable, 1=Enable)
+  Bit5  Unused
+  Bit4  Timer 2 Interrupt        (0=Disable, 1=Enable)
+  Bit3  Timer 1 Interrupt        (0=Disable, 1=Enable)
+  Bit2  Lightpen Interrupt       (Not implemented?)
+  Bit1  Raster Interrupt         (0=Disable, 1=Enable)
+  Bit0  High bit of Raster FF0Bh (see there)
+
+FF0Bh - Raster interrupt register
+Lower 8bit of the Raster Interrupt value (the upper bit is in Port FF0Ah), a
+Raster interrupt is requested when this value matches the current scanline
+number.
+On the C16, picture rendering starts at line 000h, however, in 25-row mode, the
+first 3 scanlines are masked (in 24-row mode, first 7 lines are masked).
+There are also several registers to read (and modify) the current scanline
+number, as well as other horizontal/vertical position registers, see Rendering
+chapter.
+
+FF00h - Timer 1 Counter/Reload LSB
+FF01h - Timer 1 Counter/Reload MSB
+FF02h - Timer 2 Counter LSB
+FF03h - Timer 2 Counter MSB
+FF04h - Timer 3 Counter LSB
+FF05h - Timer 3 Counter MSB
+All counters are decremented at single clock speed (NTSC=0.894886MHz,
+PAL=0.886724MHz). Interrupts are requested on underflow, and Timer 1 is
+restarted at the written (reload) value, Timer 2 and 3 are restarted at FFFFh.
+No idea if the timers are temporarily stopped/frozen when writing/reading to
+LSB registers, and re-activated on MSB register access?
+
+Reset on Power up / Reset Button
+Resets the CPU (program counter), the ROM Bank Latch (to Basic/Kernal), the
+Plus/4's RS232 controller, and whatever external hardware which is connected to
+the /Reset signal.
+The RAM isn't cleared on reset. And the TED doesn't seem to have a Reset input
+- so either RAM or ROM may be enabled - even on power-up!?! Maybe the TED
+triggers reads from the Reset vector to enable ROM...?
+The key-combination RESET+STOP enters the built-in machine language monitor,
+very nice idea, but taking into account that RESET destroys the current program
+counter setting, this is by far the worst debugging solution that I could think
+off.
+
+C16/PLUS4 Memory Control (CPU and Video)
+----------------------------------------
+
+FF12h - Bitmap/Character Memory Control and Sound 2 Frequency MSB
+  Bit7-6  Unused
+  Bit5-3  Bitmap Base Address      (in 8K steps) (ROM/RAM see FF12h.Bit2)
+  Bit2    Character/Bitmap ROM/RAM (0=RAM, 1=ROM) (Address see FF13h.Bit7-2)
+  Bit1-0  Sound 2 Frequency MSB    (see Sound chapter)
+
+FF13h - System Clock and Character Memory Control
+  Bit7-2  Character Base Address (in 1K steps) (ROM/RAM see FF12h.Bit2)
+  Bit1    Force single clock mode
+  Bit0-??-Memory State READ ONLY (0=RAM, 1=ROM) (change via FF3Eh/FF3Fh)
+  Bit0-??-Status of Clock
+
+FF14h - Screen/Color Memory Control
+  Bit7-3  Video-ram Base Address (in 2K steps) (ROM/RAM see FF3Eh/FF3Fh)
+  Bit2-0  Unused
+Used for both Color and Screen memory: 1K Color memory, followed by 1K Screen
+(Matrix) memory.
+
+FF3Eh - CPU/Screen/Color ROM Enable
+FF3Fh - CPU/Screen/Color RAM Enable
+Not sure if this actually affects Screen/Color, probably that is always RAM ?
+Write any value to these addresses to select ROM/RAM at 8000h-FFFFh.
+All ROM is write-through, the CPU can write to underlaying RAM, even if ROM is
+enabled.
+See FF13h.0, and FF14h, and FDD0h-FDDFh.
+  Port       Write       Read RAM   Read ROM
+  FF3E       ROM SELECT  ?          HI ROM
+  FF3F       RAM SELECT  ?          HI ROM
+
+FDD0h-FDDFh - ROM Bank Latch
+The written data value (D0-D7) is ignored, instead the lower 4 address bits are
+decoded. As such, this port is write only.
+  A3-A2  HI-ROM C000h-FFFFh Select (0=Kernal, 1=FuncHI, 2=Cart1Hi, 3=Cart2Hi)
+  A1-A0  LO-ROM 8000h-BFFFh Select (0=Basic, 1=FuncLO, 2=Cart1LO, 3=Cart2LO)
+On-board Function ROM included on Plus/4 only (not C16 and C116).
+Memory at FC00h-FCFFh is always Kernal ROM (or RAM).
+The region at FD00h-FD3Fh is used for I/O.
+For ROM/RAM selection see FF12h.Bit2 (Character/Bitmap), and FF3Eh/FF3Fh
+(CPU/Screen/Color).
+
+C16/PLUS4 Video - Control
+-------------------------
+
+FF06h - Video Control Register 1
+  Bit7    TEST Internal TED Test    (Should be always 0)
+  Bit6    ECM  Enhanced color mode  (0=Normal, 1=Extended)
+  Bit5    BMM  Bitmap mode          (0=Text, 1=Bitmap)
+  Bit4    DEN  Display Enable       (0=Blank/Border Color, 1=Display Enable)
+  Bit3    RSEL 24/25 rows screen    (0=24 Rows, 1=25 Rows)
+  Bit2-0  Y2-0 Vertical smooth-scrolling
+
+FF07h - Video Control Register 2
+  Bit7         Reverse Mode  (0=Reverse/128 Chars, 1=No Reverse/256 Chars)
+               If 0, higmost char-bit tells if char should appear in inverse.
+  Bit6    NTSC Select Video Format  (0=PAL, 1=NTSC) (Don't change!)
+  Bit5    RES  TED stop. If set, the TED stops it's counters and
+               screen-generating, only single clock and refresh
+               cycles remain.  PROJECT 64: Flashing (0=Yes, 1=No)
+  Bit4    MCM  Multicolor mode      (0=Normal, 1=Multicolor)
+  Bit3    CSEL 40/38 columns screen (0=38 Columns, 1=40 Columns)
+  Bit2-0  X2-0 Horizontal smooth-scrolling
+
+C16/PLUS4 Video - Cursor and Color
+----------------------------------
+
+FF0Ch - Hardware-cursor position MSB (2bit) (Bit7-2 unused)
+FF0Dh - Hardware-cursor position LSB (8bit)
+Beyond 1000 the cursor is not seeable.
+The shape/size/height and appearance (maybe different color, blinking, and/or
+inversion) of the cursor are unknown?
+
+FF15h - Background Color 0
+FF16h - Background Color 1
+FF17h - Background Color 2
+FF18h - Background Color 3
+FF19h - Border Color
+  Bit7    Not used
+  Bit6-4  Luminance (Not used for Color Black)
+  Bit3-0  Color
+
+The Color codes are unknown? Probably different as on C64, as luminance has
+moved to separate bitfield.
+The luminance setting is ignored for Color Black.
+There are 121 different color/luminance combinations.
+
+Base colours
+  0 ------ Black      8 RRG--- Orange
+  1 R-G-B- White      9 R-g--- Brown
+  2 RR---- Red       10 R-GG-- Yellow-Green
+  3 --GGBB Cyan      11 RR--B- Pink
+  4 RR--BB Purple    12 --G-BB Blue-Green
+  5 --GG-- Green     13 R---BB Light Blue
+  6 ----BB Blue      14 --g-B- Dark Blue
+  7 RRGG-- Yellow    15 GG--B- Light Green
+Color names taken from the Plus/4 users manual. The RGB values are raw
+guesswork - assuming 30 degree steps on a 360 degrees color wheel, Color 9
+assumed to be low-intensity color 8, and color 12 and 14 to be opposites of 8
+and 9 - no idea if real C16s work like that?
+
+C16/PLUS4 Video - Rendering
+---------------------------
+
+Below registers are used internally during rendering. Programs normally do need
+to use or initialize that registers. However, reading or modifying them may be
+useful for synchronization and effects.
+
+FF1Ah - Current Character Position MSB (2bit) (Bit7-2 unused)
+FF1Bh - Current Character Position LSB (8bit)
+Actual character-position. TED counts the characters that it had fetched and
+put out to the screen. The number is increasing by 40 after every characterline
+(8 rasterlines).
+
+FF1Ch - Current Scanline MSB (1bit) (Bit7-1 unused)
+FF1Dh - Current Scanline LSB (8bit)
+Actual position of vertical scanning. Read/Writeable!
+There's also a Raster Interrupt register, see Interrupt chapter.
+On the C16, picture rendering starts at line 000h, however, in 25-row mode, the
+first 3 scanlines are masked (in 24-row mode, first 7 lines are masked).
+
+FF1Eh - Actual position of horizontal scanning. R/W!.
+Lowmost bit is unused. It contains the TED's internal counter's highmost 8
+bits. So, it increases 4 with every character. When writing, it seems to put
+the value to a functionally different register (writing back a reading value in
+right time affects the screen).
+
+FF1Fh - Flashing Counter and Character Scanline Index
+  Bit7    Unused
+  Bit6-3  Flashing counter. It's value increases with every
+             frame, and TED fits it's flashing feature to this
+             register's reaching to 15.
+  Bit2-0  Actual vertical scanning-line in a character-row (R/W!)
+
+C16/PLUS4 Video Modes
+---------------------
+
+Video Information
+Abilities mostly parallel those of the uniquitous VIC-II video IC in the C64.
+TED does not contain sprite support. The TED can display 121 different colors.
+Other features include a hardware cursor, hardware text blinking, and hardware
+inverse character support.
+
+Character/Text modes 40x25 characters (BMM=0):
+  1K color memory (1st 400h bytes of Color/Screen memory)
+      bit7   Flashing   (Hires Text Mode only)
+      bit6-4 Luminance  (Not used for Color Black)
+      bit3   Multicolor (Multicolor Text Mode only)
+      bit3-0 Color      (Only Bit2-0 in Multicolor Text Mode)
+  1K screen memory (2nd 400h bytes of Color/Screen memory)
+      bit7   Inversion         (Hires Text Mode, with FF07h/Bit7=0 only)
+      bit7-6 Extended BG Color (Extended Text Mode only)
+      bit7-0 Tile number 0-255 (max 127 or 63 for Inversion / Extended BG)
+  2K character memory (800h bytes) (for 256 tiles)
+High-Resolution Characters, fixed BG color
+  0  Background color 0 (Port FF15h)
+  1  Color Memory (with Flashing Bit in Bit7)
+Extended Color Characters, 64 Tiles, selectable 4 BG Colors (ECM=1)
+  0  Background color 0-3 (Port FF15h-FF18h) select by upper 2bit of tileno
+  1  Color Memory (Bit7 probably unused?)
+Multicolor Characters (MCM=1) with 0-1 colors (Hires) or 0-3 (Multicolor):
+  0  0  Background color 0 (Port FF15h)
+  -  1  Background color 1 (Port FF16h)
+  -  2  Background color 2 (Port FF17h)
+  1  3  Color Memory (Bit3 selects Hires (0) or Color (1) tile-mode)
+        (Multicolor mode uses only 6 bits for color/luminance)
+        (Bit7 in Color Memory probably unused?)
+
+Bitmap modes (BMM=1):
+  1K intensity memory (1st 400h bytes of Color/Screen memory)
+      bit7   Not used
+      bit6-4 Luminance MSB  (Not used for Color Black)
+      bit3   Not used
+      bit2-0 Luminance LSB  (Not used for Color Black)
+  1K color memory (2nd 400h bytes of Color/Screen memory)
+      bit7-4 Color MSB
+      bit3-0 Color LSB
+  8K bitmap (2000h bytes) (consisting of 40x25 tiles)
+In 320x200 Hires bitmap mode (MCM=0), colors are:
+  0  Color LSB with Luminance MSB
+  1  Color MSB with Luminance LSB
+In 160x200 Multicolor bitmap mode (MCM=1), colors are:
+  0  Background color 0 (Port FF15h)
+  1  Color LSB with Luminance MSB
+  2  Color MSB with Luminance LSB
+  3  Background color 1 (Port FF16h)
+
+C16/PLUS4 Dimensions and Timings
+--------------------------------
+
+  Item          NTSC            PAL
+  Oscillator    14.318181 MHz   17.734472 MHz
+  Divider       Osc/16          Osc/20
+  Single Clock  0.894886 MHz    0.886724 MHz
+  Twice Clock   1.789773 MHz    1.773447 MHz
+  Frame Rate    60Hz            50Hz
+  Scanlines     262             312
+  Clks/Line     57 single clks  57 single clks
+
+    Dot clock = 8 times processor clock
+    Two blocked DMA fetches per character line
+    Writable horizontal and vertical sync counters
+    Horizontal raster position register
+
+CPU Clock
+The TED also generates the clock signal for the 7501/8501 microprocessor. The
+clock is not constant, as it switches from from 885 kHz and twice that speed,
+1.773 Mhz. The speed depends on TED's current task. It generates the slower
+clock signal when refreshing DRAM or fetching data for the video screen.
+Otherwise, the high clock signal is generated.
+The user can disable fast clock generation via a register. The end result is a
+machine that operates at approximately 1 MHz, as the CPU runs in slow mode
+while the screen is displayed, and operates in fast mode when the TED starts
+drawing the top and bottom borders.
+
+PAL/NTSC
+The TED chip can be configured to PAL or NTSC signals in Video Control Register
+2, there is no way to detect a PAL or NTSC mainboard, so the initialization is
+handled by separate PAL and NTSC BIOS versions.
+Attempts to change the setting will result in faulty color output, changed
+oscillator divider (resulting in overclocked/underclocked hardware), and
+changed number of scanlines (this will NOT toggle between 50Hz/60Hz mode, due
+to the different oscillator).
+
+Raster
+For the serious video programmer, raster interrupts are implemented as on the
+VIC-II. However, the 0 line of the register corresponds to the first line of
+the character screen area, not the top of the border. In addition, the current
+raster line can be read from TED registers. You can modify the counter as well.
+Doing so will most likely affect the screen display. As a bonus, the horizontal
+location of the raster can be read and modified in the same way.
+
+C16/PLUS4 Pin-Outs
+------------------
+
+C16/PLUS4 Serial - Female 6pin DIN
+  1 C16/C116: 5VDC via 330 Ohm - PLUS/4: N.C.
+  2 GND
+  3 ATN OUT
+  4 CLK IN/OUT
+  5 DATA IN/OUT
+  6 /RESET OUT
+Note: In other CBM computers, Pin 1 is used as SRQ IN, the C16/PLUS4 doesn't
+have this.
+
+C16/PLUS4 Joystick Ports - 2 x Female 8pin Mini DIN
+Not sure if one of the inputs can be used to connect a Lightpen?
+  1 JOY0  Up    (TED K0 Input)
+  2 JOY1  Down  (TED K1 Input)
+  3 JOY2  Left  (TED K2 Input)
+  4 JOY3  Right (TED K3 Input)
+  5 5VDC
+  6 BINA  Fire  (TED K6 or K7 Input)
+  7 GND
+  8 SELECT      (Amplified CPU databus D1 or D2 signal)
+Whereas, Commodores typical confusing assignments for two joysticks are:
+  SELECT  C16   C116       PLUS/4  BINA  BASIC
+  D1=LOW  JOY2  JOY1/JOYB  JOY1    K7    JOY(2)
+  D2=LOW  JOY1  JOY0/JOYA  JOY0    K6    JOY(1)
+For normal 9pin DSUB joysticks, connect directions and buttons accordingly, and
+connect the Mini DIN's SELECT signal to DSUB's GND pin. Leave all other pins
+unconnected.
+
+Cassette - Female 7pin Mini-DIN
+  1 GND
+  2 5VDC
+  3 MOTOR (9VDC)
+  4 CAS RD
+  5 CAS WRT
+  6 SENSE
+  7 GND
+
+Audio/Video - Female 8pin DIN
+  1 LUM
+  2 GND
+  3 AUDIO OUT
+  4 COMP
+  5 EXT AUDIO IN
+  6 COLOR
+  7 N.C.
+  8 C16/C116: 5VDC - PLUS4: N.C.
+
+Expansion Port - 50pin Female Edge
+  Y-F       A0-A15
+  21-14     D0-D7
+  4,5,C     /IRQ, R/W, /RESET
+  B,6,7,8   C1 LOW, C1 HIGH, C2 LOW, C2 HIGH
+  9,10      /CS1, /CS0
+  11,12,13  /CAS, MUX, BA
+  D,E,24,22 /RAS, Phi0, Phi2, AEC
+  2,3       5VDC
+  I,A,CC,25 GND
+  AA,BB     N.C.
+  Z         N.C. (RAMEN ?)
+  23        EXT AUDIO IN
+
+User Port - PLUS/4 Only - Not C16/C116 - 24pin Male Edge
+  M,E,D,B8?,H,L,C   6551A TxD,DTR,RTS,RxC,DCD,DSR,RxD
+  1,12,A,N          GND
+  2                 5VDC
+  10,11             9VAC1, 9VAC2
+  9                 SIO ATN
+  3                 /RESET (OUT)
+  F,J,7,6,5,4,K,B8? 6529B P7-P0
+
+Power Supply Input
+C16/C116: +9VDC
+PLUS/4: Female 4pin "Square-DIN-Style" with 9VAC and +5.2VDC
+Internally, all mainboards are running at raw 5VDC, the other voltages are used
+only to increase the room temperature, and for external hardware: Cassette
+Motor (9VDC), and User Port (9VAC).
+
+Keyboard Matrix
+---------------
+
+Note: On C64 and VIC20, Row and Column are bi-directional, conventionally
+Column=Output and Row=Input are used, but some programs are using the opposite
+directions. The C16 and Plus/4 are always using Col=Out, Row=In.
+
+C64 Keyboard Matrix
+The keyboard is arranged in form of a 8x8 matrix, a column must be selected by
+writing to CIA#1 Data Port A, the Row 0-7 data can be read from CIA#1 Data Port
+B as Bit 0-7:
+  Bit    Col0  Col1  Col2  Col3  Col4  Col5  Col6  Col7
+  Row0   DEL   "3"   "5"   "7"   "9"   "+"   PND   "1"
+  Row1   RET   "W"   "R"   "Y"   "I"   "P"   "*"   <--
+  Row2   RIGHT "A"   "D"   "G"   "J"   "L"   ";"   CTRL
+  Row3   F7    "4"   "6"   "8"   "0"   "-"   HOME  "2"
+  Row4   F1    "Z"   "C"   "B"   "M"   "."  RSHIFT SPC
+  Row5   F3    "S"   "F"   "H"   "K"   ":"   "="   <C=>
+  Row6   F5    "E"   "T"   "U"   "O"   "@"   "^"   "Q"
+  Row7   DOWN LSHIFT "X"   "V"   "N"   ","   "/"   STOP
+For I/O details see Complex Interface Adapter CIA#1 chapter. The default
+keyboard translation table is located at address EB81h in KERNAL ROM.
+
+C16 and Plus/4 Keyboard Matrix
+Almost same as on C64, only 10 keys are reassigned, mainly cursor related:
+  C64   "-"    "+"    POUND HOME   DOWN   RIGHT  RSHIFT <--   "^"    "@"
+  C16   UP     DOWN   LEFT  RIGHT  "@"    POUND  ESC?   HOME  "+"    "-"
+Also, function keys F1,F3,F5,F7 have been renamed to F1,F2,F3,HELP(F8).
+And, the C16 doesn't have a RESTORE key, instead it's having a RESET button.
+
+VIC20 Keyboard Matrix
+VIC20 COLUMNS equal to C64 ROWS with Bit3,7 exchanged.
+VIC20 ROWS equal to C64 COLUMNS with Bit0,7 exchanged.
+
+C64 Keyboard Layout
+  <--  1! 2" 3# 4$ 5% 6& 7' 8( 9) 0  +  -  PND HOME DEL  F1
+  CTRL   Q  W  E  R  T  Y  U  I  O  P  @  *  ^  RESTORE  F3
+  STP SHL A  S  D  F  G  H  J  K  L  :[ ;]  =  [RETURN]  F5
+  C=  SHIFT Z  X  C  V  B  N  M  ,< .> /? SHIFT U/D L/R  F7
+            [ _ _ _ _ _ SPACE _ _ _ _ _]
+
+C128 Keyboard Layout
+  ESC TAB ALT CAPS    HLP LF 40 SCR     UP DOWN LFT RGT  F1 F3 F5 F7
+  <--  1! 2" 3# 4$ 5% 6& 7' 8( 9) 0  +  -  PND HOME DEL  7  8  9  +
+  CTRL   Q  W  E  R  T  Y  U  I  O  P  @  *  ^  RESTORE  4  5  6  -
+  STP SHL A  S  D  F  G  H  J  K  L  :[ ;]  =  [RETURN]  1  2  3  EN-
+  C=  SHIFT Z  X  C  V  B  N  M  ,< .> /? SHIFT U/D L/R  [-0-] .  TER
+            [ _ _ _ _ _ SPACE _ _ _ _ _]
+
+C16 (66 type-writer keys; 3xSHIFT; cursor keys L/R/U/D in upper row)
+  ESC 1 2 3 4 5 6 7 8 9 0 L R U D DEL F1
+  CTRL Q W E R T Y U I O P @ + - HOME F2
+  RN SL A S D F G H J K L ; : * RETRN F3
+  C= SHF Z X C V B N M , . / SHF $ =  HELP
+         [------SPACE------]
+
+C116 (65 flat-short-way keys; 2xSHIFT)
+      F1  F2  F3  HELP  HOME? DEL?
+  ESC 1 2 3 4 5 6 7 8 9 0 + - *
+  CTRL Q W E R T Y U I O P @ RET
+  RUN $ A S D F G H J K L [  ] =   _|_
+  C= SHF Z X C V B N M , . / SHF    |
+         [------SPACE------]
+
+Plus/4 (67 type-writer keys, 3xSHIFT, 2xCTRL)
+      F1  F2  F3  HELP                     <-- reset button (side)
+  ESC 1 2 3 4 5 6 7 8 9 0 + - = HOME DEL
+  CTRL Q W E R T Y U I O P @ PND *  CTRL
+  RN SL A S D F G H J K L [  ] RETURN
+  C= SHF Z X C V B N M , . / SHF   _|_
+           [-----SPACE-----]        |
+
+The SHIFT LOCK Key (SHL)
+The C64 has three SHIFT keys (two normal SHIFT keys, and one SHIFT LOCK key).
+Left Shift and Shift Lock share the same entry in the keyboard matrix. The
+shift lock key is having a mechanical locking/unlocking function (similar like
+a ball-pen, it remains down when pressed once, and remains up when pressed
+another time).
+
+The RESTORE Key
+The Restore key is not part of the keyboard matrix, instead it is connected to
+the CPUs NMI signal, producing a non-maskable interrupt when pressed. On C64 it
+goes directly to the NMI line (and cannot be disabled), on VIC20 it is
+connected to VIA1 (allowing to enable/disable the NMI). Software should include
+a dummy NMI handler to prevent crashes when touching this key. For details see
+Interrupt chapter.
+
+Description of other special C64 keys...
+  Key   Full name   Normal use            Shifted use
+  HOME  CLR/HOME    Move cursor to 0,0    Move to 0,0 and clear screen
+  DEL   INST/DEL    Backspace             Insert one SPACE not moving cursor
+  STP   RUN/STOP    Stop/Break            Start Cassette Loading (LOAD+RUN)
+  C=    COMMODORE   Keycombinations...    Toggle Character Set 1 and 2
+  U/D   CRSR        Cursor Down           Cursor Up
+  L/R   CRSR        Cursor Right          Cursor Left
+  F1/F2 FUNCTION    F1                    F2
+  F3/F4 FUNCTION    F3                    F4
+  F5/F6 FUNCTION    F5                    F6
+  F7/F8 FUNCTION    F7                    F8
+The "<--" key displays the 'arrow left' symbol. The "PND" key displays the
+'pound' symbol, chr(5Ch), which is the backslash on computers with real ASCII
+character set.
+The RESTORE+STOP key combination produces a warmboot ???
+
+KERNAL Functions
+----------------
+
+KERNAL Functions (C64: FF81h-FFF5h, VIC20: FF8Ah-FFF5h)
+--> KERNAL Load/Save Functions
+--> KERNAL General File Input/Output
+--> KERNAL Serial Bus Low Level Functions
+--> KERNAL System Control
+--> KERNAL Error Handling
+
+KERNAL Memory (0000h-03FFh)
+--> KERNAL First Kilobyte RAM (0000h-03FFh)
+
+KERNAL POWER-UP ACTIVITIES
+     The KERNAL then checks for the presence of an autostart ROM cartridge
+     at location C64:8000h, VIC20:A000h. If this is present, normal
+     initialization is suspended, and control is transferred to the car-
+     tridge code.
+
+KERNAL Load/Save Functions
+--------------------------
+
+FFBA - SETLFS - Set up a logical file
+In: A=file_number, X=device_number (0-1Fh), Y=secondary address/channel
+Out: N/A
+  The following codes are used by the Commodore 64 to stand for the
+  CBM devices listed below:
+    ADDRESS  DEVICE
+    0        Keyboard
+    1        Datassette(TM)
+    2        RS-232C device
+    3        CRT display
+    4        Serial bus printer
+    8        CBM serial bus disk drive
+  Device numbers 4 or greater automatically refer to devices on the
+  serial bus.
+    A command to the device is sent as a secondary address on the serial
+  bus after the device number is sent during the serial attention
+  handshaking sequence. If no secondary address is to be sent, the Y index
+  register should be set to 255.
+
+FFBD - SETNAM - Set file name
+Used to prepare address & length of filename for OPEN, LOAD, SAVE functions.
+In: A=Length (0=None), Y:X=Address (if length nonzero) - Out: N/A
+
+FFD5 - LOAD - Load RAM from device
+Use SETLFS and SETNAM to prepare additional parameters before LOAD.
+The Secondary Address parameter (SA) is misused to select the target address in
+memory, either the address in Y:X registers, or the original file address
+stored in file header.
+In: A (0=Load, 1=Verify), SA (0=Load to Y:X, 1=Load to Header Address)
+Out: A=???, Y:X=End Address of file
+Error returns: 0,4,5,8,9, READST
+
+FFD8 - SAVE - Save memory to a device
+Use SETLFS and SETNAM to prepare additional parameters before SAVE.
+In: WORD[A]=Start Address, Y:X=End Address
+Note: The A-register must point to a 16bit value in page zero.
+Error returns: 5,8,9, READST
+    Registers affected: A, X, Y
+
+KERNAL General File Input/Output
+--------------------------------
+
+FFC0 - OPEN - Open a logical file
+Use SETLFS and SETNAM to prepare the parameters before using OPEN.
+In: N/A - Out: A,X,Y=Destroyed
+Error returns: 1,2,4,5,6,240, READST
+
+FFC6 - CHKIN - Select handle for CHRIN/GETIN
+Use OPEN to initialize the file_handle before use.
+This function automatically invokes TALK and TKSA.
+In: X=file_handle - Out: A,X=Destroyed
+
+FFC9 - CHKOUT - Select handle for CHROUT
+Use OPEN to initialize the file_handle before use.
+This function automatically invokes LISTEN and SECOND.
+In: X=file_handle - Out: A,X=Destroyed
+
+FFE4 - GETIN - Get a character
+In: N/A - Out: A=Data, X,Y=Destroyed
+  Preparatory routines: CHKIN, OPEN
+  Error returns: See READST
+ Description: If the channel is the keyboard, this subroutine removes
+  one character from the keyboard queue and returns it as an ASCII value in
+  the accumulator. If the queue is empty, the value returned in the
+  accumulator will be zero. Characters are put into the queue automatically
+  by an interrupt driven keyboard scan routine which calls the SCNKEY
+  routine. The keyboard buffer can hold up to ten characters. After the
+  buffer is filled, additional characters are ignored until at least one
+  character has been removed from the queue.
+ If the channel is RS-232, then
+  only the A register is used and a single character is returned. See
+  READST to check validity. If the channel is serial, cassette, or screen,
+  call BASIN routine.
+
+  How to Use:
+    1) Call this routine using a JSR instruction.
+    2) Check for a zero in the accumulator (empty buffer).
+    3) Process the data.
+  EXAMPLE:
+         ;WAIT FOR A CHARACTER
+    WAIT JSR GETIN
+         CMP #0
+         BEQ WAIT
+
+FFCF - CHRIN - Get a character from the input channel
+Use OPEN and CHKIN to initialize and select the channel.
+XXX behaves special when reading from keyboard ???
+In: N/A - Out: A=Data, X=Destroyed
+Error returns: 0 (See READST)
+
+FFD2 - CHROUT - Output a character
+Use OPEN and CHKOUT to initialize and select the channel.
+In: A=Data - Out: A=Destroyed
+Error returns: 0 (See READST)
+
+  +-----------------------------------------------------------------------+
+  | NOTE: Care must be taken when using this routine to send data to a    |
+  | specific serial device since data will be sent to all open output     |
+  | channels on the bus. Unless this is desired, all open output channels |
+  | on the serial bus other than the intended destination channel must be |
+  | closed by a call to the KERNAL CLRCHN routine.                        |
+  +-----------------------------------------------------------------------+
+
+FFCC - CLRCHN - Clear I/O channels
+In: N/A - Out: A,X=Destroyed
+  Description: This routine is called to clear all open channels and re-
+  store the I/O channels to their original default values. It is usually
+  called after opening other I/O channels (like a tape or disk drive) and
+  using them for input/output operations. The default input device is 0
+  (keyboard). The default output device is 3 (the Commodore 64 screen).
+    If one of the channels to be closed is to the serial port, an UNTALK
+  signal is sent first to clear the input channel or an UNLISTEN is sent to
+  clear the output channel. By not calling this routine (and leaving lis-
+  tener(s) active on the serial bus) several devices can receive the same
+  data from the Commodore 64 at the same time. One way to take advantage
+  of this would be to command the printer to TALK and the disk to LISTEN.
+  This would allow direct printing of a disk file.
+    This routine is automatically called when the KERNAL CLALL routine is
+  executed.
+
+FFC3 - CLOSE - Close a logical file
+In: A=file handle - Out: A,X,Y=Destroyed
+Error returns: 0,240 (See READST)
+  Description: This routine is used to close a logical file after all I/O
+  operations have been completed on that file. This routine is called after
+  the accumulator is loaded with the logical file number to be closed (the
+  same number used when the file was opened using the OPEN routine).
+
+FFE7 - CLALL - Close all files
+In: N/A - Out: A,X=Destroyed
+  Description: This routine closes all open files. When this routine is
+  called, the pointers into the open file table are reset, closing all
+  files. Also, the CLRCHN routine is automatically called to reset the I/O
+  channels.
+
+KERNAL Serial Bus Low Level Functions
+-------------------------------------
+
+Receive Functions: TALK, TKSA, ACPTR, UNTLK
+Send Functions: LISTEN, SECOND, CIOUT, UNLSN
+
+FFA5 - ACPTR - Get data from the serial bus
+Prepare by TALK and TKSA before use.
+In: N/A - Out: A=Received Data, X=Destroyed.
+Error returns: See READST
+
+FFA8 - CIOUT - Transmit a byte over the serial bus
+Prepare by LISTEN and SECOND and TKSA before use.
+In: A=Data - Out: N/A
+Error returns: See READST
+
+  This routine always buffers one character. (The routine holds the previous
+  character to be sent back.) So when a call to the UNLSN routine is made to
+  end the data transmission, the buffered character is sent with an End Or
+  Identify (EOI) set. Then the UNLSN command is sent to the device.
+
+FFB1 - LISTEN - Command a device on the serial bus to receive data
+  In: A=Device Number (0-1Fh)
+  Error returns: See READST
+  Registers affected: A
+LISTEN will OR the number bit by bit to convert to a listen address, then
+transmits this data as a command on the serial bus.
+The specified device will then go into listen mode, and be ready to accept
+information.
+
+FF93 - SECOND - Send secondary address for LISTEN
+    Communication registers: A
+    Preparatory routines: LISTEN
+    Error returns: See READST
+    Registers affected: A
+  Description: This routine is used to send a secondary address to an
+  I/O device after a call to the LISTEN routine is made, and the device is
+  commanded to LISTEN. The routine can NOT be used to send a secondary
+  address after a call to the TALK routine.
+  A secondary address is usually used to give setup information to a
+  device before I/O operations begin.
+  When a secondary address is to be sent to a device on the serial bus,
+  the address must first be ORed with $60.
+
+FFAE - UNLSN - Send an UNLISTEN command on serial bus
+  In: N/A - Out: A=Destroyed
+  Error returns: See READST
+Commands all devices on the serial bus to stop receiving data. Only devices
+previously commanded to listen are affected.
+
+FFBA - TALK - Command a device on the serial bus to TALK
+In: A=Device number (0-1Fh) - Out: A=Destroyed
+Error returns: See READST
+
+FF96 - TKSA - Send a secondary address to a device commanded to TALK
+Use TALK to send the device number before using TKSA.
+TKSA is required if the device does use secondary address.
+In: A=Secondary Address (0..1Fh), eg. disk channel_number - Out: A=Destroyed
+Error returns: See READST
+
+FFAB - UNTLK - Send an UNTALK command on serial bus
+  In: N/A - Out: A=Destroyed
+  Error returns: See READST
+All devices previously set to TALK will stop sending data when this command is
+received.
+
+KERNAL System Control
+---------------------
+
+FF81 - CINT - Initialize screen editor & 6567 video chip
+C64 Only - Not supported by VIC20 !!!
+In: N/A - Out: A,X,Y=Destroyed
+  Description: This routine sets up the 6567 video controller chip in the
+  Commodore 64 for normal operation. The KERNAL screen editor is also
+  initialized. This routine should be called by a Commodore 64 program
+  cartridge.
+
+FF84 - IOINIT - Initialize I/O devices
+C64 Only - Not supported by VIC20 !!!
+In: N/A - Out: A,X,Y=Destroyed
+  Description: This routine initializes all input/output devices and
+  routines. It is normally called as part of the initialization procedure
+  of a Commodore 64 program cartridge.
+
+FF87 - RAMTAS - Perform RAM test
+C64 Only - Not supported by VIC20 !!!
+In: N/A - Out: A,X,Y = Destroyed, TwoSecondsOfYourLife = Wasted.
+  Description: This routine is used to test RAM and set the top and
+  bottom of memory pointers accordingly. It also clears locations $0000 to
+  $0101 and $0200 to $03FF. It also allocates the cassette buffer, and sets
+  the screen base to $0400. Normally, this routine is called as part of the
+  initialization process of a Commodore 64 program cartridge.
+
+FF8A - RESTOR - Restore default system and interrupt vectors
+In: N/A - Out: A,X,Y=Destroyed
+  Description: This routine restores the default values of all system
+  vectors used in KERNAL and BASIC routines and interrupts. (See the Memory
+  Map for the default vector contents). The VECTOR routine is used
+  to read and alter individual system vectors.
+
+FF8D - VECTOR - Copy KERNAL vectors [0314h-0333h] to/from Buffer [Y:X]
+  Get: In: Cy=1, Y:X=Target Address - Out: A,X,Y=Destroyed
+  Set: In: Cy=0, Y:X=Source Address - Out: A,X,Y=Destroyed
+BUG: Programmers Reference suggests using a 26 bytes buffer, all C64/VIC20
+Kernal versions actually require 32 bytes (20h) buffer.
+
+FF9C - MEMBOT - Get or Set bottom of RAM
+  Set: In: Cy=0, Y:X=Address
+  Get: In: Cy=1 - Out: Y:X=Address (usually 800h on C64)
+
+FF99 - MEMTOP - Get or Set the top of RAM
+  Set: In: Cy=0, Y:X=Address
+  Get: In: Cy=1 - Out: Y:X=Address (usually A000h on C64)
+
+FF9F - SCNKEY - Scan the keyboard
+Preparatory routines: IOINIT
+  In: N/A - Out: A,X,Y=Destroyed
+Scans the keyboard, if a key is down, its ASCII value is placed in the keyboard
+queue, which can be then read by GETIN.
+SCNKEY is normally automatically called by the interrupt handler.
+
+FFED - SCREEN - Get Computers Screen Format
+  Out: X=Width, Y=Height (40x25 for C64/C16, 22x23 for VIC20)
+
+FFF0 - PLOT - Get or Set Cursor Location
+  Set: In: Cy=0, X=0..24, Y=0..39 - Out: A=Destroyed
+  Get: In: Cy=1 - Out: X=0..24, Y=0..39
+Note that the X-register has been choosen to specify the Y-position.
+
+FFF3 - IOBASE - Get Computers I/O Base Address
+Out: Y:X=Address (C64: DC00h, CIA#1) (VIC20: 9110h, VIA#1) (C16: FD00h, ACIA)
+
+FFDB - SETTIM - Set the system clock
+In: Y:X:A=Time in 1/60 seconds (jiffies) - Out: N/A
+
+FFDE - RDTIM - Read system clock
+  In: N/A - Out: Y:X:A=Time in 1/60 seconds (jiffies)
+  The clock range is 24 hours, 0..5183999 (0..4F19FFh) jiffies,
+  and starts over at zero when exceeding that range.
+Note: The clock is NOT battery buffered, it is reset to zero on power up.
+BUG: Programmers Guide incorrectly specified A:X:Y ordering for RDTIM/SETTIM.
+The clock is incremented by CIA1 only 20x per second ??? Or is that 3x
+CPU-clock ??? Inaccuracy with PAL/NTSC oscillators which are both not exact
+1MHZ ???
+
+FFEA - UDTIM - Update the system clock
+Increments the system clock by 1 jiffie (=1/60 seconds).
+This function is usually called by the KERNALs interrupt handler.
+In: N/A - Out: A,X=Destroyed
+
+FFA2 - SETTMO - Set IEEE bus card timeout flag
+  In: A.Bit7 Timeout Flag (0=Set/Enable, 1=Reset/Disable) - Out: Same
+NOTE: This routine is used ONLY with an IEEE add-on card!
+  Description: When the timeout flag is set, the Kernal will wait for a
+  device on the IEEE port for 64 milliseconds. If the device does not
+  respond to the Data Address Valid (DAV) signal within that time then the
+  Kernal will recognize an error condition and leave the handshake sequence.
+NOTE: The Commodore 64 uses the timeout feature to communicate that a disk file
+is not found on an attempt to OPEN a file only with an IEEE card.
+
+FFE1 - STOP - Check if <STOP> key is pressed
+  In: N/A - Out: A,X=Destroyed, Zeroflag=STOP Flag
+If the <STOP> key on the keyboard was pressed during a UDTIM call, this call
+returns the Z flag set. In addition, the channels will be reset to default
+values.
+
+KERNAL Error Handling
+---------------------
+
+  ERROR RETURNS: A return from a KERNAL routine with the CARRY set
+  indicates that an error was encountered in processing. The accumulator
+  will contain the number of the error.
+  NOTE: Some KERNAL I/O routines do not use these codes for error
+  messages. Instead, errors are identified using the KERNAL READST
+  routine.
+Additionally, disk drives provide additional error information by reading from
+the drives error channel (see Disk chapter for more info).
+
+Error codes in Accumulator (A-Register)
+  If an error occurs during a KERNAL routine, the carry bit is set,
+  and the number of the error message is returned in the accumulator.
+  Num  Expl.
+  0    Routine terminated by the <STOP> key
+  1    Too many open files
+  2    File already open
+  3    File not open
+  4    File not found
+  5    Device not present
+  6    File is not an input file
+  7    File is not an output file
+  8    File name is missing
+  9    Illegal device number
+  240  Top-of-memory change RS-232 buffer allocation/deallocation
+
+FFB7 - READST - Read Status Word of Serial Bus and Cassette operations
+In: N/A - Out: A, Bit 0-7 (0=Okay, 1=Error) (See table)
+  Bit  Expl.
+  0    Serial Bus: Time out write
+  1    Serial Bus: Time out read
+  2    Cassette: Short Block
+  3    Cassette: Long Block
+  4    Cassette: Any mismatch/Unrecoverable read error
+  5    Cassette: Checksum error
+  6    Cassette: End of file, Serial Bus: EOI line (End Or Identify)
+  7    Cassette: End of tape, Serial Bus: Device not present
+
+FF90 - SETMSG - Enable/Disable Screen Output of Control & Error Messages
+    Communication registers: A
+    Registers affected: A
+  Bit7  0=Disable, 1=Enable Control Messages (eg. PRESS PLAY ON CASSETTE)
+  Bit6  0=Disable, 1=Enable Error Messages   (eg. FILE NOT FOUND)
+
+KERNAL First Kilobyte RAM (0000h-03FFh)
+---------------------------------------
+
+Below describes the C64/VIC20 operating system usage of the first kilobyte of
+RAM. Caution: The C16 uses different addresses.
+Fixed assignments are 0100h-01FFh (CPU stack), and 0314h-0319h (IRQ/BRK/NMI
+vectors). The other memory can be used for whatever purpose by Non-OS-based
+programs.
+
+  Address      Name    Expl.
+  0000h        D6510   C64: 6510 On-Chip Data-Direction Register
+  0001h        R6510   C64: 6510 On-Chip Data-Input/Output Register
+  0002h                C64: Unused
+BASIC Working Storage (0000h-008Fh)
+  0000h                VIC20: USR Function JMP Opcode (4Ch) (C64: see 0310h)
+  0001h-0002h          VIC20: USR Function Vector (MSB,LSB) (C64: see 0311h)
+  0003h-0004h  ADRAY1  Jump Vector: Convert Float--Integer
+  0005h-0006h  ADRAY2  Jump Vector: Convert Integer--Float
+  0007h        CHARAC  Search Character
+  0008h        ENDCHR  Flag: Scan for Quote at End of String
+  0009h        TRMPOS  Screen Column From Last TAB
+  000Ah        VERCK   Flag: 0=Load, 1=Verify
+  000Bh        COUNT   Input Buffer Pointer / Number of Subscripts
+  000Ch        DIMFLG  Flag: Default Array DIMension
+  000Dh        VALTYP  Data Type: FFh=String, 00h=Numeric
+  000Eh        INTFLG  Data Type: 80h=Integer, 00h=Float
+  000Fh        GARBFL  Flag: DATA scan/LIST quote/Garbage Coll
+  0010h        SUBFLG  Flag: Subscript Ref / User FNx Function Call
+  0011h        INPFLG  Flag: 00h=INPUT, 40h=GET, 98h=READ
+  0012h        TANSGN  Flag: ATN/TAN sign / Comparison Result
+  0013h                Flag: INPUT Prompt
+  0014h-0015h  LINNUM  Temp: Integer Value (see Float conversion 0003h,0005h)
+  0016h        TEMPPT  Pointer Temporary String Stack
+  0017h-0018h  LASTPT  Last Temp String Address
+  0019h-0021h  TEMPST  Stack for Temporary Strings
+  0022h-0025h  INDEX   Utility Pointer Area (0022h: INDEX1, 0024h: INDEX2)
+  0026h-002Ah  RESHO   Floating-Point Product of Multiply
+  002Bh-002Ch  TXTTAB  Pointer: Start of BASIC Program
+  002Dh-002Eh  VARTAB  Pointer: Start of BASIC Variables (End of Basic program)
+  002Fh-0030h  ARYTAB  Pointer: Start of BASIC Arrays (End of Variables)
+  0031h-0032h  STREND  Pointer: Start of free memory (End of Arrays+1)
+  0033h-0034h  FRETOP  Pointer: Bottom of String Storage (End of Free memory)
+  0035h-0036h  FRESPC  Utility String Pointer
+  0037h-0038h  MEMSIZ  Pointer: Highest Address Used by BASIC (End of Strings)
+  0039h-003Ah  CURLIN  Current BASIC Line Number
+  003Bh-003Ch  OLDLIN  Previous BASIC Line Number
+  003Dh-003Eh  OLDTXT  Pointer: BASIC Statement for CONT
+  003Fh-0040h  DATLIN  Current DATA Line Number
+  0041h-0042h  DATPTR  Pointer: Current DATA Item Address
+  0043h-0044h  INPPTR  Vector: INPUT Routine
+  0045h-0046h  VARNAM  Current BASIC Variable Name
+  0047h-0048h  VARPNT  Current BASIC Variable Address (Pointer)
+  0049h-004Ah  FORPNT  Pointer: Index Variable for FOR/NEXT
+  004Bh-0060h          Temp Pointer / Data Area
+  004Bh-004Ch  VARTXT  Temporary storage for TXTPTR during READ, INPUT, GET
+  004Dh        OPMASK  Mask used during FRMEVL / Comparison symbol accumulator
+  004Eh-0052h  TEMPF3  Temporary storage for FLPT value.
+  0053h        FOUR6   Length of String Variable during Garbage collection.
+  0054h-0056h  JMPER   Jump Vector used in Function Evaluation (4Ch, LSB, MSB)
+  0057h-005Bh  TEMPF1  Temporary storage for FLPT value.
+  005Ch-0060h  TEMPF2  Temporary storage for FLPT value.
+.................
+  0061h-0066h  FAC     Floating-Point Accumulator 1 (Exp,4-Byte Mantissa,Sign)
+  0067h        SGNFLG  Pointer: Series Evaluation Constant
+  0068h        BITS    Floating-Point Accumulator 1 (Overflow Digit)
+  0069h-006Eh  ARG     Floating-Point Accumulator 2 (Exp,4-Byte Mantissa,Sign)
+  006Fh        ARISGN  Sign Comparison Result: Accumulator 1 vs 2
+  0070h        FACOV   Floating-Point Accumulator 1 (Low-Order, Rounding)
+  0071h-0072h  FBUFPT  Pointer: Cassette Buffer
+  0073h-0078h  CHRGET  Subroutine: Get Next Byte of BASIC Text
+  0079h        CHRGOT  Subroutine: Entry to Get Same Byte of Text Again
+  007Ah-007Bh  TXTPTR  Pointer: Current Byte of BASIC Text
+  007Ch-008A           Subroutine: Rest of the CHRGET/CHRGOT Subroutines
+  008Bh-008Fh  RNDX    Floating RND Function Seed Value
+KERNAL Working Storage (0090h-00FFh)
+  0090h        STATUS  Kernal I/O Status Word: ST
+  0091h        STKEY   Flag: STOP key / RVS key
+  0092h        SVXT    Timing Constant for Tape
+  0093h        VERCK   Flag: 0=Load, 1=Verify
+  0094h        C3PO    Flag: Serial Bus-Output Character Buffered
+  0095h        BSOUR   Buffered Character for Serial Bus
+  0096h        SYNO    Cassette Sync No. / Tape EOT received
+  0097h                Temp Data Area / Register save
+  0098h        LDTND   Number of Open Files / Index to File Table
+  0099h        DFLTN   Default Input Device (normally 0=Keyboard)
+  009Ah        DFLTO   Default Output (CMD) Device (normally 3=Screen)
+  009Bh        PRTY    Tape Character Parity
+  009Ch        DPSW    Flag: Tape Byte-Received
+  009Dh        MSGFLG  Flag: 80h=Direct Mode, 00h=Program RUN
+  009Eh        PTR1    Tape Pass 1 Error Log
+  009Fh        PTR2    Tape Pass 2 Error Log
+  00A0h-00A2h  TIME    60Hz Real-Time Jiffy Clock (approx) 1/60 Sec
+  00A3h-00A4h          Temp Data Area
+  00A5h        CNTDN   Cassette Sync Countdown
+  00A6h        BUFPNT  Pointer: Tape I/O Buffer
+  00A7h        INBIT   RS-232 Input Bits / Cassette Temp
+  00A8h        BITCI   RS-232 Input Bit Count / Cassette Temp
+  00A9h        RINONE  RS-232 Flag: Check for Start Bit
+  00AAh        RIDATA  RS-232 Input Byte Buffer/Cassette Temp
+  00ABh        RIPRTY  RS-232 Input Parity / Cassette Short Cnt
+  00ACh-00ADh  SAL     Pointer: Tape Buffer / Screen Scrolling
+  00AEh-00AFh  EAL     Tape End Addresses/End of Program
+  00B0h-00B1h  CMP0    Tape Timing Constants
+  00B2h-00B3h  TAPE1   Pointer: Start of Tape Buffer
+  00B4h        BITTS   RS-232 Out Bit Count / Cassette Temp
+  00B5h        NXTBIT  RS-232 Next Bit to Send/ Tape EOT Flag
+  00B6h        RODATA  RS-232 Out Byte Buffer
+  00B7h        FNLEN   Length of Current File Name
+  00B8h        LA      Current Logical File Number
+  00B9h        SA      Current Secondary Address
+  00BAh        FA      Current Device Number
+  00BBh-00BCh  FNADR   Pointer: Current File Name
+  00BDh        ROPRTY  RS-232 Out Parity / Cassette Temp
+  00BEh        FSBLK   Cassette Read / Write Block Count
+  00BFh        MYCH    Serial Word Buffer
+  00C0h        CAS1    Tape Motor Interlock
+  00C1h-00C2h  STAL    I/O Start Address (VIC20:8000h, C64:A000h) (both wrong?)
+  00C3h-00C4h  MEMUSS  Tape Load Temps / VIC20: KERNAL setup pointer
+  00C5h        LSTX    Current Key Pressed (40h=None) (0-3Fh=Key Number)
+                       The Key Numbers differ on C64/VIC20. If more than 1 key
+                       is down, the key with the highest number shows up here.
+                       Not used for special keys like SHIFT, CTRL, etc.
+  00C6h        NDX     Number of Chars in Keyboard Buffer (see also: 0277h)
+  00C7h        RVS     Flag: Reverse Chars (01h=On/Yes, 00h=Off/Not Used)
+  00C8h        INDX    Pointer: End of Logical Line for INPUT
+  00C9h-00CAh  LXSP    Cursor X,Y Position at Start of INPUT
+  00CBh        SFDX    C64: Flag: Print Shifted Chars.
+  00CBh                VIC20: Current key pressed (same as 00C5h)
+  00CCh        BLNSW   Cursor Blink enable (0=Flash Cursor) (copy of 00C6h)
+  00CDh        BLNCT   Timer: Countdown to Toggle Cursor
+  00CEh        GDBLN   Character Under Cursor
+  00CFh        BLNON   Flag: Last Cursor Blink On/Off
+  00D0h        CRSW    Flag: INPUT or GET from Keyboard / from screen
+  00D1h-00D2h  PNT     Pointer: Cursor Current Screen Line Address
+  00D3h        PNTR    Cursor Column on Current Line
+  00D4h        QTSW    Flag: Editor in Quote Mode (00h=No/Direct Cursor)
+  00D5h        LNMX    Screen Line Length, screen_width*(1..4)-1
+  00D6h        TBLX    Current Cursor Line Number (see also: 00D1h-00D2h,00D3h)
+  00D7h                Temp Data Area, last inkey/checksum/buffer
+  00D8h        INSRT   Insert Mode (00h=Disable, NNh=Number of spaces left)
+  00D9h-00F2h  LDTB1   Screen Line Link Table / Editor Temps
+  00F3h-00F4h  USER    Pointer: Current Screen Color RAM location
+  00F5h-00F6h  KEYTAB  Pointer: Current Keyboard Decode Table (Norm,Shift,etc.)
+  00F7h-00F8h  RIBUF   RS-232 Input Rcv Buffer Pointer
+  00F9h-00FAh  ROBUF   RS-232 Output Tx Buffer Pointer
+  00FBh-00FEh  FREKZP  User Program Zero-Page Space (not used by BASIC/KERNAL)
+  00FFh        BASZPT  BASIC Temp Data Area
+BASIC & KERNAL Stack (0100h-01FFh)
+  0100h-01FFh          Micro-Processor System Stack Area
+   0100h-010Ah         Floating to String Work Area
+   0100h-013Eh BAD     Tape Error Log
+BASIC & KERNAL Working Storage (0200h-033Bh)
+  0200h-0258h  BUF     System INPUT Buffer
+  0259h-0262h  LAT     KERNAL Table: Active OPEN Logical File Numbers
+  0263h-026Ch  FAT     KERNAL Table: Device Number for each File
+  026Dh-0276h  SAT     KERNAL Table: Secondary Address for each File
+  0277h-0280h  KEYD    Keyboard Buffer Queue (see also: 00C6h,0289h)
+  0281h-0282h  MEMSTR  Pointer: Bottom of Memory for Operating System
+  0283h-0284h  MEMSIZ  Pointer: Top of Memory for Operating System
+  0285h        TIMOUT  Flag: Kernal Variable for IEEE or Serial Timeout
+  0286h        COLOR   Current Character Color Code
+  0287h        GDCOL   Background Color Under Cursor
+  0288h        HIBASE  Start of Screen Memory (MSB=Page)
+  0289h        XMAX    Size of Keyboard Buffer (max 0Ah, see also: 0277h,0289h)
+  028Ah        RPTFLG  Flag: Key Repeat (00h=Cursor Keys, 80h=All keys)
+  028Bh        KOUNT   Key Repeat Speed Counter
+  028Ch        DELAY   Key Repeat Delay Counter
+  028Dh        SHFLAG  Keyboard Flags (Bit0=Shift, Bit1=Commodore, Bit2=Ctrl)
+  028Eh        LSTSHF  Last Keyboard Shift Pattern
+  028Fh-0290h  KEYLOG  Vector: Keyboard Table Setup / Decode Logic
+  0291h        MODE    Flag: SHIFT+COMMODORE Case Switch (0=Enable,80h=Disable)
+  0292h        AUTODN  Flag: Auto Scroll Down (0=On, other=Off)
+  0293h        M51CTR  RS-232: 6551 Control Register Image
+  0294h        MS1CDR  RS-232: 6551 Command Register Image
+  0295h-0296h  M51AJB  RS-232 Non-Standard BPS (Time/2-100) USA
+  0297h        RSSTAT  RS-232: 6551 Status Register Image
+  0298h        BITNUM  RS-232 Number of bits left to send
+  0299h-029Ah  BAUDOF  RS-232 Baud Rate: Full Bit Time (us)
+  029Bh        RIDBE   RS-232 Index to Input Buffer End
+  029Ch        RIDBS   RS-232 Start of Input Buffer (Page)
+  029Dh        RODBS   RS-232 Start of Output Buffer (Page)
+  029Eh        RODBE   RS-232 Index to Output Buffer End
+  029Fh-02A0h  IRQTMP  Holds IRQ Vector During Tape I/O
+  02A1h-02FFh          VIC20: Program indirects
+  02A1h        ENABL   C64: RS-232 Enables
+  02A2h                C64: TOD Sense During Cassette I/O
+  02A3h                C64: Temp Storage For Cassette Read
+  02A4h                C64: Temp D1 IRQ Indicator For Cassette Read
+  02A5h                C64: Temp For Line Index
+  02A6h                C64: PAL/NTSC Flag, 0= NTSC, 1 = PAL
+  02A7h-02FFh          C64: Unused
+  0300h-0301h  IERROR  Vector: Print BASIC Error Message
+  0302h-0303h  IMAIN   Vector: BASIC Warm Start
+  0304h-0305h  ICRNCH  Vector: Tokenize BASIC Text (Crunch)
+  0306h-0307h  IQPLOP  Vector: BASIC Text LIST (Print Tokens)
+  0308h-0309h  IGONE   Vector: BASIC Char. Dispatch / Start new Basic code link
+  030Ah-030Bh  IEVAL   Vector: BASIC Token Evaluation / arithmetic element link
+  030Ch-030Fh  SxREG   Storage for 6502 Registers A,X,Y,P
+  0310h-0313h          VIC20: Unused ?
+  0310h        USRPOK  C64: USR Function JMP Opcode (4Ch) (VIC20: see 0000h)
+  0311h-0312h  USRADD  C64: USR Function Vector (LSB,MSB) (VIC20: see 0001h)
+  0313h                C64: Unused
+  0314h-0315h  CINV    CPU IRQ Vector (redirected IRQ with A,X,Y pushed)
+  0316h-0317h  CBINV   CPU BRK Vector (redirected BRK with A,X,Y pushed)
+  0318h-0319h  NMINV   CPU NMI Vector (redirected NMI without anything pushed)
+  031Ah-031Bh  IOPEN   KERNAL OPEN Vector
+  031Ch-031Dh  ICLOSE  KERNAL CLOSE Vector
+  031Eh-031Fh  ICHKIN  KERNAL CHKIN Vector
+  0320h-0321h  ICKOUT  KERNAL CHKOUT Vector
+  0322h-0323h  ICLRCH  KERNAL CLRCHN Vector
+  0324h-0325h  IBASIN  KERNAL CHRIN Vector
+  0326h-0327h  IBSOUT  KERNAL CHROUT Vector
+  0328h-0329h  ISTOP   KERNAL STOP Vector
+  032Ah-032Bh  IGETIN  KERNAL GETIN Vector
+  032Ch-032Dh  ICLALL  KERNAL CLALL Vector
+  032Eh-032Fh  USRCMD  User-Defined Vector
+  0330h-0331h  ILOAD   KERNAL LOAD Vector
+  0332h-0333h  ISAVE   KERNAL SAVE Vector
+  0334h-033Bh          Unused
+Tape Buffer Working Storage (033Ch-03FFh)
+  033Ch-03FBh  TBUFFR  Tape I/O Buffer (General purpose RAM when CAS not used)
+  03FCh-03FFh          Unused
+
+Versatile Interface Adapter 6522 (VIA)
+--------------------------------------
+
+00h - Input/Output Register B (IRB/ORB) (PB7..PB0)
+  Bit  Expl.
+  7-0  Input/Output lines PB7..PB0      (0=Low, 1=High)
+Writing always sets the ORB output latch (even in input mode).
+Reading unlatched-inputs returns current state of PB pins.
+Reading latched-inputs returns state of PB pins at most recent CB1 edge.
+Reading outputs will directly return ORB settings, regardless of PB pins and/or
+latching (unlike as for Register A below).
+Reading/writing IRB/ORB acknowledges CB1 Edge IRQ, and (in Non-independend
+mode) also acknowledges CB2 Edge IRQ.
+
+01h - Input/Output Register A (IRA/ORA) (PA7..PA0)
+  Bit  Expl.
+  7-0  Input/Output lines PA7..PA0      (0=Low, 1=High)
+Writing always sets the ORA output latch (even in input mode).
+Reading unlatched-inputs returns current state of PA pins.
+Reading latched-inputs returns state of PA pins at most recent CA1 edge.
+In output mode, reading/latching data from PA pins will most likely represent
+to ORA data - but may be forcefully pulled high/low by external hardware
+(unlike as for Register B above).
+Reading/writing IRA/ORA acknowledges CA1 Edge IRQ, and (in Non-independend
+mode) also acknowledges CA2 Edge IRQ.
+
+02h - Data Direction Register B (DDRB)
+03h - Data Direction Register A (DDRA)
+  Bit  Expl.
+  7-0  Direction for Data Port Bits 7-0  (0=Input, 1=Output)
+
+04h - T1 Low-order Counter/Latch (T1C_L)
+05h - T1 High-order Counter/Latch (T1C_H)
+06h - T1 Low-order Latch (T1L_L)
+07h - T1 High-order Latch (T1L_H)
+  Reading port 04h/05h returns the upper/lower T1 counter value.
+  Reading port 06h/07h returns the lower/upper T1 latch value.
+  Reading port 04h resets the T1 interrupt flag (IFR.6).
+  Writing port 04h/05h or 06h/07h sets lower/upper bits of the T1 <latch>.
+  Writing port 05h copies the 16bit T1 latch to the 16bit T1 counter.
+  Writing port 05h/07h resets the T1 interrupt flag (IFR.6).
+T1 is a 16bit counter decremented at system clock rate. An interrupt is
+generated upon underflow. It can be used in one-shot mode, or in continous mode
+(using the latch as reload value upon underflows). Additionally, it can be
+configured to toggle the PB7 output upon underflow.
+
+08h - T2 Low-Order Latch/Counter (T2C_L)
+09h - T2 High-Order Counter (T2C_H)
+  Writing to 08h sets the T2 low-order <latch>.
+  Writing to 09h sets the T2 high-order <counter>.
+  Writing to 09h also copies lower-order latch to low-order counter.
+  Writing to 09h additionally resets the T2 interrupt flag (IFR.5).
+  Reading from 08h/09h returns the low/high-order T2 counter value.
+  Reading from 08h additionally resets the T2 interrupt flag (IFR.5).
+T2 is a one-shot 16bit counter, decremented either at System 02 clock rate, or
+by negative pulses on PB6 pin. An interrupt is generated upon underflow. T2 can
+be also used as 8bit prescaler for the Shift register (in that case, the
+low-order latch is used as 8bit reload value after each bit transfer).
+
+0Ah - 8bit Shift Register (SR)
+  Reading/writing SR resets the shift counter, and, in most shift modes,
+  starts the transfer and generates an interrupt once the shift counter
+  reaches a value of eight.
+Serial data is shifted in or out to the left, in case of serial output the
+register is in fact just rotated to the left, causing the initial content to be
+restored after 8 shift operations.
+Data is input/output at CB2 line, the shift clock is input/output at CB1 line.
+Transfer direction, internal clock rate, or external clock selection can be
+programmed in Auxiliary Control Register.
+
+0Bh - Auxiliary Control Register (ACR)
+  Bit  Expl.
+  7    T1 Toggle PB7 Output     (0=Disable, 1=Invert PB7 upon underflow)
+  6    T1 Continous Mode        (0=One-Shot, 1=Restart upon underflow)
+  5    T2 Clock Source          (0=System clock, 1=PB6 negative edge)
+  4    Shift Register Direction (0=Shift In, 1=Shift Out)
+  3-2  Shift Register Mode      (0-3, see below)
+  1    PB Latching Enable       (0=Disable, 1=Latch PB on CB1 Interrupt Flag)
+  0    PA Latching Enable       (0=Disable, 1=Latch PA on CA1 Interrupt Flag)
+Shift Register Modes:
+  0=Free-Run (when Bit4=1), or Disabled (when Bit4=0)
+  1=Shift at System 02 Clock rate divided by (2+T2C_L)
+  2=Shift at System 02 Clock rate divided by 2
+  3=Shift at external CB1 clock rate
+In mode Free-Run/Disabled mode, data is shifted in at CB1 rate, or shifted out
+at T2 rate (by repeatedly outputting 8bit SR data), in either case no
+interrupts are generated when completing 8bits of data.
+
+0Ch - Peripheral Control Register (PCR)
+  Bit  Expl.
+  7-5  CB2 Input/Output Control (0-7, see below)
+  4    CB1 Input Control        (0-1, see below)
+  3-1  CA2 Input/Output Control (0-7, see below)
+  0    CA1 Input Control        (0-1, see below)
+CB2 and CA2 Control (referred as CX2, with corresponding CX1,PX respectively)
+  0 (In)  Interrupt on negative CX2 edge, Acknowldge by read/write Port PX
+  1 (In)  Interrupt on negative CX2 edge, Independent (without ack via PX)
+  2 (In)  Interrupt on positive CX2 edge, Acknowldge by read/write Port PX
+  3 (In)  Interrupt on positive CX2 edge, Independent (without ack via PX)
+  4 (Out) Handshake (CX2=LOW on write Port B, CX2=HIGH on active CX1 edge)
+  5 (Out) Pulse     (CX2=LOW for 1 cycle on write to Port PX)
+  6 (Out) Manual    (CX2=LOW)
+  7 (Out) Manual    (CX2=HIGH)
+CB1 and CA1 Control (referred as CX1, with corresponding PX respectively)
+  0 (In)  Interrupt on negative CX1 edge, Acknowldge by read/write Port PX
+  1 (In)  Interrupt on positive CX1 edge, Acknowldge by read/write Port PX
+
+0Dh - Interrupt Flag Register (IFR) (Request/Acknowledge)
+0Eh - Interrupt Enable Register (IER) (Enable/Disable)
+  Bit  Set by                 Cleared by
+  0    CA2 Active edge        Read or write ORA (except in Independed mode)
+  1    CA1 Active edge        Read or write ORA
+  2    Completed 8 shifts     Read or write SR
+  3    CB2 Active edge        Read or write ORB (except in Independed mode)
+  4    CB1 Active edge        Read or write ORB
+  5    T2 Underflow           Read T2 low or write T2 high
+  6    T1 Underflow           Read T1 low or write T1 high
+  7    Any enabled interrupt  Cleared only when (IER AND IFR AND 7Fh)=00h
+Accessing Interrupt Flag Register:
+  Write IFR 0-6   Interrupt Acknowledge           (0=Keep, 1=Set to Zero)
+  Write IFR 7     No function                     (Don't care)
+  Read IFR 0-6    Interrupt Request Flags         (0=None, 1=Interrupt Request)
+  Read IFR 7      Interrupt signal, set when IER AND IFR AND 7Fh is nonzero
+Accessing Interrupt Enable Register:
+  Write/IER 0-6   Select Interrupt Enable Bits    (0=Keep, 1=Set to Bit7)
+  Write/IER 7     New Value for Selected IER Bits (0=Disable, 1=Enable)
+  Read/IER 0-6    Current Value of IER Bits 0-6   (0=Disabled, 1=Enabled)
+  Read/IER 7      Not used                        (Always 1)
+Writing a "1" into IER Bit 0-6 sets the respective bit to the value in IER 7.
+Writing a "1" into IFR Bit 0-6 sets the respective bit to zero (the IFR bits
+can be also cleared by circumstances described in the right column).
+
+0Fh - Input/Output Register A' (IRA'/ORA')
+Same as Register 01h, except no CA1/CA2 handshake.
+
+Summary of Input/Output Pins
+The VIA includes 16 general purpose pins, 4 control pins, and 1 interrupt pin.
+  Pin(s)  Dir  Purpose
+  PA0-7   I/O  Eight general purpose I/O pins
+  PB0-7   I/O  Eight general purpose I/O pins
+  PB6     In   Optionally used as Timer T2 clock source (negative edge)
+  PB7     Out  Optionally toggled on each T1 Timer underflow
+  CA1/CB1 In   Edge triggered IRQ (with optional Port A/B latching)
+  CA2/CB2 In   Edge triggered IRQ (with optional Port A/B Acknowledge)
+  CA1/CB1 In   Port A/B handshake input
+  CA2/CB2 Out  Fixed High/Low, or Port A/B Handshake output
+  CB1/CB2 I/O  Shift-Register clock/data
+  IRQ     Out  Interrupt signal send to CPU's /IRQ or /NMI input
+
+Disk Drive
+----------
+
+"Welcome to the fastest, easiest, and most efficient filing system available
+for your Commodore 64 or VIC 20 computer, your 1541 DISK DRIVE."
+
+--> Disk Tech Details
+--> Disk Accessing the Drive
+--> Disk Command and Error Channel
+--> Disk Data Channels & File Types
+--> Disk Programming the Disk Controller
+--> Disk Format
+--> Disk and File Images
+--> Disk Memory Map and I/O Ports
+--> Disk Configuration
+
+Disk Tech Details
+-----------------
+
+1541 Disk Drive
+  CPU 6502 ???MHz, 16K ROM, 2K RAM, two 6522 I/O and timer chips
+  Read/Write Speed ??? Serial Bus Rate ???
+  Two serial bus sockets (one towards computer, other for further devices)
+  Power Supply: 100-240V AC, 25 Watts (internally using +5V and +12V)
+  Height 97 mm, Width 200 mm, Depth 374 mm, Weight 16 tons
+  Diskettes: Standard mini 5 1/4", Single Sided (SS), Single Density (SD)
+  Formatting: 35 Tracks, 17-21 sectors per track, 256 bytes per sector
+  Total Capacity: 174848 bytes (683 blocks, 256 bytes each)
+  Free Space: 168656 bytes (664 blocks, 256-2 bytes each)
+  Directory: 144 files per diskette, 16 characters per filename (19 blocks)
+
+The 1541 disk drive is actually a complete computer with CPU, ROM, and RAM. The
+drive is connected to the computer via serial bus. Commodore describes that
+overcomplicated circuitry as "intelligent". That is true in so far that all
+filesystem is handled by the drive, without occupying ROM or RAM areas in the
+computers memory map.
+
+The downside is that the computers BASIC operating system doesn't know anything
+about disk drives (it just knows that it talks to something on the serial bus),
+LOAD and SAVE commands are barely working. But issuing DIR, DELETE, or RENAME
+commands, or viewing disk error messages works only when using some odd
+workarounds.
+
+Using Double Sided (DS) Disks
+Even though the 1541 disk drive is having only one head, double sided diskettes
+can be used, simply turn over the disk to use the other side. However, you will
+need to cut a new write protect notch at the right side of the disk (which
+becomes left when turned over).
+The disk is write-protected when the notch at left side is closed (eg. covered
+by tape). Of course, because the drive is software controlled, software may
+easily ignore the write-protect signal.
+Note: The drive doesn't use the index hole, so you don't need to cut that, too.
+
+Disk Accessing the Drive
+------------------------
+
+ LOAD "*",8             ;load first file on disk (or recently accessed file)
+ LOAD "FILENAME",8      ;load a specific file by name
+ LOAD "FILENAME",8:RUN  ;load and start a file
+ LOAD "$",8:LIST        ;load and view the directory
+ LOAD "$0:FILE*",8:LIST ;load and view specific names in the directory
+ SAVE "FILENAME",8      ;save a file to disk
+ SAVE "@0:FILENAME",8   ;save a file to disk and delete old file of same name
+ VERIFY "FILENAME",8    ;compare specified file with program in memory
+
+Notes
+The drive supports standard wildcards ("*" and "?"). Commodore has also
+manufactured a dual disk drive (two drives in one case, numbered drive 0 and
+1). For 1541, always specify drive "0" in the "$0:" and "@0:" expressions. When
+loaded to a different memory location, internal pointers may get changed
+automatically inside of the program, in that case VERIFY would produce an
+error.
+
+DOS Support Program
+A program called DOS Support should be shipped along with the disk drive.
+The following abbreviations can be used if DOS Support has been loaded:
+  /filename     load a program from disk
+  >    or @     read and display error channel
+  >$   or @$    read and display directory
+  >cmd or @cmd  send command to drive
+
+BASIC Instructions used to access the Disk Drive
+  LOAD   file_name, device_number [,command_number]
+  SAVE   file_name, device_number [,command_number]
+  VERIFY file_name, device_number
+  OPEN   file_number, device_number, channel_number [,file_name]
+  PRINT# file_number, variable list
+  INPUT# file_number, variable list
+  GET#   file_number, variable list
+  CLOSE  file_number
+  STATUS, CHR$, ASC
+
+KERNAL Functions used to access the Disk Drive
+  Addr  Name    Expl.
+  FFBA  SETLFS  Set logical/physical/secondary address (fileno,device,channel)
+  FFBD  SETNAM  Set length and address of filename
+  FFC0  OPEN    Open a file (parameters must be prepared by SETLFS/SETNAM)
+  FFC3  CLOSE   Close a file
+  FFC6  CHKIN   Select file_number for CHRIN
+  FFC9  CHKOUT  Select file_number for CHROUT
+  FFCC  CLRCHN  Clear all channels (undoes or terminates CHKIN/CHKOUT ???)
+  FFCF  CHRIN   Read a byte from the file being selected by CHKIN
+  FFD2  CHROUT  Write a byte to the file being selected by CHKOUT
+
+Whereas,
+  device_number  values 8-11 for 1st-4th attached drive unit (usually 8)
+  drive_number   always 0 for normal drives, value 0-1 for dual drives
+  file_number    file handle in computer (use any value 1-127)
+  channel_number file handle in drive (0-1 reserved, 2-14 data, 15 cmd/err)
+  file_name      ASCII filename (misused to contain parameters in some cases)
+  command_number
+
+Using PRINT#
+Note that PRINT always produces text output (any numeric parameters are
+converted into strings), if you want to send a binary number as such then you
+must specify it as CHR$(nn) to avoid that conversion. PRINT inserts unwanted
+spaces between parameters in some cases, or lacks to insert spaces or commas in
+other cases, and PRINT appends CR, chr$(0Dh), at the end of the statement
+(unless it was terminated by comma or semicolon).
+In short, PRINT works much unpredictable - PRINT your data to the screen
+instead of to the drive to see how it comes out.
+
+  When using the PRINT# statement, if you use commas (,) to separate
+  items on the line, the items will be separated by some blank spaces,
+  as if it were being formatted for the screen.  Semicolons (;) don't
+  result in any extra spaces.
+
+  Numeric data written in the file takes the form of a string, as if the
+  STR$ function had been performed on it before writing it out.  The
+  first character will be a blank space if the number is positive, and a
+  minus sign (-) if the number is negative.  Then comes the number, and
+  the last character is the cursor right character.
+
+Using INPUT#, GET#, and STATUS
+INPUT# receives strings, any commas or carriage returns (CR) in the file are
+treated as string end. GET# receives single characters, commas and CRs can be
+read as such, note that binary data comes out as CHR$(nn), the binary value can
+be retrieved by ASC function. The ST or STATUS system variable can be used to
+detect the end of the file.
+
+Using CLOSE
+It is extremely important that you properly CLOSE files once you are
+finished using them. Closing the file causes DOS to properly allocate
+blocks in the BAM and to finish the entry in the directory. If you
+don't CLOSE the file, all your data will be lost!
+
+You should also be careful not to CLOSE the error channel (channel
+15) before CLOSEing your data channels. The error channel should be
+OPENed first and CLOSEd last of all your files! That will keep your
+programs out of trouble.
+
+If you close the error channel while other files are OPEN, the disk
+drive will close them for you, but BASIC will still think they are
+open (unless you CLOSE them properly), let you to try to write to them.
+
+NOTE: If your BASIC program leads you into an error condition, all
+files are CLOSEd in BASIC, without CLOSEing them on your disk drive!
+This is a very dangerous condition. You should immediately type the
+statement OPEN 15, 8, 15, "I". This will re-initialize your drive and
+make all your files safe.
+
+Disk Command and Error Channel
+------------------------------
+
+Channel 15 is used as command and error channel, allowing to send commands to
+the disk drive, and, in the other direction, to receive status information.
+
+OPEN / Filename
+Like data channels, the channel must be opened before using it, but a filename
+is not required. The filename field may be left out, or it may contain a
+command (allowing to send the first command directly along with the OPEN
+function).
+
+Command Format
+All commands are to be sent as ASCII text string, terminated by CR:
+  "COMMAND:parameters",0dh
+  "SPECIAL-COMMAND:parameters",0dh
+Commands can be abbreviated by using the first character of each word, ie.
+  "C:parameters",0dh
+  "S-C:parameters",0dh
+Some commands, have more than one parameter, separated by commas or spaces or
+other characters (depending on the command).
+Numeric parameters must be sent as decimal text string, ie. the value 80h (128
+decimal) takes up three characters: "1", "2", "8". The only exception are the
+"MEMORY-" commands and the "POSITION" command which are using binary
+parameters.
+
+
+PRINT#15,
+
+  "NEW:name,id"  format the entire disk, and set disk name and 2 chars ID
+  "NEW:name"     clears the directory without re-formatting the whole disk
+  "COPY:newfile=oldfile"      copy a file (source and dest both on same disk)
+  "COPY:newfile=f1,f2,f3,f4"  copy max 4 files into 1 file
+  "RENAME:newname=oldname"    rename a file
+  "SCRATCH:name"              delete a file (may use wildcards)
+  "INITIALIZE"          closes any open files and reboots the drive
+  "VALIDATE"            defragments the disk (do not use with random files)
+  "DUPLICATE"           reserved for dual drives (1:1 copy of a whole disk)
+
+
+General Disk Managment Commands
+ NEW                "N
+ COPY               "C:new file=:original file
+ RENAME             "R:new name=old name"
+ SCRATCH            "S:file name"
+ INITIALIZE         "I
+ VALIDATE           "V
+ DUPLICATE          not for single drives
+ C64/default speed  "UI+"
+ VIC 20 speed       "UI-"
+Special Random File Commands
+ BLOCK-ALLOCATE     "B-A: drive track block"
+ BLOCK-FREE         "B-F: drive track block"
+ BLOCK-READ         "B-R: channel drive track block"
+ BLOCK-WRITE        "B-W: channel drive track block"
+ BLOCK-EXECUTE      "B-E: channel drive track block"
+ BUFFER-POINTER     "B-P: channel position"
+ USER1 (UA) (READ)  "U1: channel drive track block"
+ USER2 (UB) (WRITE) "U2: channel drive track block"
+Special Relative File Command
+ POSITION           "P", channel+96, record_lsb, record_msb [,position]
+Disk Controller Commands
+ MEMORY-READ        "M-R", address_lsb, address_msb
+ MEMORY-WRITE       "M-W", address_lsb, address_msb, length, data[length]
+ MEMORY-EXECUTE     "M-E", address_lsb, address_msb
+ USER Commands      "Un"
+
+ U3 or UC      jump to 0500h
+ U4 or UD      jump to 0503h
+ U5 or UE      jump to 0506h
+ U6 or UF      jump to 0509h
+ U7 or UG      jump to 050Ch
+ U8 or UH      jump to 050Fh
+ U; or UJ      jump to [FFFC] power-up vector
+
+Error Channel Format
+NN is the error number (to be interpreted by software), NAME is the error name
+(to be output to screen if wanted), TR and BL usually specify the track and
+block number where the error has occured.
+  "NN,NAME,TR,BL",0dh
+NN, TR, and BL are numbers in two-digit string format. The items are separated
+by commas, and the error message is terminated by CR, chr(0dh).
+After the error message has been received, the error channel gets cleared (ie.
+reset to 00/OK) automatically.
+
+Description of DOS Error Messages
+  00 OK                 - No error.
+  01 NAME???      - No error. Response to SCRATCH (TR=number of files deleted)
+  02-19 N/A       - No error. Reserved for status messages (should be ignored)
+  20 READ ERROR         - Block header not found
+  21 READ ERROR         - No sync mark found on track
+  22 READ ERROR         - Data block not present
+  23 READ ERROR         - Checksum error in data block
+  24 READ ERROR         - Byte decoding error
+  25 WRITE ERROR        - Write-verify error
+  26 WRITE PROTECT ON   - Attempt to write with closed write-protect notch
+  27 READ ERROR         - Checksum error in header
+  28 WRITE ERROR        - No sync mark found after written data block
+  29 DISK ID MISMATCH   - Unformatted disk or bad header
+  30 SYNTAX ERROR       - Invalid command parameters
+  31 SYNTAX ERROR       - Unrecognized command
+  32 SYNTAX ERROR       - Command/parameters longer than 58 characters
+  33 SYNTAX ERROR       - Wildcards used in OPEN/SAVE command
+  34 SYNTAX ERROR       - Missing filename in command string
+  39 SYNTAX ERROR       - Unrecognized command. "Command file not found" ???
+  50 RECORD NOT PRESENT - Reading past the last record.
+   Positioning to a record beyond end of file in a relative file. If the
+   intent is to expand the file by adding the new record (with a PRINT#
+   command), the error message may be ignored. INPUT or GET should not be
+   attempted after this error is detected without first repositioning.
+  51 OVERFLOW IN RECORD - Writing exceeds record boundary.
+  52 FILE TOO LARGE     - Record position in relative file exceeds disk space
+  60 WRITE FILE OPEN    - Tried to open a file for read while open for write
+  61 FILE NOT OPEN      - Tried to access a file that is not open
+  62 FILE NOT FOUND     - The requested file does not exist
+  63 FILE EXISTS        - The filename of the file being created already exists
+  64 FILE TYPE MISMATCH - File type does not match file type in directory
+  65 NO BLOCK           - B-A command fail (TR,BL=next free block, 00,00=None)
+  66 ILLEGAL TRACK AND SECTOR - Illegal track or block number
+  67 ILLEGAL SYSTEM T OR S    - Illegal system track or block
+  70 NO CHANNEL         - Too many channels used, or requested channel not free
+  71 DIRECTORY ERROR    - BAM messed up (on floppy disk, or in drive RAM)
+  72 DISK FULL          - Disk or directory full. Close requires 2 free blocks
+  73 CBM DOS V2.6 1541  - Power-up message (note that 73 is also used below)
+  73 DOS MISMATCH       - DOS2.X cannot <write> to old DOS1-formatted disks
+  74 DRIVE NOT READY    - Disk missing
+CHR(0-255) -- Binary data returned after MEMORY-READ command
+
+Retrieving Error Messages in BASIC
+Because the BASIC operating system doesn't explicitely support disk drives, it
+will usually come up with a meaningless "FILE NOT FOUND" message even if the
+error was actually caused by an unformatted disk.
+A small program is required to receive more detailed error information:
+  10 OPEN 1, 8, 15            ;open the error channel
+  20 INPUT# 1, A, B$, T, B    ;read error_code, error_name, track, block
+  30 PRINT A, B$, T, B        ;display it
+  RUN                         ;start (INPUT works only with line numbers)
+The error_name parameter contains a text string (equivalent to error_code
+information, but more convinient for human users). The other three parameters
+always contain numbers and can be interpreted by software.
+
+Disk Data Channels & File Types
+-------------------------------
+
+The channel# is a data channel, number 2 through 14.
+A maximum of five sequential files may be opened at one time to the DOS. Direct
+access channels (what is a direct access channel???) may have six opened files.
+(Does that mean 5 PLUS 6 data channels in total???)
+
+Sequential Files
+Sequential files consist of one or more data blocks, each block contains 254
+bytes data, and a pointer to position of the next block. That format makes it
+necessary to read through all previous blocks to find the position of the last
+block.
+Sequential files are accessed by opening a data channel, with the following
+expression in the file_name field:
+  OPEN file_name_field: "[@]0:filename[,file_type,direction]"
+The leading "@" optionally indicates to overwrite an existing file of same
+name. The "0:" should always precede the filename or the drive will only allow
+to use two buffers. The filename may contain wildcards (opening the first
+matching file when reading). Sequential file types are:
+  PRG or P - Sequential Program (with BASIC tokens, used for LOAD/SAVE)
+  SEQ or S - Sequential Data File (typically containing ASCII text data)
+  USR or U - Sequential User File (unspecified content)
+Direction may be READ or R for input, WRITE or W for output. Type and direction
+may be left out when opening an existing file for reading.
+Specifying "$" as filename opens the directory (read-only), reading directory
+data comes out as BASIC program, filesizes encoded in the linenumber fields.
+
+Relative Files
+The data blocks in relative files have exactly the same format as sequential
+files, the filesystem additionally creates 'side sectors' which contain a list
+of all data blocks used in the file, allowing it to find a specific data block
+on disk without having to read all previous data blocks.
+When a Relative file is first to be used, the OPEN statement will create that
+file; after that, the same file will be used. The replace option (with the @
+sign) does not erase and re-create the file. The file can be expanded, read,
+and written into.
+  OPEN file_name_field: "filename,L,", record_length
+Filetype (REL or L) and record size may be left out when opening an existing
+file. Note that record_length is a binary value (not a text string).
+Relative files are split into records, the record size may be 1..254 bytes and
+is defined when creating the file, there may be up to 65535 records in each
+file, records may overlap from one data block into the next. However, data may
+NOT overlap from one record into the next; in order to read or write, you must,
+before any operation, use the POSITION command to move the file pointer to the
+correct record position.
+  "P", channel+96, record_lsb, record_msb [,character_position]
+The POSITION command changes the file pointer, but does NOT write anything to,
+or read anything from the file. Moving the file pointer beyond the end of the
+file produces a RECORD NOT PRESENT error, you should check for that message (in
+order to remove it from the error channel), but you may ignore it if you want
+to expand the file; writing to the data channel will expand the filesize by
+appending new record(s) up to the specified record number.
+  character_position specifies the address (1..size) inside of the record.
+  If it is not specified, character_position defaults to 1.
+  HOW does that separate between ending chr(0dh) and character_pos ???
+  Include the character_position number, when adding fields.   WHY ???
+
+Random Files
+Random files consist of raw sectors, marked as allocated in the BAM. Unlike
+real files, a random "file" does not include any filename or directory entry.
+Accessing a random file requires two channels: the command channel (15), and a
+data channel (2..14).
+Caution: Because there is no directory entry, executing the VALIDATE command
+will deallocate any blocks used by random files (assuming that these blocks
+have been allocated by mistake).
+  OPEN file_name_field: "\[n]"
+For the data channel "\" or "\n" should be specified as filename (either using
+any buffer, or selecting a specific buffer eg. "\2"). Note: The backslash,
+chr(5Ch), will appear as pound sign on the C64 keyboard and in the C64 charset.
+  PRINT# cmd_file_number, "BLOCK-ALLOCATE:drive track block"
+  PRINT# cmd_file_number, "BLOCK-FREE:    drive track block"
+Use BLOCK-ALLOCATE to mark a specific track/sector as used in the BAM. The
+allocation will fail if the block is already in use, the error channel does
+then return "65,NO BLOCK,TR,BL". Whereas, <TR,BL> will indicate the next higher
+unused sector, if any, or <00,00> if there's none. The BLOCK-FREE command can
+be used to de-allocate a block.
+  PRINT# cmd_file_number, "BLOCK-READ:    data_channel drive track block"
+  PRINT# cmd_file_number, "U1:            data_channel drive track block"
+The BLOCK-READ command reads up to 256 characters, but stops reading when the
+buffer-pointer stored with the block says that block is finished. The USER1
+command (U1 or UA) performs the BLOCK-READ operation, but first forces the
+pointer to 255 in order to read the entire block of data from the disk.
+  PRINT# cmd_file_number, "BLOCK-WRITE:   data_channel drive track block"
+  PRINT# cmd_file_number, "U2:            data_channel drive track block"
+The BLOCK-WRITE command writes the contents of the buffer to the block on the
+disk along with the value of the buffer-pointer. The USER2 command (U2 or UB)
+writes the buffer without disturbing the buffer-pointer value already stored on
+that block of the diskette. Note that you must fill or modify the buffer
+through data channel <before> issuing BLOCK-WRITE or USER2 through command
+channel.
+  PRINT# cmd_file_number, "BUFFER-POINTER:data_channel location"
+The BUFFER-POINTER command moves the read/write pointer to the specified
+address (0..255) in the buffer of the file, reading/writing to the data channel
+does then access that address (and up).
+  !! When the data is being put into the buffer, a pointer in the DOS keeps
+  !! track of how many characters there are, when you perform the BLOCK-WRITE
+  !! operation, that pointer is recorded on the disk (WHAT WHERE HOW ???).
+
+Disk Programming the Disk Controller
+------------------------------------
+
+BLOCK-EXECUTE
+This command will load a block from the diskette containing a machine
+language routine, and begin executing it at location 0 in the buffer
+until a RTS (ReTurn from Subroutine) command is encountered.
+  FORMAT FOR BLOCK-EXECUTE:
+  PRINT#file#, "B-E: data_channel drive track block"
+
+MEMORY-READ
+There is 16K of ROM in the disk drive as well as 2K of RAM.  You can
+get direct access to these, or to the buffers that the DOS has set up
+in the RAM, by using the MEMORY commands.  MEMORY-READ allows you to
+select which byte to read, through the error channel.
+  MEMORY-READ:
+  PRINT#file#, "M-R",addr_lsb,addr_msb
+The next byte read using the GET# statement through channel# 15, the
+error channel, will be from that address in the disk controller's
+memory, and successive bytes will be from successive memory locations.
+Any INPUT# to the error channel will give peculiar results when you're
+using this command.  This can be cleared up by any other command to
+the disk (aside from a memory command).
+
+MEMORY-WRITE
+The MEMORY-WRITE command allows you to write up to 34 bytes at a time
+into the disk controller's memory.
+  MEMORY-WRITE:
+  PRINT#file#, "M-W", addr_lsb, addr_msb, len, data[len]
+
+MEMORY-EXECUTE and USER COMMANDS
+Any routine in the DOS memory, RAM or ROM, can be executed with the
+MEMORY-EXECUTE command.
+  "M-E", addr_lsb, addr_msb  ;jump to addr   Any address in RAM or ROM
+  "U3" or "UC"               ;jump to 500h   Buffer 2, Index 00h
+  "U4" or "UD"               ;jump to 503h   Buffer 2, Index 03h
+  "U5" or "UE"               ;jump to 506h   Buffer 2, Index 06h
+  "U6" or "UF"               ;jump to 509h   Buffer 2, Index 09h
+  "U7" or "UG"               ;jump to 50Ch   Buffer 2, Index 0Ch
+  "U8" or "UH"               ;jump to 50Fh   Buffer 2, Index 0Fh
+  "U;" or "UJ"               ;jump to [FFFC] Power-up vector
+
+Disk Format
+-----------
+
+Block Distribution by Track
+The disks are having 35 tracks (1-35), track 1 is at the outer rim, track 35 is
+at the center hub, track 18 contains the directory. The number of blocks per
+track decreases towards inner tracks:
+  Track Numbers  Block Numbers  Total Size (Tracks * Blocks)
+  1..17          0..20          17*21=357
+  18..24         0..18          7*19=133
+  25..30         0..17          6*18=108
+  31..35         0..16          5*17=85
+There's a total of 683 blocks (sectors) of 256 bytes on the disk.
+However, all 19 blocks in Track 18 are used for the directory, so that only 664
+blocks are free for data. And, the first two bytes in each sector are used by
+the filesytem, leaving only 254 bytes to the user.
+Note: The DOS (disk operating system) fills up the diskette from the center
+outward, ie. starting at track 35.
+
+1540/1541 Block Availability Map (BAM) Format (Track 18, Sector 0)
+  Index  Expl.
+  00,01  Track and sector of first directory block   (18,01)
+  02     ASCII character "A" indicating 4040 format  (41h)
+  03     Null flag for future DOS use.               (00h)
+  04-8F  Bit map of available blocks for tracks 1-35
+Each bit represents one block, 1 = available block, 0 = block not available.
+BAM contains space for 1120 blocks ??? Are blocks on track 18 included ???
+Is that 4 bytes per track ???
+
+1540/1541 Directory Header (Track 18, Sector 0)
+  Index  Expl.
+  90-A1  144-161  Disk name 18 characters padded with shifted spaces
+  A2-A3  162-163  Disk ID two characters
+  A4     164      Shifted space                       (A0h)
+  A5-A6  165,166  DOS version "2" and format type "A" (32h,41h)
+  A6-A7  Shifted spaces                      (A0h,A0h)
+  AB-FF  Nulls, not used                     (00h filled)
+Index A6 used twice ??? Index A8-AA unspecified ???
+Note: ASCII characters may appear in locations 180 thru 191 on some diskettes.
+
+Directory Format (Track 18, Sectors 1..18)
+The directory consists of 144 file entries (stored in 18 sectors of 8 entries
+each).
+  Index  Expl.
+  00,01  Track and sector of next directory block
+  02-1F  File entry 1
+  22-3F  File entry 2
+  42-5F  File entry 3
+  62-7F  File entry 4
+  82-9F  File entry 5
+  A2-BF  File entry 6
+  C2-DF  File entry 7
+  E2-FF  File entry 8
+Note that there are two unused bytes between each file entry.
+
+Structure of single Directory Entry
+  Index    Expl.
+  00       128+type
+             File type OR'ed with 80h to indicate properly closed file.
+             Types: 0=DELeted, 1=SEQuential, 2=PROGram, 3=USER, 4=RELative
+  01,02    Track and sector of 1st data block.
+  03-12    File name 16 characters padded with shifted spaces (=A0h).
+  ???      Relative file only: track and sector for first side sector block.
+  ???      Relative file only: Record size.
+  13-1B    Unused (zero filled).
+  ???      Track and sector of replacement file when OPEN@ is in effect.
+  1C-1D    Number of blocks in file: low byte, high byte.
+
+Sequential Format
+  00,01  Track and sector of next sequential data block.
+  02-FF  254 bytes of data with carriage returns as record terminators.
+
+Program File Format
+  00,01  Track and sector of next block in program file.
+  02-FF  254 bytes of program info stored in CBM memory format (with key
+         words tokenized). End of file is marked by three zero bytes.
+
+Random File Format
+  00-FF  Data
+Random files consist of blocks marked as used in the BAM, and the full 256
+bytes of each block can be used for data. These "files" do not have a filename
+or directory entry.
+
+Relative File Format
+Side Sector Block(s):
+  00,01   Track and block of next side sector block.
+  02      Side sector number. (0-5)
+  03      Record length.
+  04-0F   Track and block of side sector number 0-5.
+  10-FF   Track and block pointers to 120 data blocks.
+Data Block(s):
+  00,01   Track and block of next data block.
+  02-FF   254 bytes of data.
+Empty records contain FFh in the first byte followed by 00h to the end of the
+record. Partially filled records are padded with nulls (00h).
+A blank disk provides space for 664 data blocks (plus 6 side sectors), so that
+the last some entries in the last side sector are typically not used.
+
+1540/1541 Format: Expanded View of a Single Sector
+Each sector consists of a header, followed by the actual data field, each with
+separate leading SYNC signal, and ending GAP space.
+  Header:     SYNC, 08, ID1, ID2, TRK, BLK, CHKSUM, GAP1
+  Data Field: SYNC, 07, DATA[256], CHKSUM, GAP
+Note: The drive doesn't include a Index Hole LED, the first sector will be thus
+positioned anywhere on the track.
+
+Disk and File Images
+--------------------
+
+.PRG .P00 .LNX .SDA .SFX .D64
+
+The following are common file formats used by C64 emulators.
+The VIC20 uses the same extensions, same Basic Tokens, and same cassette and
+disk formats.
+
+Program Files (Extension .PRG)
+Contains the original load address in first two bytes, followed by the actual
+program or data (which is usually loaded to the computers MEMBOT+1 address, NOT
+to the original address in the file).
+  - Original 16bit memory address (typically MEMBOT+1)
+  - BASIC line(s)
+  - Two zero bytes (End of BASIC program)
+  - Binary data (eg. machine code) (if any)
+Each BASIC line:
+  - 16bit pointer to next line (in respect to original load address)
+  - 16bit line number
+  - BASIC expressions (consisting of tokens and ascii text)
+  - One zero byte (End of line)
+Typical values for MEMBOT+1 are: 801h (C64), and 401h, 1001h, or 1201h (VIC20;
+depending on amount of installed RAM).
+
+Self-Extracting C64 files (.LNX .SDA .SFX)
+These are just normal .PRG files with uncommon extensions. The extension is
+meant to indicate that the file will self-extract itself after it has been
+loaded into the C64 (or emulator). Respectively, you will need a blank disk (or
+disk image) to store the extracted file(s).
+
+"Encapsulated" C64 File Images (Typically with extension .P00)
+C64 File Images contain the actual C64 file data, plus additional information
+from the C64 disks directory, that info is parts of stored in the images
+filename/extension, and parts of in a 26 bytes header. The images filename and
+extension should be:
+  <FILENAME>.<T><NN>
+<FILENAME> may be up to 8 characters long, and may contain letters "A"-"Z" and
+numbers "0"-"9" only, ideally this name would be composed of the the first some
+characters of the original 16 char C64 filename - in practice there's often
+little or no relationship, making it almost impossible to find a C64-Image by
+C64-Filename.
+<T> indicates the file type:
+  P - Program file (PRG)
+  S - Sequential file (SEQ)
+  U - User file (USR)
+  D - Deleted file (DEL)
+  R - Relative file (REL)
+<NN> may be a number in range "00"-"99", allowing to use the same <FILENAME>
+for different files. Note that the number "64" should be avoided for 'deleted'
+files because the extension ".D64" is also used for C64 disk images.
+The first 26 bytes of the image contain the image header:
+  Index Size Expl.
+  00h   07h+1  Image ID "C64File", ended by 00h
+  08h   10h+1  Original 16 character C64 Filename, padded with 00h
+  19h   01h    Record size for REL files (00h for other files)
+  1ah   ...    Original file image with load address (same as .PRG file)
+Data blocks are 254 bytes each, excluding the track/block bytes stored on C64
+disks???
+Relative files are assumed to be stored one data block after another, the C64s
+"side sectors" are thus not required and are not included in the file???
+
+C64 Disk Images (Extension .D64)
+Contains a raw disk image, including for the BAM and directory in the middle of
+the disk/image, but without any image header or disk formatting information.
+The filesize is 174848 bytes, for 683 blocks, of 256 bytes each.
+The images may contain so-called "random files", but the image format is not
+suitable for copy protected disks - which may contain unformatted tracks, may
+use reversed sector numbers, may use different number of bytes per block, etc.
+
+Disk Memory Map and I/O Ports
+-----------------------------
+
+Memory Map
+  0000-07FF  Work RAM (2 KBytes)
+  0800-17FF  Not used
+  1800-180F  I/O - VIA#1 (serial data & control)
+  1810-1BFF  Not used
+  1C00-1C0F  I/O - VIA#2 (drive data & control)
+  1C10-BFFF  Not used
+  C000-FFFF  Disk ROM (16 KBytes)
+
+Work RAM
+  0000-0103  System Area
+  0104-01FF  Stack Area
+  0200-02FF  System Area
+  0300-03FF  Buffer 0
+  0400-04FF  Buffer 1
+  0500-05FF  Buffer 2
+  0600-06FF  Buffer 3
+  0700-07FF  Buffer 4
+
+1800h-180Fh - VIA 1: 6522, port for serial bus
+  PB 7, CB2:  ATN IN
+  PB 6,5:     Device address preset switches
+  PB 4:       ATN acknowledge OUT
+  PB 3:       CLOCK OUT
+  PB 2:       CLOCK IN
+  PB 1:       DATA OUT
+  PB 0:       DATA IN
+
+1C00h-1C0Fh - VIA 2: 6522, port for motor and read/write head control
+  PA          data to and from read/write head
+  PB 7:       SYNC IN
+  PB 6,5:     Bit rate D1 and D0
+  PB 4:       WPS - Write Protect Sense (1 = On)
+  PB 3:       ACT - LED on drive
+  PB 2:       MTR - drive motor
+  PB 0,1:     step motor for head movement
+  CA 1:       Byte ready
+  CA 2:       SOE - Set Overflow Enable for 6502
+  CA 3: (CA three?)  read/write
+
+--> Versatile Interface Adapter 6522 (VIA)
+
+Disk Configuration
+------------------
+
+Changing the Disk Drive Device Number
+When turned on, the drive checks its jumper settings to determine its device
+number (usually 8), and does then store the device number in RAM. If you have
+two drives with the same device number, disconnect one drive, enter the
+following expression to change the device number of the connected drive from X
+to Y, eg. 8 to 9, and then re-connect the other drive.
+  open 1,x,15:print#1,"m-w" chr$(119) chr$(0) chr$(2) chr$(y+32) chr$(y+64)
+For a permanent change, cut the jumpers on the drives mainboard:
+  Device   Jumper A/1   Jumper B/2
+  8        Don't cut    Don't cut   (default)
+  9        Cut          Don't cut
+  10       Don't cut    Cut
+  11       Cut          Cut
+Jumpers are labeled A,B in some drives, or 1,2 in others (btw. not J1,J2).
+
+Changing the Drive Speed for VIC 20 or Commodore 64
+The drive works with both VIC 20 and C64 computers. However, the transmission
+rate from drive to computer is different. When the drive is switched on it is
+set to C64 speed, but can be changed by UI or U9 command:
+  OPEN 1,8,15,"UI-":CLOSE 1    ;VIC 20 speed
+  OPEN 1,8,15,"UI+":CLOSE 1    ;Commodore 64 speed (default)
+The actual speed(s) are unknown???
+There is no jumper for permanent change???
+
+
+CPU Local Usage
+---------------
+
+C64
+6510A 8bit CPU, 1.02 MHz (NTSC) or 0.98 MHz (PAL), compatible with 6502, with
+built-in I/O Ports at addresses 0000h and 0001h.
+Video DMA to Character Memory takes place without waitstates, however, DMA to
+Matrix memory (in each 8th scanline), and DMA to Sprite memory (if any) stalls
+the CPU. For more info see
+--> C64 VIC Dimensions and Timings
+
+VIC20
+CPU: 6502A, 1.02 MHz (NTSC), 1.11 MHz (PAL).
+Because of the low resolution/dot clock, all Video DMA takes place in Phase 1,
+without any CPU waitstates.
+
+C16/Plus4
+CPU: 7501/8501, single-speed clock 0.894886 MHz (NTSC), 0.886724 MHz (PAL).
+6502 compatible with on-chip 7bit I/O Port, with double-speed mode, without NMI
+input.
+In single-speed mode, the CPU is clocked in Phase 2 only, most video DMA and
+DRAM refresh take place without waitstates during Phase 1. However, 80 bytes
+screen/color data must be fetched for each character row, which is probably
+done in phase 2 (unless it is squeezed into hblank periods of previous lines?).
+In twice-speed mode, CPU is clocked in both phases, theoretically running at
+more than than 1.7MHz, because of the Phase 1 Video DMA the full speed is
+achieved only in Hblank & Vblank periods, minus whatever (?) cycles spent on
+DRAM refresh.
+
+Disk Drive
+Uses the 6502, too. Clock frequency is unknown.
+
+Z80 Microprocessor Cartridge
+----------------------------
+
+Z80 Cartridge
+Optionally, the C64 can be upgraded by an external Z80 CPU cartridge, the clock
+frequency of this CPU is unknown???. Even when the Z80 cartridge is connected,
+the C64 still operates in 6510 mode as usually, but programs may now freely
+switch back and forth between 6510 and Z80 modes, however, as both CPUs need to
+access the data/addressbus, both cannot be operated simultaneously.
+Both 6510 and Z80 are accessing the same RAM (and ROM, and I/O ???) being
+built-in into the C64, as each CPU expects special data at address 0000h, all
+memory has been 'shifted' by 1000h bytes. The Z80 addresses 0000h-EFFFh refer
+to 1000h-FFFFh of normal C64 memory, and Z80 F000h-FFFFh wraps to 0000h-0FFFh
+of C64 memory.
+
+CPU Mode Switching
+The example code below illustrates switching to Z80 mode, executing a simple
+'program' in Z80 mode, and switching back to 6510 mode. First, write the
+following opcodes into memory at C64-addresses 1000h and up, ie. Z80 addresses
+0000h and up.
+  C64   Z80   Opcode    Disassembled      Comment
+  1000  0000  00        nop               ;\the Commodore Z80 needs three NOPs
+  1001  0001  00        nop               ; to stabilize after mode switching
+  1002  0002  00        nop               ;/
+  1003  0003  21 02 F5  ld   hl,0F502h    ;\the actual Z80 'program' increment
+  1006  0006  34        inc  (hl)         ;/a byte in VRAM (C64 address=0502h)
+  1007  0007  3E 01     ld   a,01h        ;\turn off Z80 again by I/O port
+  1009  0009  32 00 CE  ld   (0CE00h),a   ;/(C64 address=DE00h)
+  100C  000C  00        nop               ;\
+  100D  000D  00        nop               ; again three NOPs to 'destabilize'
+  100E  000E  00        nop               ;/
+  100F  000F  C3        jp   0000h        ;-Huh? Should never execute this...
+Now execute the following BASIC program from inside of C64 mode:
+  10 poke 56333,127   :rem [DC0Dh]=7Fh, turn off 6510 irq's
+  20 poke 56832,00    :rem [DE00h]=00h, turn on z80 card & execute Z80 code
+  30 poke 56333,129   :rem [DC0Dh]=81h, turn on 6510 irq's when z80 done
+Interrupts should be disabled during mode switching, but might be enabled while
+operating in Z80 mode, provided that Z80 /IRQ and /NMI lines are connected ???
+When switching to Z80 mode, the Z80-CPU is apparently reset (and starts at
+Z80-address 0000h, of course RAM is not reset, so the Z80 may re-initialize
+itself from code and data stored in RAM).
+When switching to 6510 mode, the 6510 CPU is NOT reset, and just continues
+where it had stopped before switching to Z80 mode ???
+
+Commodore CP/M
+The Z80 cartridge is mainly intended for use with CP/M software, thus sometimes
+referred to as CP/M cartridge, even though it contains a raw CPU without any
+BIOS or operating system ROM.
+The cartridge should be usually delivered together with a Commodore CP/M disk.
+To start CP/M, turn on the computer, and load and start CP/M (all still from
+inside of normal C64 mode). The C64 provides 52K contiguous bytes of RAM for
+use in CP/M mode (of which 4K are used by the CP/M operating system, and 48K
+are free for CP/M software???).
+Note: CP/M is a text based disk operating system (with similar appearance as MS
+DOS) which is used on many different Z80 computers.
+
+External Connectors
+-------------------
+
+Joystick Ports - 2x SUB-D 9pin Male
+The C64 has two "Control Ports", a digitial joystick or paddle can be connected
+to each Port 1 and Port 2. Also, a lightpen can be connected to Port 1.
+  Pin Name      Expl.
+  1   Switch 0  Joystick Up
+  2   Switch 1  Joystick Down
+  3   Switch 2  Joystick Left, or Paddle X-Button
+  4   Switch 3  Joystick Right, or Paddle Y-Button
+  5   POTY      Paddle Y-Axis
+  6   Switch 4  Joystick Fire, or Lightpen (Port 1 only)
+  7   +5V       Power Supply (max 50mA)
+  8   GND       Ground
+  9   POTX      Paddle X-Axis
+Pin 1-5 in upper row, Pin 6-9 in lower row, from left to right each.
+Note that Port 1 is CIA Port B, and Port 2 is CIA Port A (!). Respectively, it
+is everyones bet which port is to be treated as the "first" port, many games
+expect the joystick to be connected to Port 2 (CIA Port A), other games expect
+it at Port 1 (CIA Port B), and some of the better games work with either port.
+See also:
+--> Joystick Y-Cable
+
+Cartridge Expansion Slot - 44 Pins Female
+    Pin Expl.      Pin Expl.      Pin Expl.      Pin Expl.
+    1   GND        12   BA        A   GND         N   A9
+    2   +5V        13   /DMA      B   /ROMH       P   A8
+    3   +5V        14   D7        C   /RESET      R   A7
+    4   /IRQ       15   D6        D   /NMI        S   A6
+    5   R/W        16   D5        E   02          T   A5
+    6   Dot Clock  17   D4        F   A15         U   A4
+    7   I/O1       18   D3        H   A14         V   A3
+    8   /GAME      19   D2        J   A13         W   A2
+    9   /EXROM     20   D1        K   A12         X   A1
+   10   I/O2       21   D0        L   A11         Y   A0
+   11   /ROML      22   GND       M   A10         Z   GND
+Pin 1-22 in upper row, A-F,H,J-N,P,R-Z in lower row, from right to left each!
+
+TV Output - Cinch Female
+Outputs TV Signals (video and sound), channel switch may select between two
+channels ???
+
+Audio/Video (6 or 8 Pin, DIN, Female)
+  Pin  Expl.                 ++ ++
+  1    Luminance           /  +-+  \
+  2    GND                +  8   7  +
+  3    Audio Out          | 3  6  1 |
+  4    Video Out          +  5   4  +
+  5    Audio In            \   2   /
+  6    Chrominance           +---+
+ (7)   N.C.
+ (8)   +5V DC
+
+Serial I/O (6 Pin, DIN, Female)
+  Pin Expl.                  ++ ++
+  1   Serial /SRQ In       /  +-+  \
+  2   GND                 +  5   1  +
+  3   Serial ATN Out      |    6    |
+  4   Serial CLK In/Out   +  4   2  +
+  5   Serial Data In/Out   \   3   /
+  6   /RESET                 +---+
+A printer, up to five disk drives, and other hardware can be (simultaneously)
+connected to the Serial I/O Port. Each peripheral should include two identical
+serial sockets, either one connected to the C64 (or previous device), the other
+one connected to the next device (if any).
+
+Cassette - 12 Pins Male (actually 6 pins duplicated)
+  Pin  Expl.
+  A-1  GND
+  B-2  +5V DC
+  C-3  Cassette Motor (WHAT=On ???) (+9V UNREG DC ?)
+  D-4  Cassette Read
+  E-5  Cassette Write
+  F-6  Cassette Sense (Switch PLAY Pressed ???, WHAT=Yes ???)
+Pin 1-6 in upper row, Pin A-F in lower row, from left to right each.
+
+User I/O (User Port) - 24 Pins Male
+  Pin  Expl.               Pin  Expl.
+  1    GND                 A    GND
+  2    +5V DC (max 100 mA) B    /FLAG2
+  3    /RESET              C    PB0
+  4    CNT1                D    PB1
+  5    SP1                 E    PB2
+  6    CNT2                F    PB3
+  7    SP2                 H    PB4
+  8    /PC2                J    PB5
+  9    SER. ATN OUT        K    PB6
+  10   9V AC1 (max 100 mA) L    PB7
+  11   9V AC2 (max 100 mA) M    PA2
+  12   GND                 N    GND
+Pin 1-12 in upper row, A-F,H,J-N in lower row, from left to right each.
+
+Power Supply (7 Pin, DIN, Female)
+  Pin    Expl.               ++ ++
+  1      GND               /  +-+  \
+  2      GND (or N.C.)    +  7   6  +
+  3      GND              | 3     1 |
+  4      +5V DC           +  5   4  +
+  5      +5V DC            \   2   /
+  6      +/-9V AC1           +---+
+  7      +/-9V AC2
+Most of the computer circuit is operated at +5V DC. The 9V AC voltage is
+internally converted into +9V UNREG (for cassette motor), and into +9V or +12V
+DC (for sound chip, voltage depends on type of chip used). Also, 9V AC are
+output to the user port. And, the 9V AC1 frequency (typically 50Hz or 60Hz,
+depending on wall socket) is used to feed to time of day clock.
+
+Transmit Function
+-----------------
+
+The Xmit function allows to upload a .PRG or .P00 file from no$c64 (utility
+menu) to real C64. The required circuit consists of a parallel/printer cable
+connected to the user port signals, and a boot EPROM connected to the C64
+expansion port signals. The feature has been very useful and comfortable when
+making and testing no$c64, and might be of some use for other programmers, at
+least if owning an eprom burner.
+
+Features / Performance / Requirements
+All transfer takes place automatically, there's no need to reset the C64
+manually, nor to type LOAD or RUN. Transmission time should be max 3 seconds
+(for big 50K files). The circuit works with any parallel/printer port (both
+older one-directional, and newer bi-directonal ports). Transmission should work
+stable regardless of the PCs CPU speed, and even with multitasking operating
+systems. Windows NT and worse reportedly prevent to access the parallel port
+unless when installing a special driver to unlock the port (eg. Giveio,
+Totalio, Userport).
+
+Transmit Circuit
+The schematic shows the connection and pin numbers for the User port, Expansion
+Port, Eprom, and Printer port (USR, EXP, ROM, PRN). The circuit can be
+connected externally (to user/expansion port). Or inside of the C64 (circuit
+soldered directly to the mainboard, with Centronics socket installed in
+computers case, the EPROM socket can be 'stacked' on top of the BIOS ROM with
+1:1 connection for most pins). The external solution would require a lot of
+messy/special cables, the internal solution works with a standard printer
+cable.
+  Name    Pin                         Pin       Name
+  PA2     USR.M     ----------------- PRN.1     /STROBE
+  PB0-7   USR.C-L   ----------------- PRN.2-9   DATA0-7
+  FLAG    USR.B     ----------------- PRN.11    BUSY
+  GND     USR.A,N   ----------------- PRN.19-24 GND
+  GND     USR.A,N   ----------------- PRN.14    /AUTOLF
+  /INTRES EXP.C     ----------------- PRN.16/31 /INIT
+  /EXROM  EXP.9     ---|>|---+---+--- PRN.17/36 /SELECT
+  +5VDC   EXP.2     --[3K3]--'   '--- ROM.20    /CS
+  /ROML   EXP.11    ----------------- ROM.22    /OE
+  GND     EXP.1     ----------------- ROM.14    GND
+  +5VDC   EXP.2     ----------------- ROM.1,26-28  A13-15,VCC
+  D0-7    EXP.21-14 ----------------- ROM.11-13,15-19  D0-7
+  A0-12   EXP.Y-K   ----------------- ROM.10-3,25,24,21,23,2  A0-12
+The diode (1N4148) and resistor (3.3KOhm) used for compatibility with other
+expansion cartridges only, you can leave out the diode & resistor, and connect
+/EXROM directly to /SELECT. The grounded /AUTOLF signal used for compatibility
+with "geocab" parallel printer port adapter only. Use PRN pins 16,17 for DSUB
+25pins plug or pins 31,36 for Centronics 36pins plug.
+
+Boot EPROM
+Here's the hex-dump, type up the bytes, or copy/paste in windows version, and
+use whatever preferred method to get the hex values into binary format.
+  1E 81 00 00 C3 C2 CD 38 30 A9 1B 8D 11 D0 A9 08
+  8D 16 D0 A9 04 09 10 8D 18 D0 A9 03 8D 00 DD A9
+  00 8D 15 D0 A9 00 A9 02 8D 20 D0 8D 21 D0 A9 01
+  A2 00 9D 00 D8 9D 00 D9 9D 00 DA 9D 00 DB E8 D0
+  F1 A9 20 A2 00 9D 00 04 9D 00 05 9D 00 06 9D 00
+  07 E8 D0 F1 A9 00 85 0C 85 0D 60 48 C9 0D D0 07
+  A9 00 85 0C 4C 95 80 C9 0A D0 05 E6 0D 4C 95 80
+  A9 00 85 0B A5 0D 0A 0A 65 0D 0A 0A 26 0B 0A 26
+  0B 65 0C 85 0A A9 04 65 0B 85 0B 68 48 29 3F A2
+  00 81 0A E6 0C 68 60 68 85 08 68 85 09 E6 08 D0
+  02 E6 09 A2 00 A1 08 E6 08 D0 02 E6 09 C9 00 F0
+  06 20 5B 80 4C A3 80 6C 08 00 A9 3B 8D 02 DD A9
+  00 8D 03 DD 60 A9 04 2C 00 DD D0 FB AE 01 DD 2C
+  00 DD F0 FB 8A 60 A0 00 A9 04 2C 00 DD D0 FB AD
+  01 DD 91 02 C8 A9 04 2C 00 DD F0 FB AD 01 DD 91
+  02 C8 D0 E4 E6 03 60 A9 00 A8 99 02 00 99 00 02
+  99 00 03 C8 D0 F4 A9 3C 85 B2 A9 03 85 B3 A9 A0
+  8D 84 02 A9 08 8D 82 02 A9 04 8D 88 02 60 A9 E7
+  85 01 A9 2F 85 00 A2 00 8E 16 D0 20 A3 FD 20 F7
+  80 20 15 FD 20 5B FF 58 4C 3B 81 20 53 E4 20 BF
+  E3 20 22 E4 A2 FB 9A D0 00 A2 80 4C 4E 81 8A 20
+  87 81 86 2D 84 2E A9 76 A0 A3 20 1E AB 20 59 A6
+  20 33 A5 A9 04 85 C6 A2 09 BD 7D 81 9D 77 02 CA
+  10 F7 A9 A4 48 A9 7F 48 A9 04 4C 7B 02 52 55 4E
+  0D 2C 00 DD F0 FB 60 08 78 20 BA 80 A9 05 8D 20
+  D0 20 C5 80 85 02 20 C5 80 85 03 20 C5 80 85 04
+  20 C5 80 85 05 20 C5 80 85 06 20 C5 80 85 07 A9
+  00 8D 20 D0 20 D6 80 C6 05 D0 F9 A9 04 2C 00 DD
+  D0 FB A9 0F 8D 20 D0 A6 02 A4 03 28 60
+Keep in mind to specify the correct target address when burning the EPROM, eg.
+when using a 27C512 chip (64KBytes) with A13-15 connected HIGH, use E000h as
+target address.
+
+Notes
+The circuit currently provides one-way communication from PC to C64 only,
+no$c64 sends data blindly without receiving checksum or status information,
+it'll be thus always report "Okay" even if the C64 is disconnected or switched
+off.
+The C64 can be kept used as normal with disk and cassette programs, provided
+that the /SELECT and /INIT signals are HIGH (default setting after
+transmission, however, the PCs BIOS/OS may mess around with that signals when
+(re-)booting the computer, simply disconnect the parallel cable in case of
+problems).
+
+Joystick Y-Cable
+----------------
+
+Because of unclear programming specs, many C64 games are working only with
+joystick port 1, or only with joystick port 2, making it necessary to
+re-connect the joystick to appropriate port about each time when loading a new
+game.
+Unlike normal Y-cables (which split one port into two ports), the nocash C64
+Y-cable turns it the other way around and forcefully solves the problem by
+merging both ports into a single port.
+The circuit consists of some wires, plugs/sockets, and 10 diodes (eg. 1N4148).
+Use two diodes for each of the 5 switches (directions and button), connected as
+such:
+  C64 Port 1 ----|>|----+---- Joystick Switch
+  C64 Port 2 ----|>|---/
+  C64 Ground ---------------- Joystick Ground
+The diodes ring is to be pointing to the joystick-side. Diodes used to keep the
+keyboard working when joystick is not moved. Both (two) diodes are required
+because some programs (eg. Bruce Lee) use reversed input/output direction for
+keyboard row/column ports.
+The single joystick will act as if two joysticks are moved simultaneously into
+same direction. This works okay with most programs, but may confuse a few
+games, eg. Zaxxon produces some odd blinking when moved right.
+
+Links
+-----
+
+This Document in TXT and HTM Format
+http://nocash.emubase.de/c64.htm - homepage of no$c64 emulator/debugger
+http://nocash.emubase.de/pagezero.htm - specs in HTM format
+http://nocash.emubase.de/pagezero.txt - specs in TXT format
+
+Project 64
+http://project64.c64.org/archive.htm
+Books and manuals converted into in plain clean raw ascii text format. The file
+C64PRG10.TXT has been essential when making no$c64 emulation and documentation.
+Also, 1541D10A.TXT and 154MAP10.TXT gave important info on the disk drive, and
+PLUS4M~1.TXT provided some valuable & rare info on C16.
+
+funet.fi
+http://www.funet.fi/pub/cbm/
+Great collection of C64, VIC20, and PLUS4 related things in various categories,
+especially the schemactic sections have been very helpful when making no$c64.
+
+Grahams 65xx processor series opcodes
+http://oxyron.net/graham/opcodes.html
+Info on documented and undocumented 6502 opcodes, the undocumented part is
+great, but the documented part lacks some fundamental details.
+
+C=Hacking Magazine
+http://www.ffd2.com/fridge/chacking/
+Many thanks for articles Talking to TED, and Opening the Borders.
+
+C64 Games
+http://arnold.c64.org/
+
+

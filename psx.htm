@@ -1,0 +1,129 @@
+<HTML><HEAD>
+  <TITLE>no$psx - nocash Playstation 1 emulator/debugger</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash Martin Korth">
+  <META NAME="Description" CONTENT="no$psx - nocash Playstation 1
+   emulator/debugger">
+  <META NAME="KeyWords" CONTENT="psx,ps1,psone,playstation 1,playstation i,
+   emulator,emu,emus,debugger,sony,devtool,devkit,dev,devr,devrs,kit,dev-kit,
+   dev-tool,tool,debuggers,emulators,8bit,ports,docs,doc,specs,programming,
+   programmers,home,computer,debugging,emulation,homepage,webpage,page,
+   shareware,freeware,professional,support,windows,win9x,win,pc,ibm,upload,
+   martin,bin,martin,korth,martin korth,by,from,the,a,and,Martin Korth,
+   nocash,no$,game,coding,coders,code,specifications,dox,reference,
+   9x,io,tech,technical,info,information,informations,details,opcodes,
+   80x86,386,486,compatible,nocash@work.de,new,newest,update,i/o,
+   updates,demo,demos,cable,no$psx,no$ps1,small,good,fast,quality,features,
+   source code,sym,debug,info,symbolic,labels">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<!---------------------->
+<CENTER>
+<FONT SIZE=+2>no$psx</FONT><BR>
+nocash Playstation PSone emulator by martin korth
+</CENTER><HR><P>
+
+<B>Donations</B><BR>
+No$psx is freeware, <A HREF="donate.htm">donations</A> will be very welcome.
+
+My overall income is near zero, and I am glad about anything, including
+small amounts.
+
+You can send money to my bank account, or send bitcoins.
+I am banned on paypal (because my webpage is violating all kinds of laws,
+they haven't been able to say which laws, but surprisingly they've openly
+admitted that they don't accept emulators - reasons might be general
+incompetence, and/or their own financial interests, I don't know).
+
+<P>
+<B>Downloads</B><BR>
+ <A HREF="no$psx.zip">no$psx v2.0 Windows 32bit version</A> (ca. 720 Kbytes, 12 Aug 2017) or <A HREF="psxtny.zip">cut-down gaming version</A> (ca. 180 Kbytes)<BR>
+ <A HREF="no$psx19.zip">no$psx v1.9 Windows 32bit version</A> (ca. 566 Kbytes, 28 May 2014) or <A HREF="psxtny.zip">cut-down gaming version</A> (ca. 147 Kbytes)<BR>
+ <A HREF="no$psx18.zip">no$psx v1.8 Windows 32bit version</A> (ca. 534 Kbytes, 03 Mar 2014) or <A HREF="psxtny18.zip">cut-down gaming version</A> (ca. 139 Kbytes)<BR>
+ <A HREF="no$psx17.zip">no$psx v1.7 Windows 32bit version</A> (ca. 525 Kbytes, 26 Nov 2013)<BR>
+ <A HREF="no$psx16.zip">no$psx v1.6 Windows 32bit version</A> (ca. 515 Kbytes, 10 Oct 2013)<BR>
+ <A HREF="no$psx15.zip">no$psx v1.5 Windows 32bit version</A> (ca. 483 Kbytes, 25 Apr 2013)<BR>
+ <A HREF="no$psx14.zip">no$psx v1.4 Windows 32bit version</A> (ca. 521 Kbytes, 19 Mar 2013)<BR>
+ <A HREF="no$psx13.zip">no$psx v1.3 Windows 32bit version</A> (ca. 497 Kbytes, 26 Jan 2013)<BR>
+ <A HREF="no$psx12.zip">no$psx v1.2 Windows 32bit version</A> (ca. 485 Kbytes, 06 Jan 2013)<BR>
+ <A HREF="no$psx11.zip">no$psx v1.1 Windows 32bit version</A> (ca. 482 Kbytes, 28 Dec 2012)<BR>
+ <A HREF="no$psx10.zip">no$psx v1.0 Windows 32bit version</A> (ca. 469 Kbytes, 03 Dec 2012)<BR>
+<BR>
+<B>The Program</B> is intended to work out-of-the-box. There is no need for
+  specific windows versions, special video drivers, obscure plug-ins,
+  virtual CDROM drives, system BIOS, or tweaked per-game configurations.<BR>
+<B>The Emulation</B> should be complete with all hardware features fully
+  implemented and working, though as by now it wasn't tested with too many
+  games, so there may be still some problems with other games (bug reports
+  are welcome).<BR>
+<B>The BIOS</B> is emulated via a BIOS-clone, which is free and faster than the
+  original PSX-BIOS. There may be still some compatibilty issues (especially as
+  most PSX games are applying patches to the original BIOS; the BIOS clone is
+  reproducing known patches, but may fail on unknown ones). In case of problems,
+  please use a copy of the original BIOS (with filename PSX-BIOS.ROM in no$psx
+  folder), and please let me know if that is fixing problems with any games.<BR>
+<B>CDROMs</B> are supported via complete disk images (in
+  .CCD+IMG,
+  .CDI,
+  .CUE+BIN,
+  .MDS+MDF,
+  or .NRG format),
+  via single-track images (.ISO files), or as raw executables (.EXE files).
+  Decompressing .ECM and .CDZ files is supported.
+  Subchannel data (for libcrypt'ed games) can be read from .SBI, .M3S, .SUB, .MDF files.
+  Reading from real CDROM drives is also supported, but does require
+  wnaspi32.dll (which appears to be a problem on WinNT/Win2K and higher).<BR>
+<B>Minimum Requirements</B> are around 1-2 GHz on a Pentium 3,
+  which is maybe fast or maybe not so fast
+  (older PSX emulators are said to be working on 200MHz computers,
+  on the other hand, I got told that no$psx is much faster than those
+  old emulators... I've no clue how that is possible).<BR>
+<B>Debugging/Development</B> functions include disassembler, debugger, profiler,
+  code breakpoints, memory breakpoints, assembler, I/O map viewer, VRAM viewer,
+  polygon viewer, TTY debug console window, and complete PSX hardware specs.<BR>
+<B>Pocketstation</B> is emulated as part of <A HREF="gba.htm">no$gba</A>
+  v2.7 and up (the pocketstation is a PSX memory card with LCD screen; emulated
+  in no$gba because GBA and pocketstation are both based on ARM processors).<BR>
+<!--- <A HREF="donate.htm"><IMG SRC="donate.gif" WIDTH=62 HEIGHT=31></A> --->
+<P>
+
+<B>News</B><BR>
+<A HREF="psxnew.htm">release notes</A><BR>
+<P>
+
+<B>Programming Specs</B><BR>
+<A HREF="psx-spx.htm">psx-spx.htm</A> - PSX Spex, HTML version<BR>
+<A HREF="psx-spx.txt">psx-spx.txt</A> - PSX Spex, TXT version<BR>
+<P>
+
+<A HREF="psx-xboo.jpg"><IMG SRC="psx-xboo.gif" BORDER=0 title="psx-xboo bios and parallel port mod (and some other mods)" WIDTH=400 HEIGHT=397></A>
+<P>
+
+<IMG SRC="psx-gui.gif" title="no$psx bios clone / memory card manager" WIDTH=320 HEIGHT=224>
+<P>
+
+<A HREF="psxdebug.gif"><IMG SRC="psxdebug.jpg" BORDER=0 title="no$psx debug screens" WIDTH=640 HEIGHT=512></A>
+<P>
+
+<B>Hardware Donations</B><BR>
+If you've some old PSX hardware that you want to get rid off, and that youwant to donate for emulation and research purposes, some things that I amlooking for would be:
+<LI>PS2 Gamepad (for testing PS2 controller)</LI>
+<LI>SCPH-1040 Serial Link Cable (for testing max transfer rate; which is needed since games seem to autodetect that max rate)</LI>
+<LI>SCPH-10180 I-Mode adaptor, and maybe an old I-Mode compatible mobile phone</LI>
+<LI>SLEH-0005/SLUH-00017 Konami Lightgun (for testing if it's accuracy is really worse than Guncon)</LI>
+<LI>SLPH-00100/SLUS-00063 Fishing Controller (ascii/agetec)</LI>
+<LI>BANC-0001 Fishing Controller (Bandai)</LI>
+<LI>HPS-97/HPS-98 Fishing Controller with attached plastic fish (Hori)</LI>
+<LI>SCPH-1150 old analog joypad (with one vibration motor, with red/green led)</LI>
+<LI>SCPH-1180 old analog joypad (without vibration motors, with red/green led)</LI>
+<BR>Note: shipping address would be in germany.
+<P>
+
+<B>Contact</B><BR>
+<A HREF="email.htm">email</A><BR>
+<A HREF="http://ngemu.com/forums/no-psx-discussion.147/">no$psx forum (ngemu)</A><BR>
+<P>
+<A HREF="index.htm">nocash homepage</A><P>
+
+<IMG SRC="nonazi.gif" title="we are no longer mass-murdering ourselves in germany" HEIGHT=100 WIDTH=100>
+<BR>Don't forget to tell your children that gay people are friendly people (I have just read that... as far as I understood... the russian government is trying to "protect" children from that information).
+</BODY></HTML>

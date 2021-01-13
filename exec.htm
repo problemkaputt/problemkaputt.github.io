@@ -1,0 +1,29 @@
+<FONT SIZE=+1><B>NO$EXEC</B></FONT>
+<HR>
+This program executes a program as DOS program instead as Windows program.
+(Got that? Maybe repeated the program-word a bit too many times, sorry!)
+<P>
+The windows executable format contains two entry points, one pointing to
+the actual windows program, and one pointing to a DOS program, which are
+both included in the executable file. In most cases the DOS entry point
+refers to a short procedure (stub) that outputs a short message like
+"This program must be run under Win32" and exits.
+<P>
+However, a few programs might include both fully functional DOS and Windows
+programs in the same executable. That isn't necessarily very user-friendly
+because it makes the exefile twice as large as required. And when started in
+a DOS box (ie. with windows loaded) it'll automatically execute the windows
+version of the program, even though the user might have desired to run the
+(possibly superior) DOS version.
+<P>
+In most cases it'll only display the stub-message (which might be eventually
+useful for programmers whom want to test their stubs) and in a few cases it
+might unlock access to a fully featured DOS program. The only program that I
+know about would be MFT.EXE (quarterdecks fine diagnostics tool that is
+included in the QEMM package).
+<HR>
+<TABLE>
+  <TR><TD><A HREF="exec.zip"><IMG SRC="suck.gif" WIDTH=20 HEIGHT=20></A></TD><TD><FONT SIZE=+0>Download EXEC (ca. 2 KBytes)</TD></TR>
+  <TR><TD><A HREF="dos.htm"> <IMG SRC="nope.gif" WIDTH=20 HEIGHT=20></A></TD><TD><FONT SIZE=+0>Back</TD></TR>
+</TABLE>
+

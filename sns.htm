@@ -1,0 +1,93 @@
+<HTML><HEAD>
+  <TITLE>no$sns</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash / Martin Korth">
+  <META NAME="Description" CONTENT="nocash SNES/SFC emulator">
+  <META NAME="KeyWords" CONTENT="snes,super nintendo entertainment system,
+  super famicom,sfc,super nes,super,nintendo,entertainment,system,console,
+  super family computer,emulator,debugger,emu,emulation,65816,65c816,cpu,
+  ppu,apu,mappers,mad,asm,assembler,disassembler,
+  breakpoints,code,data,stack,registers,ports,opcodes,trace,tracing,
+  windows,win95,win98,9x,win9x,pc,ibm,clones,free,freeware,shareware,
+  download,cartridge,.smc,games,no$sns,no$snes,nocash,emulation,
+  martin korth,update,updates,homepage,webpage,martin,korth">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<FONT SIZE=+0>
+<!----------------->
+<FONT SIZE=+1><B>no$sns (c) Martin Korth</B></FONT><BR>
+ nocash SNES/SFC emulator/debugger for windows
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Downloads</B></FONT>
+<LI><A HREF="no$sns.zip"><B>Download no$sns v1.6</B></A> (21 Mar 2016) - snes-cd, snapshots, tracelog, st018, bugfixes/details</LI>
+<LI><A HREF="no$sns15.zip"><B>Download no$sns v1.5</B></A> (30 Jul 2013) - fullscreen, aspect ratio, better/faster zooming, bugfixes/details</LI>
+<LI><A HREF="no$sns14.zip"><B>Download no$sns v1.4</B></A> (24 Oct 2012) - exertainment emulation, improved nss emulation, debug features</LI>
+<LI><A HREF="no$sns13.zip"><B>Download no$sns v1.3</B></A> (14 Aug 2012) - emulates nintendo super system, pachinko, twin tap, barcode battler</LI>
+<LI><A HREF="no$sns12.zip"><B>Download no$sns v1.2</B></A> (28 Apr 2012) - bugfixes, video/controller cleaning-up, sfc-box, etc.</LI>
+<LI><A HREF="no$sns11.zip"><B>Download no$sns v1.1</B></A> (24 Feb 2012) - same as v1.0, plus GSU and SA-1 coprocessor emulation</LI>
+<LI><A HREF="no$sns10.zip"><B>Download no$sns v1.0</B></A> (24 Feb 2012) - initial release</LI>
+<P>
+For getting started, here are <A HREF="snsnotes.htm">some notes</B></A> on
+emulation/debugging controls, BIOS files, and ROM-Image formats for NSS
+and SFC-Box cartridges.<BR>
+Details on new features: <A HREF="snsnew.htm">complete release notes</A>
+for all versions.
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Hardware Donations</B></FONT><BR>
+If you've some old SNES hardware that you want to get rid off, and that youwant to donate for emulation and research purposes, some things that I amlooking for would be:
+<LI>Naki/Fire Tribal tap (five-player adaptor, the thing has 5 connectors, but only 4 seem to be working)</LI>
+<LI>A snes mouse (for testing it's sensitivity/threshold)</LI>
+<LI>BSX-Flashcart (mini-flashcart for BSX games)</LI>
+<LI>Nintendo Power-Flashcart (big-flashcart with unknown access protocol)</LI>
+<LI>Photos of different Hudson (and third-party) Multitap PCBs (don't need to have the real hardware, but would be nice to see what is in there).</LI>
+<BR>Aside from SNES hardware, some other stuff that I am currently looking for:
+<LI>Nintendo DSi (or DSi XL, or 3DS) handheld console (region is don't care)</LI>
+<LI>Nintendo DSi (or 3DS) game cartridge (region is don't care)</LI>
+<BR>Note: shipping address would be in germany. For email/contact, see below.
+<P>
+If you like no$sns, please <A HREF="donate.htm">donate</A> some money,
+this will <U>help</U> me to continue to work on emulation projects.<BR>
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Features</B></FONT><BR>
+<LI>The program is 100% assembler code. Accuracy should be quite high (if not: bug are reports welcome).
+<LI>Controllers: 1-2 Joypads, Multitap, Mouse, Lightguns (via mouse), NTT Data Pad, X-Band Keyboard, Twin Tap's, Barcode Battler, Pachinko Dial, Exertainment Bike</LI>
+<LI>Coprocessors: SA-1, GSU, DSP, ST010/11, ST018, CX4, OBC1, S-DD1, SPC7110, S-RTC, RTC-4513, SFC-Box, NSS arcade cabinet</LI>
+<LI>Add-ons: Satellaview, Super Disc CDROM, Turbofile (TFII and STF)</LI>
+<LI>Debugger: Assembler, Disassembler, Xboo-Upload Function (for testing code on real SNES).
+<LI>Requirements: Win95 and up, around 8MB RAM, around 200MHz (tested)<BR>(on 1GHz computers, most games can run 5-10 times faster as on real hardware).</LI>
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Known Problems</B></FONT><BR>
+<LI>Interlace Mode (vertical hires) isn't yet supported (used only by 3 games or so)
+<LI>Offset-Per-Tile Mode isn't yet supported (used by Starfox... and probably by some further games...?)
+<LI>GUIs of Copiers and Cheat Devices should be working (but without actually emulating FDDs or Patches)</LI>
+<LI>Actraiser 2 hangs in intro (unknown why)</LI>
+<P>
+<!----------------->
+<FONT SIZE=+1><B>SNES Hardware Specs</B></FONT><BR>
+<LI><A HREF="fullsnes.htm"><B>fullsnes.htm</B></A> - complete SNES specs, html version.</LI>
+<LI><A HREF="fullsnes.txt"><B>fullsnes.txt</B></A> - complete SNES specs, text version.</LI>
+<LI><A HREF="sns-scan.gif"><B>sns-scan.gif</B></A> - scanned SNES schematics.</LI>
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Sample Code</B></FONT><BR>
+<LI><A HREF="magicflr.htm"><B>Magic Floor</B></A> - a small search game (includes sample source code for A22i-assembler and Xboo-Upload)</LI>
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Test Programs</B></FONT><BR>
+Below are some test programs for confirming some formerly unknown details
+of the NSS and SFC-Box hardware (by replacing the BIOS with the test EPROM).
+<LI><A HREF="kromtest.zip"><B>kromtest.zip</B></A> - Super Famicom Box (Hotel Box) Test Program. (test results: <A HREF="http://forums.nesdev.com/viewtopic.php?f=12&t=9597">here</A>)</LI>
+<LI><A HREF="nss-test.zip"><B>nss-test.zip</B></A> - Nintendo Super System (Arcade Cabinet) Test Program. (test results: <A HREF="http://forums.nesdev.com/viewtopic.php?f=12&t=9065">here</A>)</LI>
+<P>
+<!----------------->
+<FONT SIZE=+1><B>Contact/Homepage</B></FONT><BR>
+<LI><A HREF="email.htm"   ><B>Emailing me</B></A> - snes feeback very welcome.</LI>
+<LI><A HREF="address.htm" ><B>Mailing me</B></A> - my mailing address.</LI>
+<LI><A HREF="index.htm"   ><B>Back to Homepage.</B></A></LI>
+<P>
+<!----------------->
+</FONT>
+</BODY></HTML>

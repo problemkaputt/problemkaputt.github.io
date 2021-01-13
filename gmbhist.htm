@@ -1,0 +1,972 @@
+<!----------------->
+<FONT SIZE=+3>NO$GMB HISTORY</FONT>
+<P>
+<PRE>
+<HR>
+Maybe some people are interested in no$gmb history. Here are specs & zips
+for all major versions. Including more and more features, fixes, emufixes
+and debug functions.
+
+<HR>
+<B>Summary</B>
+
+v2.5  07/00  windows GUI, windows & frameskip fixes, MBC3, cheats file, etc.
+v2.4  02/00  windows version, major sound fixes, long filenames, bugfixes, etc.
+v2.3  09/99  some timing/link/snespad fixes, OAM screen, A22I-XED, new address
+v2.2  07/99  various details & fixes, vram viewer, y2k, sound/joystick fixes...
+v2.1  03/99  various bugfixes and details, stereo, lite version, a22i tuned, etc
+v2.0c 01/99  some bugfixes for version 2.0
+v2.0  01/99  CGB, various details & fixes, sound, DMA3, GUS, @@a22i, etc, etc
+v1.9  10/98  2MB,SGB link,SAV/SV2..C,gameshark,SGB predef border,snespad,speaker
+v1.8  09/98  various fixes (sound/speech, sgb, emu-core, winNT, etc. etc.)
+v1.7  08/98  digital sound,tuned BG gifs,bugfixes,debugmsg,battery fix,animate!
+v1.6  07/98  SGB support, hidden window, sprite priority, 640x480 EMUmode, etc.
+v1.5  05/98  1M rom, 32K ram, global brks, 4 button, shareware, timing, 720pix
+v1.4  02/98  ffa, sound, cfg-file, GIFs, graphix debug, conditional breaks etc.
+v1.3  01/98  color edit, softswap, herc/cga, gamegenie, commercial debugger
+v1.2  11/97  full screen, emufixes, saves battery ram, xt/at compatibility
+v1.1  10/97  much more carts working, 2 player link, better sound, ems used
+v1.0  09/97  the first release, lots of carts not working, 12 machines
+v0.0  05/97  the first month (unreleased)
+--    04/97  gameboy project started (based on amstrad project)
+--    09/95  amstrad project started (based on hack debugger)
+--    12/94  hack debugger project started
+--    XX/93  first experiences with gameboy, programmed infgmb for gameboy
+
+<HR></PRE><FONT SIZE=+3>... AND THINGS GET BETTER</FONT>
+<P>
+<PRE>
+
+<B>23th July 2000 - v2.5</B> <A HREF="no$gmb.zip">download</A> (current windows version) (120 KBytes)
+
+* frameskip: optionally displays frameskip values in performance indicator
+* frameskip: completely rewrote the entire frameskip calculation
+             (it's basically running more fluent now, and it's heavily
+             improving the performance of the combination flat32+pentium)
+* sound: fixed stereo noise on channel 1 and 2 if right channel muted
+* sound: sound output for first player only (in multiple machines mode)
+* sound: supported master volume (ff24) for ch3, and sound obscurity feature
+* huc3: emulated data-read and data-ready registers, whatever that is used for
+* mbc3: xdebug version emulates MBC3 timer, also updated if cartridge not loaded
+* cgb: color translation procedure skips unused colors, possibly a bit faster
+* colors: changed default colors for mono gameboy more to brown (less yellow)
+* battery ram saving: optionally saves whole 8/32K ram area (for bung sram)
+* cheats: loads gamegenie and gameshark data from file no$gmb.ggs, with comments
+* cheats: saves gamegenie and gameshark codes in file no$gmb.ggs
+* cheats: update URLs for gamegenie and gameshark cheats (thanks cameron & brad)
+* cartheader: added more manufacturers codes from the peitschi collection
+* file menu: added "Reload Cartridge" function in "file" popup menu
+* vram viewer: tile & oam screen display monochrome OAM tiles as OBP0, OBP1
+* vram viewer: palette screen displays monochrome gameboy BGP, OBP0, OBP1
+* sgb debugging: made conditional breaks and use of symbolic info freeware
+* debugger: killed the "watchpoint" memory inspection window, instead watches
+            are entered through CTRL+I now, declared as one-byte datazone,and
+            displayed as "bookmarks" in breakpoint window
+* debugger: datawindow highlights cursor in the active part (hex or asc) only
+* xdebug: optionally emulates/warns on disabled external/battery RAM, [0000]=0A
+* help: updated games and options sections, added "two player mode" chapter
+* help: added homepage overview, added "making no$gmb faster" chapter
+* help: added child-proof (hexdump) email address & brief homepage description
+* help: added link to abisx.zip in help file (converts ISX files to SYM files)
+* help: updated the "Features" section, now summarizes all basic features
+* help: added "about the program and work" section
+* biosfix: dummy es:bx adr for acer int15/8301, otherwise it killed a bit in mem
+* diskreadline: fast 16K buffered read (for fast loading big .ggs cheat files)
+* commandline: recognizes .SNAps (provided that file is in SNAP subdirectory)
+* setup: disables sound script file on startup (even if somebody enabled it)
+* cgb bugfix: no more unwanted mono-color init (avoid flicker during tracing)
+* network fix: no$gmb.exe path may contain \\networkname\ instead of drive:\
+* startup: added message to prepare people for the discovery that it's shareware
+* intruder alert: info about ethics that shouldn't be necessary to talk about
+* flat32guifix: always initializes colors when drawing SGB border (pfamirii)
+* flat32fix: uses 32bit string-len (instead 16bit) in ctrl+s search function
+* flat32fix: fixed crash that occured when debugging external RAM banks 1-3
+* flat32gui: info message when attempting to activate empty debug message window
+* flat32gui: allows background gifs bigger than DOS-style 320x200 pixels
+* flat32gui: vram screens freshened during/after tracing/running emulation
+* flat32gui: flicker-free grid in vram viewer screens (user, map, tiles)
+* flat32gui: displays text "paused" in gamescreen caption during debugging
+* flat32gui: added automatic close/create/hide options for game/debug windows
+* flat32gui: displays "caret" (hardware cursor) in data window if it's active
+* flat32gui: gamescreen adjusts its size also when background gif isn't loaded
+* flat32gui: destruction of inactive debug/game window doesn't activate it
+* flat32gui: supports multiplayer (2 players with GIF border, 3-12 without GIF)
+* flat32gui: border between code & data window can be vertically adjusted
+* flat32gui: own button/checkbox class (that won't capture keyboard focus)
+* flat32gui: displays emulation speed (performance) in debug window statusbar
+* flat32gui: automatically starts/stops emu when switching between game/debug
+* flat32gui: gamescreen can be maximized, maximize-state saved in setup
+* flat32gui: optionally gamescreen can be sized at any step and ratio
+* flat32gui: gamescreen can be sized (with mouse) to any size (step 50%)
+* flat32gui: separate child windows for LCD screen and GIF/SGB border fragments
+    (speedup, child windows are drawn directly, old code used a 320x200pix temp
+    buffer for "emulated direct" VGA vram access)
+* flat32gui: removed dos-style debugscreen options (colors, vsize, resolution)
+* flat32gui: debug window/frame can by re-sized vertically, fixed xed-sizing
+* flat32gui: added right mouse button context menues in debugscreen
+* flat32gui: ported main debug screen to windows format, and moved performance
+  indicator to window caption; no$gmb.f?? DOS-font files are no longer required
+* flat32: completely removed SetDIBColorTable, CreateDIBSection, and XxxBlt's.
+          using StretchDIBits instead seems to fix 8bit palette dirt & lockups
+* flat32gui: override option in xcept setup disables/grays options below
+* flat32gui: ported help text windows style pages, headlines, links, etc.
+* flat32gui: keyboard setup works for player 1-12
+* flat32gui: windows gui port of built-in editor mostly completed and working
+* flat32: entering data in stack window fixed (with ycur<>0) (thanks randy)
+* flat32gui: started to port the included "xed" text editor (still incomplete)
+* flat32gui: right mousebutton popup menu in emulation mode
+* flat32gui: setup (at the moment the screens are arranged a bit messy though)
+* flat32: detects non-prensent soundcard (and disables sound if necessary)
+* flat32gui: added setup autosave option (saves settings on exit)
+* flat32nogui: clicking left mouse button stops emulation (as in DOS version)
+* flat32: removed DOS-only options (display redraw mode, swapping, plain text)
+* flat32gui: ported the vram viewer screens to windows style format
+* flat32: removed maxmize box in caption, removed modalframe in modeless dialogs
+* flat32: disabled unwanted screen-to-bggif centering in 3..12 players mode
+* flat32: redisptotal redisps all screens (indirectly fixes CGB blank color bug)
+* flat32gui: supports loading and saving in color scheme editor
+* flat32: fixed SGB border colors (didn't use incoming ch in set_sgb_color_dacs)
+* flat32: palette animation (GIF/SGB borders, and colsch edit in 8bit vga mode)
+* flat32gui: color scheme editor (isn't fully functional yet though)
+* flat32: put Sleep(1) in main getkey loop (more multitasking friendly)
+* flat32gui: subclassed wm_char --> search processing in files.lst menu
+* flat32: cartloader warning messages on bad checksums, undef mbc-type, etc.
+* flat32fix: fixed all DialogProcs for win2000 (added begin/end_proc pushpops)
+* flat32gui: added small lowres cartridge icon for caption/title bar
+* flat32fix: fixed input_proc for win2000 (added pusha/popa_proc)
+* flat32gui: win-explorer style filemenues, around 10 times slower than before
+* flat32gui: no$gmb internal stats modal dialog box, unregistered-debug dialog
+* flat32gui: F10-hardware info screen as modeless dialog, renamed to I/O Map
+* flat32fix: added invalidate rect's for color scheme load/save menues
+* flat32gui: unregistered users CGB five minute timeout message box
+* flat32gui: debug message dialog box window (instead DOS hercules debug screen)
+* flat32gui: SGB packet window, update info if older than 6 months messagebox
+* flat32gui: a22i source code assembler result/errormessage dialog box
+* flat32fix: repaired memchange breaks (conditionals like "(FF40)!&80")
+* flat32fix: multiple cgb-machine reset (crashed when 2 player saved in setup)
+* flat32fix: battery ram saving size (for 32KB external ram) fixed ax/xax
+* flat32gui: files.lst menu
+* flat32: fixed SGB packet window crash (pop xbp instead pop bp)
+* flat32: fixed a22i errmsg lockup (emulated text cursor offscreen, total_ysize)
+* flat32: added DOS stub message with URL for DOS version
+* flat32fix: fixed [xregpc] instead [si] in halt-with-di procedure (thanks ein)
+* flat32gui: dialog box for gameshark (took around 4 days), and for gamegenie
+* flat32gui: input/output textbox, aboutbox, fixed options, bung eeprom writer
+* flat32: resource file with copyright info, gameboy- and cursors-icon 26 Feb 00
+* update info: made option version-specific so it'll be re-enabled in updates
+* xt version: translated pusha/popa macros to calls to free mem in basis segment
+
+<B>24th February 2000 - v2.4</B> <A HREF="no$gmb24.zip">download</A> (windows version) (120 KBytes)
+
+* cgb detail: lcdc.0 for disabled background priority emulated (sinline only)
+* emufix: OAM sprites with prioity behind BG still may overlap other OAM sprites
+* vramview: fixed small gamescreen in upper right in 720x480pix vesa mode
+* screenshots: works without switching to 320x200 lowres gfx mode (sinline only)
+* colsch: color scheme editor works in hires debug mode (without vmode switches)
+* debugger: added override option in xcept setup to disable exceptions/warnings
+* debugger: reset "*" recognizes if "autostart carts" is disabled in setup
+* debugmsg: fixed disassembler (.msg buggy since 2.3b) (and shows indirect .msg)
+* debugger: stackwin supports cursor left/right follow (maps codewin to RET-adr)
+* xdebug: new optional warning message for 'display disable outside vblank'
+          (nintendo doesn't let games pass through their approval that do that)
+* xdebug: "more than 10 sprites/line" limitiation realizes sprites at x>=168
+* cartloader: uses actual filesize rounded up to 2^n if header [0148h] is buggy
+* dos/flat32: long cartnames in snapshots, backwards compatibile to old snaps
+* dos/flat32: long filenames
+* flat32/utility: directly implemented XED editor (converted to 32bit assembler)
+* bg gif: displayed in hires debug mode, and in hgc/cga mode, removed 3some bg
+* bg gif: reduced temporarily allocated disk buf & data table from 128K to 32K
+* bg gif: changed default location from .\colors\default.gif to .\no$gmb.gif
+* flat32: fixed battery ram loading/saving
+* flat32: fixed several mem allocation/deallocations bugs in multimachine mode
+* flat32: fixed win2000 bug, didn't like the int16 in clearkeybuf procedure
+* flat32: fixed ctrl+g "rombank:offset"
+* flat32: fixed samplerate detection (always failed if CALLBACK was specified)
+* flat32: fixed 'deleting source code breakpoints' with DEL key (thanks richard)
+* flat32: print screen key works also when emulation runs (gif/screenshot menu)
+* flat32: added redefine-keyboard function
+* flat32: rewrites CGB/SGB palettes as one block (major game/tracing speedup)
+* flat32: fixed @MEMWRITE [membreak], fixed CGB WRAM banking
+* flat32: fixed 32K external battery ram allocation, fixed hblank dma crash
+* flat32: fixed "files.lst not exist" bug, and "F4-reg users only" message crash
+* flat32: digital sound, sound/timing synchronisations, stereo/rate detection
+* flat32: translated jcxz to jecxz (tasm32 automatically uses 32bit for others)
+* flat32: saved window positions when saving setup
+* flat32: gamescreen (non-debugbackgnd) zoom-able, sgb screen 224 pix (DOS=240)
+* flat32: automatically generates & executes GRABFONT.COM when used 1st time
+* flat32: automatically creates required subdirectories, joystick support
+* flat32: realtime alignment, performance indicator, commandline <path\cartname>
+* flat32: screenshots
+* flat32: write to bung flashcard function, snespads, pause menu, gif decoder
+* flat32: 32K-battery ram, multiple machines, debugmsg, snapshots, dirtlines
+* flat32: color gameboy (1 Nov 99)
+* flat32: diskextract, super gameboy
+* flat32: dacs, color scheme editor, mouse, vram viewer, F1-help manual
+* flat32: f10-hardware info, rombanking (roms >32Kbyte), xdebug, y2k, osshell
+* flat32: source code assembler, symfiles, genie/shark cheat boxes, grabfont
+* flat32: graphics emulation included, tetris and starfight playabe (24 Oct 99)
+* sound: modified the restart noise a little... / and removed it completely
+* sound: fixed lost frequency counter digits for 12.5%/25%/75% waves
+* sound: removed meaningless/buggy "mov [sb_play_remain],1"s in rebuild code
+* sound: implemented exact step7/15 algorhytm for white noise channel 4
+* sound: should emulate skipped first sample-digit on channel 3 restarts
+* sound: emulates freq-dirt on voice restarts (also good for gauntlet speech)
+* sound: inverted 12.5%/25%/75% waves, probably doesn't matter though...
+* sound: refixed gauntlet2 sound (buggy since 2.3g) (also fixes vigilante 8)
+* sound: enusered immediate generate_sample when frequency gets changed
+* sound: fixed sign-bug on freq_rewrites for 12.5/25/75 percent waves
+* sound: ignores various freq_rewrites if unchanged
+* sound: freq_rewrite and poly_rewrite no direct effect if @@non_infinite
+* sound/ch3: ninjamove, freq/8calc, out_last_patt
+* sound/flat32: fixed noise in non-even sampleblock lengths (mono, of course)
+* sound: does not write to samplebuf during tracing anymore (crashed flat32)
+* sound: removed acdc option
+* menubar: added help-item and about-box (as flat32 replacement for exitmessage)
+* commandline: /s refixed (buggy in 2.3b update, messed up near/far RETs)
+* exestamp: changed version number timestamp format from 23.00 to 2.04
+* internal: removed toclear flag, always uses writeback instead
+* internal/flat32: debugger in 640x480 window, scrolling, inputs.. (17 Oct 99)
+* internal/flat32: started work on anti-performance 32bit 'flat' version
+* internal: moved vram viewer to separate segment (hack -> stat), fix:tv/oldbutt
+* advertising: removed bung logos
+* address: updated adr in timeout screen (old adr still works either though)
+* updates: added warning message if used no$gmb version is older than 6 months
+* y2k: removed year 2000 support, it's been limited to january 2000 anyways,
+       and NO, this is NOT a bugfix, to review it in older versions use /y
+
+<B>23/24th September 1999 - v2.3(a)</B> <A HREF="no$gmb23.zip">download</A> (134 KBytes)
+
+* snespads: fixed the new SNES button setup options (bugfix version 2.3a)
+* timing: not sure how often I had to re-fix it, it's daedalian opus again
+* timing: fixed adjust_intcount_redisp at display enable (bugs life,ez,bob-demo)
+* mbc5/link: fixed mbc5-flag initialization in multi-machines mode
+* linkfix: rombank re-initialization past interrupting emulation in link mode
+* linkspeedup: suppresses redundant EMS mapping during machine switches
+* linkdebug: offholded F3 and F4 screenswitch by 1 sec (also in gfx debug mode)
+* snespads: user defineable buttons (optionally SNES A,B,X,Y for each GMB A,B)
+* vram viewer: added new OAM screen for viewing OAM sprite data at FE00..FE9F
+* debugger: option to initialize RAM (0:C000..7:DFFF) as random filled
+* debugger: fixed datawindow address after using vram viewer (<>30 lines mode)
+* debugmsg: fixed hercules debug screen video output (as secondary display)
+* xdebug: F3 & F4 offhold screen switches from text to graphix mode by 1 second
+* datawin: displays cursor position 'best fit' symbolic address in statline
+* a22i: when using .norewrite, fixes chksum for whole cart with appended data
+* a22i/xed communication:   (utility menu --> assemble file / edit file)
+  --> on a22i errors, the user is prompted if he wants to edit the source
+  --> the line number of the first a22i error is passed to the editor
+      (requires LATEST version of nocash XED http://www.work.de/nocash/xed.zip)
+      (and "XED" must be selected as desired editor in no$gmb DEBUG setup)
+      (and XED.EXE must be saved in a directory that is in your PATH statement)
+  --> XED passes last edited line number back to no$gmb, allowing to continue
+      editing in that line later
+  --> new XED hotkey: F9 = SAVE and EXIT and ASSEMBLE file
+      (ie. sends a request to no$gmb to assemble the file with A22i)
+* a22i-ex: new .msx directive to generate MSX seven byte bin file headers
+* a22i: de-allocates its mem before loadrom allocs new mem (better cgb mem fit)
+* commandline: added /2 switch to force two player mode
+* commandline: /s switch to disable soundcard detection (=sound can't be used)
+* internal: mostly prepared hack_rombank for 16bit, also fixes 256 bung banks
+* regkeys: finally locked illegal PsyDuck key in case it still exists...
+* regkeys: recognizes some typical mail-program-damaged filenames
+* memfix: unwanted 24K battery allocation (frequently due to bad initialization)
+* memory: moved gamegeniedata (1.5K) to separate segment (mostly for XT version)
+* cpu detection: fixed wrong CPU type fatal errormessage
+* fatal error handler: unloadrom unloads only EMS mem (prevent recursive errors)
+* help/order.frm: changed snailmail address to ringheide 44
+
+<B>8th July 1999 - v2.2</B> <A HREF="no$gmb22.zip">download</A> (132 KBytes)
+
+--- 2/2/22 anniversaire release - 2 years, 2 months, 22 days - version 2.2 ---
+
+* emufix: out_lcd_adj reload_vbl_val instead intcount_vbl (rtypedx,moonpatrol)
+* emudetail: real timing for separate hblank DMA blocks (wwfattit,logical)
+* emudetail: unused bits in FF02 (serial control) set to "1" (gmb=7Eh, cgb=7Ch)
+* emudetail: color pool overflow retries (slugfest 'clouds' title screen)
+* emudetail: intersegment relative jumps instead of FAST jumps (CGB centipede)
+* emudetailfix: rotate/shift/swap (hl) in banked memory regions (slugfest)
+* emudetail: halt quirk emulation only if ff0f.AND.ffff not cleared (tetris/ali)
+* emudetail: halt ends only when ff0f.AND.ffff gets set (tetris/ali boxing)
+* emufix: FF41 lyc=ly fixed for double zero situation (game&watch:galaxian,diag)
+* emurefix: display disable in each line mode did redraw screen after cls
+* cgb dma/accurate-each-line-redraw mode: real FF55 readback (klax,bugs life)
+       hblank data transferred in separate blocks, ability to stop DMA (FF55.7)
+* cgb dma/old-trashy-full-screen-redraw: cheated FF55 readback (klax,bugs life)
+* huc1: direct rombanking above 5bit (bank_mode_exist=0) (pokemon kadoo,z2)
+* mbc5: lower/main rombank bits only in 2000..2FFF area (rox,reborn2,quiqui)
+* romsize: assembled for up to 256 rom banks (4Mbyte) (tokimeki eye terror)
+* timing: refix for lyc=ly timing (parodius, and (particulary) moon patrol)
+* sinline cgb redraw: fixed bug in XT version, also faster on other CPUs now
+* sticks: moved calibration INTO running emu for correct timing WITH sound dma
+* sticks: calibration values displayed in internal status screen (alt+w,n)
+* cgb+initial sgb border: recognizes 'reverse' SGB picture transfers (nba zone)
+* startup logo: visible if no tetris-cart loaded (cgbflag=FF caused white bgp)
+* startup: removed the take from the rich thing box frequently showing up
+* sound: fixed waveptr destruction ;ancient horror: ;xxxx (pocket bomberman cgb)
+* sound: right channel fixed (used shl al instead ax in attempt to shift to ah)
+* sound: channel 3 startover (robocop2 music)
+* sound controller: particulary emulated clearing sound regs on sound disable
+* year 2000: no$gmb is the first and only gameboy emu with full y2k support
+* help: hyperlinks, mouse/enter or cursor left/right to undo/follow "--> link's"
+* help: added <very> detailed information about how to register the program
+* help: new funny colors for examples and stuff, serious layout? plz forgive me!
+* help: full size display in 50/60 lines mode (even if debugscr is f10-spitted)
+* help: new sections about cheats, what is an emulator, and using the manual
+* help: added summary of default joypad keys to help txt, yes! space IS button A
+* help: fixed some typos, thanks SoloYo
+* help/pokemon: added pokemon-users-leave-me-alone section, hope it "help"s
+* internal: mostly increased 'rompagelimit' to 16bit for bigger carts in future
+* help/internal: changed from .asm to .xed syntax, mkno$gmb 'compiles' the file
+* background gif: modified default.gif with red bung sponsor plaque / url
+* filemenues: removed stupid <new file> entry from 'assemble' utility thing
+* filemenues: fixed abc quicksearch in menues with <new file>, new type is 18h
+* cartridges: added .GBC as default extension for loading & (de-)compression
+* cartrunner: fix gfxwin when ESCcaping F12 menu(on attempt to run without cart)
+* cartloader: forces MBC5 if header byte 147h is 00 (mbc type) with rom >32K
+* cartloader: warning message if header byte 147h is 00 (mbc type) with rom >32K
+* setup: redefkeys requires enter pressed for prompts,cursor can be used to move
+* utility: added 'write to bung flashcard' function for 512K and 2048K cards
+* bung: sponsor startup logo (old nintendo header logo alternately in setup)
+* bung: support for 64M cartridges, not tested yet (reported to be not working)
+* bung: fast FF-filled-blank-block programming, autodetected MX delay size
+* debugger: added ALT+B hotkey for adding 'bookmarks' (=dummy breakpoints)
+* debugger: when 'FRB' is empty <cursor left> brings you back to program counter
+* debugger: changed highlight popup menu colors in hercules color mode (for vga)
+* debugger: shows clks/opcode and counts clks from top of window (debug setup)
+* debugger: saves last (non-)split screen setting (F10 hwinfo) status for ctrl+v
+* debugger: fixed strn overkill in long lines with comments plus brk condition
+* debugger: fixed invisibly .SYM file errormessages if loaded from commandline
+* debugger: prepared symtable and str2val for future 16bit rom bank values
+* debugger: marked VRAM bank 1 (1:8000..1:9FFF) as data-area (thanx patriek)
+* vram viewer: NEW: tile viewer, palette viewer, background map viewer
+* vram viewer: user screen viewable in same resolution than debugger, plus grid
+* vram viewer: options and screen box also keyboard controlled (via 1st letter)
+* vram viewer: map/tile screen use BGP FF47 for used tiles if in non-cgb mode
+* vram viewer: bg map shows tile number/source additionally under zoomed tile
+* vram viewer: map screen shows values for scx, scy
+* vram viewer: tile screen displays name of assumed/guessed palette as text info
+* vram viewer: palette view shows separate R,G,B values (hex and percents each)
+* vram viewer: fixed TAB screen toggle, and right mouse button can be used, too
+* vram viewer: displays mouse-pointed tile enlarged in bgmap and tile viewer
+* vram viewer: scyx lines <surround> the gamescreen only, double width (2 pix)
+* vram viewer: bg map displays xy-flipped tiles, with text for xy-flip and prio
+* vram viewer: tile viewer scans OAM and BGMAP for probably desired palettes
+* licence: included the famous optional order form for registration (order.frm)
+* licence: also recognizes CR/0Dh instead only LF/0Ah or CR,LF/0D,0Ah
+* licence: added skip-mime-header code to prevent problems caused by mail progs
+* gmbreg: fixed gmbusers.asc datafilesize greater than 32K bug, whew :-)
+* reg keys: made the ghostcow key invalid and added some checksum verifications
+* public stuff: re-uploaded piracy protected 2.1a,only 1.9 public for some hours
+* security: removed dsp reset in fatal error handler (caused win95 horror delay)
+* fatal errors: forces INT10/03 for displaying error messages
+* special versions: instALL.BAT fix for full 486-optimization including LCD pack
+* game genie: fixed mouse x-position, and added brief keypad "*" help message
+* snapshots: re-initializes color palettes past loading CGB snapshot
+* snapshots: can load/save SGB borders in CGB mode (may crash with old snaps)
+* hgc/cga: fixed screen position if screen size set to max (which is vga only)
+* 720 pixels text: 9th pix oversize only for border characters (C0..DF)
+* real CGB colors: dramatically increased the color depth (scales)
+* color scheme editor: fixed bug when in 'whole screen' display redraw mode
+* debugmsg: alternately may contain pointer to actual text string (see manual)
+* a22i: .comment directive (to define begin/end of comment sections)
+* a22i: fixed ix/iy bit commands (of course had no effect on gameboy code)
+* a22i: strings can end with +80h (ie. db 'hello'+80h) (instead 'hell',0cfh)
+* a22i: recognizes '' in strings as ' (ie db 'it''s nice' --> it's nice)
+
+<B>14/16 March 1999 - v2.1(a)</B> <A HREF="no$gmb21.zip">download</A> (115 KBytes)
+
+* emurefix: hdma transfers during display disable (game&watch gallery2) (v2.1a)
+* emudetail: removed stupid ADDCYCLE at int48 calculation (already at get_ly)
+* emudetail: fixed interrupt execution clk cycles
+* emudetail: fixed user generated interrupts (diag)
+* emudetail: particulary emulated timings for CGB's new DMA transfers
+* emudetail: emulates interrupts caused at display enable (diag)
+* emufix: don't know how, but obviously fixed a bug a while ago (smurfs / sgb)
+* emudetail: emulated old gmb's stat-write-during-blanking-bug (roadrash,zerd)
+* emudetail: emulated all possible 2048 DAA BCD situations (patriek lesparre)
+* emudetail: improved linked machine switch / prev_intcount
+* link: fixed very silly linking-bug with console type 'standard gameboy'
+* lcd detail: removed some flickering non-updated lines (bugs life intro)
+* speedup: fixed alignment bug in VALS data, keeping snap backwards compatiblity
+* speedup: several code/data alignment adjusts in lcd pack
+* loadrom: speeded up lame cartridge checksum calculation procedure (big roms)
+* loadrom: allows to exit by pressing ALT+X during no$gmb startup/cart loading
+* screenshot function: saves CGB poppy colors if emulation is setup to this mode
+* screenshot function: PRINT SCREEN/SYS REQ hotkey
+* background: removed more or less ugly commercial licence background option
+* GUS: disabled midi irqs and removed all midi dummy code
+* GUS: fixed ULTRASND interpretation for two digit IRQ values other than "11"
+* GUS: less aggresive GUS detection (no SCSI conflicts with nintendo's ROM emu)
+* stereo sound: fixed dirt noise, one day with a stereo card helped :-)
+* soundblaster: should also support possibly even worse IRQs 11..15
+* soundblaster: should support remapped IRQ 9 used by some plug and play craps
+* sound: defaults to SB stereo instead SB mono
+* performance indicator: value displayed on friendly transparent background
+* performance indicator: new option for display only if value <> 100%
+* cgb header id: also recognizes new C0h (cgb only) and undocumented values
+* no$gmb LITE: new debugger-excluded version, for registered users only though
+* auto frameskip: made it more accurate on whoosh button and emu re-start
+* readme/help: added disclaimer 'expect that everybody knows copyright blabla'
+* sgb delays: new ignore-only-if-transfer-occured option (flashing game titles)
+* mbc1: fully emulated these extra rombank bits (bomberman quest)
+* timing: increased LY lookahead from 4 to 6 (robocop 2)
+* doskey: saves old inputs to file NO$GMB.INP (can be disabled in debug setup)
+* doskey: old input buffer doesn't waste entries for identical inputs
+* screenshot names: 'debug' options: filemenu, cartname and incrementing numbers
+* sample.wav: fixed upper word of rat2 in header (was buggy for 44kHz stereo)
+* memory: added best fit strategy, maybe it helps, maybe it messes up...
+* debug screen: redraws hwinfo background past arj/zip-calls (50/60 line split)
+* cgb-xdebug: inavailable palette RAM still updates index (harvest moon)
+* debugger: fixed memchange breaks (n:nnnn)! in bankable CGB ram areas
+* debugger: clks counter in F10-hardware screen (reset-able in debug popup menu)
+* a22i: made the ':' in 'label:db/dw n[,n,n,n]' lines optionally
+* a22i: added .norewrite directive (overwrite old file, keep data at it's end)
+* a22i: added autostart (on succesful assembly with load-to-.mem directive)
+* a22i: supported ld (c),a and ld a,(c) additionally to ldh (c) and in/out (c)
+* a22i: replaced .BIN extension by gameboy .GMB extension (except in .z80 mode)
+* a22i: new 'numeric' format for easy 4 color sprite definitions (dithered chrs)
+* a22i: supports multiplying and dividing values without forward references
+* a22i: recognizes 80x86 style [] brackets as alias for Z80 style () brackets
+* a22i: fixed a small label bug (didn't accept some lables like r_scroll)
+* a22i: added .rom and .ram directives for RAM data structure definitions
+* a22i: fixed relative out of range error message (that produced dirt messages)
+* a22i-ex: re-enabled .z80 instructions and fixed small .cpc header bug
+* webpage: reduced amount of pages, direct link to gmb.htm from index.htm
+* webpage: added flashcard link
+* webpage: supported luxory bigwig display resolutions above 640x480 pixels
+* btw: uploaded Starfight for gameboy, check the freeware section on gmb page
+* and sometimes, happy hamster visits ALL registered users
+
+<B>10 January 1999 - v2.0c</B> <A HREF="no$gmb2c.htm">download</A> (113 KBytes)
+
+* SGB: border color 0, another fix, hopefully it's really good now (pokeblue)
+* controls: keypad "+" (whoosh) shouldn't mess up frameskipping anymore
+* controls: disabeled ability to press up+down or left+right at the same time
+* CGB: increased intensity of real CGB colors
+* bugfix: division error when loading rom into two machines (prev_eintcount)
+* setup: highlighted default suggested console setting
+* GUS: supported both IRQs set to the same value
+* GUS: enabled line-in (might be useful to connect a 'slave' sound card to GUS)
+* a22i: added ".brk" directive for source code breaks (alias for "db 40h")
+* a22i: reduced max errmessages to 50 (more would suck with slow 640x480 text)
+* a22i: moved .sym generator to ext segment, a22i-ex now available on webpage
+* a22i-ex: added example source code skeleton and example 'make' batch file
+* a22i-ex: updated a22i.txt (instruction-set description about flags, timings)
+* a22i-ex: added DOS errorlevel output (01=assembly failure(s), 02=disk fail)
+* back2dos: restores previous DOS video mode as long as it it's VGA / 80xNN
+* webpage: added "How to become a Registered User" information
+* webpage: a22i-ex available (standalone version of no$gmb built-in assembler)
+* webpage: four new background gifs (see freeware tools & games & stuff section)
+
+<B>5 January 1999 - v2.0</B> <A HREF="no$gmb20.htm">download</A> (113 KBytes)
+
+* readme.txt: improved installation help (emm386,linking,etc)
+* SGB/CGB: preset gameboy type set to CGB+initialSGB (best compatible setting)
+* SGB+CGB+initialSGBborder option (wario2 doesn't support SGB in CGB mode)
+* SGB+CGB option (tetris dx, dqm) (but NOT wario2)
+* SGB: bugtrick for messed up SGB border transfer (Detective Conan 2)
+* CGB: completely locked TRACE and BREAKS for unregistered users in CGB mode
+* CGB-detail: new DMA transfer register improved (a bugs life)
+* CGB: fixed color fadein/out bug (still occured in old video mode + frameskip)
+* CGB: fine accurate CGB-style RGB color translation (infgmb,wario2,diag,etc)
+* CGB: initialized CGB/VGA colors as free (ffff) on emu start (infgmb/minizork)
+* CGB: executes corrupted stops without warning by default (xdebug/bomberman)
+* CGB: startup initializes true CGB-LY,STAT,DIV states and OBP0/1 contents
+* CGB: fixed too-early de-alloctation of colors (fade in/out caused flicker)
+* CGB: reduced amount of allocated colors (ignores transparent OBJ colors)
+* CGB display: BG priority attribute emulated
+* CGB: fine-adjusted vertical position of palette changes
+* CGB: initialized 'clean' wave pattern on startup (instead old gameboy dirt)
+* CGB: updates new DMA source/dest addresses at end of transfer
+* CGB: initialized startup CPU register contents, unused IO bits, startup colors
+* timingfix: HIRES redisp/vblank timing (dkl2 with inavailable vram option,diag)
+* memfix: removing multiple machines with more than 8K external cart ram
+* display: fixed lcdc.0 emulation, it's TRICKY in BOTH cgb and gameboy modes :-)
+* display: each-line redraw (instead whole-screen redraw) it's slower than the
+  old code, but it removes all graphix problems in games like:
+    DKL1,2,3,Prince of Persia,Lucky Luke,V-Rally, etc. etc.
+  the old (faster) code is still available optionally in emulation setup
+* 100% cheat-free emu: removed SFII cheat (the game didn't need it since v1.8)
+* emudetail: filled non-existing external ram areas by FFs (thunderbirds bug)
+* emudetail: white screen during hidden display disable
+* emufix: discovered CPU quirks and fully emulated it (smurfs, thunderbirds)
+* emufix: interprets hidden 'signed' double speed clks as positives (wario2cgb)
+* emufix: finetuning hidden double speed mode (previous Xreload -> clks_xx)
+* emufix: stupid hidden palette bug on flipped sprites (wario2cgb cloud)
+* emufix: mbc5 ram banking without (6XXX) being set (wario2cgb)
+* emufix: hidden [memseg] banking resolution incresed from 16Kto 4K (wario2cgb)
+* emufix: hidden oldstyle background priority (tetris dx)
+* emufix: SGB border color 0 override fix (pokemon blue)
+  (and this is the funny thing: I am sure that hundreds of people used the old
+  version for pokemon, but none of them seems to have noticed the bad colors)
+  (hehe, probably none of them actually came into the game, not knowing how
+  to install emm386)
+* digital sound: fixed division overflow in new frequency code (@@quite)
+* digital sound: optimized ch3 frequency maker
+* digital sound: fixed small bug in new 'deltaf' frequency code
+* digital sound: 256 times higher frequency resolution for channel 1-2 (and 3)
+* digital sound: gravis ultrasound support (including 16bit dma channels)
+* digital sound: variable sample rate (speedup through optional reduced quality)
+* sound BLASTER environment string: ignores wrong values for 8bit dma channel
+* sound blaster: recognizes lowercase set BLASTER string (if ever used)
+* sound setup: removed automatic switch to adlib sounds if no SB detected
+* sound: removed stupid allocation of sample buffer in adlib- and no-sound mode
+* sound: re-fixed adlib mode (played digital noise along with adlib sounds)
+* sound blaster: fixed dma channel 3 bug (did it worked in older versions ???)
+* sound: added some test options (ACDC)
+* xdebugfix: corrupted stops really fixed now (pocket bomberman cgb,bugs life)
+* debugfix: cleaned VRAM except's at emu-stop, too (not only at trace rereadio)
+* debugger: optional emulator identification (hl=0ca5h on startup)
+* debugger: warning if rombank changed while program counter is in that rombank
+* debugger: very basic support for watchpoints (memory inspections)
+* debugger: added fix for "jr $" in online assembler (push ds at far_disline)
+* debugger: direct "switch_to" buttons for lower window (instead toggle_next)
+* debugger: membreaks can refer to banked memory (n:nnnn)?/! / (n:nnnn..nnnn)?/!
+* debugger: re-implemented DI+HALT exception to prevent unpredictable results
+* debugger: online assembler handles huge DEFS/DEFF memfill commands (00 or FF)
+* debugger: inavailable VRAM exceptions also care about CGB palette data IO
+* a22i: integrated source code assembler supports local labels (@@labelname)
+* SGB refix: monochrome display emulation of SGB's gameboy window
+* console type: added hidden mode with grabbed SGB border
+* console type: pocket gameboy option (not that it would do anything useful)
+* console type: VGB-quirks option for emu based games (yar's revenge, sokoban)
+* pocket gameboy: initializes io regs and wave pattern as on pocket gameboy
+* loadsnaps: inits MBC5 bank_mode_exist flag at loadrom instead at reset only
+* loadsnaps: refix initializes remaining unused external ram as 00s (zelda)
+* loadsnaps: initilizes undefined clks_xxx variables (backwards compatibility)
+* setup: fix for CGB+initialSGB option used with non-SGB (CGB-only) cartridge
+* setup: moved joystick enable to joyb setup (as well as mouse mode option)
+* setup: removed full-tseng option (automatically on chipset detection instead)
+* slowdown option: improved SB/GUS digital sound in slowdown modes
+* online F11/F12 setup/files: clears nintendo logo when starting over (zork2)
+* filemenu: cursor re-adjust past dir changes
+* config file: fixed internal IIsnd range bug (slowed down during startup)
+* cheats: increased number of gameshark cheats to up to 15 (pokemon, warioland)
+* security: intruder alert gives separate virus infection warning
+* tracefix: removed unwanted palette-vram exceptions at trace / re_read_io
+* internal: added /u switch for unregistered pentium testings
+* internal: changed built-in 3some background from binary string macro to binary
+  words - frees up around 90K tasm memory ;-)
+* internal: used new neoseg in cpu-core, reduced exefile size, some speedup
+* 2player-emuspeed-refix: machine switch only a serial int (not at sinline)
+* speedup: used 'and bp' in hidden pixline colorization code, too
+* speedup: removed extremely stupid dec dx from SGB pixline colorization
+* keyboard control: added left/right ALT as default keys (pinball,snake wars)
+* int09: removed 32bit push, removed oldint9 for f11/f12 (new xkey compatibilty)
+* cartheader: added non-hex new licesee codes to disassembled cartheader
+* webpage: added some titles, replaced DTs by BRs (not uploaded yet though)
+* btw: INFGMB (infocom interpreter for gameboy and cgb) updated (version 3.0)
+       visit http://www.work.de/nocash/infgmb.htm (including minizork demo)
+
+<B>22 October 1998 - v1.9</B> <A HREF="no$gmb19.zip">download</A> (105 KBytes)
+
+* romsize: increased cartridge rom area to 2MB max (dragon quest monsters)
+* emufix: re-fixed priority of first defined sprite per line (mortal kombat 3)
+* emufix: true display of partical sprites past upper statline etc. (john b.)
+* sgb: added predefined gameboy-style background for border-less SGB games
+* controls: snespad inits all lpt port registers and detects invalid pads
+* controls: snespad support in SGB's multiplayer mode (first player(s) only)
+* controls: support for snespads at lpt1..3
+* cheats: added buttons to toggle between gamegenie and gameshark boxes
+* cheats: gameshark codes support (http://www.gameshark.com/surfing/gameboy/)
+* cheats: fixed address ptr carry bug (might have corrupted one gamegenie slot)
+* link: load/save battery at each add/remove machine (multiplayer saving)
+* link: invented multiplayer support in SGB mode, uses different dacs / machine
+* link: asynchronous reset (see below) fixes pinball revenge of gator problem
+* link: added automatic reset of new (added) machine(s)
+* setup: automatically resets cpu/game if console type changed in setup
+* digital sound: fixed bug, other channels influenced ch4 frequency
+* digital sound: channel 4 (white noise) turned back to full output volume
+* digital sound: channel 4 (white noise) frequency emulation (pinball/gator)
+* digital sound: added LPT1-3 sound adapter support (see readme.txt)
+* digital sound: added trashy PC speaker support (requires ca 33MHz though)
+* adlib: fixed detection bug (gave wrong result on pipelined 286 notebook)
+* adlib: fixed shutdownbug on plain adlibs with unsupported sb sound selected
+* keyboard: removed pushf/popf, maybe it helps on some messed up 486 laptop
+* debugger: .SYMbolic info file may contain "02:8000 rombank2_end" at 8000h
+* debugger: source code breaks can be removed by mouseclick or F2 or DEL
+* debugger: source code breaks colored like normal breaks
+* debugger: pageup (etc) in/near header-area violently speeded up
+* cartridge header: disassembler shows new mbc types in header comments
+* 720pix: re-outcommented 14, 17 for ASUS AGP-V2740 with 3D accelerator
+* fixed_options: displays optional SGB (and future CGB) assembly support
+* protection: hopefully prevents re-extraction of compressed exefile
+* utility/archievate: includes files with .SGB or .CGB extensions
+* loader: .sgb and .cgb extensions were recognized ONLY in zips and arjs, oops
+* speedup: SGB colorization procedure timing optimized (and bp)
+* cleaned: removed stupid SGB code from hidden & hgc/cga redraw code
+* internal: extra segment for ext/ass/dis pack (frees 11K in debug code segment)
+
+<B>12 September 1998 - v1.8</B> <A HREF="no$gmb18.zip">download</A> (96 KBytes)
+
+* freeware: no$gmb turned back to FREEWARE for NON-COMMERCIAL use
+* windows NT: fixed bug in load setup procedure
+* sgb: ignores unsupported SGB/SNES jump command (biichiba, atlanta 96)
+* sgb: ignores joypad-IO as packet transfer (asteroids/missilecmd/castlevania3)
+* sgb: bugfix for pal_set / cancel mask without atf (another bible)
+* sgb: oversized attr_chr packets shrinked (desert strike)
+* sgb: supports scy transfers (dragonball z)
+* sgb: attr_blk ctrl=1,4 fixed
+* sgb delays: can be optionally re-enabled in xcept setup
+* emufix: LYC rewrite direct interrupt generation (sagaia)
+* emufix: LYC offholded when offholded (not vice versa) (diag)
+* emufix: offholded LYC re-enabled in certain situations (tcfos)
+* emufix/digital sound: pre-initializes sound IO (jeep jambouree)
+* emufix: background display disable (altered space title zoom)
+* emufix: ENT with shift=0 fixed: digital snd, adlib, statscr (prince of persia)
+* emufix: timer FF (ishido1)
+* emufix: freezes lcd stat (mr do)
+* emufix: uncommon 6XXX addresses for 32K ram carts (mini4wheel)
+* emufix: multiple OAM (ferrari grndp,f15,prehistorik man,nhl hockey 95,robocop)
+* emufix: fatal devision error shutdown cleared (parasoru)
+* digital sound: emulates uninitialized pattern (kaguyahi, rtype)
+* digital sound: fixed bug for slave IRQ re-verctoring (IRQ 10)
+* digital sound: env emulation optimized (collecting coins in mario2)
+* digital sound: fixed 7FF freq (gauntlet2 speech, chessmaster speech, barbie)
+* digital sound: write protected sound on/off flags at FF26 (kingdom crusade)
+* digital sound: fixed bug for ENV quite (nemesis title)
+* digital sound: bugfix for uninitialized FF24 (beetle juice)
+* digital sound: .wav script files specifies 8bit depth instead buggy 1bit
+* digital sound: optionally supports stupid SET BLASTER=A220 I5 D1 T3 thing
+* adlib/digital sound: pre-initialied snd IO offers switching between adlib/SB
+* removed trick for corrupt zen-interg.ninja (doesn't work on real gameboy, too)
+* discovered some buggy carts are simply corrupt (zen,cyber formula,junglewars)
+* tetris: emulation speed improved (it's a cheat, sorry, but it runs so nice)
+* sgb/debugger: exception option for corrupted packet transfers (joypad reads)
+* debugger: F10-statscr shows SGB packet, SGB screen mask (commercial ver only)
+* debugger: new SCRLOCK datawindow follow option: point to value at code cursor
+* debugger: lines in .sym-file may be terminated by CRLF or LF
+* debugmsg: optionally writes to hercules display (that has to be in text mode)
+* emudetail: emulated di/double_halt shutdown (and removed old di/halt option)
+* security: added division error handler
+* screenshots: refuses to write to any file with other extension than .GIF
+* fixedsetup: press any key in fixedsetup exits properly with "any" key
+* gmb /h: hercules emulation uses B800 instead B000 (compatible to illegal qemm)
+* gmb /?: commandline: does not flush keybuf when started with /?
+* sound: automatically disables sounds if no adlib/sb was found (speedup)
+* sound: detects presence of standard adlib sound card
+* animate: removed no$gmb disco animation (check old ver if you haven't seen it)
+* combifix: combination noswap+videobig fixed (thanx rusty)
+* bg gif: opens file as readonly instead read/write
+* bg gif: [GIF] mousespot to select BG screen directly from current setup
+* nonumbers: startup in filemenu if selected (debug setup) even if tetris exists
+* nonumbers: fixed dirty text background if cartridge was not found
+* cartloader: accepts default extension .SGB, as well as .CGB for future no$cgb
+* files.lst not found: files box gives brief specs about file format
+* statscreen: separates sb16 and awe32, not that...
+* statscreen: separates 386 and 486 cpu, not that it would be of any use...
+* memory: compressed help text overlay and exefile itself
+* a22i: redraws F10 statscr past assembly (in split 50/60 lines screen modes)
+* a22i: outputs (plain) assembly time, a22i-ex (excluded) does exist yet again
+* a22i/dis/emucore: assumes stop opcode as "10 00" instead "10" followed by nop
+* a22i: disabled z80 support (frees mem) and fixed some bugs (z80 in gmb mode)
+
+<B>05 August 1998 - v1.7</B> <A HREF="no$gmb17.zip">download</A> (96 KBytes)
+
+* sgb: hides mouse during border redraw
+* sgb: automatically skips sgb transfer delays (most sgb games)
+* sgb: mouse display in 256x240 pixel mode (almost) fixed
+* sgb: line attribute command supported
+* sgb: 256x240 mode fixed, big thanks to Enrique Sanchez for very nice help
+* sgb: border color 0 fixed
+* battery ram: fix for saving before loading new cartridge (oops) (hehe)
+* vesa: pagesize detection refix - i'm always great in adding more & more bugs
+* vesa mode: mouse step under win95 cheat-fixed
+* background gifs: automatically loads <cartname>.gif if present
+* background gifs: small collection of BG gifs available on my webpage
+* background gifs: emulator zipfile includes default.gif by luisfer
+* background gifs: options popup contains BG-GIF fileselect box
+* background gifs: screen automatically positioned into empty area (if any)
+* background gifs: setup contains new option for y-position of gameboy screen
+* registration: shareware messages appear less often at the moment :-)
+* licence.key: accepts keys downloaded on macs (lf / crlf)
+* digital sound: yet another voice strategie (teenage mutant ninja turtles 2)
+* digital sound: playes 'cool method' voice (bart simpson/camp deadly)
+* digital sound: volume fix
+* digital sound: plays digital voice (talking clock)
+* digital sound: updated on all changes
+* digital sound: detects IO baseadr
+* digital sound: stereo mode for SBPro works
+* digital sound: removed int1c conflict if no sb was detected
+* digital sound: env register backup (reload on kick)
+* digital sound: soundblaster 1.0 compatibility
+* digital sound: optimized frequency emulation (rounds up)
+* digital sound: immidiately FF25 quite emulation
+* digital sound: optimized automatic screen refresh rate (pre-p$$$)
+* digital sound: division error for some high frequencies on channel 3 fixed
+* digital sound: IRQ number autodetect (5,7,2,3,10,4)
+* digital sound: FF26.7
+* digital sound output (SB2 and above)
+* sound mixer: new option: don't change = keep initial volume
+* sound mixer: removed force-zero-volume on program termination
+* online reset (keypad"*"): emulated cpu type changes fixed
+* alt-x power-off: emulates dirt lines (optional) (thanx to steve demeter)
+* alt-x program termination: can be optionally enabled during emu run
+* no display swap: bugfix (override option in sgb mode)
+* no numbers please: even more bugfixes for stupid disable debugger option
+* no numbers please: bugfix for disable debugger option
+* a22i: .mem directive re-programmed (always to file, optional to mem)
+* a22i: .fix directive fixes both cart-header chksums
+* debugmessages: displayed by built-in disassembler
+* debugmessages/a22i: supports debug messages (.msg 'string')
+* debugmessages: strings with operands 8/16bit regs,allregs,(rr),flgs to file
+* scroll lock follow function: optionally follows 16bit registers (debug setup)
+* xcept setup: saved to config file (hehe, looks as if i forgot something)
+* header: debug setup contains option to supress buggy-cart-warning messages
+* header: displays real checksums (or 'okay' for correct values)
+* header: displays licensee code owners, probably all of them are trademarks ;-)
+* Animate Function (Rusty Davis Birthday Package)
+* intruders: bypassed 01-conflict with possibly defect (=win95) mouse driver
+* F12: defaults to 'select by filename' if files.lst not found
+* ctrl+b: fixed new bug(s) for break at BANK:adr
+* memory: fixed bug for SGB mem alloc during emulation (via keypad "*")
+* adlib: single/mono channel emulation re-enabled (half volume) (tetris title)
+
+<B>01 July 1998 - v1.6</B> <A HREF="no$gmb16.zip">download</A> (82 KBytes)
+
+* emufix: cool window detail added (donkey kong) (discovered by pascal felber)
+* debug setup: new option "keep old keystrokes when continue" (joypad state)
+* debug setup: debug setup splitted to debug / exception setup
+* sgb: multiplayer control (street fighter 2, toshindn, etc)
+       PLEASE NOTE that the default CONTROLS for PLAYER 1 are Q,A,O,P and
+       NOT cursor keys !!! (only relevant for SGB multiplayer games)
+* sgb: pal_set fixed (kirby2)
+* sgb: attr_lin fixed (dkl2)
+* sgb/gameboy: blank screen / screen border fixed
+* 386dx: bypassed 386-bug in procedure that calls pkunzip (popa,NOP,xchg)
+* sgb: multiplayer request emulation fixed (furaino siren)
+* sgb: attr_chr (dkl2)
+* sgb: mouse arrow for 256x240 pixel video mode
+* sgb: snapshots (new format, one direction compatible only!)
+* sgb: screenshot support (GIFs) plus comments :-)
+* sgb: 3 days work - pretty good result :-)
+* bugfix: wrote 41 (instead 40) entries to internal sprite list (wario1) oops
+* security: environment failure errmess (this may especially occur if using
+  a very bad operating system or -configuration (e.g. win95 etc) the old
+  version would shutdown, new no$gmb gives errormessage instead :-)
+* refix: yet again cleared a bug for 'cartridge not found' message :-)
+* debugger xram: symbolic information file may contain banked ram addresses
+* debugger xmem: frb supports rambanks, max rom/rambank width 15bit (old=7bit)
+* debugger xram: ctrl+g accepts rambank:adr (bankable external ram)
+* debugger xram: contents of current rambank are displayed
+* program name: renamed program from 'gameboy emulator' to 'gameboy debugger'
+* internal: rombank EMS allocation prepared for carts bigger than 1MB (any size)
+* fix: starting with multiple machines selected in .cfg file (oops)
+* speed: slowmotion options (x2, x10)
+* sound: setup contains mixer volume option (SBpro,SB16 and newer sound cards)
+* display: if more sprites per line are displayed than possible in reality (10)
+           these can be displayed optionally as hidden or flickering (xdebug
+           version only)
+* display: emulation can run in medium & full size in 'graphix debug mode'
+           without any resolution switches before/after running.
+           (it slows down, but looks very nice especially on newer degenerated
+           display - "oh, don't do that resolution switch, it does hurt!")
+* display: full screen sw swap speeded up violently
+* display: removed charset "big" macro code (no more full screen HW swap)
+* debugger: code window home-key jumps to 0100 (header) instead 0000
+* debugger: stack window ctrl+pgup/dn fixed (reversed)
+* internal: removed memory sucking charset "set" macro assembly
+* internal: debugger code segment spitted to hack/xgra/stat
+* 2nd cheatfix: ID7 byte (zen - intergalactic ninja)
+* gamegenie cheats: fix for pokes in rombanks 01..nn (zelda, etc, etc)
+* gamegenie cheats: inputbox shows internal performed poke (NNNN) NN->NN
+* emufix: rombanking ignores dirtbits (fifa96)
+* emufix: bugfree initial 32K ram allocation (warioland2,furaino siren)
+* romsize: rom banking exceptions verify rombank against romsize in header
+* romsize: warning if incorrect (different to header specification)
+* internal: emulation code segment splitted into core and lcd
+* header: disassembler comments explain header bytes (mbc type etc)
+* fix for battery ram saving after loading a snapshot
+* fix for combination "graphix debug PLUS 3..6 machines PLUS hardware swapping"
+* re-fix for int48 while lcd disabled (bartsimpson/campd)
+* re-fix for calling OS shell (with upper mem enabled)
+* re-fix for calling external dos editor (with upper mem enabled)
+* Undo Run Function (writing to UNDO_RUN.SNA) can be disabled
+* emufix: true sprite priority order (garqoyles quest, mk3, bighurt baseball, etc)
+* emufix: splitted sprite size (super hunchback 2)
+* emufix: timing optimization (bomberman 3)
+* setup: added mousespots to toggle between setup screens and for save setup
+* debugger: f10 status screen: re-fix for IE/IF flag display
+* joystick: 4 button setup fix, this time really fixed completely
+* joystick: 4 button setup fix, i've had only a 1 button stick for testing, sorry
+* colors: bugfix for changing debug color set
+* memory: files.lst loaded to 100% temporary memory (more free conventional mem)
+* memory: upper memory blocks used for allocation (more free conventional mem)
+
+<B>07 May 1998 - v1.5</B> <A HREF="no$gmb15.zip">download</A> (78 KBytes)
+
+* memory: 1024 KB rom cartridges supported (warioland 2, sup.blackbass pocket 2)
+  --> make sure that you have installed EMS (EMM386) in your CONFIG.SYS !
+* memory: 32 KB external ram cartridges supported (warioland 2)
+* memory: help text moved to temporary memory
+* emufix: strange IO attempts supported (mortal kombat 3)
+* emufix: fixed WIN priority (tetris blast), optimized BG priority
+* emufix: smoother WX emulation (cada, tennis)
+* emufix: 100% true lcd-stat interrupt model (pinball fantasies, pinball deluxe)
+* emufix: separate oam/hblank interrupt emulation (instead of both the same)
+* emufix: true 59.7275Hz real video refresh rate (rather than dirty 60Hz)
+* enufix: true 70224 clocks per vblank (rather than 699xx)
+* emufix: interrupt enable (ei) behaviour (bubble bobble)
+* emufix: display disable (korodice)
+* emufix: timer (korodice)
+* emufix: startup logo-cls, out_lcdc, startup BG colors (infgmb)
+* bugfix: multiple two player links repaired (if more than two machines)
+* bugfix: joystick disable option fixed (oops)
+* bugfix: pause in multi split screens (batman title screen colors)
+* bugfix: disable debugger option (no numbers): bugfix for cart not found
+* cartridges: accepts carts with 'readonly' attribute
+* commandline/files.lst: accepts [d:][path]fname instead plain fname
+* drives: recognizes all installed HDDs, CDROMs, etc (thanx rusty davis)
+* controls: joystick button setup (swap buttons, four-button sticks, etc)
+* display: handles split/scrolled screens during emu pause (debug graphix, GIFs)
+* GIF background: black display border
+* sound: channel 3 volume emulation improved a bit more
+* debugger: exception-fix for illegal ldi/ldd mem reads (vram, echo)
+* debugger: symbolic address displayed if data cursor hits a label
+* debugger: new vertical resolutions of 30, 34, 43 and splitted 35+25 lines
+* debugger: new horizontal resolution 720 pixels (9 pixels per character)
+* debugger: ret-key (pressed twice) un-centers screen and maps cursor to top
+* debugger: advanced no$cpc-like hardware info screen (f10 key)
+* debugger: 16bit FE00-FE9E inc/dec/ldi/ldd exception (debug version)
+* debugger: global condition breaks caused halt at pc=0000, oops
+* debugger: global memchange breaks (nnnn)? or (nnnn..nnnn)? (debug version)
+* debugger: global memwrite  breaks (nnnn)! or (nnnn..nnnn)! (debug version)
+* debugger: global condition breaks disabled until condition comes true again
+* debugger: inputboxes accept '$' = current line of code window ('jr $' etc.)
+* debugger: show jump direction for true conditional jp/call/ret at prog pointer
+* debugger: trace scrolls one line before last line of display
+* debugger: codecenter (ret key) fixed for addresses close to 64K boundary
+* debugger: jmp/brk/ctrlg uses codecenter if adr is out of screen
+* XT/AT version update available yet again
+* XT: supports old PC keyboards
+
+<B>23/27 February 1998 - v1.4(a)</B> <A HREF="no$gmb14.zip">download</A> (70 KBytes)
+
+* sound: SBpro, SB16+ volume init (was almost turned off by default)  (27 Feb)
+* setup: number of emulated gameboys setting fixed                    (27 Feb)
+* vesa svga: video hardware pagesize detection (graphix debug screen) (27 Feb)
+* no mouse: removed stup!d shutdown on startup (graphix debug screen) (27 Feb)
+* finally FFA (final fantasy adventure) works in start-key menu. phew!
+* various sound envelope fixes, hope everybody will like it much better...
+* setup saved in .CFG file (instead of .EXE) (so updates can use old config)
+* debugging functions (those strange numbers) can be disabled in setup
+* color scheme editor redirects to normal display if called in full screen mode
+* no$gmb.gif as emulation background (setup) (320x200 pixel, max 128 colors)
+* screenshots (save gameboy screen to GIF)
+* sprites got cleared from 'dirt lines' if they hit other sprites
+* smoother startup skips flash debugscreen if started with commandline parameter
+* pause menu can be optionally controlled by cursor keys (instead of mouse only)
+* mouse rollbars can be also used as pgup/dn (instead of plain line up/dn)
+* machine popup menu ported to setup screen
+* optimized sound channel 3 volume emulation
+* bugfix for load/save battery disable option
+* debugger screen includes gameboy screen graphix window
+* debugger undo function for last emulation run (automatic generated snapshot)
+* debugger manual can be extracted from f1-screen to file help.txt
+* debugger Ctrl-N Search Next Breakpoint
+* debugger Ctrl-B Enter Conditional Breakpoint
+* debugger breakpoints got an extra window (data or break window displayed)
+* debugger resolution 80x60 text got SVGA and mouse compatible
+* debugger flags window shows DI/EI state
+* debugger dump to file
+* debugger disassemble to file starts at top of window (instead cursor pos)
+* debugger bugfix for symbol tables >16K with ROMs >32K
+* debugger bugfix for data-dump-window address display in 50 lines mode
+* debugger bugfix for undo follow to other rom bank
+* debugger all input boxes accept 8bit registers
+* debugger codewindow's follow function can map datawindow to nnnn for 'ld nnnn'
+* xt/at version currently not updated
+
+<B>19 January 98 - v1.3</B> <A HREF="no$gmb13.zip">download</A> (60 KBytes)
+
+* Color Scheme Editor, but it is mouse-only, sorry
+* Software Swapping (clean display redraw for hardware incompatibe VGA cards)
+* Hercules & CGA support (this should also work on EGA displays in CGA mode)
+* GameGenie input box (options popup)
+* loads ROMs from current directory -OR- slot directory
+* setup got TAB and 'S' hotkeys for easier access to other screen & save setup
+* pkzip/arj memory overkill due to multiple-machines-loaded bypassed
+* Display procedure speeded up a lot (but it was not that slow before)
+* debugger detailed manual (included in special debug version)
+* debugger ctrl-G accepts rombank:adr (eg. 02:4567)
+* debugger bugfix for breakpoints in other rombanks
+* debugger supports halt options for illegal memory accesses (special version)
+* debugger supports symbolic information, stored in "cartname".SYM
+* debugger source code breakpoints support (code 40h) (ld b,b)
+* quick mouse-click pause-menu during emulation contains 5 more topics.
+* bugfix for emm386/noems (msdos6)
+
+<B>27/29 November 1997 - v1.2</B> <A HREF="no$gmb12.zip">download</A> (44 KBytes)
+
+* Save setup bugfix (29 Nov 97) (oops there was a stupid shutdown)
+* full screen display (as some pepole asked for)
+* saves those stupid battery ram to disk (battery subdirectory)
+* interrupt bugfix that crashed gargoyles quest, mario2, king of the zoo..
+* described existence of second setup screen and save setup function in
+  F1-key help text (as there seemed to be confusion about)
+* fixed a sprite/window priority bug for mario2 in those vertical pipes.
+* fixed window wx bug (zelda status line at bottom of screen)
+* supports sound flags, so bart simpson/camp deadly will work
+* removed a stupid bug in the 7-12 machines display with old svga drivers
+* debugger setup contains option to start in file menu instead of in debugger
+* XT 8086 and AT 80286 versions availabe
+* 80486 optimized version available
+* snapshots save battery ram, too.
+* F5/F7 hotkeys during emulation run for quick save/load snapshots
+* i expect it contains a non-inverted black & white color scheme (somebody
+  asked for), sure it was not tested on a color display yet.
+
+<B>17th October 1997 - v1.1</B> <A HREF="no$gmb11.zip">download</A> (40 KBytes)
+
+* IO ports accessable via non-typical-io-commands (much more games working)
+* push af puts gameboy like flags on de stack (f1-race works)
+* exact clocks per interrupts now. (much more games working)
+* disable sprites bit supported (some less trash on screen)
+* during (and past) lcd disable LY and interrupts will behave as on real gmb
+* jr c,disp clock cycles bug fixed
+* supporting multiple interrupts at excact the same time. (rtype 2 works)
+* supporting serial interrupts from internal clock. (some more games working)
+* fixed some redisplay bugs for certain window positions. (some more games)
+* ISTAT register emulated (internal STAT) (but not necessary for any games?)
+* flash-free sprites due to display swapping (tseng,trident and all vesa svga)
+* hires video for more than 2 machines is now vesa svga compatible
+* automatic display refresh rate (best fit)
+* Keypad-plus is WHOOSH key (it is mainly my own idea, but i saw it in GB97,too)
+* Joystick offhold support in setup menu (as standard gamecards slow down)
+* Some new alternate color shades, but nocash-LCD-shades are still coolest.
+* EMS used, so 512K cartridges & more multiple machines will work.
+* Archievate Utility works again (as it did months ago)
+* forgot to intialize first adlib ADSRs (now sound MUCH better)
+* rewriting frequency if changes (many games sound much better)
+* optimized volume envelope attack & release rates. (many games sound better)
+* hacked out real function of those counter/consecutive bit. (removed trash)
+* supported sweep envelope. (currently disabled)
+* 2 player link groups. (they can play against each other on one PC, hah!)
+* intelligent speedup option, detects waitloops and shrinks them violently
+
+<B>04 September 97 - v1.0</B> <A HREF="no$gmb10.zip">download</A> (35 KBytes)
+
+* the first official release
+* emulates 12 gameboys at the same time
+* lots of carts not working
+
+<B>16 May 97 - v0.0</B> <A HREF="no$gmb00.zip">download</A> (33 KBytes)
+
+* basic sound emulation
+* hardware window removed in speeded-up redraw procedure
+* spiderman title splits wrong
+* rtype scroll/statline splits pretty good
+* no snapshots yet
+* no battery ram yet
+* most functions from no$cpc integrated
+* does not run if 'slot' sub-directory is missing (!)
+
+<B>16 April 97 - project started</B>
+
+* discovered pan docs
+</PRE>
+<HR>
+<P>
+<TABLE>
+  <TR><TD><A HREF="gmb.htm">  <IMG SRC="nope.gif" WIDTH=36 ALT="BACK"></A></TD><TD><FONT SIZE=+1>Back to emulator page</TD><TR>
+</TABLE>
+

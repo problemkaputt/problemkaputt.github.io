@@ -1,0 +1,274 @@
+<!----------------->
+<BODY  bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<FONT SIZE=+3>NO$MSX HISTORY</FONT>
+<HR>
+<B>Summary</B><BR>
+<FONT SIZE=-1>
+First, here's the summary of all public updates - for more detailed release
+notes for each update read on below. It's been started as a
+quick hack, and then ended up to become a bigger project.<BR>
+</FONT>
+<PRE>
+Date   Ver  Description
+05/03  1.5  Debugger/GUI improvements (symbolics, arezip preview, etc.)
+03/01  1.4  Digital sound, Z80 trueflags, gmb-gui, fixes, carts, snaps, kanji..
+03/00  1.3  MSX2 support, bugfixes, RTC, disk memio, interseg, etc.
+01/00  1.2  Win32 version, 256K RAM, fullscr 256x200, IO map, updated A22i
+04/99  1.1  Bugfixes, caps LED, F6-10 keys, pmode, video speedup, DSX tool
+03/99  1.0  First version, written within only 5 days, basic features supported
+09/95  ---  Programmed Z80 CPU and PSG sound engines for my CPC emulator
+12/94  ---  Programmed 80x86 HACK debugger, the basement for the no$-debuggers
+0?/85? ---  Got hold of my first MSX computer, and started learning programming
+</PRE>
+<HR>
+<PRE>
+<B>1st May 2003 - no$msx version 1.5</B>
+  vram viewer: user scr, bgmap, tiles, oam (for now screen 2 only, windows only)
+  fileloader: arj/zipped ROM-file decompression working, arjzip preview
+  bugfix: fixed place_getold_charset (sometimes crashed before loading bios rom)
+  a22i: merges cont. dta lines into single dzone (saves ass/sym/dis mem) 11/2002
+  debugger: various news from my other emus (gui, hack, a22i, xed, arjzip, sym)
+  screen 0/40+80: supports name table base addrs other than zero (thanks luis)
+  autostart: forces blank boot screen when autostarting games (as from no$cpc)
+  debugger: basic de-compreter function view/list to file 11/2001 (from no$zx81)
+  emulation: added still rather trashy sprite collision detection 11/2001
+
+<B>21st March 2001 - a BIG update - no$msx version 1.4</B>
+  shareware: it's now declared as shareware rather than freeware, need help!
+  flat32/carts: manually alloc. cart.mem (any size, faster loading / deUPXing)
+  debugger: i/o map screen shows name of last issued VDP DMA command
+  webpage: turned over to using important looking white background "#ffffff"
+  flat32: fixed double-linked DOS-stub (wasted 200h bytes) (same for cpc/gmb)
+  video: also freezes colors when using the freeze-disabled-display trick
+  msx2/video: vdp cmd log_move (9Xh) truncates xlen to width-dstx (barbarian)
+  icon: new "Zilog - Z80 in memory" icon
+  cartridges: mapper detection lookahead trick (fixes 'bounder' detection bug)
+  cartridges: allows bloaded cartridges (such like royal blooad: 1024 kbytes)
+  speedup: updates keyboard LEDs (if changed) only once per drawn frame
+  dos/memory: always allocated adlib periodes table (uploaded to xms like bios)
+  help: Z80 specs: described interrupt timings/modes, trueflags, memptr, mirrors
+  performance: excluded portar/z80 docs in optimized versions (saves 42KB)
+  performance: fast fake screen split in fast/optimized versions (zanac-ex)
+  performance: excluded new trueflags/hblank timing in fast/optimized versions
+  setup: memorizes last active setup screen (emu/debug/controls) for next F11
+  setup: selectable MSX BIOS charsets: european, russian, japanese, or korean
+  cpu: fixed short-distance-LDIR (not using MOVSD if DE=HL+2..3), same for LDDR
+  keyboard: emulates MSX numeric keypad (instead using normal number keys on it)
+  roms: included MSX 2.1 ROM as overlay, plus packed 2.0 and 1.0 ROMs (cpc-pack)
+  setup/ram: optionally emulates 8K, 16K, 32K, 64K, 128K, or 256K main RAM
+  setup/msx1: option disables MSX2 V9938 features, loads newly included MSX1 ROM
+  debugger: i/o map separately shows VBL/HBL-IRQ flags, show current scanline
+  cpu/ei: does not execute old interrupt if DI/ACK/DIS follows directly after EI
+  cpu/ei: if already IFF=1 executes like NOP (real t4,r1 instead dummy t0,r0)
+  disk: supports 7F80-4 I/O addresses (arabic) additionally to 7FBX and 7FFX
+  disk: accepts memory I/O only if lower adr byte exactly 80-87, B8-BF or F8-FF
+  disk: supports 7FB8-C I/O addresses (SVI/Technoahead) additionally to 7FF8-F
+  disk: supports reading from Port D4h (Brazilian DISK ROMs v.30 and newer)
+  disk: fixed force interrupt command D0h (instead F0h amazing bug but worked)
+  disk: recognizes LD A,(DE) as disk I/O ("Sharp" and "Technoahead" disk roms)
+  keyboard: suppresses automatic keytranslation on non-standard roms (japanese)
+  z80: IM 0 and illegal IM X behave like IM 1 as (with good luck) on real MSX2
+  z80: interrupts executed like opcodes, ie. counting real clock/refresh cycles
+  disk: no$cpc-style fast_disk_in trick (allows bios to read 200h bytes at once)
+  msx2: fixed VDP command D0h highspeed copy: xlen=0 -> maxlen ("Usas" sprites)
+  msx2: screen 5 display split scrolling (zanac-ex status bar)
+  interrupts: keeps requesting IRQs even if disabled, new int_mask for execution
+  keyboard: emulated "keyboard switch" using PGUP key (PGDN still = SELECT key)
+  keyboard: emulated kana/code LED using num lock LED (dos version only)
+  detail: correct memory mapper port FC-FF readback (unused upper bits set)
+  msx2: emulated accurate hblank IRQ and accurate vblank/hblank flag timings
+  video/hgc: fixed hercules/monochrome video option when enabled before emu run
+  setup: initializes bios config byte according to selected keyboard/country
+  setup/video: var. 256-pix vmode centering (mostly for my own bugged monitor)
+  setup: option to change date-format DD-MM-YY etc. (for MSX-DOS "dir" command)
+  video/msx2vdp: variable frame rate (setup option now only sets default in ROM)
+  .... trueflags, memptr
+  z80/trueflags: BIT N,OP: emulated UNDOC28 flags, verified correct P,S flags
+  z80/trueflags: CPL undocumented flags F=(F AND (FF-28)) OR (A AND 28)
+  z80/trueflags: SCF/CCF: documented H/N flags, and undocumented F=F|(A&28h)
+  z80/trueflags: undoc flags for RLD/RRD, undoc flags for RLCA/RLA/RRCA/RRA
+  a22i: produces error messages on "LD IXL,(rr)", and "LD (rr),IYH" etc.
+  a22i: error messages on "LD (rr),(rr)", and on "LD H,IXL" or "LD IXL,IYL" etc.
+  a22i: produces errors on "EX DE,IX/IY", and any CB-Opcodes with IXL,IYH etc.
+  z80: correct DDXX/FDXX timing/refresh for stupid XX command without HL/L/H
+  help/z80: verified all IXL/IXH/IYL/IYH commands & described in a22i/z80 doco
+  z80: emulates & disassembles undoc DDCB and FDCB opcodes, RRC A,(IX+D) etc.
+  a22i: fixed unrecognized "iyl" register (that's been lastmost in operand list)
+  help/dos: unloads temp-memory before allocating help-mem (prevent out of mem)
+  video: screen0/width80: emulated color attribute - static only yet (compass)
+  video: screen0/width80: 26.5 lines mode additionally to normal 24 lines mode
+  help/portar: added note about Lost-IRQ bug (reading IRQ while change from 0-1)
+  z80/vdp: interrupts not automatically acknowledged anymore (must read status)
+  z80/vdp: changed cycles per 50Hz from 71592 to 71328 - closer to reality
+  z80/msx: uses no$cpc-style 'prevv' value to bypass lost cycles at interrupts
+  z80: correct DD/FD-NOP timing emulation (even though doesn't make much sense)
+  z80: tested & fixed undocumented "IN 0,(C)" and "OUT (C),0" opcodes
+  z80/msx: measured & adjusted opcode timings from raw CLK to CLK+REFRESH
+  help/flat32: menubar includes help context links for z80, portar, dataformats
+  help: imported (and updated) Z80 specifications from a22i.txt
+  a22i: new .8080 directive that allows 8080/8085-compatible Z80 code only
+  help/portar: new chapters about kanji, rs232, cassette format, V9958 registers
+  help/portar: re-arranged VDP, FDC, PPI descriptions, new SSLOT description
+  help/flat32: always uses fontsize /fs18 instead sometimes buggy /fs20
+  video/flat32: more stable StretchDIBits (old memory DC did often kill colors)
+  video/flat32: draws blank screen border at left/right sides of background
+  video/flat32: vertically centers 192 pix background in 212 pix window
+  video/flat32: screen may be maximized and zoomed to any size (step 50%)
+  video: basically supports screen 4 (unless when bank switched/scrolled)
+  video: supports screen 7 (no sprites yet), fixed video "AND-command" (tetris)
+  dsx: DSX.COM includes new 'record image' option (for 1:1 copy of real floppy)
+  kanji: supports class 1 and 2 kanji (japanese character set ROM)
+  kanji: file KANJI.ROM may be in current "." directory, ".\ROM" or ".\ROMS" dir
+  kanji: 256KB KANJI.ROM file only loaded/allocated when actually accessed/used
+  kanji: in DOS versions EMS memory is required for kanji
+  filemenu/dos: shows only files with correct extension, "*" shows all files
+  internal/dos: moved screen redisp to separate segment to free mem in emu-core
+  debugger/dos: data/code window can be resized by mouse (as in windows version)
+  cartridges: supports ROM carts (currently windows only, and uncompressed only)
+  cartridges: autodetects Raw ROM, Konami 8K, Ascii 8K and Ascii 16K types
+  xed/flat32: fixed lost last character of not-existing filenames
+  snapshots/flat32: open-dialog with 'autostart' checkbox (new for cpc/gmb also)
+  snapshots: supports snapshots now (saves/loads state of CPU,IO-MAP,RAM,VRAM)
+  setup/flat32: setup screen layout, more sound options, fixed options colors
+  setup: separate boot/disk/logo/drive options instead general 'optimize' option
+  imported DSX.COM into emulator (for xed/a22i interaction) (and DOS edit file)
+  debugger: automatically shows IO address comments for IN and OUT instructions
+  debugger/flat32: modeless I/O map dialog (can show I/O map during debugging)
+  debugger/flat32: saves last screen position of I/O map in setup file
+  debugger/flat32: blank padded MSX font to 6x12 pix, also used in XED editor
+  emustop/flat32: right mouse button pause/context menu
+  emustop/flat32: activating debug-menubar during emulation stops emulator
+  lfn/spaces: allowed in filemenu, and in files.lst & commandline (quoted)
+  disks/flat32: file sharing allows same disk in both drives (use with care)
+
+  debugger: datawindow statusbar, flat32: statusbar DI/EI (all from no$gmb)
+  flat32/disassembler: fixed "ld (nnnn),<rr>" and "ld (ix+nn),<r>" (no$cpc 1.8a)
+  flat32: imported gmb GUI (flg-checkboxes, fast-text, debug splitter) (cpc1.8a)
+  flat32: replaced emulation menubar by context menu (r_mouse button) (cpc1.8a)
+  windows files.lst: 12x12 pix disk-icons in list (cpc1.8a) cart-icon if *.ROM
+  flat32: doesn't treat SPC in "C:\Program Files\Msx" as cmdline-param (cpc1.8a)
+  internal: recomb.cpc/msx and gmb DOS fileselect boxes (enables LFNs) (cpc1.8a)
+  internal: recomb.cpc/msx and gmb FILES.LST (cpc/msx-layout,gmb-code) (cpc1.8a)
+  internal: recomb.some cpc/msx and gmb HACK functions (codecenter) (cpc1.8a)
+  internal: recombined cpc/msx and gmb diskxxx and getmem (dos/flat) (cpc1.8a)
+
+  a22i: xed/a22i interaction (lineno, autostart from editor, autoedit errors)
+  a22i: copies assembled BIN files to BOOTDISK.DSK and autoloads/starts it
+  (autostart currently requires <name>.BAS that redirects to BLOAD"<name>.BIN",R
+  a22i: fixed indirect 16bit ix/iy load commands like LD IX,(NNNN) (no$cpc 1.8)
+  file popup menu: added eject disk a/b, and eject cart function (as no$cpc 1.8)
+  printer: supported under windows, and defaults to new setting (none) (cpc 1.8)
+  filemenu: allows more than 3 extensions/filetypes (DSK,ZIP,ARJ, and new ROM)
+  about: aboutbox in dos version, changed windows aboutbox layput (no$cpc 1.8)
+  emudetail: DAA instruction returns 100% correct AF for all 65536 AF (cpc 1.8)
+  calmdown: unlimted mhz disaster 100% and 50% frames working now (no$cpc 1.8)
+  internal: no$gmb shared init_path_sub,disksethomedir (as no$cpc 1.8)
+  keyb: DOS version supports AUTOMATIC keyboard translation (from no$cpc 1.7)
+  help: xed-based source, 128K size, windows .HLP format (as in no$cpc 1.7)
+  help: imported my updated portar hardware specs, connectors, etc. into help
+  sound: digital sound engine (optionally old adlib sound) (as in no$cpc 1.7)
+  alternate name for FILES.LST could be also NO$MSX.LST (as in no$cpc 1.7)
+  recombined MSX and CPC sources: Z80, HACK, PSG, SETup, other GUI/System things
+
+  internal: re-comb. cpc and msx source (debugger,GUI,setup screens,etc) (7/00)
+  internal: re-comb. cpc and msx source (DOS/windows filesystem, Z80 core)(7/00)
+  internal: re-comb. cpc and msx source (PSG sound core, etc.) (7/00)
+  setup/flat32: imported windows setup structure from no$gmb to cpc/msx (7/00)
+  digital sound: programmed digital PSG sound generator for cpc and msx (7/00)
+  digital sound: imported/shared digital sound player from no$gmb (7/00)
+  dos version: uses no$msx.inp file with old inputs also (10th July 00)
+
+<B>25th March 2000 - one year no$msx - first MSX2 release - no$msx version 1.3</B>
+  y=208 hides all following sprites (thanx www.msxnet.org/tech/tms9918a.txt)
+  msx2 roms working (in screen 0,1,2 only), eggerland 1 works now
+  256kbyte ram works with beamrider (BFFF..C000 boundary), flat32:kb256
+  supported silly memory mapped disk IO, but at least it's an english diskrom
+  rtc emulated (uses dos system time/date, and saves MSX 'CMOS' in no$msx.rtc)
+  started with msx2 support, memory mapper in protected mode version
+  emulated VDP interrupt disable (zanac, thexder), keypad"*" reset clears RAM
+  made halts on illegal/buggy IO optional (thexder)
+  added automatic BOOST on reset and disk access in optional optimized mode
+  mapped RAM to pslot 3, disk to pslot 2 (instead portar map) (for buggy games)
+  disk memio via addresses DISKSLOT:BFFX supported (barbarian msx-dos loader)
+  128K vram emulation (cracked disk versions of MGalious and R-Type work now)
+  MSX2 background emulation & VDP commands mostly completed
+  removed mmm_spr_backup buffer for hiding, new code uses vram_flags instead,
+  possibly even faster and less complicated. changed vga-width to physically
+  256 pixels. vertically part-offscreen sprites displayed (hero)
+  particulary colored MSX2 sprites, even/odd vram discovered & emulated
+  interseg reljumps/opcodefetch for flat32 software ram 'banking' (mem mapper)
+  particulary supported zoomed 16x16 -> 32x32 pix sprites (sorcery,boulder dash)
+  screen 0 color changes, screen 3 support
+  flat32: AnimatePalette for fast hardware based color changes (8bit VGA mode)
+
+<B>2nd January 2000 - first public windows version - no$msx version 1.2</B>
+  DSX 24K read ahead buffer for faster add files
+  added performance indicator
+  DSX replaced INT29 by INT21/06 for redirected output >SCRIPT.TXT
+  zoomed 8x8 sprites (maus, schnelle 15)
+  256K RAM emulation (penguin adventure) only real mode, eats up all conv mem
+  fast movsw instead movsb for draw/hide/copy sprites, and other video speedup
+  debugger follow jump works on djnz, too
+  tested 386 pmode version on 386-33 whew, hero runs at 150% without frameskip
+  two color display mode support for screen 0 and very nice dithered screen 1/2
+  two color mode on 'real' hercules, hgc with variable color 0 (beamrider)
+  256x200 pixels full screen video mode (requires expensive SVGA monitor)
+  forced screen width to 40 chars (instead 37 chars) in 'optimized' mode
+  assembled lite version (pklited exefile only 29K)
+  playable win32 version with graphics, filemenu, menubar, basic debug and huhs
+  blackscreen delay on 256x200 mode switch
+  unzoomed 8x8 sprites (Zauberschloss)
+  uploaded first win32 beta version (non-public, 15 August 99)
+  flat32: added adlib sound (uses direct IO though)
+  flat32: filemenu/setup disable (and keep in bg) 2nd active mainwindow (if any)
+  implemented newest no$gmb a22i version, flat32: online assembler works now
+  changed files.lst format to "Description>DskName RunName" without so many spcs
+  beside for the above listed news, all DOS functions are fully ported to
+  the windows version now. The F10-screen shows the complete MSX IO state,
+  no cpc-relicts left.
+
+<B>27th April 99 - second public update - version 1.1</B>
+  fixed more variable vram addresses (zaxxon), null-mem emulation (zaxxon/bios)
+  pio ctrl (bit set/reset) and caps led emulation, direct F6-F10-key emulation
+  reset (keypad-*) de-installs autorun (from F12 menues)
+  uploaded bugfixes for version 1.0 (1 April 99)
+  adjusted some colors according to real msx, exchanged left/right ALT keys
+  variable vram address bit in screen 2 (konami games), rom seg fixes
+  fixed 'fatal/unexpected' error that crashed if DISC directory didn't exist
+  displayed disk type 360/720 in hwinfo screen, some other small hwinfo things
+  made protected mode version (10% faster), fast vram ss access
+  forced high frameskip only by whoosh button
+  partical screen redraws (display redraws in hero 10 times faster)
+  started DSX disktool (basically add, list, extract and delete works)
+  DSX commandline interface, renamed DISC directory to DSK
+
+<B>30th March 99 - first public release - version 1.0</B>
+  loaded ROMs into mem, could read startup message in Hexdump debug window
+  keyboard support, text mode output in text mode (trashy)
+  charcter readback from vram, could write programs in basic
+  disk emulation, read only, works only with port-based (D0..D4) disk rom
+  got the keystone kapers demo running, in heavily corrupted graphic
+  german keymap with altgr
+  screen2/hero backgound okay, curse MAYER (pixelbyte would be at fixed xy)
+  colors, joystick and adlib sound support, hero playable
+  video and sound quality define a new form of terror!
+  disk writes emulated, double sided 720K supported, drive b: emulated
+  transparent BG color emulated (lines in beamrider, game works now)
+  fast optimize nodelays startup rom pokes, various country-keymaps
+  autostart via commandline 'no$msx diskname runname' and filemenu
+  emulated keyboard-joysticks, stick2, interrupt timing cleaned up
+  transp bg color changes recognized while emu running, various options
+  offscreen/EC emulation, buffered video output (no flickering sprites)
+  reversed sprite priority
+  fixed major sound bugs, public release, downloaded some more games
+  fixed screen 1 variable vram addresses (sorcery), 48K RAM (sorcery)
+  BUG: this version didn't work if the DISC directory didn't exist :-)
+
+<B>25th March 99 - Project started</B>
+  one million thanks to the 'Portar.doc' for solid info about msx hardware
+</PRE><HR><P>
+<TABLE>
+  <TR><TD><A HREF="msx.htm">  <IMG SRC="nope.gif" WIDTH=36 ALT="BACK"></A></TD><TD><FONT SIZE=+1>Back to NO$MSX page</TD><TR>
+</TABLE>
+</BODY>
+

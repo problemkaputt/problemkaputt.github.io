@@ -1,0 +1,453 @@
+<IMG SRC="unlaunch.gif" WIDTH=268 HEIGHT=416 align="right">
+<FONT SIZE=+2><B>Unlaunch.dsi bootcode exploit</B></FONT><BR>
+Unlaunch.dsi is the first ever [released] bootcode exploit for DSi consoles.<BR>
+It's gaining control with full SCFG_EXT access rights immediately after
+power-up (before even starting the launcher).<BR>
+Installation requires a working DSiware exploit with SD/MMC access,
+or a hardmod.<BR>
+The exploit works with all retail DSi models, regardless of region
+and firmware version.<BR>
+Once when installed, it will start the file 'bootcode.dsi' from SD card (if present).<BR>
+Or, otherwise, it will resume booting nintendo's launcher
+(with disturbing healthsafety and bootmusic disabled,
+and removed RSA, whitelist and region checks).<BR>
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Downloads</FONT></B><BR>
+CAUTION: Backup your eMMC before installation.
+Pick a tested/stable unlaunch version (unless you have a hardmod for easy unbricking).
+Unlaunch modifies bootfiles - if installation goes wrong and you can neither
+boot the original firmware nor bootcode.dsi from SD card, then you'll need a
+hardmod to re-install your eMMC backup copy.
+ <TABLE WIDTH=60% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI><A HREF="unlaunch.zip">download unlaunch.dsi v2.0</A> (newly released, don't know if it's stable)</LI>
+<LI><A HREF="unlau19.zip">download unlaunch.dsi v1.9</A> (tested, stable)</LI>
+<LI><A HREF="unlau18.zip">download unlaunch.dsi v1.8</A> (tested, stable)</LI>
+<LI><A HREF="unlau17.zip">download unlaunch.dsi v1.7</A> (tested, stable)</LI>
+<LI><A HREF="unlau16.zip">download unlaunch.dsi v1.6</A> (tested, stable, but lacks a few details)</LI>
+<LI><A HREF="unlau15.zip">download unlaunch.dsi v1.5</A> (dsi-mode touchscreen not working)</LI>
+<LI><A HREF="unlau14.zip">download unlaunch.dsi v1.4</A> (OKAY - tested, seems to be stable)</LI>
+<LI><A HREF="unlau13.zip">download unlaunch.dsi v1.3</A> (OKAY - tested, seems to be stable)</LI>
+<LI><A HREF="unlau12.zip">download unlaunch.dsi v1.2</A> (unstable, don't use)</LI>
+<LI><A HREF="unlau11.zip">download unlaunch.dsi v1.1</A> (some parts don't work on firmware v1.4.5)</LI>
+<LI><A HREF="unlau10.zip">download unlaunch.dsi v1.0</A> (some parts don't work on firmware v1.4.5)</LI>
+<LI><A HREF="unlau09.zip">download unlaunch.dsi v0.9</A> (some parts don't work on firmware v1.4.5)</LI>
+<LI><A HREF="unlau08.zip">download unlaunch.dsi v0.8</A> (old - tested, seems to be more or less stable)</LI>
+ </TR></TD></TABLE>
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Related Stuff</FONT></B><BR>
+ <TABLE WIDTH=70% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI><A HREF="wifiboot.htm">wifiboot</A> - a dslink/dswifi clone in ASM for
+     wifi-uploading code from PC to NDS/DSi (for the PC side use no$gba
+     utility/upload, or the .EXE from original <A HREF="https://github.com/devkitPro/dslink">dslink</A>)</LI>
+<LI><A HREF="magicflr.htm">magic floor</A> - a search game with source code for GBA/NDS/DSi/eReader</LI>
+<LI><A HREF="gba.htm">no$gba</A> - GBA/NDS/DSi debugger/emulator</LI>
+<LI><A HREF="gbatek.htm">gbatek.htm</A> - GBA/NDS/DSi specifications (html version)</LI>
+ </TR></TD></TABLE>
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Donations</FONT></B><BR>
+Donations would be very welcome.
+Unlaunch started as a quick 3 weeks hack, barely allowing to 'boot something'.
+That 3 weeks quickly turned into 3 months, and unlaunch has now envolved to
+a complete firmware replacement, fully supporting all those complicated hardware
+initializations needed to access things like wifi, sound, ram, and touchscreen
+hardware.<BR>
+Concerning donations, I've got a little money that might pay off for the
+first 1-2 weeks, but it doesn't remotely cover the 3 months (and certainly not
+the preceeding 4-5 years that I had spent on DSi reverse-engineering), and
+even without special expenses, paying for food &amp; rent can be often
+troublesome.<BR>
+So, if you can share a few dollars - you would be welcome to share
+whatever you have!<BR>
+ <TABLE WIDTH=60% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+ <LI>You can <A HREF="https://secure.problemkaputt.de/checkout.php">share via credit card</A> (internationally)</LI>
+ <LI>You can <A HREF="donate.htm">share via bank transfer</A> (within european union, fees can be quite high from elsewhere)</LI>
+ <LI>You can <A HREF="donate.htm">share via bitcoin</A> (internationally)</LI>
+ </TR></TD></TABLE>
+Btw. I also need a MMC card, and a SDXC card (and any kind of non-working SD cards) for testing.
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Before Installation - make a backup</FONT></B><BR>
+Make a backup of your eMMC chip. If you have a DSiware exploit, use the
+"Backup DSi NAND" function in fwtool.nds, for example.
+With hardmod, just dump the eMMC chip.
+Either way, backup the unmodified file in a safe place, you can use it to
+restore the console to working state if something goes wrong (if the console
+gets totally bricked then you'll need a hardmod to do this).<BR>
+The eMMC contains some <I>console-specific</I> files with RSA signatures -
+if that files get lost then you've a problem - there is no way to replace them
+by using equivalent files from another console.
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Automatic Installation (requires a working DSiware exploit)</FONT></B><BR>
+Installation is easy if you have a console with Flipnote installed
+(the game came pre-installed on many consoles, and it was also available as
+free download when the DSi shop was still online).
+However, some people may have deleted or missed downloading it, and it wasn't
+released in CHN/KOR regions. Anyways, if you have flipnote, use this exploit:
+ <TABLE WIDTH=60% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI><A HREF="https://davejmurphy.com/%25CD%25A1-%25CD%259C%25CA%2596-%25CD%25A1/">Flipnote Lenny or whatever it is called</A> flipnote exploit for USA/EUR/AUS/JAP regions (requires https and youtube) </LI>
+ </TR></TD></TABLE>
+If you already have another exploit like sudokuhax then you could use that
+as well. There's also another flipnote exploit called ugopwn in some webforum
+(for USA region).
+All DSiware exploits are conventionally loading 'boot.nds' from SD card, so
+rename unlaunch.dsi to that name, then select Install Now in unlaunch (first
+making the backup, of course).<BR>
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Manual Installation (via hardmod)</FONT></B><BR>
+This requires soldering four wires to DSi mainboard
+(eMMC signals CLK, CMD, DATA0, GND),
+attach the wires to a SD/MMC card reader, and use some tool like HxD or
+Win32diskimager to dump the eMMC content to a 240Mbyte file.<BR>
+Next, you will need the CID and Console ID for decrypting the eMMC image.
+There are several to obtain that values, and it's also possible to brute-force
+one (or both) values.
+ <TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI>Decrypt the eMMC image using a tool like TWLtool (requires 64bit windows; there's also an inoffical 32bit built)</LI>
+<LI>Mount it to your OS using OSFMount or the like.</LI>
+<LI>Locate 520-byte 'title.tmd' file in the following folder: 'title\00030017\484E41xx\content'
+(the 'xx' varies per region), append 81400-byte 'unlaunch.dsi' at the end of
+the tmd file (tmd filesize is then 81920 bytes).</LI>
+<LI>Set the Read-only attribute for all files in above folder (else some DSi
+system tools may automatically brick your console by the deleting all files
+in the modified folder).</LI>
+<LI>Re-encrypt the eMMC image.</LI>
+ </TR></TD></TABLE>
+Alternately, if you want to avoid the decryption, mounting, appending,
+protecting, re-encryption steps:<BR>
+ <TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI>Add a <A HREF="gbatek.htm#dsisdmmcimages">no$gba footer</A> with CID and Console ID to the eMMC image, and run unlaunch.dsi in no$gba (with the eMMC named dsi-1.mmc)</LI>
+<LI>Note: Don't forget to enable DSi emulation, you may also need some further files like DSi BIOS rom images.<LI>
+ </TR></TD></TABLE>
+Finally, copy the modified eMMC image back to the console.
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Hotkeys</FONT></B><BR>
+ <TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+Boot hotkeys can be changed by clicking OPTIONS in unlaunch filemenu.
+Button A+B are fixed, and will bring up the Unlaunch filemenu.
+Buttons None, A, B, X, Y can be assigned to anything you want, for example:
+<LI>Wifiboot (useful for developers)</LI>
+<LI>Unlaunch filemenu, or other homebrew filemenues, or official launcher</LI>
+<LI>DS Cartridge slot, or your favorite DSiware title(s)</LI>
+<BR>
+Older unlaunch version did have fixed hotkeys:<BR>
+<LI>None: Start sd:\bootcode.dsi (if present)</LI>
+<LI>Button A: Start original launcher and show unlaunch version number (default when bootcode.dsi not present)</LI>
+<LI>Button B: Start ROM cartridge</LI>
+<LI>Button X: Start sd:\bootthis.dsi (instead of bootcode.dsi)</LI>
+<LI>Button Y: Skip Wifi init</LI>
+<LI>Dpad Up: Show red/blue/green to indicate relauncher bootstages</LI>
+<LI>Dpad Down: Do NOT invalidate cache on startup of installer</LI>
+ </TR></TD></TABLE>
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Bootable Files</FONT></B><BR>
+The bootcode.dsi (and bootthis.dsi) can be general nds/dsi files of following type:<BR>
+ <TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI>Relative small self-contained titles (that are solely relying on the bootcode areas defined in their cart headers, without trying to load extra data)</LI>
+<LI>Homebrew NDS/DSi titles that are designed to load extra data from DSi SD/MMC slot (in many cases this may require something called "dldi" or so) (if it's a homebrew DSiware title then it <I>should preferably</I> use the Device List).</LI>
+<LI>Homebrew DSiware titles that access extra data by using the filenames from the incoming the Device List</LI>
+<LI><B>Not legit:</B> Commercial DSiware titles (unless you have purchased them from DSi Shop when the shop was still online; but I think you didn't miss anything important if you didn't buy them)</LI>
+<LI><B>Not working:</B> Games that load extra data from ROM cartridge slot instead of from SD/MMC slot (eg. ROM-images from commercial games)</LI>
+ </TR></TD></TABLE>
+For DSiware, the <A HREF="gbatek.htm#dsisdmmcdevicelist">Device List</A> contains the names of the executable and public/private save files. With unlaunch, that names will be sdmc:/bootcode.dsi, sdmc:/bootcode.pub, sdmc:/bootcode.prv (or bootthis.xxx instead bootcode.xxx). The .pub/.prv files must exist (if the title is using them), and they must have the correct filesize (as specified in the cart header of the title).
+<P>
+<!---------------->
+<B><FONT SIZE=+1>SD Cards</FONT></B><BR>
+Unlaunch supports SD/SDHC cards (max 32GB, preformatted as FAT16/FAT32).
+SDXC cards (above 32GB, preformatted as ExFAT) are not supported,
+neither by Unlaunch, nor by DSiware in general.<BR>
+Reformatting SD/SDHC cards isn't recommended, or it should be done only with
+dedicated SD card formatting tools (that maintain cluster size matched to
+physical sector size). However, reformatting SDXC cards may help to get rid
+of the weird ExFAT format.<BR>
+I would be glad to receive any non-working SD/MMC cards, so I could either
+support them or at least add some meaningful error message for such cards.
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Feedback / Contact</FONT></B><BR>
+I haven't received too much feedback from too many people.
+I assume that a bunch of people are discussing unlaunch in chatrooms,
+without telling anybody else about their findings
+(although Apache Thunder seems to have forwarded some of that info to me, thanks there).
+Some people also published info about suspected unlaunch bugs on random
+webpages, but without giving any details on how to reproduce that bugs.
+Apart from bug reports, testing would be also interesting.
+Like knowing if DSi browser can be already booted as bootcode.dsi and
+bootcode.prv (if somebody can spare 5 minutes on that so I won't need to test it myself).
+<BR>
+Official forum thread is in <A HREF="http://forums.nesdev.com/viewtopic.php?f=23&t=17581">nesdev / other retro dev</A> forum.
+You can also reach me per email <A HREF="email.htm">email</A>.<BR>
+<P>
+<!---------------->
+<B><FONT SIZE=+1>How it works</FONT></B><BR>
+Bootstage 2 is loading the  launcher's "title.tmd" file to memory, and it's
+doing that without any error checking for "filesize>limit" (instead, it's only
+doing a rather surreal "filesize>filesize" check).
+The defunct error checking is allowing to load about 80Kbytes of useful code
+to Main RAM and to overwrite a task switching structure, which is then causing
+ARM9 to execute the loaded code, and which can then tweak ARM7 to execute
+custom code by remapping some portions of shared WRAM.<BR>
+Yup, it's actually that simple. The bigger problem has been to find this
+exploit within the 400,000 lines of code that bootstages 2 and 3 consist of
+(hence taking almost 10 years until somebody found a bootcode exploit).<BR>
+The other issue is that bypassing the original firmware is leaving most of the
+hardware uninitialized (the DSi is often said not to have an operating system
+- which is true - but people tend to forget that things like wifi, wram, sound,
+touchscreen, and system variables won't work without extensive firmware
+initializations (not too mention booting nds/dsi titles from sd/mmc or
+cartridge slot also needing extensive loading and decryption functions).<BR>
+That initialization stuff isn't exactly easy. It did help that I had already
+reproduced most of it when making no$gba in the past some years.
+As of unlaunch v1.0, I am quite confident that I got the firmware replacement
+working quite well - and that DSi consoles are now booting up ways faster than
+with original firmware.<BR>
+The thing still missing would be a bootmenu for selecting titles from sd/mmc,
+though devrs will more likely stick with loading wifiboot/dslink directly from
+sdcard, so a bootmenu won't be of too much use (except maybe for gamers).
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Artwork/Photos</FONT></B><BR>
+Normally, I am avoiding to make bloated up software. In this case, triggering
+the exploit needed the file to be padded to a hefty size of 80 kbytes - so I
+have filled parts of that space by adding some background gif's, roughly
+themed around crashes or launch failures...<BR>
+  <B>Unlaunch v1.5 through v1.7</B> are themed on the
+  <A HREF="https://en.wikipedia.org/wiki/List_of_military_nuclear_accidents">Past Greatness</A>
+  of the 1950's and 1960's where the USA lost at least one or two
+  nuclear-bomb-carrying airplanes per year (or dropped off the bombs as a safety
+  measure before emergency landings).
+  The upper image shows some older
+  <A HREF="https://en.wikipedia.org/wiki/Boeing_B-50_Superfortress">Boeing B-50 Superfortress</A> bombers,
+  capable of carrying a single nuclear bomb.
+  Later
+  <A HREF="https://en.wikipedia.org/wiki/Boeing_B-52_Stratofortress">Boeing B-52 Stratofortress</A> bombers
+  had a capacity to losing 2-4 bombs per accident.
+  The lower image is showing attempts to disarm and recover parts of a nuclear
+  bomb from
+  <A HREF="https://en.wikipedia.org/wiki/1961_Goldsboro_B-52_crash">muddy underground</A>
+  near Goldsboro, USA.
+  However, accidents occurred all over the northern hemisphere; covering Europe,
+  North America, Japan, Mediterranean Sea, and Atlantic and Pacific oceans.
+  Some bombs remain lost at unknown and/or inaccessible locations,
+  other bombs have been recovered in whole or in parts,
+  with ongoing plans for future decontamination of areas where the bombs
+  had scattered into pieces.
+  <BR>
+<B>Images in other unlaunch versions</B> are showing
+<A HREF="https://en.wikipedia.org/wiki/Herzogin_Cecilie">Herzogin Cecilie</A>.
+I've also considered
+<A HREF="https://en.wikipedia.org/wiki/SS_Principessa_Jolanda_(1907)">Principessa Jolanda</A>
+for actual launch failures, and the
+<A HREF="https://en.wikipedia.org/wiki/Skyluck">Skyluck</A>
+for intentionally grounded vessels. But then, the photo with the half sunken ship's
+<A HREF="http://www.marinearchaeology.org/hezogin%20cecille.htm">figurehead</A>
+nearly kissing the waves is so strong that I've chosen that one
+(not to mention that I like the way how the lower image is mirroring the lines
+from the upper image).
+<BR>
+<B>Caution:</B> Some people appear to be scared about the images with the sunken sailing ship
+(though maybe some of them will be more pleased with bombers).
+Be aware that the images will be displayed as boot message
+in place of the healthsafety screen
+(unless you know how to store a working bootcode.dsi file on SD card).
+<P>
+<!---------------->
+<B><FONT SIZE=+1>Release Notes</FONT></B>
+<TABLE><TR><TD>
+<PRE>
+v2.0 27 Aug 2019
+ - extra ipc sync before arm9 vram remapping (avoid memory pit arm7 vram crash)
+ - cosmetic: Wifi-LED kept switched OFF during/after wifi-firmware init
+ - bugfixes: initializes dsi_flag AFTER vramcnt, and fixed options glitch
+ - removed warning on unknown chinese region (no longer unknown)
+ - wifiboot: faster reconnect on warmboot, rtc set, icon/title
+
+v1.9 28 Apr 2019
+ - wifiboot: supports DSi-wifi SDIO hardware with WPA/WPA2 and faster transfers
+ - updated unlaunch.htm webpage and how-it-works screen (hotkeys, bootcode.dsi)
+ - no$gba: fixed wifiboot uploader (without nocashio for wifi) (no$gba v2.9c)
+ - detects MMC cards in SD/MMC slot (upon failed APP_CMD during idle state)
+ - initializes 2FFFCFAh wifi channels (for dsdownloadplay and pictochat)
+ - added lowercase font, hotkeys: removed experimental dpad up/down hotkeys
+ - displays title from icon/title (if any, instead 12-letter cart header title)
+ - removed unknown firmware warning (wasn't working, and v1.0J is now known)
+ - filesys/speedup: uses 1-sector fat cache for faster next cluster look-up
+ - filemenu: also shows files with .srl extension (in case anybody uses that)
+ - hotkey config: new options include keep (no change) and none (ignore hotkey)
+ - forces pub/prv savedata size zero for NDS titles loaded from SD/MMC
+
+v1.8 06 Nov 2018
+ - filesys: decodes lfn's, ascii-case-insensitive, with alternate short names
+ - filesys: parses path+file strings (eg. sdmc:\dir\subdir\file.ext)
+ - filesys: skips mount_drive when already having the same device mounted
+ - directory crawler: scans all folders on eMMC and SD/MMC (xcept DCIM etc)
+ - directory crawler: creates filelist with all .app/.nds/.dsi files
+ - directory crawler: adds entries for internal functions cart:, wifi:, sett:
+ - crawler: doesn't treat volume labels as files (even if named .app/nds/dsi)
+ - quick crawl: aborts folder reading on 1st UNUSED entry (instead cluster end)
+ - quick crawl: does NOT load carthdr (instead, done on the fly in filemenu)
+ - quick crawl: skip data,0003000f,import,progress,shared12,sys,ticket,tmp,dcim
+ - filemenu: displays all titles from crawler and allows to select/start them
+ - filemenu: displays carthdr title (instead nintendo's 000000vv.app filenames)
+ - filemenu: supports scrolling and keyrepeat, loads carthdr's during scrolling
+ - filemenu: ROM cart eject/insert: auto-updates ROM cart title on the fly
+ - filemenu: SD/MMC card eject/insert: auto-recreates the whole filelist
+ - filemenu: displays full filename and pub/prv sizes on lower screen
+ - filemenu: different colors for card:+wifi:+sett: vs nand: vs sdmc: files
+ - filemenu: hinge close: auto-power-off
+ - device list: adjusts savedata names either data\public.sav or filename.pub
+ - device list: adjusts savedata names either data\private.sav or filename.prv
+ - autoload: allows retails titles to start titles via 2000300h (via title id)
+ - autoload: allows frontends to start titles via 2000800h (via path\filename)
+ - creates title list at 2FFD800h (needed for enter_settings & reboot_title)
+ - options: allows to configure default boot action and hotkeys A,B,X,Y
+ - options: shows abbreviated name for each hotkey, and full name for current
+ - hotkeys not treated as menu-input in filemenu/options (when still held down)
+ - hotkeys checked early (and multiple times ORed up during boot)
+ - removed skip wifi-init hotkey (button Y has now other/custum use)
+ - redirect to "load error" handler when trying to start empty rom/sdmmc slot
+ - early backdrop init (before decompression) (black, or color from 2000800h)
+ - patches tmd-size-selfcheck in launcher v1.4.2E (if size=bad, force default)
+ - patches launcher.carthdr[1B4h].bit3 (needed if loading launcher from sd/mmc)
+ - patches for launcher applied as usually; when selecting launcher in filemenu
+ - loads verdata tmd (2FFD7B0h region/filename needed for SysSettings and Shop)
+ - moved ARM9 "gif_table" to what is "cluster_buf" on ARM7 side
+ - bugfixed hex32bit_r0_to_string_r1_upcase (was badly bugged on digit 9)
+ - wifiboot: now included as overlay in unlaunch (allows wifi without SD card)
+ - added NO ONE IS ILLEGAL tagging, and removed the nuke-crash-bombing pictures
+ - resumed old GIFs, or actually it's only one of them, for memory reasons
+
+v1.7 30 Sep 2018
+ - re-enabled some other tweaks (except the one causing touchscreen problems)
+ - webpage: added notes on the new background GIFs
+
+v1.6 30 Sep 2018
+ - re-fixed dsi touchscreen input
+
+v1.5 30 Sep 2018
+ - co-releases: no$gba v2.9b and wifiboot v2.3
+ - zerofill main ram support added (needed for a few titles like DSi Sound)
+ - zerofill done via fast NDMA-fill (16MbyteDSiMode=263ms, 4MbyteNdsMode=66ms)
+ - zerofill skipped if carthdr[0B0h]="DoNotZeroFillMem" (fastboot for homebrew)
+ - memory moved exploit entry code to gap between 37F0E3Ch and 37F22C8h
+ - memory shares cluster_buf as rom_cart_xxx buffers (for sd/mmc vs rom carts)
+ - moved wifi firmware load prior to cartload (so wifi can trash main ram)
+ - added warnings on unsupported cluster sizes (too small or too large)
+ - allows FFFFh as 'valid' camera id (for consoles with broken camera/cables)
+ - speedup: uses DMA for modcrypt (some dsiwares have HUGE modcrypt regions)
+ - added warning on unknown chinese firmware & unknown old firmwares from 2008
+ - added uninstall function (dealloc clusters, change filesize, unprotect)
+ - added warning about uninstall function (prompt X+Y buttons to confirm)
+ - initializes microphone MIC_CNT, teak DSP_xxx, stop/clear NDMA before title
+ - vram_code (moved unlaunch to vram; faster & leaves main ram to loaded title)
+ - gif: much faster gif decoder (r0-r12 instead ram, faster code table)
+ - gif: simplified gif decoder (no interlace, without wrap at image width)
+ - gif: special edition themed on broken arrow cold war nuclear accidents
+ - added support for modcrypt with more than FFFFh blocks (eg. dsi sound)
+
+v1.4 22 Aug 2018
+ - web: created no$project patreon page, https://www.patreon.com/martin_korth
+ - added dpad UP hotkey: show red/blue/green to indicate relauncher bootstages
+ - added dpad DOWN hotkey: do NOT invalidate cache on startup of installer
+ - invalidates/forgets cache on startup of installer (unless hotkey, see above)
+ - initializes GPIO powerbutton irq enable (for some homebrew dsi titles)
+ - removed warning on unknown CID/CSD for ST NAND02GAH0LZC5 rev31 eMMC chips
+
+v1.3 09 Aug 2018
+ - forces disabled cache to be MADE EMPTY before starting loaded title
+ - rearranged init sequence for loaded titles and added more cache flushes
+ - moved scfg state from 380FFCX to 3FFFFCX, passes final state to loaded title
+ - bugfix: skip wifi init by button Y (not button B, which is ROM cart loading)
+ - checks for unknown cid/csd AFTER manually reading cid/csd from hardware
+
+v1.2 05 Aug 2018
+ - rom loader: variable ARM9 secure area size=4000h..1000h, or skips if none
+ - zerofills vram/oam/palette before starting other titles (takes about 6ms)
+ - arm7_copy_scfg_state_to_ram_and_wram (passes SCFG_OP to ARM9 side)
+ - supports twl-debugger (with 80h-byte address shift, without region patches)
+ - removed forced SFCG_EXT.bit31=1 patches (since they weren't too useful)
+ - fixed color-flash on patch errors, resumes further patches after keystroke
+ - added wildcard for anti-black-fill patch (did hang firm v1.4.5 since v0.9)
+ - moved unknown camera/emmc warnings after dsi-mode check, ie. not in nds-mode
+ - removed warning on unknown CID/CSD for ST NAND02GAH0LZC5 eMMC chips
+
+v1.1 25 Jul 2018
+ - removed warning on unknown CSD for KLM5617EFW-B301 eMMC chips
+
+v1.0 24 Jul 2018
+ - co-releases: no$gba v2.9a and wifiboot v2.2
+ - webpage: new unlaunch.htm page, with more installation info, new forum, etc.
+ - speedup: uses DMA for SD/MMC-read, SDIO-write, and AES-read/write, ROM read
+ - rearranged EXMEMCNT init, ensures ARM9 IPC IRQ enabled before waiting for it
+ - installer: uses fill_copy_list (instead of relying on carthdr copy in ram)
+ - installer: stores no$gba footer at eMMC offset FF800h (if it's zerofilled)
+ - installer: omits FAT writing if FAT unchanged (as so on unlaunch updating)
+ - installer: disables BPTWL powerbutton auto-reset during install_now
+ - sdmmc/sdio: removed pre-wait and soft-timeouts, instead checks hw error bits
+ - initializes SOUNDBIAS (maybe better in case games don't do that themselves)
+ - moved GIFs to separate non-lz77 memory block (avoid double compression)
+ - verifies camera chip id and emmc cid/csd with warning if unknown hardware
+ - added Y button hotkey: load NDS/DSi title from ROM-cartridge slot
+ - rom loader: cartpower, romctrl, 4004012h/14h, load chip id and secure areas
+ - rom speedup: uses 1000h-byte blocksize for faster 1t-rom loading
+ - rom speedup: forces fast mrom timings for mrom carts with wrong cart header
+ - rom speedup: forces less slow 1t-rom timings for actual 1t-rom carts
+ - rom speedup: forces reduced secure area delay of 8ms for 1t-rom carts
+ - rom speedup: uses slot-swap-reset-trick (instead slow power-off/on)
+ - rom speedup: crops hardcoded cart power-on delays to 1ms/1ms/0ms/1ms
+ - more accurate modcrypt (old was overcomplicated, and bugged on size=0)
+ - supports place_aes_keys (maybe needed for jpg/camera or verdata stuff)
+ - sets POSTFLG register (needed for NDS titles like EragonDemo, DownloadPlay)
+ - moved twlcfg/wlfirm/hwinfo elsewhere (reloc to 2000400h only for DSi titles)
+ - resumes default BPTWL powerbutton mode (unless when booting nds-titles)
+ - enter_nds_mode: reloc 2FFFxxxh to 23FFxxxh, set 4MB-RAM, NDS-ROM, ARM9 67MHz
+ - enter_nds_mode: set NDS-TSC-touchscr mode, init NDS-Wifi, NDS-SNDEXCNT
+
+v0.9 14 Jun 2018
+ - co-releases: no$gba v2.9 and wifiboot v2.1
+ - creates device list in ram (with names sdmc:/bootcode/bootthis.dsi/pub/prv)
+ - uses lz77 compressed arm9 code to squeeze all new features into 80kbyte file
+ - moved gif decoder buffer to address not conflicting with cart loader
+ - loads TWLCFG0.dat, HWINFO_S.dat, and HWINFO_N.dat to main ram structures
+ - added touchscreen/sound controller init (required for working sound output)
+ - new patch: prevent original launcher from black-filling engine-a-palette
+ - proper cache init/initback with cleaning dirty lines before invalidating
+ - supports blowfish/secure_area (requires rom/itcm) and modcrypted dsi areas
+ - loader: applies cartheader MBK values for entry and for arm7/arm9 loading
+ - loader: applies cartheader WRAMBANK and SCFG_EXT7 values before entry
+ - added hotkey: hold button X to load "bootthis.dsi" instead of "bootcode.dsi"
+ - removed patch supported languages (caused touchscreen issues in korea/japan)
+ - initializes wifi related hardware (rtc.fout, bptwl[30h], gpio_wifi)
+ - uploads wifi firmware before starting bootcode.dsi (cmd5/upload/init/wmi)
+
+v0.8 10 May 2018
+ - added one more patch wildcard for firmware v1.4.5E
+
+v0.7 08 May 2018
+ - write-protects ALL files/folders in launcher content folder (xcept . and ..)
+ - added hotkey: hold button A to skip bootcode.dsi (and force normal launcher)
+ - installer: moved arm7entry from 37f8000h to 2380000h (better for 4swordhax?)
+ - when starting bootcode.dsi: skips GIF display, keeps I2C warmboot flag
+ - added more patches to launcher (rsa) and bootcode (gif instead whitescreen)
+ - rebuilds whole eMMC Info at 2FFD7BCh (in case destroyed by some exploit)
+ - uses faster 4bit sdmmc mode (if detected/supported)
+ - more specific error messages for fat mismatch, bad mbr/vbr, etc
+ - skips DSi DISPSTAT wait when (trying to) run in NDS mode
+
+v0.6 24 Apr 2018
+ - write-protects .tmd file (prevent Data Managment from deleting it)
+
+v0.5 23 Apr 2018
+ - first public release (installer, gui, loader for bootcode.dsi)
+
+v000 01 Apr 2018
+ - discovered exploitable .tmd filesize in bootcode disassembly
+</PRE>
+</TD></TR></TABLE>
+<P>

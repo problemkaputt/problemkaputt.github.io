@@ -1,0 +1,592 @@
+<HTML><HEAD>
+  <TITLE>Super Woofer SWF-3500 service info by nocash</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash Martin Korth">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<!--------------------------------------------------------------->
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+SWF-3500 Super Woofer</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+The Super Woofer is a neat black ghettoblaster in a beautiful black case
+with a lot of square and some diagonal edges, manufactured in 1988 according
+to the chip markings. One day, I found the Super Woofer on my staircase, asked
+the neighbors where it came from, and got told that it's trash and that I can
+have it. It wasn't trash, worked perfectly without even eating my tapes.
+People who grew up with silver zeppelin shaped CD players may not like it.
+Anyways about everybody who grew up in the eighties and sees it says:
+Wow, that's cool.
+<P>
+Since I didn't find a schematic or service manual, here're the results of
+my own research, with some potentially useful notes, pin-outs, and testpoints...
+<P>
+- Nocash
+<P>
+<A HREF="http://nocash.emubase.de/swf-3500.htm">http://nocash.emubase.de/swf-3500.htm</A>
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+Repair</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+<P><B>Rubber-Wheel and Drive Belts</B><BR>
+The first thing I noticed when I got my SWF was that one the drives did
+have the small rubber wheel missing; anyways, I found it inside of the
+case, and justed needed to snap it back in.<BR>
+As in all tape drives, drive belts tend to get worn-out after 10 years or
+so, causing the drive to spin slowly, or even to eat the tape. In my SWF,
+the belts are still okay (maybe they were already replaced some years ago),
+anyways, in case of problems it may be a good idea to buy some new belts.
+
+<P><B>Contacts</B><BR>
+Next, the volume and equalizer regulators produced ugly scratch noise when
+touching them, which I got fixed with some evil contact spray. It may be
+also good to put some spray on the various switches; When I tried to measure
+the Tuner/AUX/Tape contacts, I found only one 0 ohm contact, on the other
+contacts I measured absurde values like 20 kilo-ohms (although the switches
+still worked somehow). After some days the Deck-B output volume became
+extremly silent and muffled, after putting some spray on the Play/Record
+switch (S3) it seems to be working again (altough the problem may have been
+caused by something else, that days the room-temperature dropped to 12'C, so
+maybe the super woofer just got a cold).
+
+<P><B>Plastic Clips</B><BR>
+There are some elastic plastic clips that seem to tend to break: Two rather
+unimportant clips that stabilize the big carrying handle in its vertical
+position. And, four rather important ones:
+Inside of each drive door, there seem to have been two plastic clips that
+pushed-down the cassettes, but all of them seem to have been broken long ago.
+In result, inserting tapes feels a bit as if the cassettes are a good bit too
+small for the huge drive opening. And, during operation, the cassettes are
+held down only by gravity... which is more at less working okay, but, if
+gravity doesn't do it's job, then the tape isn't wound-up properly, and the
+drive tends to eat the tape (eg. when turning the drive top-down, or when the
+cassette isn't well inserted). So it may be recommeded to remove the drive
+doors, and install some new plastic or metal clips inside of them.
+<PRE>
+                             #####
+                                   &lt;------------ Insert Cas This Way
+                  ___-----__
+                 /          ---___              X--- Screws
+   ###          /                 ------_X_     #### Drive Door Body
+     ###       |    |####################|##    --__ Elastic Foil
+      ###      |   X|--##################|##
+       ##       \__/ #######################
+   #######################################################
+
+                             #####
+                                   &lt;------------ Insert Cas This Way
+                         ___
+                        /   ---___              --__ Original Clip
+   ###                            |             #### Drive Door Body
+     ###             #######################
+      ###            #######################
+       ##            #######################
+   #######################################################
+</PRE>
+
+<P><B>White Noise Problem...?</B><BR>
+In my SWF, I am having some white noise on Deck-B, it's mainly audible when
+the tape is stopped (or even when no tape is inserted) (during playback, the
+music is louder than the noise, so it isn't too annoying although the noise
+is still there).<BR>
+The noise disappers when Deck-B is deactivated (eg. when pressing Play/FF/Rew
+on Deck-A). Aside from the noise problem, my Deck-B produces slightly deeper
+sounds as than playing the same tape in Deck-A (of which, Deck-A tendencially
+sounds better).<BR>
+I am not sure if there's something broken in my SWF, or if that problem
+appears to all SWFs - would be nice to know if it appears in other super
+woofers, too!
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+Mods/Improvements</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+<P><B>AC Power Switch/Power Light</B><BR>
+The original "power" switch in the SWF merely switches the 15V off (or
+the 12V when using batteries), but keeps the transformator powered at 230V,
+so it's permanently wasting a few watts of energy. To the worst, the SWF
+doesn't have a Power LED, so it's easy to forget to switch off even the DC
+part, and so, to waste a good bunch of watts.<BR>
+To fix that problem, I've installed a nice red 230V switch with built-in
+power lamp in the rear-plate.
+
+<P><B>Less messy Wires</B><BR>
+If you want to do any repairs, you'll probably curse the nasty wires. With
+some efforts, the interiors can be made accessible in a more comfortable way:<BR>
+  - add a 6pin plug/socket in the wires that go to the rear-plate<BR>
+  - add a 8pin plug/socket in the wires that go to the front-plate<BR>
+  - replace W10,W11,W12 by longer wires<BR>
+  - add 2 contacts for injecting 12V and GND on the mainboard<BR>
+For testing, it's best to remove the front-plate and rear-plate completely; the
+12V/GND supply voltage can be injected from another external power-supply, and
+audio-output can be tested via headphone socket, so the transformator and
+speakers aren't needed at all.
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+Tape Drives</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+The dual-tape deck is pretty straight ahead, without any ferro/chrome/metal
+detectors (there's only a record-lock detector), without auto-reverse,
+and any without dolby noise reduction, but with Hi-speed dubbing.
+And, most important, it's still having real mechanical Play/Stop switches,
+so it's just fun to be able to actually <I>press</I> the buttons.
+
+<P><B>Motor and Drive Belts</B><BR>
+The dual-deck is having only a single motor shared for both drives, the
+advantage is that it's cheap, and eventually ensuring that both drives are
+spinning at exactly the same speed when copying one tape to another.
+<PRE>
+                                     _______
+                                    |       |
+                                    | Motor |              |
+                      ____Brush____ |_______| ____Brush____|
+      Deck-A Wheel   '     |||          |         \___/
+     ==============--------------------===         |||          Deck-B Wheel
+           ||       Belt to Deck-A     ===---------------------==============
+           ||                           |      Belt to Deck-B        ||
+                                       Axis
+</PRE>
+When replacing the belts, they should be arranged as shown above, ie. Belt-A
+should be closer to the motor body, and Belt-B closer to the end of the axis.
+
+<P><B>Play/Fast Forward/Rewind</B><BR>
+Each deck has a switch that senses when PLAY/FF/REW is pressed. When the
+switch on Deck-A is closed, then the output from Deck-B is muted. A rather
+strange result is that one cannot rewind a tape in Deck-A while playing
+another tape in Deck-B (however, it works vice-versa, rewind in Deck-B, and
+play in Deck-A).
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+Disassembling the Case</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+The case consists of three components: The rear-plate, top-panel, and front.
+
+<P><B>REAR-PLATE</B><BR>
+Can be removed by loosening 6 long and 4 short screws.
+The rear-plate contains the AC socket, the transformator, the battery box,
+and the external antennae. The AC socket also contains a built-in switch that
+activates the battery supply when the AC cable is disconnected.
+
+<P><B>TOP-PANEL</B><BR>
+The top panel isn't attached by any screws nor snap-ins. Once when the
+rear-plate is removed, the top panel can be simply removed by pulling it to
+towards the rear side; there's some soft/sticky glue (no hardenend glue) at
+the front-end of the top panel, but that can be loosened quite easily.
+The top panel contains the main electronics: The tape drivers, the 3 circuit
+boards; cassette, tuner, equalizer, etc.
+
+<P><B>FRONT-PANEL</B><BR>
+Consists of the front plate (and side/bottom walls), and contains the
+speakers: One set of large/tiny speakers (on each side, left and right),
+one single bass speaker (in the center), and a microphone (as part of the
+right speaker set, ie. underneath of the equalizers).
+
+<P><B>CHANNEL SELECTION MECHANICS</B><BR>
+The channel selector unit consists of a large black plastic block with
+two large black wheels, located between the Tuner board and Equalizer board.
+Underneath of the tuner board is a white lever with notches at both ends of
+the lever, which rest on plastic edges inside of the horizontally arranged
+wheel.
+When removing and re-installing the tuner board: First remove BOTH the tuner
+board and channel selector mechanics. Then fit the lever on the wheel, and
+attach the tuner board to the mechanics with two screws. Then, attach the
+channel mechanics on the equalizer board with another two screws, which can
+be reached through holes in the tuner board.
+
+<P><B>Drive Doors</B><BR>
+Can be removed easily. Push the two vertical clips inwards that stop the
+opened door after reaching the 45 degree positions. The door can be now
+lifted up to a 90 degree position, and there it can be removed.
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+CIRCUIT BOARDS</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+The three circuit boards are:
+
+<P><B>Mainboard (CR-X100-02)</B><BR>
+Contains the AC-to-DC voltage converter, the audio amplifiers, the tape drive
+electronics, and the AUX cinch sockets.
+
+<P><B>Tuner-board (CR-X100-01)</B><BR>
+Contains the tuner, and most important: The Tape/Tuner/AUX select switch.
+
+<P><B>Equalizer-board (CR-X100-03)</B><BR>
+Contains the equalizer, volume regulator, FMS-Switch and FMS-Led, bass-boost
+switch, and the infamous power switch (which is barely a energy wasting
+"standby" switch, since it doesn't disconnect the transformator). There's
+also a tiny daughterboard with the headphone socket and two resistors on it.
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+WIRES</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+The circuit boards (and speakers and rear-plate) are interconnected with a
+mess of about 50 single wires (rather than using a handful of flat-cables), to
+the worst, the wires are soldered directly from one board to another (without
+any plugs/sockets).
+
+<PRE>
+<B>Summary of all Wires</B>
+  W1  white   3pin                    (tuner to equalizer) (CURR-INPUT for OUTPUT)
+  W2  black   3pin      (near supply) (mainboard to tuner) (TAPE for OUTPUT)
+  W3  gray    3pin      (near cinch)  (mainboard to tuner) (AUX-IN for OUTPUT)
+  W4  black   3pin      (near supply) (tuner to mainboard) (CURR-INPUT for RECORD)
+  W5  brown   3pin      (near motor)  (mainboard to tuner) (TAPE for RECORD)
+  W6  brown   3pin      (near cinch)  (mainboard to tuner) (AUX-IN for RECORD)
+  W7  white   3pin      (main-center) (equalizer to mainboard)
+  W8  N/A
+  W9  N/A
+  W10 orange  1pin stereo LED (tuner to equalizer board)    (replace by longer wire)
+  W11 brown   1pin stereo switch (tuner to equalizer board) (replace by longer wire)
+  W12 red     1pin stereo switch (tuner to equalizer board) (replace by longer wire)
+  W13 white   2pin     (mainboard to equalizer board) (mono/beatcut?)
+  W14 yellow  1pin BASS-SPEAKER minus (mainboard to boost-switch)
+  W15 green   1pin BASS-SPEAKER plus  (mainboard to speaker)
+  W16 black   1pin BASS-SPEAKER minus (boost-switch to speaker)
+  W17 blue    1pin RIGHT              (mainboard to equalizer)
+  W18 white   1pin LEFT               (mainboard to equalizer)
+  W19 black   1pin                    (mainboard to equalizer)
+  W20 orange  1pin +6.8V (permanent)  (near supply) (mainboard to equalizer)
+  W21 black   1pin GND (near MIC)     (mainboard to equalizer)
+  W22 brown   1pin +6.8V (when CAS on)(near supply) (tuner to mainboard)
+  W23 orange  1pin +6.8V (permanent)  (near supply) (mainboard to tuner)
+  W24 N/A
+  W25 black   1pin GND (near W20/W23) (mainboard to tuner)
+  W26 yellow  1pin  cas speed...      (mainboard-W26 to tuner-W27)
+  W27 white   1pin                    (mainboard-W27 to tuner-W26)
+  W28 green   1pin  dubbing (equalizer board to tuner)
+  W29 magenta 1pin  dubbing (equalizer board to tuner)
+  W30 magenta 1pin   LEFT-SPEAKER plus   (equalizer to speaker)
+  W31 blue    1pin   RIGHT-SPEAKER plus  (equalizer to speaker)
+  W32 black   1pin   ONE-SPEAKER minus   (equalizer to speaker)
+  W33 black   1pin   OTHER-SPEAKER minus (equalizer to speaker)
+  W34 N/A
+  W35 N/A
+  W36 N/A
+  W37 yellow  1pin DECK-B Sense      (mainboard to Play/FF/Rew Switch B)
+  W38 yellow  1pin DECK-B Sense      (mainboard to Play/FF/Rew Switch B)
+  W39 magenta 1pin DECK-A Sense      (mainboard to Play/FF/Rew Switch A)
+  W40 magenta 1pin DECK-A Sense      (mainboard to Play/FF/Rew Switch A)
+  W41 orange  1pin MOTOR-Pin-B       (mainboard to tape motor)
+  W42 red     1pin MOTOR-Pin-A       (mainboard to tape motor)
+  W43 black   2pin MOTOR +/- Pins    (mainboard to tape motor)
+  W44 gray    2pin DECK-B Erase Head (mainboard to drive head)
+  W45 gray    3pin DECK-B Play/Rec R (mainboard to drive head) (red=play, white=record)
+  W46 white   3pin DECK-B Play/Rec L (mainboard to drive head) (red=play, white=record)
+  W47 brown   3pin DECK-A Play Head  (mainboard to drive head)
+  MIC gray    2pin Microphone (mainboard to front-plate)
+  J1  magenta 1pin          (mainboard to mainboard) (W40 to elsewhere)
+  EXT.ANT red 1pin Antennae (tuner to rear-plate)   (replace by longer wire)
+  NONAME      1pin brown (near W43)  (mainboard to Power Switch)
+  NONAME GND  1pin black (near ...)  (mainboard to tape drive body)
+  NONAME GND  1pin black (near ...)  (mainboard to cooling plate)
+  ~      REAR.red   12VAC 2x1pin to AC-DC converter
+  NONAME REAR.white 15VDC 1pin from AC-DC converter
+  NONAME REAR.brown to Power Switch (15VDC; or 12VDC when using batteries)
+  NONAME REAR.black GND   (Battery Minus)
+  NONAME REAR.red   12VDC (Battery Plus)
+</PRE>
+
+<P><B>Mis-named wires</B><BR>
+The L/R markings for the two AUX-IN wires (W3 and W6) are wrong (left and right
+are vice-versa). W26 and W27 are somehow connected as crossed wires (ie. W26
+on the mainboard connects to W27 on the tuner board, and W27 to W26).
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+CHIPSET</FONT></TD></TR></TABLE><BR>
+<!--------------------------------------------------------------->
+
+<PRE>
+<P><B>Chipset Summary</B>
+  IC-1  N/A
+  IC-2  1x8 pins (LA3160 9A8) (Sanyo)         (Deck-A Play)
+  IC-3  2x7 pins (Toshiba 8849U TA7658P M'SIA)(Deck-B Play/Rec)
+  IC-4  1x12pins (NEC JAPAN uPC1278H 8808D)   (Left/Right Speakers)
+  IC-5  1x14pins (NEC JAPAN uPC1335V 8843B)   (BASS Speaker)
+  IC-x  2x11pins (AN7025K .864) (Tuner board) (Tuner)
+
+<P><B>IC-2  1x8 pins (LA3160 9A8) 2-Channel Preamplifier For Car Stereo (Deck-A Play)</B>
+  1 CH1 IN   ;via 10uF to W47.L
+  2 CH1 NF
+  3 CH1 OUT
+  4 VCC (recommended 9V, typ 13.2V, max 18V)
+  5 GND      ;(W47.Shield)
+  6 CH2 OUT
+  7 CH2 NF
+  8 CH2 IN   ;via 10uF to W47.R
+
+<P><B>IC-3 - Toshiba TA7658P - Dual Preamplifier for Tape Recorder (Deck-B Play/Rec)</B>
+  1 Power Supply (VCC, min 3V, max 16V) (6V in SWF, permanently on)
+  2 Buffer amplifier output (L)
+  3 Preamplifier output (L)
+  4 NC
+  5 Preamplifier feedback (L)
+  6 Preamplifier input (L)     [right in swf]
+  7 ALC control output (Automatic Level Control)
+  8 Ground (ALC side)
+  9 Preamplifier input (R)
+  10 Preamplifier feedback (R)
+  11 Ground
+  12 Preamplifier output (R)
+  13 Buffer amplifier output (R)
+  14 NC
+Above L/R are as suggested in the TA7658P datasheet
+(in the Super Woofer, L/R are connected vice-versa).
+ALC and Buffer-outputs are Record related (not Play related).
+
+<P><B>IC-4  12pins (NEC JAPAN uPC1278H) (Left/Right Speakers)</B>
+UPC1278H, Dual-Channel Audio Power-Output Amplifier
+  1 GND (IN)
+  2 OUT1
+  3 CAP1
+  4 FILTER.IN
+  5 IN1-
+  6 IN1+
+  7 IN2+
+  8 IN2-
+  9 CAP2
+  10 FILTER.OUT
+  11 OUT2
+  12 GND (OUT)
+
+<P><B>IC-5 NEC JAPAN uPC1335V - Audio Power Amplifier (BASS Speaker)</B>
+  1  Output 1
+  2  Boot Strap 1
+  3  Compensation 1
+  4  Input 1
+  5  NFB 1
+  6  GND (Input)
+  7  Filter
+  8  Input 2
+  9  NFB 2
+  10 Boot Strap 2
+  11 Compensation 2
+  12 VCC (MIN 6V, TYP 12V or 15V, MAX 20V) (+15VDC in SWF)
+  13 Output 2
+  14 GND (Output)
+
+<P><B>AN7025K - "AM Tuner/FM-IF + FM MPX"</B>
+  1 AM Mixer Input
+  2 AM Mixer Output
+  3 AM Mixer By-pass
+  4 AM IF Input
+  5 AM AGC
+  6 AM Detector Output
+  7 AM AF Input
+  8 Stereo Indicator
+  9 GND
+  10 MPX Pilot Detector Filter or Mono/stereo switch
+  11 VCO
+  12 MPX Phase Detector Filter or FM/AM switch
+  13 L-Channel Output
+  14 R-Channel Output
+  15 MPX Input
+  16 IF Detector Output
+  17 Quad. detector coil
+  18 VCC (min 1.8V, max 6.6V)
+  19 IF By-pass 1
+  20 IF By-pass 2
+  21 FM IF Input
+  22 AM Local Oscillator
+</PRE>
+
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+Switches, Connectors, Regulators</font></td></tr></table><br>
+<!--------------------------------------------------------------->
+
+<PRE>
+<P><B>Switches</B>
+  S1  tuner UKW/MW switch
+  S?  Tape/AUX/Tuner switch (on tuner board) (see below for details)
+  S3  Play/Record Switch (on mainboard) (see below for details)
+  S4  FM Stereo
+  S5  N/A
+  S6  Dubbing
+  S7  Bass Boost
+  Sv  (inside headphone socket)
+  Sw  (inside AC socket at rear-plate)
+  Sx  15VDC Power Switch
+  Sy  DECK-A Sense W39/W40 (when PLAY/FF/REW pressed)
+  Sz  DECK-B Sense W37/W38 (when PLAY/FF/REW pressed)
+
+<P><B>Regulators</B>
+  VR1  (on tuner board)
+  VR2  Speed LO (on mainboard)
+  VR3  Speed HI (on mainboard)
+  VR4  Volume Left  (on equalizer board)    (A50K) (mono)
+  VR5  Volume Right (on equalizer board)    (A50K) (mono)
+  VR6  Equalizer 10kHz (on equalizer board) (8H0 B100K) (stereo)
+  VR7  Equalizer 3kHz  (on equalizer board) (8H0 B100K) (stereo)
+  VR8  Equalizer 1kHz  (on equalizer board) (8H0 B100K) (stereo)
+  VR9  Equalizer 300Hz (on equalizer board) (8H0 B100K) (stereo)
+  VR10 Equalizer 100Hz (on equalizer board) (8H0 B100K) (stereo)
+
+<P><B>Connectors</B>
+  AC socket (with built-in DC battery switch)
+  headphone socket (with built-in switches, and built-in resistors)
+  AUX cinch inputs (for external CD player, or similar external stuff)
+  Battery Box (eight 1.5V cells) (ie. 12V DC)
+
+<P><B>S3 (Play/Record Switch)</B>
+Consists of 9 simultaneous switching two-position switches.
+Each three pins are a separate two-position switch, with a common middle pin.
+   _______ ______ ______ ________ ________ ________ ________ ________ ________
+  |       :      :      :        :        :        :        :        :        |
+  | 1 2 3 :4 5 6 :7 8 9 :10 11 12:13 14 15:16 17 18:19 20 21:22 23 24:25 26 27|
+  |_______:______:______:________:________:________:________:________:________|
+
+  1   GND    (play)   (not used)
+  2   GND    (common) (low=enable)
+  3   ERASE  (rec)    (erase)
+  ---------
+  4   ..     (play)   (?)
+  5   GND    (common) (?)
+  6   ..     (rec)    (?)
+  ---------
+  7   NC     (play)   (not used)
+  8   NC     (common) (not used)
+  9   NC     (rec)    (not used)
+  ---------
+  10  W46.L  (play)   (deck-b record left)
+  11  GND    (common) (low=mute)
+  12  W46.R  (rec)    (deck-b play left)
+  ---------
+  13  W46.R  (play)   (deck-b play left)
+  14  ..     (common) (?)
+  15  ..     (rec)    (?)
+  ---------
+  16  W45.L  (play)   (deck-b record right)
+  17  GND    (common) (low=mute)
+  18  W45.R  (rec)    (deck-b play right)
+  ---------
+  19  W45.R  (play)   (deck-b play right)
+  20  ..     (common) (?)
+  21  ..     (rec)    (?)
+  ---------
+  22  NC     (play)   (not used)
+  23  GND    (common) (?)
+  24  ..     (rec)    (?)
+  ---------
+  25  ..     (play)   (?)
+  26  ..     (common) (?)
+  27  NC     (rec)    (not used)
+
+<P><B>Input Select Switch (Tuner/AUX/Tape)</B>
+Consists of 6 simultaneous switching three-position switches.
+    _____________________________________________       |
+   |               :              :              |      |
+   | A  B  C     D :E  F  G     H :I  J  K     L |      |
+   | 1  2  3     4 :5  6  7     8 :9 10 11    12 |      |
+   |_______________:______________:______________|      |
+  ______________________________________________________| <--- board edge
+
+   1  W27/W28     (tuner)  (W27, aka W26 at mainboard side)
+   2  W27/W28     (aux)    (W27, aka W26 at mainboard side)
+   3  W26 white   (common) (W26, aka W27 at mainboard side) (cas speed...)
+   4  W29 magenta (tape)
+   -----------------------
+   5              (tuner)
+   6  W3.R  gray  (aux)
+   7  W1.R  white (common)
+   8  W2.R  black (tape)
+   -----------------------
+   9              (tuner)
+   10 W3.L  gray  (aux)
+   11 W1.L  white (common)
+   12 W2.L  black (tape)
+   -----------------------
+   A              (tuner)
+   B  NC          (aux)
+   C  W23  orange (common)    +6.8V (permanent)
+   D  W22  brown  (tape)      +6.8V (when CAS on)
+   -----------------------
+   E              (tuner)
+   F  W6.R        (aux)
+   G  W4.R        (common)
+   H  W5.R        (tape)
+   -----------------------
+   I              (tuner)
+   J  W6.L        (aux)
+   K  W4.L        (common)
+   L  W5.L        (tape)
+
+<P><B>AUX Inputs (Cinch)</B>
+The left/right AUX inputs are connected with voltage dividers like so,
+            Cinch.L                         Cinch.R
+               |                               |
+          +----+----+                     +----+----+
+          |         |                     |         |
+        [47K]     [47K]                 [47K]     [47K]
+          |         |                     |         |
+  W6.L ---+         +--- W3.L     W6.R ---+         +--- W3.R
+          |         |                     |         |
+        [1.5K]    [22K]                 [1.5K]    [22K]
+          |         |                     |         |
+          +----+----+                     +----+----+
+               |                               |
+              GND                             GND
+W6 and W3 are then passed to the Input Select switch.
+Mind that L/R are accidently named R/L on the mainboard.
+
+<P><B>Tuner Left/Right-Output</B>
+       Tuner IC              Tuner IC
+       Pin13 (L)             Pin14 (R)
+          |                     |
+          o                     o
+          | wire                | wire
+          o                     o
+          |__||__GND            |__||__GND
+          |  ||                 |  ||
+          | C34 2A135K          | C33 2A135K
+         +|                    +|
+         === C36               === C35
+         -|  1uF 10V           -|  1uF 10V
+        __|__                 __|__
+       |     |               |     |
+   L10 ~    === C38       L9 ~    === C37
+       |__ __|  182J         |__ __|  182J
+          |                     |
+          |__||__GND            |__||__GND
+          |  ||                 |  ||
+          | C39 2A222K          | C40 2A222K
+        __|__                 __|__
+       |     |               |     |
+  R21 [ ]   [ ] R78     R22 [ ]   [ ] R79
+  150K |__   |  5K6     150K |__   |  5K6
+       |  |  |               |  |  |
+  R35 [ ] |  |          R36 [ ] |  |
+  1K5  |  |  |          1K5  |  |  |
+      GND |  |              GND |  |
+          |  |                  |  |
+   Input Select Switch   Input Select Switch
+
+</PRE>
+<!--------------------------------------------------------------->
+<P><TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><FONT SIZE=+2>&nbsp;
+Notes</font></td></tr></table><br>
+<!--------------------------------------------------------------->
+
+The audio signals are routed somehow like so:
+<P>
+Drive Head ---&gt; Pre-Amp ---&gt; Input Switch ---&gt; Power Amp's ---&gt; Speakers
+<P>
+For some reason, each audio input is passed <I>twice</I> to the Input Switch
+(not sure, maybe one signal is for recording, and the other for output to the
+speakers).<BR>
+For speaker output, there are two separate Power Amplifiers, one for normal
+left/right speakers (and left/right headphone), and one for the Bass speaker
+(used when the Bass Boost switch is on).<BR>
+When overloading the 6.8V supply (when dragging 2 Amperes or so), Q5 begins
+to smoke. 6.8V isn't always that voltage, another day I've measured 7.4V for
+whatever reason.<BR>
+</BODY></HTML>

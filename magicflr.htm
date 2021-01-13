@@ -1,0 +1,273 @@
+<TITLE>Magic Floor</TITLE>
+<HTML><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH=610><TR><TD>
+<FONT SIZE=+0>
+<CENTER>
+MAGIC FLOOR<BR>
+This is a freeware sample for the nocash debuggers and A22i assembler.<BR>
+<!---------------------->
+<IMG SRC="magicflr.gif" WIDTH=240 HEIGHT=62 ALT="Magic Floor / Download"><BR>
+For ZX81, ACE, 2K6, SNES, BSX, NSS, SuperDisc, NES, PC10, GBA, NDS, DSi, and e-Reader<BR>
+Copyright (c) 2002-2016 by Martin Korth<BR>
+<!---------------------->
+<HR>
+In this game, you are a boulder, and yesterday you've<BR>
+discovered a hidden underground hall in your magic cellar! At the first glance it appeared<BR>
+to be just empty, but at closer look it turned out to be having a<BR>
+very funny bewitched floor...                <BR>
+<HR>
+<TABLE><TR><TD WIDTH=40% ALIGN=RIGHT>
+The floor cells are made of four shades of<BR>
+brightness. The magic floor gives you one<BR>
+point when moving from a darker field to a<BR>
+field of next higher brightness, or when<BR>
+moving from the brightest to darkest color.<BR>
+</TD><TD WIDTH=2%>
+</TD><TD WIDTH=40% ALIGN=LEFT>
+Arrow symbols show up to indicate your<BR>
+tracks, you may repeat these moves again,<BR>
+but no further points are given. You can<BR>
+move freely between fields of same<BR>
+brightness. Other moves are not possible.<BR>
+</TD></TR></TABLE>
+<HR>
+Today you've decided to play with your new floor, and to see<BR>
+how many points you can get! Cursor-keys are used to move around, hold down the<BR>
+A-button to jump to a more distant field.<BR>
+<!---------------------->
+<HR>
+<B>AMT630A Version (Mini TFT "car rearview" monitor)</B><BR>
+<TABLE><TR><TD>
+<IMG SRC="magic630.gif" ALT="Magic Floor / AMT630A version" WIDTH=332 HEIGHT=268><BR>
+This is a firmware hack for <A HREF="amt630a.htm">AMT630A</A> based TFT screens, probably the first ever
+homebrew game for a TFT screen, and very most likely the first ever game
+specifically for the undocumented AMT630A hardware.
+The AMT630A video chip contains a 8052 microprocessor with Composite input,
+OSD hardware, TFT output, ADC button input, PWM, timers, with firmware on an
+external SPI FLASH chip.
+The OSD hardware is capable of 16-color graphics (although without hardware
+support for moving sprites, and memory limits are making it difficult to get
+a fullscreen picture; the game tiles are drawn as 24x8pix font, which matches
+best for 24x24pix floor cells).
+The 3-button controls are using Menu to toggle horizontal/vertical direction,
+and tapping/holding Minus+Plus for short/long moves, which is working
+surprisingly well.
+Alongsides, the binary contains complete new firmware replacement, fixing
+several issues from the original Engels firmware (painfully bright backlight,
+annoying gui timeouts, lacking power saving mode, missing C64 compatibility,
+and, more or less fixed: PAL60 support).
+Current version is for 3.5 inch 320x240pix 4:3 screens and 4.3/5.0 inch
+480x272pix 16:9 screens
+(to support other hardware, I would still need firmware dumps from other
+displays).
+<A HREF="amt630a.zip">download amt630a version</A><BR>
+</TD><TD>
+<!---A HREF="magiczx.zip"--->
+<IMG SRC="630ori35.jpg" ALT="Magic Floor / AMT630A version" WIDTH=244 HEIGHT=226><BR>
+<IMG SRC="630side.jpg" ALT="Magic Floor / AMT630A version" WIDTH=200 HEIGHT=222><BR>
+<IMG SRC="630rear.jpg" ALT="Magic Floor / AMT630A version" WIDTH=200 HEIGHT=193>
+<!---/A---><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>GBA, Multiboot, NDS, DSi, and e-Reader versions</B><BR>
+<TABLE><TR><TD>
+<b>The GBA version</b>, dating back to 2002, has been the original incarnation of the
+Magic Floor game, it's working as GBA cartridge, and can be also played via
+'xboo' Multiboot upload. It has been intended to make some small sample source
+code that barely allows to move a sprite...
+which somehow ended up becoming a fairly unique and not too boring game concept,
+despite - or because - of the minimalistic game rules (although, until 2016,
+the GBA version supported only a single fixed map, lacking logic for creating
+different maps and to compute dead ends & maximum number of moves).
+<A HREF="magicflr.zip"><IMG SRC="magicgba.gif" ALT="Magic Floor / original GBA version" WIDTH=251 HEIGHT=187></A><BR>
+<BR>
+<b>The eReader version</b> can be printed as dotcode, and then scanned with
+the GBA eReader. This version is tightly squeezed to 2Kbyte size (the limit
+for a single dotcode; for not exceeding that limit, the instructions are
+meant to be printed on the card, instead of including them in the binary).
+</TD><TD WIDTH=270>
+<A HREF="magicflr.zip"><IMG SRC="magicdsi.gif" ALT="Magic Floor / DSi bootmenu" WIDTH=267 HEIGHT=415></A><BR>
+<b>The DSi version</b> features a fully working DSi cart header, compatible with
+the DSi bootmenu (working when patching the emulated BIOS to support
+unencrypted RSA signatures, and it should also work on real hardware when
+having Nintendo's private key). Also works on NDS.
+</TD></TR></TABLE>
+<A HREF="magicdot.png"><IMG SRC="magicdot.gif" ALT="Magic Floor / dotcode snippet" WIDTH=600 HEIGHT=44></A><BR>
+<!---------------------->
+<HR>
+<B>ZX81 Version</B><BR>
+<TABLE><TR><TD>
+This is just a simple straight ZX81 hires-game, working on any ZX81 with
+16Kbyte hires-compatible RAM expansion (older incompatible expansions
+can be upgraded to hires-support by adding a resistor and two diodes).
+The four floor colors are drawn via dithering.
+Text is drawn via the ZX81 BIOS charset converted to bold form.
+<A HREF="magiczx.zip">download zx/ace version</A><BR>
+</TD><TD>
+<A HREF="magiczx.zip"><IMG SRC="magiczx.gif" ALT="Magic Floor / ZX81 version" WIDTH=332 HEIGHT=240></A><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>Jupiter Ace Version</B><BR>
+<TABLE><TR><TD>
+<A HREF="magiczx.zip"><IMG SRC="magicace.gif" ALT="Magic Floor / Jupiter Ace version" WIDTH=332 HEIGHT=240></A><BR>
+</TD><TD>
+<!---The Jupiter Ace is a home computer designed by ex-sinclair employees. It's
+resembling the ZX81, but uses FORTH instead of BASIC. FORTH is a crazy language,
+intended to be slower and more confusing than assembler. Fortunately it's also
+possible to run normal Z80 code on the thing.--->
+The ACE version has some differences to the ZX81 Magic Floor version:
+The picture is drawn to 1K BG Tile Memory (rather than as 6K Bitmap), the player
+sprite is drawn/moved by manipulating two BG tiles at the player location.
+The sound engine is using some PWM to produce noise and a simple volume
+envelope (it doesn't sound too well though).
+And it's the first-ever directly autostarting ACE file (not using the older
+autostarting trick that required to load a separate commandline file into
+Pad memory).
+<A HREF="magiczx.zip">download zx/ace version</A><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>Atari 2600 Version</B><BR>
+The Atari 2600 video hardware is barely containing enough memory to display a
+half scanline. For displaying bigger pictures one needs to manipulate the video
+registers, carefully timed in sync with the cathode ray beam.
+The game here is using hatched background to simulate four different BG colors,
+and displays &amp; mirrors the arrow symbols to the desired locations. Looks
+simple, but it's more or less scratching the limits of the hardware.
+It's also the first-ever Atari 2600 game with flicker-free 24-column text,
+soft-scrolling, and, well, rotated by 90 degrees, but anyways: it's more text
+than ever seen on the console.
+<A HREF="magic2k6.zip">download atari 2600 version</A><BR>
+<TABLE><TR><TD>
+<A HREF="magic2k6.zip"><IMG SRC="magic2k1.gif" ALT="Magic Floor / Atari 2600 title screen" WIDTH=295 HEIGHT=240></A><BR>
+</TD><TD>
+<A HREF="magic2k6.zip"><IMG SRC="magic2k2.gif" ALT="Magic Floor / Atari 2600 game screen" WIDTH=295 HEIGHT=240></A><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>NES Version</B><BR>
+This version is using a larger cell size of 4x4 tiles
+(to match up with the NES color attribute resolution),
+and it's the first-ever single-chip NES cartridge
+(without any video ROM or video RAM) (instead,
+it's using the console's built-in 2K name table RAM;
+as 1K name table plus 1K CHR RAM).
+<A HREF="magicnes.zip">download nes/pc10 version</A><BR>
+<TABLE><TR><TD>
+<A HREF="magicnes.zip"><IMG SRC="magicnes.gif" ALT="Magic Floor / NES version" WIDTH=266 HEIGHT=266></A><BR>
+</TD><TD>
+<A HREF="nes-sin1.jpg"><IMG SRC="nes-sin1.jpg" ALT="NES nocash single chip PCB, component side" WIDTH=300 HEIGHT=133></A><BR>
+<A HREF="nes-sin2.jpg"><IMG SRC="nes-sin2.jpg" ALT="NES nocash single chip PCB, solder side" WIDTH=300 HEIGHT=133></A><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>Playchoice 10 Version (NES based arcade cabinet)</B><BR>
+<TABLE><TR><TD>
+This is basically same as the NES version, but with some PC10 specific features:
+  It's the first-ever homebrew PC10 game (with working title and instruction
+screen).
+  And the first-ever PC10 game with less than four memory chips (works without
+CHR-ROM, like the NES version, and additionally works without decryption key
+PROM, resulting in only two memory chips: PRG-ROM and INST-ROM).
+  And the first-ever PC10 game that does autostart when money is inserted
+(and displays demo mode otherwise).
+And, it's more or less matched to the glitchy (NES-incompatible) PC10 color palette.
+Works with Single- and Dual-Monitor BIOSes.
+<A HREF="magicnes.zip">download nes/pc10 version</A>
+(wasn't yet tested on real PC10 hardware, but it should be working, hopefully)<BR>
+<A HREF="magicnes.zip"><IMG SRC="magicpck.gif" ALT="Magic Floor / PC10 version, Single Monitor" WIDTH=268 HEIGHT=285></A><BR>
+</TD><TD>
+<A HREF="magicnes.zip"><IMG SRC="magicpch.gif" ALT="Magic Floor / PC10 version, Dual Monitor" WIDTH=266 HEIGHT=507></A><BR>
+</TD></TR></TABLE>
+<BR>
+<!---------------------->
+<HR>
+<B>SNES Version</B><BR>
+Nothing too special here. I just wrote it to get familar with the SNES hardware.
+One slightly special programming trick is that it is producing sounds without
+actually uploading any program code to the sound processor
+(instead, it's uploading byte-pairs directly to the sound I/O ports).
+<A HREF="magicsns.zip">download snes/bsx/nss/cdrom version</A>
+<BR>
+<!---------------------->
+<HR>
+<B>Nintendo Super System Version (SNES based arcade cabinet)</B><BR>
+<TABLE><TR><TD>
+<A HREF="magicnes.zip"><IMG SRC="magicnss.gif" ALT="Magic Floor / BSX Satellite Download Center" WIDTH=267 HEIGHT=250></A><BR>
+</TD><TD>
+This is the first-ever homebrew NSS game. Basically same as the SNES version,
+but with some NSS specific features:
+Skill Mode (game ends via Game Over flag when solving it),
+DIP-Switch support (floor size selection),
+working INST-ROM (with Title and OSD instruction screen).
+And, it's the first-ever NSS game that works without decryption key PROM
+(the PROM is completely bypassed by software; it works without PROM, as well as
+with any PROM with don't care content).
+It's also the first-ever NSS game with automatic Game/Demo-Mode detection
+(with dimmed brightness in demo mode, and autostart in game mode).
+<A HREF="magicsns.zip">download snes/bsx/nss/cdrom version</A>
+</TD><TD>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>Satellaview BSX Version (SNES based satellite receiver with flash carts)</B><BR>
+This is mostly same as the normal SNES version. Special features are a BSX
+specific header (which is different than normal SNES headers), a function for
+returning control to the BSX BIOS (without completely rebooting the BIOS).
+With that features, it could be considered being the first-ever homebrew BSX
+game. It's also the first-ever game that was available as simulated satellite
+download file in a SNES emulator.
+<A HREF="magicsns.zip">download snes/bsx/nss/cdrom version</A><BR>
+<TABLE><TR><TD>
+<A HREF="magicsns.zip"><IMG SRC="magicbsx.gif" ALT="Magic Floor / BSX Satellite Download Center" WIDTH=267 HEIGHT=250></A><BR>
+</TD><TD>
+<A HREF="magicsns.zip"><IMG SRC="magicbs2.gif" ALT="Magic Floor / BSX Version" WIDTH=266 HEIGHT=250></A><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>Sony Super Disc SFX-100 CDROM Version (playstation prototype)</B><BR>
+Also mostly same as the normal SNES version. Special features consist of the
+Super Disc volume descriptor, a custom bootsector for loading the actual game,
+some useless SRAM grafitti, and a reset option for loading a different disc.
+And, this is the first-ever game being released for the Super Disc console.
+<A HREF="magicsns.zip">download snes/bsx/nss/cdrom version</A><BR>
+<TABLE><TR><TD>
+<A HREF="magicsns.zip"><IMG SRC="magiccd1.gif" ALT="Magic Floor / CDROM Loading Screen" WIDTH=267 HEIGHT=250></A><BR>
+</TD><TD>
+<A HREF="magicsns.zip"><IMG SRC="magiccd2.gif" ALT="Magic Floor / CDROM Game Menu" WIDTH=267 HEIGHT=250></A><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<B>Gameboy Version - Libbet the Boulder Girl by tepples</B><BR>
+This is the first ever Magic Floor port made by somebody else. After it almost
+became a running joke that I am porting the game to each and every system - now
+other people are starting to do it, too!<BR>
+For the gameboy, tepples has added a couple of details
+that make the game more beautiful: Animated boulder sprites,
+slightly altered the story, demo mode,
+and doors to next room that open up when solving 90% of the current floor.
+<A HREF="http://forums.nesdev.com/viewtopic.php?f=20&t=17932">download on nesdev</A>
+<TABLE bgcolor="#808080"><TR><TD>
+<IMG SRC="libbet1.gif" ALT="Magic Floor / gameboy version" WIDTH=160 HEIGHT=144><BR>
+</TD><TD>
+<IMG SRC="libbet2.gif" ALT="Magic Floor / gameboy demo" WIDTH=160 HEIGHT=144><BR>
+</TD></TR></TABLE>
+<!---------------------->
+<HR>
+<A HREF="magicflr.zip">download gba/multiboot/nds/dsi/e-reader version</A><BR>
+<A HREF="magicsns.zip">download snes/bsx/nss/cdrom version</A><BR>
+<A HREF="magicnes.zip">download nes/pc10 version</A><BR>
+<A HREF="magic2k6.zip">download atari 2600 version</A><BR>
+<A HREF="magiczx.zip">download zx/ace version</A><BR>
+<A HREF="amt630a.zip">download amt630a version</A><BR>
+<A HREF="http://forums.nesdev.com/viewtopic.php?f=20&t=17932">download gameboy version on nesdev</A><BR>
+All game versions are also working in <A HREF="index.htm">no$xxx</A> emulators,
+all versions (except ace/pc10) are tested on real hardware.<BR>
+<A HREF="donate.htm">donate</A><BR>
+<A HREF="index.htm">home</A>
+<!---------------------->
+</FONT>
+</TD></TR></TABLE>
+</BODY></HTML>

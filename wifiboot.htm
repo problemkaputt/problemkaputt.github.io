@@ -1,0 +1,58 @@
+Wifiboot allows to upload executables to nintendo handhelds (nds/dsi files to
+nds/dsi, and firm files to 3ds), this is most useful for developers, allowing
+to test their code on hardware without flashcarts.<BR>
+Download here: <A HREF="wifiboot.zip">wifiboot</A> (binary and source code)
+<P>
+
+<B>Compatibility</B><BR>
+WPA2 is still working with only 2 of 3 tested access points. When testing it, please let me know if it's working, or not working with your access point(s).
+<P>
+
+<B>Transfer speed</B><BR>
+When uploading the Eragon demo, I am reaching 60-110Kbyte/s with NDS-wifi,
+and 400-600Kbytes/s with DSi-Wifi (depending on the used access point and
+daytime/noise in the neighborhood).<BR>
+The speed isn't perfect yet, but at least the new DSi-Wifi support is ways
+faster than NDS-Wifi (even if NDS would ever reach full 2MBit/s).
+
+Some things that helped to improve the speed were using NDMA
+(for SDIO-to-memory), and DMA for (for memory-to-memory), and WRAM (for the
+packet buffer), and, especially: setting the ARM7_RUNNING flag (else SDIO was
+handled only on vblank IRQs, not on SDIO IRQs, which had frustatingly caused
+more packets to get 'lost' (which did then cause slowdown whenever trying to
+speedup things)).
+Next thing to try would be running ARM7 code in WRAM or VRAM instead of slow
+Main RAM, maybe that will boost the transfer speed a bit more.
+<P>
+
+<B>How to use</B><BR>
+ <TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TD><TR>
+<LI>Configure your access point in DSi System Settings --> Internet -->
+    Advanced Setup (the advanced stuff supports WPA/WPA2).</LI>
+<LI>Load wifiboot.nds (when using unlaunch: either use the built-in wifiboot version, or load a different wfiboot version from SD card).</LI>
+<LI>If you want to use wifiboot more often, best assign a Unlaunch-hotkey to it, or make it the boot default).</LI>
+<LI>On PC side, you can use no$gba --> Utility --> Upload (and set Options -->
+    Other --> Multiboot Port to "Dslink/Wifi"). Or use the dslink.exe
+    commandline tool from devkitpro.</LI>
+<LI>Uploading should work for any nds/dsi homebrews that rely on using only
+    their bootcode blocks (without loading further data from cartridge ROM
+    after booting).</LI>
+ </TR></TD></TABLE>
+<P>
+
+<B>Todo</B><BR>
+Now that WPA/WPA2 are working (including manually handling the EAPOL messages), there's no good reason not to implement WPA for NDS-Wifi, too. The main issue might be making a GUI for entering WPA passwords on NDS, apart from that it should only require some extra tweaking on manually adding the Extended IV and MIC to the WPA packets.
+The DSi would benefit from a GUI, too (system settings are prompting to re-enter the password anytime when switching between WPA and WPA2, which is a bit uncomfortable for testing). Well, and I hope I'll get the transfer a bit faster, and fix the isssue with the non-working access point.
+<P>
+
+<B>Source code</B><BR>
+Copy the .zip contents to no$gba's "stuff" subfolder, then use Utility --> Assemble File --> wifiboot.a22 in no$gba. For use with other assemblers you would probably need to change hex numbers from 1234h to something like 0x1234 or #0x1234. I am wondering if anybody will be able or willing to do such things ; ) if you want to: maybe better wait a while and check back if there are newer updates/bugfixes before porting to source code to other formats.
+Changes to the old NDS-Wifi code are marked "with_nds_wifi" and "with_dsi_wifi" (in wificore.a22). The new DSi-Wifi code is currently mostly located in wifiboot.a22 and wifisdio.a22 (I'll move that to wificore.a22 in future versions).
+<P>
+
+<B>Thanks</B><BR>
+Thanks to Stephen Stair for making the original NDS-Wifi library (dswifi) and to wintermute for the original wifi uploader (dslink).
+<P>
+
+<A HREF="http://forums.nesdev.com/viewtopic.php?f=23&t=18065">forum thread</A> (related to rev-engineering dsi-wifi hardware)
+<P>

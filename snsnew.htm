@@ -1,0 +1,174 @@
+no$sns release notes - <A HREF="sns.htm">back to no$sns page</A><P>
+<PRE>
+<B>21 Mar 2016 - no$sns v1.6</B>
+* snes-cd: emulates snes-cd (requires SFX-100.BIN bios rom-image in BIOS folder)
+  (supports .iso 920h bytes/sector or single track .cue/.bin 800h bytes/sector)
+  (supports .iso with xa-adpcm and cd-da, .iso is without toc/track info though)
+* snes-cd: magic floor snes-cd version - first ever snes-cd game released ever
+* snes-cd: logs mechacon commands in debug message window
+* help: added complete sfx-100 snes-cd specs (io, memory, bios, discs, etc.)
+* help: added nintendo power flashcart details (many thanks to skaman and sanni)
+* snapshots: added snapshot (savestate) feature, should work with most mappers
+* nss/help: added workaround for DSP1 issues (thanks DogP) and CIC notes
+* nss/help: added several details and CN4/CN5 pinouts (thanks DogP)
+* help: added note on 3D glasses for Jim Power (pulfrich; dark/clear glasses)
+* help: added more X-Band details (sega-source-based io map, bios functions)
+* st018/speedup: switches ARM to pseudo-halt-state when arm-mainloop has no data
+* st018/cartloader: allocates ST018 memory and loads 160K ST018.BIN (128K+32K)
+* st018/emu: emulates st018 memory/io, imported ARM cpu engine (from no$gba)
+* st018/help: added ARM cpu specs, and more details on ST018 memory/io/cmd's
+* st018/disass: added ARM disassembler, getpc/setpc, 32bit valatcur, etc.
+* sound: fixed max_mixer_buf_siz for PAL games (needs bigger buffer than NTSC)
+* debug: updates data window during run (eventually allows to view RAM changes)
+* debug: added Alt+A animate to all no$xxx emus (repeated trace; as gmb/gba/psx)
+* debug: tracelog (for main cpu and apu cpu) (enabled in debug message window)
+* debug: tty window scrollbar thumb tweaked to support more than 32767 lines
+* debug: tty window optional buffer limit (1/10/100MB, with/without wrapping)
+* msu1: added msu1 emulation, and removed it after getting accused of nitpicking
+* sa1: implemented pixel-buffer-reading (used by Super Mario RPG upon level-up)
+* sa1: bugfixed 2bpp-bitmap-to-bitplane-conversion and 4bpp-pixel-buffer-write
+* help: added nss cartridge pinouts (thanx to martfrizb and hyarion and dogp)
+* help: DSPn/ST010/S-DD1 clock sources (thanx markfrizb/overload/byuu/s.central)
+* help: fixed timings in memory map (exchanged 2.68 and 3.58MHz) (thanks doppel)
+* help: added notes on using ntsc-controllers on pal-consoles (pinouts chapter)
+* gui: setup uses asia-compatible TabControl instead of unreliable PropertySheet
+
+<B>30 Jul 2013 - no$sns v1.5</B>
+* help: added note on starting multiple hdma's midframe in different scanlines
+* bugfix: mirror SRAM from 700000h to F00000h, but NOT to F08000h (thanks byuu)
+* midframe hdma: init "snes_hdma_not_pause_flgs" during vblank (super ghouls)
+* help: cleaned up memory/dma chapters, added basic LoROM/HiROM mapping chapters
+* emu: added support for rare LoROM games with more than 32K SRAM (eg. Dezaemon)
+* help: added cx4 pinouts (thanks qwertymodo) and cx4 memory map (thanks byuu)
+* commandline: looks in current directory before 'slot' directory (for lidnariq)
+* video/zoom: fullscreen option (toggle via context menu; by right mouse button)
+* video/zoom: software: supports odd ratios, mmx-based horizontal blur/resample
+* video/zoom: opengl: SwapBuffers, SubImage2d, DblBuffer, PixFmtScoring, Speedup
+* gui: created own help engine (instead of microcrap's suicidal windows .hlp)
+* game window: displays current zoom factor in caption (during sizing)
+* game window: optionally square pixels, or real PAL/NTSC pixel aspect ratios
+* game window: allows free sizing (with snapping near N*100% zoom factors)
+* sfcbox: removed dummy OSD font (real SFC-Box character set is dumped now)
+* controls: divides snes-mouse resolution by game-window-zoom-factor
+* icon: simplified snes button/logo icon, at 12x12,16x16,32x32,48x48 pix sizes
+* help/emu: sfcbox: added io-port-mirrors and values for unknown/unused io-bits
+* help/emu: sfcbox: osd character zoom, osd background/outline styles
+* help/emu: sfcbox: cpu hd64180 traps (most) invalid hd64180 opcodes
+* help/emu: gsu mirrors/openbus, gsu multiply speed, r15+irq on stop opcode
+* a22i: added argonaut gsu assembler (via .argonaut and .native/.nocash syntax)
+* emu: avoids break on nested event-handling within hdma (for buggy kof2000)
+* cartloader: clips corrupt sram/xram/flash header values to reasonable sizes
+* cartloader: fixed crash upon missing cx4 bios (thanks epguy35 for bugreport)
+* help: added GSU-1 and GSU-2 pinouts (based on GSU schematics drawn by magno)
+* help: added pinouts for SA-1 chip, BSX-FLASH connector, partial BSX-EXT port
+* help: added MAD-R logic table+more MAD-1 details (thanks SkinnyV for dumping)
+* help/emu: added some new nss details (vsync, mirrored/unused bits)
+* help: added some new xband keyboard details (thanks to Benjamin Eriksson)
+* help/emu: added copy-protected bootlegs (bitswap, constant, and alu/flipflop)
+* help/emu: added super20hab (korean multicart with 20 small nes-port games)
+
+<B>24 Oct 2012 - no$sns v1.4</B>
+* freeware: currently all no$sns versions are free with and without donations
+  still donations would be very welcome - http://nocash.emubase.de/donate.htm
+  (expenses for software development are near zero, but there are some other
+  small expenses; like buying bread and coffee and getting the rent paid)
+* controls: emulates exertainment bicycle (analog gamepad for rpm/calories/etc.)
+* nss: ignores PROM clk-egdes are PROM reset-release time (required for 5 games)
+* nss: improved osd emulation (zoom/scroll/etc based on specs from datasheet)
+* nss: added 5 new keys to nss-keys.zip (now contains keys for all 12 games)
+* nss: fine-tuned osd charset resizing (charset is now dumped; thanks to DogP)
+* magicnss/bsx/flr: cosmetic fixes for shading/dithering of the floor cells
+* magicnss: added more OSD colors & lowercase text, removed unsupp. "$" symbol
+* bugfix: don't mirror SRAM from 700000h to F00000h (especially for 4MB LoROM)
+* debug: vram viewer shows vram tiles (with scrollbar for seeing all memory)
+* debug: debug message window (allows character output via port 21FCh)
+* debug: general-purpose 32bit 21MHz clock cycle counter (read via port 21FCh)
+* a22i/help: fixed some nss-osd punctuation marks in both specs and assembler
+* help: nss: added caution on ignored PROM clk-edges at PROM reset-relase time
+* help: nss: osd specs from M50458 datasheet (thanks to DogP for datasheet)
+* help: nss: added note on INST-ROM pins A13/A14 just wired to VCC (thanks DogP)
+* help: exertainment: data packet transfer specs (rpm,miles,calories,etc.)
+* help: exertainment: rs232 controller specs (thanks to byuu for chipset photo)
+* gui: cursor+shift checks VK_LSHIFT/VK_RSHIFT (win XP doesn't support VK_SHIFT)
+
+<B>14 Aug 2012 - no$sns v1.3</B>
+* controls: auto-disables any joypads that use same port as newly enabled one
+* controls: emulates four twin taps (with multitap; keyboard keys 1..8)
+* controls: emulates barcode battler (paste from clipboard, or manual key-in)
+* controls: emulates miracle piano (keyb only, not the undumped synthesizer)
+* video: added support for directdraw4 and directdraw7 structures
+* emu: emulates NSS (z80, osd, rtc, prom, eeprom, inst-rom, controls, etc)
+* emu: added pachinko controller (via analog joypad y-axis forward)
+* a22i: added directives for generating NSS inst-roms (see magicflr.zip)
+* help: added full nintendo super system (arcade cabinet) (NSS) specs
+* help: added specs on sunsoft pachinko controller, fixed barcode battler specs
+
+<B>28 Apr 2012 - no$sns v1.2</B>
+* emu: fixed APU-BIOS-clone (jump to FFC9) (thanks mic_)
+* emu: fixed World Cup Striker APU wrap RAM:FFBF to ROM:FFC0 (thanks mic_)
+* emu: fixed crash on loading US version of Exhaust Heat2 (thanks Karl-Heinz)
+* emu: fixed spc700 flags upon rcl/rcr opcodes (axelay volume) (creaothceann)
+* emu: fixed NMI (accidently triggered NMI twice in snestest) (creaothceann)
+* emu: draws mode7/bg2 only if extbg=1 (Secret of Mana intro) (creaothceann)
+* emu: emulates voice-kun, plus remote control (but CD player isn't emulated)
+* emu: emulates sfcbox (with complete HD64180/DSP/GSU/OSD/RTC chipset)
+* debug: prevents further apu-code execution (upon events) after breakpoints
+* debug: added hd64180 disassembler (for sfcbox ATROM with BIOS\KROM1.BIN)
+* loader: add support for now-reversed little-endian dsp/seta roms
+* video: matched window-size to PAL/NTSC resolution (239 or 224 lines)
+* video: rendering supports 8bpp,16bpp,24bpp,32bpp (instead 15bpp only)
+* video: faster master-brighness changes (eg. cworld demo, donkey kong country)
+* video: softzoom (instead StretchDIBits) (faster on hires-to-normal view)
+* video: optional draw/stretching via opengl/directdraw (experimental/unstable)
+* controls: emulates 5/8 player modes (multiplay5 aka multitap)
+* controls: supports PC-joystick/gamepads, keyb/button redef for 8 players
+* controls: removed automatic-mouse emulation (was more annoying than useful)
+* controls: Backspace BS-key=Whoosh on notebooks (except XBAND and NTTDATA)
+* controls: F10-key re-enables all sound/video layers (thanks road for idea)
+* xboo: added "TEST" mode (requires jmp 7Exxxxh) (maps CART after short delay)
+* cartlist: added progress-bar and cancel-button to the allcarts.log function
+* help: fixed typo (changed "2130h.Bit6-7" to "Bit4-5") (thanks mic_)
+* help: added note on ST018 being dumped and being ARM cpu
+* help: added note on APU jump to FFC9 and RAM-to-ROM opcode wrap
+* help: added notes on different sgb icd2 chip versions (thanks d4s)
+* help: added some note on EXTBG in Mode7 (and EXTBG garbage in Mode0-6)
+* help: added more or less complete sfcbox specs
+* help: added controller mods chapter (snespad, shift-regs, 1mm pins)
+* help: updated list of hires/interlace and offset-per-tile games (creaothceann)
+* help: updated multitap & superscope game lists (thanks KungFuFurby)
+* tested: donkey kong country PAL on 200MHz pentium: 230% speed at 5 fps
+* tested: donkey kong country PAL on 200MHz pentium: 100% speed at 20 fps
+
+<B>24 Feb 2012 - no$sns v1.1</B>
+* same as no$sns v1.0, but with additional GSU and SA-1 coprocessor emulation
+
+<B>24 Feb 2012 - no$sns v1.0</B>
+* first release
+</PRE><P>
+
+<B>Before release</B><BR>
+My first experience with the SNES has been in 1999, when I received a SNES
+and a SGB, donated from Boris "bs" Schneider for researching SGB-related
+things for my Gameboy emulator.
+Some years later, in November 2006, I digged out that old SNES,
+and actually started working on SNES emulation. The sequential access feature
+of the WRAM chip made it extremly easy to upload test programs to the SNES
+via simple parallel port cable.
+And, at first glance, the 65C816 CPU looked simple: just some subtle
+differences between real 6502, 65C816 in 6502 mode, 65C816 in 8bit mode, and
+65C816 in 16bit modes, so I could just customize my 6502 emulation code...
+Well, that subtle differences summed up, so after soon, I abandoned that idea,
+and decided to write a new 65C816 core (almost) from scratch up.
+The other problem back then has been a frustating lack of PPU/APU documention,
+the existing docs have been extremely incomplete and many sentences sounded
+like incorrect japanese-to-english translations (although, I think they were
+typed-up from Nintendo's official english specs - which makes me wondering
+how western companies ever managed to produce SNES games).
+Anyways, after a handful of months, I gave up, and dropped the no$sns project.
+Finally, in October 2010, I discovered Anomie's great docs, explaining
+everthing including glitches about the PPU/APU in "real" english. This time,
+nothing could stop me, and I continued working full-time until finally
+releasing no$sns - I got a bit trapped by the add-ons, so, after all it took
+until February 2012.
+<BR>
+<A HREF="sns.htm">back to no$sns page</A><P>

@@ -1,0 +1,195 @@
+<HTML><HEAD>
+  <TITLE>No$gba Screenshots</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED editor">
+  <META NAME="Author" CONTENT="Nocash / Martin Korth">
+  <META NAME="Description" CONTENT="No$gba Gameboy Advance Debugger Screenshots">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<!----------------->
+<FONT SIZE=+2><B>No$gba Screenshots</B></FONT>
+<HR><P>
+<!----------------->
+<B>NDS 3D Viewer</B> shows a list of the current frame's geometry commands, and position/color/texture/lighting information for the selected command.<BR>
+<TABLE>
+ <TR><TD><IMG SRC="nds-tv1.gif" WIDTH=578 HEIGHT=430 ALT="Vram Viewer - BG Layer Screens">
+         <BR><B>Red Laser Lines</B> are shown for the polygons of the currently selected begin_vtxs.</TD>
+     <TD><IMG SRC="nds-tv2.gif" WIDTH=578 HEIGHT=430 ALT="Vram Viewer - Tile Memory">
+         <BR><B>Laser Pointer</B> shows a line from the center of the screen to the selected vtx_coordinates.</TD></TR>
+</TABLE><HR><P>
+<!----------------->
+<B>New Nindendo DS I/O Map windows</B> with information about all documented and undocumented ARM9 and ARM7 ports.<BR>
+<TABLE>
+ <TR><TD><IMG SRC="nds-io1.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 1"></TD>
+     <TD><IMG SRC="nds-io2.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 2"></TD></TR>
+ <TR><TD><IMG SRC="nds-io3.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 3"></TD>
+     <TD><IMG SRC="nds-io4.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 4"></TD></TR>
+ <TR><TD><IMG SRC="nds-io5.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 5"></TD>
+     <TD><IMG SRC="nds-io6.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 6"></TD></TR>
+ <TR><TD><IMG SRC="nds-io7.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 7"></TD>
+     <TD><IMG SRC="nds-io8.gif" WIDTH=636 HEIGHT=461 ALT="I/O Map, Page 7"></TD></TR>
+</TABLE><BR>
+<HR><P>
+<!----------------->
+<B>Profiler Window</B> displays number of calls to each procedure, and the
+number of clock cycles being spent in each procedure (optionally including
+cycles being spent in sub-routines). Allows to locate inefficient
+time-consuming procedures and to improve the program.<BR>
+<TABLE>
+ <TR><TD><IMG SRC="gba-pro1.gif" WIDTH=440 HEIGHT=433 ALT="Profiler Tree"></TD>
+     <TD><IMG SRC="gba-pro2.gif" WIDTH=369 HEIGHT=272 ALT="Profiler Path"><BR>
+        <B>Tree</B> shows which procs have called which sub-routines. Sound/blanking DMAs and IRQs appear as root entries.<BR>
+        <B>Path</B> shows current branch of the tree, from entrypoint (top) to current proc (bottom), including any currently executed (nested) interrupt handler(s).<BR>
+        <B>List</B> shows profiling information. By clicking on the column headers the table can be sorted by name, address, cycles, and number of calls.<BR>
+        </TD>
+     <TD><IMG SRC="gba-pro3.gif" WIDTH=440 HEIGHT=446 ALT="Profiler List"></TD></TR>
+</TABLE><BR><HR>
+<!----------------->
+<B>Main Debugscreen</B>
+at medium font size, source code with light blue background, small game
+screen in upper/right, this example uses native disassembler syntax.<BR>
+<TABLE><TR VALIGN=TOP>
+ <TD><IMG SRC="gba-1024.gif" WIDTH=1017 HEIGHT=702 ALT="Debugscreen with Source code"></TD>
+ <TD>
+  <B>Patched "Courier New" Font</B> uses large arrow symbols, and different shapes
+  for "l" (lowercase letter) and "1" (numeric digit).<BR>
+  <IMG SRC="gba-fnt.gif"  WIDTH=220 HEIGHT=165 ALT="Patched Font"><BR>
+  <B>Arrow Symbols</B> indicate jump direction.
+  Forward, Backward, or Call to sub-routine.<BR>
+  <IMG SRC="gba-cond.gif"  WIDTH=220 HEIGHT=86 ALT="Conditionals"><BR>
+  <B>During Tracing</B> the debugger displays the current opcodes condition
+  (true or false), indicating if the opcode is about to be executed or not.<BR>
+  </TD>
+</TR></TABLE><BR><HR>
+<!----------------->
+<B>Game Screen</B> can be freely resized, optionally preserves aspect ratio
+and 'full' pixels.
+<B>Up to four gameboys</B> can be debugged with multiplayer cable emulation.<BR>
+<TABLE><TR VALIGN=TOP>
+ <TD><IMG SRC="gba-scr1.gif" WIDTH=488 HEIGHT=344 ALT="Game Screen - Resized to double size"><BR>
+     Library Data Banks last updated 24 Nov 2150.</TD>
+ <TD><IMG SRC="gba-scr4.gif" WIDTH=509 HEIGHT=365 ALT="Game Screen - Four Player mode"></TD>
+ <TD><IMG SRC="gba-ver.gif"  WIDTH=243 HEIGHT=178 ALT="About Box"><BR>
+  <B>About Box</B> displays version number, homepage, and registration
+  information.<BR>
+  <B>Email address</B> allows <I>registered developers</I> to send constructive
+  feedback, questions, comments, suggestions, and bug reports.
+  </TD>
+</TR></TABLE>
+<BR><HR>
+<!----------------->
+<TABLE>
+ <TR><TD>
+         <B>Using small fonts</B> optionally provides more space for other windows,
+         and works fine at 640x480 pixels screen resolution. This example uses nocash
+         disassembler syntax, which does among others support "0NNNh" numeric format.<BR>
+         <IMG SRC="gba-640x.gif" WIDTH=642 HEIGHT=456 ALT="Small Debugscreen at 640x480 pixel resolution">
+         <B>Built-in Hardware Specifications</B> allow to review important
+         details about registers, memory, and opcodes at any time during
+         debugging (right picture).<BR>
+     </TD>
+     <TD><IMG SRC="gba-spex.gif" WIDTH=609 HEIGHT=566 ALT="Built-in Programming specifications"></TD></TR>
+</TABLE>
+<BR><HR>
+<!----------------->
+<B>GBA I/O Map windows</B> with information about all existing GBA ports.
+Optionally, the six windows can be displayed as a single large window.<BR>
+<TABLE>
+ <TR><TD><IMG SRC="gba-io1.gif" WIDTH=366 HEIGHT=428 ALT="I/O Map, Page 1"></TD>
+     <TD><IMG SRC="gba-io2.gif" WIDTH=366 HEIGHT=428 ALT="I/O Map, Page 2"></TD>
+     <TD><IMG SRC="gba-io3.gif" WIDTH=366 HEIGHT=428 ALT="I/O Map, Page 2"></TD></TR>
+ <TR><TD><IMG SRC="gba-io4.gif" WIDTH=366 HEIGHT=428 ALT="I/O Map, Page 1"></TD>
+     <TD><IMG SRC="gba-io5.gif" WIDTH=366 HEIGHT=428 ALT="I/O Map, Page 2"></TD>
+     <TD><IMG SRC="gba-io6.gif" WIDTH=366 HEIGHT=428 ALT="I/O Map, Page 2"></TD></TR>
+</TABLE><BR>
+<HR><P>
+<!----------------->
+<B>The VRAM Viewer</B> allows to view the various BG layers, Tiles, Objects, and
+other video memory.<BR>
+Moving the mouse arrow on a specific tile or object gives more information.<BR>
+<TABLE>
+ <TR><TD><IMG SRC="gba-tv1.gif" WIDTH=576 HEIGHT=428 ALT="Vram Viewer - BG Layer Screens"></TD>
+     <TD><IMG SRC="gba-tv2.gif" WIDTH=576 HEIGHT=428 ALT="Vram Viewer - Tile Memory"></TD></TR>
+ <TR><TD><IMG SRC="gba-tv3.gif" WIDTH=576 HEIGHT=428 ALT="Vram Viewer - OAM Screen"></TD>
+     <TD><IMG SRC="gba-tv4.gif" WIDTH=576 HEIGHT=428 ALT="Vram Viewer - Palettes"></TD></TR>
+</TABLE><HR><P>
+<!----------------->
+<B>The Setup Screens</B> allow to customize the program.<BR>
+Additionally, further options are found in VRAM Viewer screens,
+Debug and Emulation windows can be freely resized.<BR>
+<TABLE>
+ <TR><TD><IMG SRC="gba-set1.gif" WIDTH=401 HEIGHT=449 ALT="Setup Screen, Page 1"></TD>
+     <TD><IMG SRC="gba-set2.gif" WIDTH=401 HEIGHT=449 ALT="Setup Screen, Page 2"></TD>
+     <TD><IMG SRC="gba-set3.gif" WIDTH=401 HEIGHT=449 ALT="Setup Screen, Page 3"></TD></TR>
+ <TR><TD><IMG SRC="gba-set4.gif" WIDTH=401 HEIGHT=449 ALT="Setup Screen, Page 4"></TD>
+     <TD><IMG SRC="gba-set5.gif" WIDTH=401 HEIGHT=449 ALT="Setup Screen, Page 5"></TD>
+     <TD><IMG SRC="gba-set6.gif" WIDTH=401 HEIGHT=449 ALT="Setup Screen, Page 6"></TD></TR>
+</TABLE><HR><P>
+<!----------------->
+<B>Debug Messages</B> are text strings that can be defined in source code. The debugger resolves
+parameters contained in the message strings.<BR>
+<TABLE><TR>
+ <TD><IMG SRC="gba-dmsg.gif" WIDTH=380 HEIGHT=288 ALT="Debug Message Window"></TD>
+ <TD><IMG SRC="gba-xcp1.gif" WIDTH=261 HEIGHT=144 ALT="Warning Messages..."><BR>
+     <IMG SRC="gba-xcp3.gif" WIDTH=261 HEIGHT=144 ALT="Warning Messages..."></TD>
+ <TD><IMG SRC="gba-xcp4.gif" WIDTH=261 HEIGHT=144 ALT="Warning Messages..."><BR>
+     <IMG SRC="gba-xcp2.gif" WIDTH=261 HEIGHT=144 ALT="Warning Messages..."></TD>
+</TR></TABLE>
+<B>Warning Messages</B> notify the user about invalid or suspicious
+operations. The debuggers code window is automatically moved to the
+fault location.<BR>
+<BR><HR>
+<!----------------->
+<TABLE><TR><TD>
+ <TABLE HEIGHT=412><TR><TD VALIGN=TOP>
+   <B>Xboo Utility Function</B> uses simple parallel port cable connection to
+   upload multiboot files into GBA work RAM, and to write rom-images onto any
+   flashcard in GBA cartridge slot.<BR>
+ </TD></TR><TR><TD>
+   <IMG SRC="gba-xboo.gif" WIDTH=381 HEIGHT=193 ALT="Xboo upload box"></TD>
+ </TD></TR><TR><TD>
+   <B>Highspeed Checksum Mechanism</B> used to detect/skip unchanged flashcard
+   sectors to reduce write/erase times.<BR>
+ </TD></TR><TR><TD VALIGN=BOTTOM>
+   <HR>
+   <B>Lifetime Window</B> for EEPROM and FLASH backup memory - logs number of
+   writes per sector.
+ </TD></TR></TABLE>
+</TD><TD>
+ <IMG SRC="gba-life.gif" WIDTH=455 HEIGHT=412 ALT="Media Lifetime Window">
+</TD></TR></TABLE>
+<BR><HR>
+<!----------------->
+<B>Commercial Orientated Emulators</B> - there are a number of other great GBA
+and DS emulators available to the community for free (ie. to people in western
+industrial nations). As for everybody else: None of them is working
+on your fucked-up old and lame computer (except for Boycott Advance, nice work).
+Also, EloGBA aka PCAdvance aka MappyVM are looking very promising, all three
+versions don't seem to have video and joypad support yet, but the two newer
+versions are already supporting the black backdrop color in Fzero.
+Anyways, the programs are probably pretty cool, I guess it's just me whom
+can't figure out what's going on in the dev-scene :-) well, I guess the dev-scene
+doesn't know what I am talking about either. So, it's just okay.<BR>
+<TABLE><TR>
+ <TD><A HREF="http://www.desmume.com/"><IMG SRC="desmume.gif" WIDTH=320 HEIGHT=110 ALT="DeSmuME"></A><BR>
+     <A HREF="http://www.cyd.liu.se/~micol972/site/gebea/"><IMG SRC="gebea.gif" WIDTH=341 HEIGHT=136 ALT="Gebea"></A><BR>
+
+     <A HREF="http://www.goldroad.co.uk/"><IMG SRC="foolsgba.gif" WIDTH=291 HEIGHT=116 ALT="foolsGBA"></A></TD>
+
+
+ <TD><A HREF="http://dualis.1emu.net/"><IMG SRC="dualis.gif" WIDTH=412 HEIGHT=356 ALT="Dualis"></A></TD>
+ <TD><A HREF="http://vba.ngemu.com/"><IMG SRC="vba.gif" WIDTH=275 HEIGHT=116 ALT="VBA - the BEST gba emulator"></A><BR>
+     <A HREF="http://www.bottledlight.com/"><IMG SRC="mappy.gif" WIDTH=248 HEIGHT=225 ALT="Mappy VM"></A></TD>
+ <TD><A HREF="http://boycottadvance.emuunlim.com/"><IMG SRC="boycotta.gif" WIDTH=248 HEIGHT=206 ALT="BoycottAdvance almost 50% accuracy"></A><BR>
+     <A HREF="http://www.rascalboy.nzone.it/"><IMG SRC="rascalba.gif" WIDTH=228 HEIGHT=116 ALT="RascalBoy Advance"></A></TD>
+</TR></TABLE>
+<TABLE><TR>
+ <TD><A HREF="http://pcadvance.cjb.net/"><IMG SRC="pcadvanc.gif" WIDTH=246 HEIGHT=201 ALT="PC Advance"></A></TD>
+ <TD><A HREF="http://www.akkit.org/sGba/index.html"><IMG SRC="sgba.gif" WIDTH=404 HEIGHT=139 ALT="PC Advance"></A><BR>
+     <A HREF="http://spazioinwind.libero.it/linoma/ideas.html"><IMG SRC="ideas.gif" WIDTH=404 HEIGHT=139 ALT="iDeaS"></A></TD>
+ <TD><A HREF="http://www.lavosspawn.de/elogba/"><IMG SRC="elogba.gif" WIDTH=246 HEIGHT=220 ALT="EloGBA"></A></TD>
+ <TD><A HREF="http://agd.emuunlim.com/"><IMG SRC="agd.gif" WIDTH=354 HEIGHT=116 ALT="AGD"></A></TD>
+</TR></TABLE>
+<BR><HR>
+<!----------------->
+<A HREF="gba.htm">Back to no$gba homepage</A><P>
+</BODY></HTML>
+

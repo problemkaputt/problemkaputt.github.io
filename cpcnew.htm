@@ -1,0 +1,274 @@
+<FONT SIZE=+3>MORE AND FASTER HERE WE COME</FONT>
+<HR>
+<B>Summary</B><BR><FONT SIZE=-1>
+Here are the release notes for all no$cpc versions. I didn't log all news
+for the older versions, but attempted to compile that information as good as
+I could remember it. First, here's the summary - more detailed info follows
+below.</FONT><PRE>
+v1.8  11/00  cpc plus, oversize display, scanline based, a22i/xed interaction..
+v1.7  09/00  digital sound, windows version, automatic keyboard language...
+v1.6  09/98  some small details & bugfixes...
+v1.5  01/98  various details, bugfixes, speedup...
+v1.4  08/97  extra fast protected mode, detailed F10 hw-info screen
+v1.3  08/96  mouse support, dizzy colors, online assembler, exe-format..
+v1.2  03/96  called it 'no$cpc', snapshots, disk copyprotections, multisplits..
+v1.0  11/95  the first 2 months - most things are basically working
+--    09/95  cpc emulator project started
+--    XX/86? my first own computer: got a cpc 6128 from my parents
+
+</PRE><B>Version 1.8 - 2nd November 2000</B>
+<BR><FONT SIZE=-1>
+New in this version are: CPC Plus support, more accurate video emulation,
+and various bugfixes and details. The XED editor and A22i assembler may be
+used as integrated development environment, ie. hitting F9 in the editor will
+automatically assemble the file, copy the resulting binary into a diskimage,
+and automatically start it in the emulator (for the DOS version this requires
+separately downloading XED from my webpage).
+</FONT><PRE>
+
+* cpc plus: 4096 color palette, realizes/freshens palette changes
+* cpc plus: ASIC memory, unlock sequence, relock sequence
+* cpc plus: cartridge LOW and UPPER rom / EMS memory
+* cpc plus: cartridges (CPR files) may include header+data or just clean data
+* cpc plus: ROM image optimize patches (differences to 6128)
+* cpc plus: ROM image rescue patch (kills ugly burnin' rubber menu)
+* cpc plus: ROM image datazones (differences to 6128 and amsdos)
+* cpc plus: hardware sprites, x- and y-magnification, parts offscreen, softswap
+* cpc plus: sound DMA (no idea if it works), sound interrupts
+* cpc plus: raster interrupts, soft scrolling, split facility
+* cpc plus: CRTC Register 0Ch: 8th printer bit, and 32K vram bit?
+* cpc plus: help: cpc plus hardware description
+* cpc plus: no$gmb style color pool for up to 240 different colors on screen
+* cpc plus: recognizes/ignores FDC command 0 (amsdos coldboot vs |cpm conflict)
+* cpc plus: stack initialized at C000 instead 0000 (No Exit doesn't init SP)
+* a22i/copy/edit: supports data exchange with MV/EXT dsks instead no$-dsks only
+* a22i: xed/a22i interaction (lineno, autostart from editor, autoedit errors)
+* a22i: fixed indirect 16bit ix/iy load commands like LD IX,(NNNN)
+* a22i: copies assembled BIN files to BOOTDISK.DSK and autoloads/starts that
+* a22i: autoloads and autostarts assembled cartridge CPR files
+* a22i: assembler directive ".cpr" generates cpc plus cartridge (max 16Kbyte)
+* video: supports multiple vertical-total areas per screen (netherworld)
+* video: optional 360x240 oversize video mode, 256 color 640x200 and 720x240
+* video: new video modes supporting VESA bios/driver and Tseng ET3000/ET4000
+* video: scanline based display redraw mode (slow but more accurate)
+* video: windows version invalidates/redraws screen border only if changed
+* snapshots: new SNA format (v3) includes more details and supports cpc plus
+* snapshots: uses SAVE-dialog (windows), fixed crash when hitting ESC (dos)
+* file popup menu: added eject disk a/b functions
+* setup: separate LK4 option (screen refresh), new LK7 option (bootsector)
+* printer: defaults to new setting (none) - avoids windows NT lock ups
+* rom: reduced 464/664/6128/PLUS system roms from 160K to 70K (cpc-pack.asm)
+* rom: attached 464/664/6128/PLUS system roms as overlay to no$cpc.exe
+* debugger: I/O Map shows state of BDIR/BC1
+* debugger: I/O Map screen updated after run/trace in windows version also
+* filemenu: allows more than 3 extensions/filetypes (DSK,ZIP,ARJ, and new CPR)
+* about: aboutbox in dos version, icon: new amstrad icon (diagonal red line)
+* emudetail: better offgrid interrupt emulation clears bit 5 (thanks ulrich)
+* emudetail: gate array may manually acknowledge crtc interrupt (arnold5.rtf)
+* emudetail: DAA instruction returns 100% correct AF for all 65536 incoming AF
+* emudetail: enabled logic-command trueflags (undoc mask 28h) (shogun loader)
+* emufix: enabled interseg_pipe/reljumps in windows & dos-rmode version (gryzor)
+* emufix: unused keyboard rows (night shade, thanks cesario for bug report)
+* emufix: fixed _@ADJUST_SP with SP=0000 in windows version (guild of thieves)
+* emufix: major bug in _@mov_eintcount_ax macro didn't clear upper bits of eax
+* emufix: refixed outi in 486 dos version (bh was set to zero before bl,[xbx])
+* emufix: repaired fast write char in rmode dos version (symbol after 0, cp/m+)
+* flat32: anal_sticks resets whole 8bit stick_present if absent (stuck 56rtttt)
+* speedup: implemented no$msx boost-method (no delays during disk-io and reset)
+* speedup: megaboost, switches to hispeed mode if more than 5 wrchr per frame
+* speedup: uses spus/spop dummy macros instead push/pop ds/es in flat32 version
+* calmdown: unlimted mhz disaster settings 100% and 50% frames working now
+* internal: no$gmb shared init_path_sub,disksethomedir
+* help: recognizes mouseclicks to place cursor/follow links (dos version)
+* help: new chapter about repairing monitor (brightn/contrast/vhold regulators)
+* help: added chapter about registering, exitmsg/aboutbox realizes reg-key file
+* btw: programmed NO$CART (converts DSK-images to CPR-images, see webpage)
+
+</PRE><B>Version 1.7 - 5th September 2000</B>
+<BR><FONT SIZE=-1>
+After not updating no$cpc for almost two years, and working on my gameboy
+emulator instead, I became pissed off by the gameboy users whom are too cheap
+to pay lousy $5 for that emulator - and turned back to the roots. So here's
+a new no$cpc update, beside for various small details it's now available as
+fully decadent windows version also, and it's now including a digital sound
+engine.
+</FONT><PRE>
+* utility: filecopy should work form CPC to DOS now either (no$cpc DSKs only)
+* keyb: DOS version supports AUTOMATIC keyboard translation (not drdos6 keyb)
+* option: override protection for files that are saved as SAVE"FILENAME.BAS",P
+* help: layout, 128K size, bold, hardware specs, repairing, connectors, etc.
+* sound: beside for old adlib sound also got a fine new digital sound engine
+* operating system ROMs moved to single file NO$CPC.ROM
+  (Content: 464,664,6128,AMSDOS) (as side effect offers better compression)
+* alternate name for FILES.LST could be also NO$CPC.LST
+* recombined MSX and CPC sources:
+    Z80 core, HACK debugger, PSG core, various SETup and other GUI/System things
+  in result, no$cpc news are:
+    windows version, doskey .INP file
+    new FILES.LST format: "Description>Dskname [Runname]"
+- 11 july 00 started with flat32 port / 16 july, 01:20 AM: amstrad basic works!
+* fix: emu restarts at @@backreset instead @@cpuloop (brucelee title/486rmode)
+* debugger can also follow DJNZ instructions via cursor right (as no$msx)
+* DOS shell hotkey (no$gmb like ctrl+O)
+* disassembler: dis2file starts at TOP of codewin, bit/res/set as ONE digit N
+* utility: particulary filecopy (from dos to cpc works okay) (no$cpc DSKs only)
+* filemenu: fixed small glitch, happened in version 1.6 when showing [CPC]
+* f11/f12 keys: new xkey compatibility
+
+</PRE><B>Version 1.6 - 5th September 1998</B>
+<BR><FONT SIZE=-1>
+This has been the last no$cpc version - at least for the next two years.
+I meanwhile spent most of my energies on improving my gameboy emulator, but
+still spent some time on some final details:
+</FONT><PRE>
+* toad security: removed except in dirt versions and added more secure rate 64
+* printer port emulation: fixed script file bug in protected mode version
+* setup: win98 CPU resources option (must be disabled if not supported!!!;-)
+* source: removed all IFDEFs (tasm4 compatibility, but tasm4 is TOO SLOW anyway)
+* no$cpc.exe: compressed 386/486 exefiles to a size less than happy 60KBytes
+* setup: saved to external .cfg file, allows no$cpc.exe to be renamed/compressed
+* hercules: /h on VGA uses B800 instead B000 (compatible to illegal QEMM)
+* no$cpc.zip: eee.bat auto-installs directory-structure if somebody forgot -d
+* speedup: re-defaults to LK=50Hz (makes uninitialized games more secure)
+* speedup: temp-defaulted to LK=60Hz (made uninitialized games faster)
+* speedup: optionally reduced display refresh rates 50% and 20% (if any)
+* combifix: 2x25 lines/diskextract combination fixed (display bug)
+* speedup: optionally fast toad mem refresh (but it is a bit DANGEROUS!)
+* extended disk format: discovered & fixed more differences to mv-format
+* versions: removed non-pmode dirty versions, use pmode if you want fast code
+* CPU: identifies CPU and gives errmess if it's not supported :-)
+* Performance: Optionally shows speed relative to real CPC (no$gmb like)
+* Snapshot: saves filenames for disks in drive a: and b: format as follows:
+   75-81  13 bytes for 'FILENAME.DSK' of drive A terminated by 00
+   82-8E  13 bytes for 'FILENAME.DSK' of drive B terminated by 00
+   an empty string or invalid filename indicates 'disc missing'
+* Filemenu: quicksearch (entering first letters of filename) (code from no$gmb)
+* Filemenu: recognizes additional harddisks, CD-ROMS, etc (from no$gmb/rusty)
+* Internal: source code segment alignment cleared
+* Keyboard: PC keyboard compatibility (code taken from no$gmb)
+
+</PRE><B>Version 1.5 - 19 January 1998</B>
+<PRE>
+* bugfix for hercules display routines in protected mode (hardly really used)
+* bugfix for out block command (bug implemented months ago during speedup)
+* bugfix for block search command (bug noticed and forgetten in former days)
+* bugfix for load snapshot (128K only or something)
+* optimized block transfer command
+* bugfixes are for feud,elevator action,duet (probably some more)
+* files.lst search command does not need pressing 'S' first, not no more
+* hercules bugfixed (scrolling), cga support, ega merely supported in cga mode
+* both herc & cga support delicious true grayscale emulation in 16 color mode
+Previous Version's Date: 27 November 97
+* xtra-fast protected mode version got vcpi (emm386) compatible
+  (this is not in standard version, as stupid windows offers no vcpi)
+* keypad"+" Whoosh button, no delays as long as pressed (very useful for elite)
+* supports DOS Commandline parameters (dsk-name, optional run-name)
+* optimized waitstate emulation so guild of thieves (etc) won't shutdown anymore
+* supports illegal stupid ED-commands (those are generally never used)
+* speedup: if your adlib/sb likes quick delays, you can enable in sound setup
+* supports the senseless extended dsk format (the pawn at ftp.nvg.unit.no)
+* setup option to modify/disable key repeat rate (useful for basic or cpm
+  prompts and for text-adventures in unlimited mhz disaster)
+* fixed debugger bug in pmode versions (F2-breakpoints)
+Also new (according to the August/September release):
+The version released at end of August was speeded up violently - and
+had some new bugs implemented (oops). So here comes a BUG FREE
+release:
+* cpm plus will work yet again
+* the new pmode versions will load snapshots as other versions do
+* cpm 2 will always work yet again
+* RTC timer works again. INT 1C will be automatically used if RTC fails.
+Also, there are some new features (According to August/September):
+* emulation setup contains new 'intelligent flyback' option (which will
+  speedup various games (e.g. zynaps)
+* re-implemented zynaps title background ink flash
+* added 'sticks disabled until button press' option (speedup)
+* hercules HGC display supported
+* removed 286 version (since 286 commands slow down 286 cpu, oops)
+* added two new keyboard drivers (spain, netherlands)
+* added the *PENTIUM* version update.
+
+</PRE><B>Version 1.4 - August 1997</B>
+<BR><FONT SIZE=-1>
+Well, I have been sure that I would have programmed the fastest possible CPU
+emulation worldwide and happily enjoyed that feeling - until I have seen
+Herman Dullinks <I>CPC03</I> emulator. He used the memory banking facility
+of 80386+ CPUs in protected mode, and that made his emulator a good bit faster
+than mine. So I added protected mode support either - and now it's (hopefully)
+the fastest emulation on earth :-)
+</FONT><PRE>
+* extra fast protected mode versions (still not vcpi/emm386 compatible though)
+* invented version numbers (v14 in this case) or at least attempted to do so
+* Special version for trashy Hercules Graphix available (contact me).
+* utility menu: edit file (external edit), assemble file, disassemble to file
+* fullscreen F10 HW-info displays info about all I/O regs
+* fixed-settings screen
+
+</PRE><B>Version 1.3 - August/September 1996</B>
+<BR><FONT SIZE=-1>
+As far as I remember, this is possibly the first public released version
+of no$cpc - uploaded it to the incoming directory of
+ftp://ftp.nvg.unit.no/pub/cpc/, as I still didn't owned an own webpage.
+</FONT><PRE><!---- see also 24.09.96 letter.asc (included copy in no$cpc16.arj)  --->
+* program code exceeds 64K, ported it to EXE format with separate code segments
+* debugger: dizzy colors, menubar, popup menues, mouse control, online assembler
+* simple HW-info screen (crtc, psg, inks only)
+* setup engine with separate emu/debug screens
+* os-shell
+* mouse pause menu, mouse stick emulation, mouse-copy-chr-on-screen
+
+</PRE><B>Version 1.2 - March 1996</B>
+<BR><FONT SIZE=-1>
+Okay, meanwhile I discovered that no$cpc wasn't the first and/or only CPC
+emulator. Added the following things (after recovering from that discovery).
+</FONT><PRE>
+* renamed the program from "cpc EMU-lator" to "No$cpc"
+* more detailed help text, separated into 10 chapters
+* debugger supports standard 50 lines mode (additionally to tseng-only 60 lines)
+* supports snapshots (using MV format either)
+* supports MV-disk format additonally to my own nocash disk format
+* largescr (home/end:anarachy, pgup/dn:solomkey,bionic,tempest,feud,donkey,gothic)
+* 3..5zone vmode split (renegade start,return to oz)
+* 3..5zone color split (elite,buggy boy,super cycle?)
+* keyboard yline readback = 0 bzw. y (barbarian / starstrike,starglider)
+* emulated (barbarian=rnd, commando=b7) or real refresh count (speedlock)
+* disk sector-ID, control marks, secsize, etc. (copy protections)
+* partical read track support (summer games 1, copy prot.)
+* same sec IDs (bob winner, copy prot.)
+* new british & french keyboard drivers
+
+</PRE><B>Version 1.0 - End of November 1995 - The first two months</B>
+<BR><FONT SIZE=-1>
+My first emulator - I didn't even see any other emulator before, and when I
+started to make no$cpc I have been still sure that it'd be mostly impossible
+to emulate all hardware properly - and that it would run at least 100 times
+slower than a real CPC - well, and then it's been a nice discovery that it
+worked quite fine & fast on my 80386-33. The features have been:
+</FONT><PRE>
+* video emulation (VGA only), optionally color or "green monitor"
+* adlib sound: three tone channels and 1 noise channel
+* debugger with breakpoints, borland-style GUI, tracing, datazones
+* F11 setup screen, F12 files.lst menu (allowing 4-character names CPC-NNNN.DSK)
+* basic FOR I=1 TO 20000:NEXT almost as fast as real CPC (tested with 80386-33)
+* 286-16 version exists, but it is not very fast
+* vmode splitting (sorcery, antiriad, hexenkueche, escape from s.c., etc.)
+* color splitting (sorcery,eidolon,mercenary,elite, buggy boy, wizball, etc.)
+* max scan line modifications (buggy boy, live & let die)
+* im_2 (boulder dash)
+* illegals (ix) (many programs)
+* illegals (cb30..7) (eidolon, way of the tiger)
+* stupid illegals (DDCAnnnn, DD00) (topgun) (thrust2 ?)
+* optional real refresh count (speedlock)
+* ldi block detect (many games)
+* adlib sound support
+* joystick support, and keyboard emulated joystick support
+* supports ARJ compressed dsk files (requires arj.exe)
+* german/us keyboard driver
+
+</PRE><B>End of September 1995 - Project Started</B>
+
+<P>
+<TABLE>
+  <TR><TD><A HREF="cpc.htm">  <IMG SRC="nope.gif" WIDTH=36 ALT="BACK"></A></TD><TD><FONT SIZE=+1>Back to emulator page</TD><TR>
+</TABLE>
+

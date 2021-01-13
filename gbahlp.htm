@@ -1,0 +1,916 @@
+<HTML><HEAD>
+  <TITLE>Specifications</TITLE>
+  <META NAME="GENERATOR" CONTENT="nocash XED2HTM converter">
+</HEAD><BODY bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#0033cc" alink="#0033cc">
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="contents"></A><FONT SIZE=+2>&nbsp;Contents</FONT></TD></TR></TABLE><BR>
+<B>No$gba</B><BR>
+<A HREF="#installation">Installation</A><BR>
+<A HREF="#debugging">Debugging</A><BR>
+<BR>
+<B>Tech Info</B><BR>
+Here are programming specs for the GBA hardware, I've been trying to
+keep it both as short as possible, and as complete as possible...<BR>
+<A HREF="gbatek.htm#gbareference">GBA Reference</A><BR>
+<A HREF="gbatek.htm#cpureference">CPU Reference</A><BR>
+<BR>
+<B>Homepage & Contact</B><BR>
+http://www.work.de/nocash/gba.htm - no$gba homepage<BR>
+http://www.work.de/nocash/address.htm - my mailing address<BR>
+for registered users, my email address is found in the no$gba about box.<BR>
+otherwise my email address will be eventually found on the gba webpage,
+depending on the amount of incoming garbage; mail from programmers only,
+please.<BR>
+<BR>
+Constructive feedback, suggestions, and bug reports would be very welcome.<BR>
+<BR>
+<B>Protection of the cutdown version and full version</B><BR>
+<A HREF="#thenogbaprotection">The No$gba Protection</A><BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="debugging"></A><FONT SIZE=+2>&nbsp;Debugging</FONT></TD></TR></TABLE><BR>
+<A HREF="#hotkeysindebugmode">Hotkeys in Debug Mode</A><BR>
+<A HREF="#breakpoints">Breakpoints</A><BR>
+<A HREF="#profilingperformancemonitoring">Profiling & Performance Monitoring</A><BR>
+<A HREF="#debugmessages">Debug Messages</A><BR>
+<A HREF="#symbolicdebuginfo">Symbolic Debug Info</A><BR>
+<A HREF="#thea22iassembler">The A22i Assembler</A><BR>
+<A HREF="#xededitor">XED Editor</A><BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="hotkeysindebugmode"></A><FONT SIZE=+2>&nbsp;Hotkeys in Debug Mode</FONT></TD></TR></TABLE><BR>
+Most debug functions are available via hotkeys and via mouse accessable
+popup boxes. The popup boxes generally also show the corresponding
+hotkey.<BR>
+<BR>
+<TABLE><TR><TD><PRE> Cursor             (*) Move around
+ Cursor Right           Follow (in codewin: map window to jump/call dest adr)
+ Cursor Right           Follow (in stckwin: map codewin to return adr)
+ Cursor Left            Undo follow (if nothing to undo: goto program counter)
+ Page Up/Down       (*) Move around
+ Home               (*) Goto Start or to 0000
+ End                (*) Goto End or to IO-Area (FF40 codewin, FF10 datawin)
+ Ret                (*) Center/Uncenter current line in code window
+ Shift+Cursor           Change Active Window (Code,Data,Stck,Regs)
+ Shift+Cursor       (*) Toggle between Hex- and Ascii-input in data window
+ Tab                (*) Toggle Standard and Symbolic Display in code window
+ Tab                (*) Toggle Lower Window (Data or Break/Watch)
+ Ctrl-B                 Enter Breakpoint Address, Condition
+ Ctrl-N                 Find Next Breakpoint
+ Ctrl-G                 Goto Address (prompts for address) (does not affect pc)
+ Ctrl-E             (*) Toggle Warnings on/off
+ Ctrl-O                 OS Shell (calls DOS, type 'exit' to come back)
+ Ctrl-I                 Inspect (Define Watchpoint address)
+ Ctrl-R                 Reload Cartridge
+ Ctrl-S                 Search (see below! this works a bit strange)
+ Ctrl-C                 Continue Search
+ Ctrl-V            (**) Toggle Screen Size 25/50 lines (DOS version only)
+ Ctrl-D                 Toggle Datazone (see below)
+ Ctrl-A/T/X         (*) Add/Toggle/Remove Machine (up to 12 gameboys at 1 time)
+ Ctrl-L/W               Load/Save Snapshot (RAM, CPU-state and ROM-cartname)
+ Ctrl-Left/Right    (*) Decrease/Increase start address of window by one byte
+ &lt;..&gt;                   Assemble into Memory (input box appears on 1st char)
+ F1                     Help
+ F2                     Toggle Breakpoint at cursor
+ F3                     Trace with calls executed
+ F4                     Run to Cursor
+ F5                     VRAM Viewer (last accessed screen, TAB toggles)
+ F6                     Jump to Cursor (sets programcounter (pc) and rombank)
+ F7                     Trace (Execute one instruction)
+ F8                     Run until current sub-routine returns
+ F9                     Run (until breakpoint or user break)
+ F10                    Hardware Info Screen (splits in 50 lines DOS mode)
+ F11                    Setup Screen (last accessed setup window)
+ F12                    Cartridge Menu (last accessed, filename or files.lst)
+ Scroll Lock            Toggle Datacur follows Codecur (or 16bit reg) on/off
+ Keypad "*"             Reset and Run
+ Keypad "-"         (*) Continue Run (same as F9)
+ ESC                (*) Popup File Menu or close current window/menu
+ Alt-&lt;..&gt;           (*) Popup Menus (eg. Alt-F for File Menu)
+ Alt-A                  Animate (Repeated trace until key pressed)
+ ALT-B                  Place Bookmark
+ ALT-E                  Edit File
+ Alt-X                  Exit No$gba
+ Right Mouse Button (*) DOS: Continue Run (same as F9), Windows: Context Menu
+ Left Mouse Button  (*) Select Window, Place Cursor, Toggle Breakpoint or
+                         CPU-flag, Open Popup Menu, Click Option, etc.
+</TD></TR></TABLE><BR>
+The functions that are marked by (*) are not shown in the popup menues
+of the menu bar. Vice versa, not all functions can be accessed through
+hotkeys, so to be able to access all functions you must use both hotkeys
+and menu bars.<BR>
+<BR>
+See also:<BR>
+<A HREF="#hotkeysinemulationmode">Hotkeys in Emulation Mode</A><BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="hotkeysinemulationmode"></A><FONT SIZE=+2>&nbsp;Hotkeys in Emulation Mode</FONT></TD></TR></TABLE><BR>
+The default keyboard controls for player #1 and player #2 are<BR>
+<TABLE><TR><TD><PRE>  Up        Q          Cursor-Up
+  Down      A          Cursor-Down
+  Left      O          Cursor-Left
+  Right     P          Cursor-Right
+  Button A  Space      Keypad-"0"
+  Button B  Tab        Keypad-"."
+  Select    Left-Ctrl  Keypad-"3"
+  Start     Enter      Keypad-Enter
+  Button L  Left-Alt   L
+  Button R  Right-Alt  R
+</TD></TR></TABLE>In single player mode, both control sets control the same gameboy.<BR>
+<BR>
+The keyboard controls for player #1..#12 can be redefined in setup.<BR>
+Note: The keyboard box in the DOS version wraps to the next page (for
+the next player) when you move the cursor out of the box with the cursor
+keys.<BR>
+<BR>
+The other hotkeys during running emulation are:<BR>
+<TABLE><TR><TD><PRE>  Alt+X                Exit No$gba
+  Esc                  Back to debugger
+  keypad"-" or ^pause  Back to debugger
+  keypad"*"            Reset (Restart Game)
+  keypad"/" or pause   Pause (Context Menu)
+  keypad"+"            Whoosh. Run at max speed as long as key hold down.
+  Shift+F1..F5         Toggle Video Layers BG0..3,OBJ on/off
+  F1..F4               Toggle Sound Channel 1..4 on/off
+  F5..F6               Toggle Sound FIFO A..B on/off
+  F7                   Quickload Snapshot (as 7 looks like L)
+  F8                   Quicksave Snapshot (as 8 looks like S)
+  F11                  Setup (Options)
+  F12                  Cartridge menu
+  both mouse buttons   Back to debugger
+  left mouse button    Pause (menu) (under windows: right mouse button)
+  other button(s)      Joypad emulation (fire/activate)
+  mouse move           Joypad emulation (activated by first button click)
+</TD></TR></TABLE><BR>
+See Also:<BR>
+<A HREF="#hotkeysindebugmode">Hotkeys in Debug Mode</A><BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="breakpoints"></A><FONT SIZE=+2>&nbsp;Breakpoints</FONT></TD></TR></TABLE><BR>
+<B>Normal Breaks (F2-key)</B><BR>
+Normal breakpoints are set (or removed) by moving the code-window cursor
+onto the desired opcode, and then pushing the F2-key. Up to 50
+breakpoints can be defined.<BR>
+<BR>
+<B>Run-to-Cursor (F4-key)</B><BR>
+Hitting F4-key directly starts emulation, and stops when reaching the
+code window cursor. The break address is not memorized, ie. it is used
+only once.<BR>
+<BR>
+<B>Local Conditional Breakpoints</B><BR>
+Press Ctrl-B and define the break by entering "address, condition". The
+emulator will stop when the program counter reaches the address, and
+when the condition is true. The "$" symbol represents the current cursor
+address of code window. Examples:<BR>
+<TABLE><TR><TD><PRE>  $, r0&lt;&gt;0           --&gt; break at cursor position if r0 is non-zero
+  $, r0 & 2          --&gt; break at cursor position if bit 1 of r0 is set
+  $, r0 !& 2         --&gt; break at cursor position if bit 1 of r0 is zero
+  8001234, [r1]=r2   --&gt; break at 8001234 if r1 points at a value equal to r2
+  wrchr              --&gt; break at wrchr (always, no condition, same as F2-key)
+  wrchr, r0=0d       --&gt; break at wrchr if r0 contains 0dh
+  $, [4000006] &gt; A0  --&gt; break at cursor if VCOUNT is greater than 0A0h
+  $, r4 &lt;= r5        --&gt; break at cursor if r4 is less or equal than r5
+  $, [r4] &lt;&gt; [r5]    --&gt; break at cursor if r4 points at other value than r5
+  mainloop, ..5      --&gt; break every 5th time that pc gets to mainloop (timer)
+</TD></TR></TABLE>The conditions are verified BEFORE the instruction is executed.<BR>
+<TABLE><TR><TD><PRE>  Operators:              Operands:          Timer Identifier:
+  ==  =   &lt;   &gt;   &       n   [nn]  r        ..
+  !=  &lt;&gt;  &lt;=  &gt;=  !&      nn  [rr]  rr
+</TD></TR></TABLE>Operators == and != are pseudonyms for = and &lt;&gt;<BR>
+<BR>
+<B>Global Conditional Breakpoints</B><BR>
+Global breaks are working exactly as above local breaks, except that the
+condition is verfied after &lt;each&gt; executed opcode. In the Ctrl+B window,
+enter a condition (without specifying a address). Examples:<BR>
+<TABLE><TR><TD><PRE>  r0 = 0            --&gt; break whenever register r0 becomes zero
+  [4000006]&gt;20      --&gt; break whenever VCOUNT becomes greater than 20h
+</TD></TR></TABLE>The emulator stops only when a condition changes from false to true, ie.
+it does not permanently break after each opcode if the condition stays
+true for a while.<BR>
+<BR>
+<B>Global Memory Write Breaks</B><BR>
+This break-family allows to capture writes to specific memory addresses,
+or memory areas. Membreaks are defined by pressing Ctrl+B, and then
+entering conditions such like:<BR>
+<TABLE><TR><TD><PRE>  [02000100]!             ;stops on any byte/halfword/word write to [2000100h]
+  [02000100]?             ;stops only when writing new/changed data
+  [06000000..06003fff]!   ;stops on any write to first 16Kbytes of VRAM
+  [02000000..02003fff]?   ;stops only when writing new/changed data
+</TD></TR></TABLE>Appending an exclamation mark ("!") will capture ALL writes, appending a
+question mark ("?") captures only writes that are changing the memory
+content (ie. the new data must be different as old data).<BR>
+<BR>
+<B>The Break Window</B><BR>
+The lower left window of the debug screen is shared for Data and
+Breakpoints, use TAB-key in this window to switch between Data and Break
+windows. The Break window lists all defined breakpoints, DEL-key can be
+used to delete a selected breakpoint. When pressing ENTER on a local
+breakpoint, the code window will be moved to the break address, this
+works also for bookmarks (that are non-functional 'dummy' breaks,
+defined by ALT+B in code window).<BR>
+<BR>
+<B>Source Code Breakpoints</B><BR>
+The opcode MOV R11,R11 may be used as source code breakpoint (in both
+THUMB and ARM state). These breaks are working much like normal F2-key
+breakpoints, except that they may be defined directly in source code by
+inserting the above opcode. Because the opcode is not changing any
+registers or flags there will be no conflicts when testing the binary on
+real hardware.<BR>
+Note: Source breaks work only if you have enabled them in no$gba setup.
+To remove a specific source break, move the code-window cursor onto it,
+and hit the DEL-key (or enter NOP in the online assembler).<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="profilingperformancemonitoring"></A><FONT SIZE=+2>&nbsp;Profiling & Performance Monitoring</FONT></TD></TR></TABLE><BR>
+No$gba includes a couple of features for performance monitoring, allowing
+to write faster or smoother code, to free up more CPU time for additional
+effects, or simply to reduce the battery power consumption.<BR>
+<BR>
+<B>Profiling Features</B><BR>
+<A HREF="#clockcyclecomments">Clock Cycle Comments</A><BR>
+<A HREF="#cyclecounters">Cycle Counters</A><BR>
+<BR>
+<B>Related Specifications...</B><BR>
+<A HREF="gbatek.htm#cpuinstructioncycletimes">CPU Instruction Cycle Times</A><BR>
+<A HREF="gbatek.htm#memorymap">Memory Map</A><BR>
+<A HREF="gbatek.htm#systemcontrol">System Control</A><BR>
+<A HREF="gbatek.htm#lcddimensionsandtimings">LCD Dimensions and Timings</A><BR>
+<A HREF="gbatek.htm#bioshaltfunctions">BIOS Halt Functions</A><BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="clockcyclecomments"></A><FONT SIZE=+2>&nbsp;Clock Cycle Comments</FONT></TD></TR></TABLE><BR>
+The normal execution time for one GBA opcode ranges between 1 and 100 (!)
+clock cycles, or more. Unfortunately, opcode execution time depends on
+various of circumstances (bus widths, waitstates, etc.), which is making
+it rather difficult to count cycles by hand, or just to a get feeling for
+efficient GBA code.<BR>
+<BR>
+The no$gba Clock Cycle Comments feature displays the execution time for
+each opcode in disassembler window. Four different view modes (selectable
+in setup) are available:<BR>
+<BR>
+<B>Short Formula, and Detailed Formula</B><BR>
+Short Formula: Displays the Non-sequential, Sequential, and Internal
+cycles (eg. 2N+3S+1I). Detailed Formula: Splits the N and S cycles into
+code and data access (eg. 1N+1S+1ND+2SD+1I, N/S for code, ND/SD for data).<BR>
+<BR>
+<B>Cycles, and Cycles & Sum</B><BR>
+Cycles: Displays the number of clock cycles (by resolving the above
+formula - recursing operand size, opcode and data addresses, and current
+waitstate configuration). Cycles & Sum: Additionally displays the sum of
+all opcodes on screen in a second column (to use that feature, simply
+scroll the first line of interest to topmost screen position).<BR>
+<BR>
+Even though these features are making it much easier to count cycles,
+there are still some restrictions which should be kept in mind:<BR>
+<BR>
+<B>Data access (load/store opcodes) - Important</B><BR>
+Cycles are resolved by current register settings. For example, the
+execution time for "LDR Rd,[Rb]" could be resolved correctly only if Rb is
+currently pointing to the same memory area as when executing that opcode
+(that is valid if the program counter points to the opcode, for stack
+accesses by r13 register it'd be usually always valid).<BR>
+<BR>
+<B>Prefetch</B><BR>
+Game-Pak Prefetch isn't yet understood or supported. If it is enabled in
+WAITCNT register, access to cartridge ROM may take up less cycles as
+displayed in clock cycle comments.<BR>
+<BR>
+<B>Conditional Opcodes</B><BR>
+Conditional opcodes are always assumed to be true (unless if the program
+counter points to the opcode, in that case the actual execution time is
+displayed, ie. 1S if the condition is false).<BR>
+<BR>
+<B>Sums</B><BR>
+The Cycles & Sums features simply adds one execution time to another,
+useful for fragments of code, but of course not aware of loops or skips.<BR>
+<BR>
+<B>Jumps</B><BR>
+Execution time for branch opcodes is incorrectly displayed by using local
+waitstates for local code area (rather than target area). However,
+intersegment jumps (from one memory area to another) are typically
+consisting of a call-return combination (ie. the overall execution time
+would be correct, but the execution times of the call and return opcodes
+would be exchanged).<BR>
+<BR>
+<B>VRAM Waitstates</B><BR>
+VRAM Waitstates are not displayed (the real hardware would occasionally
+add 1 cycle for accesses to video memory).<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="cyclecounters"></A><FONT SIZE=+2>&nbsp;Cycle Counters</FONT></TD></TR></TABLE><BR>
+<B>Execution Time value in Statusbar</B><BR>
+No$gba displays the clock cycles difference between start and stop time in
+status bar when the emulation gets stopped. For example, hitting F3-key to
+execute a "BL draw_frame" opcode would display the execution time of the
+"draw_frame" procedure.<BR>
+Note: That would also include any interrupts or DMAs which may have been
+occured while executing that procedure.<BR>
+<BR>
+<B>User Counter</B><BR>
+The user counter (located in Timers page of I/O map window) is incremented
+during emulation execution and tracing, the counter can be easily reset to
+zero by pushing the reset button which is displayed next to it.<BR>
+<BR>
+<B>Debug Message Counters</B><BR>
+The Debug Message feature includes some special operands (%totalclks%,
+%lastclks%) which allow to write cycle counts to debug message window (or
+into log file). See Debug Messages chapter for details.<BR>
+<BR>
+<B>CPU Load Indicator</B><BR>
+The "Power Gauge" (the red-green bar in debug window) displays the used
+CPU time (assuming that the unused CPU time is properly spend in Halt or
+IntrWait state, which reduces battery power consumption on real hardware).
+The higher it gets, the more CPU time is used.<BR>
+By default, CPU load is re-calculated once per frame (60Hz), this rate can
+be changed in "Other" setup options (useful to prevent flickering with
+game engines that update the picture only once every two or three frames).<BR>
+Note: The same information is also displayed as decimal value, in steps of
+0.1%, in the Timers page of the I/O map window.<BR>
+<BR>
+NB. Cycle counters are 32bit values and will overflow (restart at zero)
+after 4G cycles (256 seconds), which is probably more than enough in most
+cases.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="debugmessages"></A><FONT SIZE=+2>&nbsp;Debug Messages</FONT></TD></TR></TABLE><BR>
+Debug Messages can be defined in source code. When the emulator
+'executes' a message opcode, the message text will be output to the
+debug message window and/or to file DEBUGMSG.TXT (as selected in XCEPT
+setup). Debug Messages will not disturb execution on real hardware (the branch
+opcode just skips the data definition, wastes a few clock cycles though).<BR>
+<BR>
+The message definition format (in THUMB or ARM mode) is as follows:<BR>
+<TABLE><TR><TD><PRE>   mov  r12,r12          ;first ID
+   b    @@continue       ;branch opcode that skips the message data
+   dcw  6464h            ;second ID (ascii 'dd')
+   dcw  0                ;reserved for flags
+   dcb  'Hello'          ;user defined ascii data (max length 120 bytes)
+   dcb  0                ;ending zero (normally not required, see below)
+  .align 4               ;align following code (use align 2 in thumb mode)
+  @@continue:
+</TD></TR></TABLE>The text field is terminated by a zero byte or by the branch
+destination. The zero byte must be separately defined ONLY if your
+assemblers doesn't zero-pad alignment space.<BR>
+<BR>
+The ascii string may contain parameters, defined as %param%.<BR>
+<TABLE><TR><TD><PRE>  r0,r1,r2,...,r15  show register content (displayed as 32bit Hex number)
+  sp,lr,pc          alias for r13,r14,r15
+  scanline          show current scanline number
+  frame             show total number of frames since coldboot
+  totalclks         show total number of clock cycles since coldboot
+  lastclks          show number of cycles since previous lastclks (or zeroclks)
+  zeroclks          resets the 'lastclks' counter
+</TD></TR></TABLE><BR>
+In the no$gba built-in A22i assembler, messages may be defined as:<BR>
+<TABLE><TR><TD><PRE>  .msg 'Hello'
+  .msg 'Source Addr = %r0% ; Dest Addr = %r1% ; Length = %r2%'
+  .msg 'Stack Pointer = %SP%'
+  .msg 'Decompression time: %lastclks% cycles'
+</TD></TR></TABLE>Messages could be defined as macros when using other assemblers. The
+%parameters% are stored in ascii format as-is. The assembler/macro does
+NOT need to interprete and/or adjust the parameters!<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="symbolicdebuginfo"></A><FONT SIZE=+2>&nbsp;Symbolic Debug Info</FONT></TD></TR></TABLE><BR>
+If debug info (.SYM or .ELF files) has been loaded, labels will be
+displayed in disassembled code. And input boxes will recognize labels
+(eg. for Ctrl+G). TAB in code window toggles symbolic display on and
+off. Moving the code windows cursor onto a line with a symbol displays
+the value that hides behind the symbol in the upper left corner of the
+screen (DOS) or in the status bar (Windows).<BR>
+Also, if source-level debug info is present, no$gba allows the user to
+view his/her source code in 'stacked' view mode, ie. disassembled opcodes
+shown below of each source line, this would be important for HLL programs.<BR>
+<BR>
+<B>.ELF Files</B><BR>
+Elf files are binaries, generated by many ARM assemblers and compilers
+(eg. Nintendo Tools, GNU tools). The files are containing the program
+(binary executable), and optionally also a symbol table & further debug
+information (usually in Dwarf2 format, and if present, typically
+containing source-level debug info).<BR>
+Current no$gba version supports loading the binary (game), and the
+symbol table (similiar content as .SYM files, but without additional
+code+data info), and the source-level debug information.<BR>
+<BR>
+There seem to be different interpretations of how to store a binary inside
+of ELF files - as far as I know no$gba is compatible with all of these
+'standards'.<BR>
+<BR>
+<B>.SYM Files</B><BR>
+When not using ELF files, symbolic Information may be stored in file
+&lt;cartname&gt;.SYM in the same directory than &lt;cartname&gt;.GBA. The A22i
+assembler produces ready-for-use SYM files. When using another assembler,
+you may convert any debug information into .SYM format.<BR>
+<BR>
+<B>.SYM Symbolic Information File Format:</B><BR>
+<TABLE><TR><TD><PRE>  ;no$gba symbolic information table example
+  08000000 .arm
+  080000C0 start
+  08000124 mainloop
+  080001EC .thumb
+  080001EC init_video
+  08000210 .arm
+  08000210 irq_handler
+  08000228 jumplist
+  08000228 .dbl:0010
+  08000414 text_array
+  08000414 .asc:0017
+  0800042B .asc:000F
+  0800043A .asc:0012
+  06000000 vram_base
+  ;...
+</TD></TR></TABLE><BR>
+All symbols have to be declared as EIGHT-character string nnnnnnnn
+(hexadecimal memory address, not case sensitive), followed by at least
+one space or TAB and then followed by the symbol name (the name may
+contain any characters except spaces and control codes, names are
+case-sensitive).<BR>
+<BR>
+<B>.SYM Additional Code and Data Information</B><BR>
+Aside from labels, the file may also contain information about 16bit or
+32bt program code areas, and about data zones. This info is stored in
+the same format as normal labels, but by using the following reserved
+"labels":<BR>
+<TABLE><TR><TD><PRE>  .arm          ;following code is in 32bit/ARM format
+  .thumb        ;following code is in 16bit/THUMB format
+  .byt:NNNN     ;next NNNN bytes are 8bit data (dcb lines)
+  .wrd:NNNN     ;next NNNN bytes are 16bit data (dcw lines)
+  .dbl:NNNN     ;next NNNN bytes are 32bit data (dcd lines)
+  .asc:NNNN     ;next NNNN bytes are ascii data (quoted dcb lines)
+  .pool         ;dummy label (indicates that following is literal pool)
+</TD></TR></TABLE>The entries may be mixed with normal label definitions, NNNN is a
+hexadecimal value, it is always counted in BYTES (even when defining
+16/32 bit data fields).<BR>
+<BR>
+There is no need to sort the entries in any way. Empty lines are
+allowed. Lines starting with ";" are ignored as comments. Lines are
+terminated by LF or CRLF or EOF or filesize. The file is terminated by
+EOF or filesize.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="installation"></A><FONT SIZE=+2>&nbsp;Installation</FONT></TD></TR></TABLE><BR>
+<B>Required Hardware</B><BR>
+Miminum requirement would be a 32bit CPU (eg. 80386SX and up). No$gba
+has been programmed on a 66MHz 80486DX2, smaller games (eg. simple 2D
+games, text output) are working relative smoothly at 100% speed on that
+computer. Larger games (eg. 3D games, plasma demos) may require a CPU
+speed of up to 400..500MHz.<BR>
+Emulation performance mainly depends on whether (and how much) the game
+is using the low power Halt/IntrWait GBA bios functions in idle mode, or
+not.<BR>
+<BR>
+<B>Installing No$gba</B><BR>
+Just copy the executable to harddisk, preferably into a new/blank
+folder, below text will refer to this folder as the 'No$gba' folder, you
+may use any other name though. The program will automatically create
+some subdirecties. For example, the Slot directory is the suggested
+location for rom-images.<BR>
+You will eventually also need some additional files - see below!<BR>
+<BR>
+<B>Installing Updates</B><BR>
+Just overwrite the old executable by the newer version. The setup file
+from the older version may be used, any unrecognized options will be set
+to the default value.<BR>
+<BR>
+<B>Uninstalling No$gba</B><BR>
+The program does not infect the windows registry. If you wish to
+uninstall it just delete the 'No$gba' folder and all sub-directories.<BR>
+Of course excluding any important files which you may have stored in
+these directories and which you may want to keep (ie. source code,
+binaries, game positions, and/or your registration key).<BR>
+<BR>
+Optional Files<BR>
+<BR>
+<B>GBA.ROM</B><BR>
+When using any BIOS functions in your program, then you will need a copy
+of the original GBA BIOS (file GBA.ROM, or alternately NO$GBA.ROM, saved
+in the No$gba folder).<BR>
+The Xboo tool on the no$gba webpage includes a function for downloading
+the BIOS from GBA to file (by simple cable connection). Be careful when
+downloading the BIOS from internet, there seems to be a very popular
+BIOS version in the net (possible a very old prototype version), this
+file is not compatible with distributed GBA models - no$gba outputs a
+warning message if using an incorrect or patched BIOS version.<BR>
+No$gba includes a small built-in BIOS which is used if the GBA.ROM file
+is not found. It supports IRQs and SWIs 2-5 (Halt/IntrWait), all other
+BIOS functions aren't actually required (eg. you may use your own
+division procedure rather than the BIOS Div function).<BR>
+<BR>
+<B>PKUNZIP.EXE and/or ARJ.EXE</B><BR>
+These decompression programs are required when loading ARJ or ZIP
+compressed cartridges. The programs must be stored in a directory which
+is part of your 'Path' (ie. a directory which is automatically searched
+by the operating system, if you do not understand this, try using your
+C:\Windows folder). Alternately, decompress the files by hand before
+loading them.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="thenogbaprotection"></A><FONT SIZE=+2>&nbsp;The No$gba Protection</FONT></TD></TR></TABLE><BR>
+<B>Hello to the no$gba protection</B><BR>
+Below describes how the protection stuff works...<BR>
+<BR>
+<B>The protection of the public cutdown/freeware version</B><BR>
+This version is (was) made for hobby programmers, I've tried to keep the
+program as functional as possible (for small games only, but with
+complete debugging features), and to make it useless for crackers &
+gamers:<BR>
+<TABLE><TR><TD><PRE>  1) Cartridge/ROM emulation program code is missing in both versions.
+  2) Sound emulation program code missing in color version.
+  3) Color emulation program code missing in sound version.
+</TD></TR></TABLE>
+Any attempts to upgrade the public cutdown/freeware version into a fully
+functional (or only parts of more functional) version will result in
+discontinuing the free public version completely and forever.<BR>
+(That situation has become true. See you good bye.)<BR>
+<BR>
+<B>The protection of the professional full/commercial version</B><BR>
+This is for developers/companies only. Yes, it is commercial. Yes, I
+call myself nocash. Bet what? I need some money like everybody else. No,
+I don't care for luxories.<BR>
+<TABLE><TR><TD><PRE>  1) The program is shipped in form of an encrypted data file.
+  2) The data file is completely useless without decryption program.
+  3) The decrypter translates the data file into exe file.
+  4) The program will not work without registration key file.
+  5) The key contains user name, user number, checksum etc.
+  6) The key also contains emulation-data that is used by the program.
+  7) The user name/number are stored at various locations in executable.
+  8) That is parts of as clean ascii, but mostly encrypted text/numbers.
+  9) The fullversion costs $X000 US, it is not available to gamers.
+  10) That provides that only a few people will get hold of it.
+  11) A password is required to install the program on a new computer.
+</TD></TR></TABLE>If a fullversion and/or registration key and/or decryption program should
+leak from a company into public, that company will not receive any further
+updates.<BR>
+<BR>
+The freeware version is (was) actually used and appreciated by some hobby
+coders, if you crack & kill the program, some gamers will maybe kiss
+your ass, the more serious user won't.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="xededitor"></A><FONT SIZE=+2>&nbsp;XED Editor</FONT></TD></TR></TABLE><BR>
+<A HREF="#xedabout">XED About</A><BR>
+<A HREF="#xedhotkeys">XED Hotkeys</A><BR>
+<A HREF="#xedassemblerdebuggerinterface">XED Assembler/Debugger Interface</A><BR>
+<A HREF="#xedcommandlinebasedstandaloneversion">XED Commandline based standalone version</A><BR>
+<A HREF="#xedcopyrighthomepage">XED Copyright & Homepage</A><BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="xedabout"></A><FONT SIZE=+2>&nbsp;XED About</FONT></TD></TR></TABLE><BR>
+<TABLE><TR><TD><PRE>  "For normal word processing, as used by university students
+  for example, it would be suitable to buy an older 1GHz computer."
+     - Public Wisdom
+</TD></TR></TABLE><BR>
+Suitable or not, nocash fucks those intellectuals and all their Gigahertz.<BR>
+Text editing works at 4MHz, no matter what everybody else thinks.<BR>
+<BR>
+<B>About XED</B><BR>
+XED is a text editor, the executable is fast and small, and it includes
+comfortable editing functions. It is both intended for standard .TXT
+files (or any other ASCII files, such like .ASM for assembler source
+code). Also, the line-wrapping support (.XED files) can be used for
+authoring stories, specifications, etc. Most of the features are much
+the same as for other text editors, some special functions are pointed
+out below:<BR>
+<BR>
+<B>Block Selection</B><BR>
+XED supports good old quality block mechanisms, allowing to copy/move
+the selection directly to cursor position by Ctrl+K,C/V hotkeys (without
+needing to use paste). For data exchange with other programs or text
+files, the block can be directly written to (or loaded from) file by
+Ctrl+K,R/W. And, mainstream copy/cut/paste functions are supported as
+well, by Ctrl+Ins, Shift+Del, Shift+Ins.<BR>
+Note: The block remains selected even when typing text, and it won't get
+deleted when touching Del-key.<BR>
+<BR>
+<B>Condensed Display Mode</B><BR>
+Condensed mode is activated by "F6,C" key combination. In this mode,
+only lines beginning with colon ":", or (for assembler source code
+files) with semicolon-colon ";:", for example:<BR>
+<TABLE><TR><TD><PRE>  :Chapter IV - Showdown at Snadra Peak
+  ;:---Sound Engine---
+</TD></TR></TABLE>Normal block functions can be used in this mode to Move, Copy, or Delete
+whole 'chapter(s)'. Cursor keys can be used to move the cursor to a
+specific chapter. Pushing Enter or Escape terminates condensed mode.<BR>
+<BR>
+<B>Column Block Mode</B><BR>
+Column mode is activated by "Ctrl+K,N" key combination. In this mode,
+the block selection appears as a rectangular area, allowing to deal with
+tables & columns in text files by using copy/delete, indent/unindent
+block functions.<BR>
+Typing "Ctrl+K,N" again will return to normal block mode (in which any
+lines between begin/end of the block will be selected at full length).<BR>
+<BR>
+<B>Blank Space</B><BR>
+Unlike most other editors, XED allows to move the cursor to any screen
+location, including at horizontal positions after the end of the current
+line. Entering space characters at such locations advances the cursor
+position, but does not actually store space characters in the file.<BR>
+When typing text, spaces are automatically inserted between line-end and
+cursor position. Respectively, ending spaces are automatically deleted
+(eg. assume that the line contains "Hello !", deleting "!" will also
+remove the space character, internally).<BR>
+That is of course all happening behind your back, you won't have to care
+about it - but you can be sure that there'll be no hidden spaces filling
+up disk space.<BR>
+<BR>
+<B>Tabulation Marks / TAB-Key</B><BR>
+The TAB Key advances the cursor to the next higher tabulation location
+(usually in steps of eight columns, counted from leftmost screen border),
+and the appropriate number of spaces is inserted into the file if
+necessary.<BR>
+In overwrite mode (de-/activated by INS Key), the TAB Key simply advances
+the cursor without actually inserting spaces (and without overwriting
+existing text by spaces).<BR>
+<BR>
+<B>Tabulation Marks / CHR(9)</B><BR>
+When enabled in setup (default), TAB marks are automatically expanded into
+appropriate number of spaces (ie. towards next "8-column" position) when
+loading a file.<BR>
+The file is normally saved by using raw SPC characters, without any TABs.
+Optionally, it can be saved by using "best-fill" SPCs and TABs (disabled
+by default), that feature may conflict with third party tools (assemblers,
+compilers, etc). In order to reduce the risk of such problems, best-fill
+is suppressed in quoted lines (by using ' or " or &lt;&gt; quotation marks, eg.
+db 'Hello !').<BR>
+<BR>
+<B>Line Wrapping</B><BR>
+Line wrapping is enabled/disabled by "F5+W" key combination. Wrapping is
+automatically enabled when loading a file with extension ".XED".<BR>
+In the file, wrapped lines are using CR characters as soft linebreaks,
+paragraphs are terminated by normal CR,LF characters. Normal<BR>
+Note: It'd be recommended to convert .XED files into 'standard' formats
+such like .TXT or .HTM before releasing them, but preferably NOT into
+disliked bloated file formats such like .PDF or .DOC.<BR>
+<BR>
+<B>Word Processing</B><BR>
+Aside from the above line-wrapping support, no other 'word processing'
+features are included, the program provides normal 'type writer'
+functions, not more, not less. In particular, any overload such like
+bold or colored text, big and small fonts, bitmaps and different fonts
+are disliked.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="xedhotkeys"></A><FONT SIZE=+2>&nbsp;XED Hotkeys</FONT></TD></TR></TABLE><BR>
+XED recognizes both CP/M Wordstar hotkeys (also used by Borland PC
+compilers), and Norton editor hotkeys (NU.EXE). The "Ctrl+X,Y" style
+hotkeys are wordstar based, particulary including good block functions.
+The F4,X and Alt/Ctrl+X type hotkeys are norton based, particulary very
+useful for forwards/backwards searching.<BR>
+<BR>
+<B>Standard Cursor Keys</B><BR>
+<TABLE><TR><TD><PRE>  Up         Move line up
+  Down       Move line down
+  Left       Move character left
+  Right      Move character right
+  Pgup       Scroll page up / to top of screen
+  Pgdn       Scroll page down / to bottom of screen
+  Ctrl+Pgup  Go to start of file (or Ctrl+Home)
+  Ctrl+Pgdn  Go to end of file (or Ctrl+End)
+  Home       Go to start of line
+  End        Go to end of line
+  Ctrl+Left  Move word left
+  Ctrl+Right Move word right
+  Ins        Toggle Insert/Overwrite mode
+  Del        Delete char below cursor
+  Backspace  Delete char left of cursor
+  Tab        Move to next tabulation mark
+  Enter      New line/paragraph end
+  Esc        Quit (or Alt+X, F3+Q, Ctrl+K+D, Ctrl+K+Q, Ctrl+K+X)
+</TD></TR></TABLE>Note: Pgup/Pgdn are moving the cursor to top/bottom of screen, page
+scrolling takes place only if the cursor was already at that location.<BR>
+<BR>
+<B>Editor Keys</B><BR>
+<TABLE><TR><TD><PRE>  Ctrl+Y     Delete line (or Alt+K)
+  Alt+L      Delete to line end (or Ctrl+Q,Y)
+  Alt+V      Caseflip to line end
+  Ctrl+V     Caseflip from line beginning
+</TD></TR></TABLE><BR>
+<B>Norton Search/Replace Functions</B><BR>
+<TABLE><TR><TD><PRE>  Alt+F      Norton - search/replace, forwards
+  Ctrl+F     Norton - search/replace, backwards
+  Alt+C      Norton - continue search/replace, forwards
+  Ctrl+C     Norton - continue search/replace, backwards
+</TD></TR></TABLE>Search: Type "Alt/Ctrl+F, String, Enter".<BR>
+Search+replace: "Type Alt/Ctrl+F, String1, Alt+F, String2, Enter".<BR>
+Non-case sensitive: Terminate by Escape instead of Enter.<BR>
+<BR>
+<B>Wordstar Search/Replace Functions</B><BR>
+<TABLE><TR><TD><PRE>  Ctrl+Q,F   Wordstar - search
+  Ctrl+Q,A   Wordstar - replace
+  Ctrl+L     Wordstar - continue search/replace
+</TD></TR></TABLE>Search options: B=Backwards, G=Global, N=No query,<BR>
+U=non-casesensitive, W=whole words only, n=n times.<BR>
+<BR>
+<B>Disk Commands</B><BR>
+<TABLE><TR><TD><PRE>  F3,E       Save+exit
+  F3,S       Save (or Ctrl+K,S)
+  F3,N       Edit new file
+  F3,A       Append a file
+</TD></TR></TABLE>See also: Block commands (read/write block).<BR>
+<BR>
+<B>Block Selection</B><BR>
+<TABLE><TR><TD><PRE>  Shift+Cursor  Select block begin..end
+  Ctrl+K,B   Set block begin (or F4,S)
+  Ctrl+K,K   Set block end   (or F4,S)
+  Ctrl+K,H   Remove/hide block markers (or F4,R)
+  F4,L       Mark line including ending CRLF (or Ctrl+K,L)
+  F4,E       Mark line excluding ending CRLF
+  Ctrl+K,T   Mark word
+  Ctrl+K,N   Toggle normal/column blocktype
+</TD></TR></TABLE><BR>
+<B>Clipboard Commands</B><BR>
+<TABLE><TR><TD><PRE>  Shift+Ins  Paste from Clipboard
+  Shift+Del  Cut to Clipboard
+  Ctrl+Ins   Copy to Clipboard
+  Ctrl+Del   Delete Block
+</TD></TR></TABLE><BR>
+<B>Block Commands</B><BR>
+<TABLE><TR><TD><PRE>  Ctrl+K,C   Copy block (or F4,C)
+  Ctrl+K,V   Move block (or F4,M)
+  Ctrl+K,Y   Delete block (or F4,D)
+  Ctrl+K,P   Print block  (or F7,B)
+  Ctrl+Q,B   Find block begin (or F4,F)
+  Ctrl+Q,K   Find block end   (or F4,F)
+  Ctrl+K,R   Read block from disk towards cursor location
+  Ctrl+K,W   Write block to disk
+  Ctrl+K,U   Unindent block (delete one space at begin of each line)
+  Ctrl+K,I   Indent block (insert one space at begin of each line)
+  F5,F       Format block (with actual x-wrap size) (or ;Ctrl+B)
+  F8,A       Add values within column-block
+</TD></TR></TABLE><BR>
+<B>Setup Commands</B><BR>
+<TABLE><TR><TD><PRE>  F11        Setup menu (or F8,S)
+  F5,S       Save editor configuration
+  F5,L       Set line len for word wrap (or Ctrl+O,R)
+  F5,W       Wordwrap on/off (or Ctrl+O,W) (*)
+  F5,I       Auto indent on/off (or Ctrl+O,I)
+  F5,T       Set tab display spacing
+</TD></TR></TABLE>(*) Wrapped lines will be terminated by CR, paragraphs by CRLF.<BR>
+<BR>
+<B>Other</B><BR>
+<TABLE><TR><TD><PRE>  F1         Help
+  F2         Status (displays info about file & currently selected block)
+  F8,M       Make best fill tabs
+  F8,T       Translate all tabs to spaces
+  SrcLock    Freeze cursor when typing text ("useful" for backwards writing)
+  Ctrl+O,C   Center current line
+  Ctrl+K,#   Set marker (#=0..9)
+  Ctrl+Q,#   Move to marker (#=0..9)
+  Ctrl+Q,P   Move to previous pos
+  F6,C       Condensed display mode on/off (*)
+  Ctrl+G     Go to line nnnn (or F6,G) (or commandline switch /l:nnnn)
+</TD></TR></TABLE>(*) only lines starting with ':' or ';:' will be displayed. cursor and block
+commands can be used (e.g. to copy a text-sequence by just marking it's
+headline)<BR>
+<BR>
+<B>Hex-Edit Keys (Binary Files)</B><BR>
+This mode is activated by /b commandline switch, allowing to view and
+modify binary files. Aside from normal cursor keys, the following hotkeys
+are used:<BR>
+<TABLE><TR><TD><PRE>  Tab        Toggle between HEX and ASC mode (or Shift+Left/Right)
+  Ctrl+Arrow Step left/right one full byte (instead one single HEX digit)
+  Ctrl+G     Goto hex-address
+  Ctrl+K,S   Save file (as usually)
+</TD></TR></TABLE><BR>
+<B>Printer Commands</B><BR>
+<TABLE><TR><TD><PRE>  F7,P       Print file
+  F7,B       Print block (or Ctrl+K,P)
+  F7,E       Eject page
+  F7,S       Set page size
+</TD></TR></TABLE>More printer options can be found in setup. Printing was working well
+(at least with my own printer) in older XED versions, but it is probably
+badly bugged (at least untested) for years now.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="xedassemblerdebuggerinterface"></A><FONT SIZE=+2>&nbsp;XED Assembler/Debugger Interface</FONT></TD></TR></TABLE><BR>
+<B>Nocash Debuggers</B><BR>
+The XED editor provides simple but very useful interaction with the
+various nocash debuggers/emulators (no$gba, no$gmb, no$cpc, no$msx,
+no$c64, no$2k6, no$zx81, no$x51).<BR>
+The editor can be launched from inside of the debugger (by Alt+E hotkey,
+by retaining the recently edited line number when re-launching the
+editor).<BR>
+And, when editing assembler source code files, F9-key can used to launch
+the assembler from inside of XED. That is, the file is saved to disk,
+the A22i assembler is started (built-in in all debuggers), and, in case
+of successful assembly, the program is loaded & started in the emulator.
+Otherwise, the assembler displays a list of errors, and the editor is
+moved directly to the source code line number in which the first error
+has occured.<BR>
+<BR>
+<B>16bit DOS debuggers</B><BR>
+The XED editor is included built-in in all nocash windows debuggers, and
+in the no$gba 32bit DOS version only.<BR>
+For use with other nocash 16bit DOS debuggers the XED editor must be
+downloaded separately at http://www.work.de/xed.htm, and must be
+installed in a directory which is included in your PATH statement, and
+XED must be selected as preferred editor in debugger setup.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="xedcommandlinebasedstandaloneversion"></A><FONT SIZE=+2>&nbsp;XED Commandline based standalone version</FONT></TD></TR></TABLE><BR>
+<B>Standalone 16bit DOS version</B><BR>
+This version is written in turbo pascal, nevertheless fast enough to
+work on computer with less than 10MHz. It uses 16bit 8086 code, and
+works with all 80x86 compatible CPUs, including very old XTs.<BR>
+The downside is that it is restricted to Conventional DOS Memory, so
+that the maximum filesize is 640K (actually less, because the program
+and operating system need to use some of that memory).<BR>
+<BR>
+<B>Using the 32bit debugger-built-in version as 32bit standalone editor</B><BR>
+I haven't yet compiled a 32bit standalone version, however, any of the
+no$xxx 32bit debuggers can be used for that purpose. By commandline input:<BR>
+<TABLE><TR><TD><PRE>  no$xxx /x &lt;filename&gt;   Edit text file in standalone mode
+  no$xxx /b &lt;filename&gt;   Edit binary file in standalone hexedit mode
+</TD></TR></TABLE><BR>
+<B>Standalone Commandline Syntax</B><BR>
+Syntax: XED &lt;filename&gt; [/l:&lt;line number&gt;] | /?<BR>
+<TABLE><TR><TD><PRE>  &lt;name&gt;    Filename, optionally d:\path\name.ext
+  /?        Displays commandline help
+  /l:&lt;nnn&gt;  Moves to line number nnn after loading
+</TD></TR></TABLE>The filename does not require to include an extension, the program
+automatically loads the first existing file with any of following
+extensions appended: XED, ASM, ASC, INC, BAT, TXT, HTM, DOC, A22, PAS.<BR>
+<BR>
+<B>Standalone DOS Return Value</B><BR>
+XED returns a three-byte return value after closing the program. This
+data is used when calling XED as external editor from inside of nocash
+DOS debuggers, but it might be also useful for other purposes.<BR>
+Because normal DOS return values are limited to 8bits only, the three
+bytes are written into video RAM at rightmost three character locations
+in first line:<BR>
+<TABLE><TR><TD><PRE> VSEG:77*2  Exit code   (00h=Exit normal, F9h=Exit by F9-key)
+ VSEG:78*2  Line number (Lower 8bits, 1..65536 in total)
+ VSEG:79*2  Line number (Upper 8bits)
+</TD></TR></TABLE>The color attribute for these characters is set to zero (invisible,
+black on black). Use INT 10h/AH=0Fh to determine the current video mode
+(AL AND 7Fh), if it is monochrome (07h) then use VSEG=B000h,
+otherwise VSEG=B800h.<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="xedcopyrighthomepage"></A><FONT SIZE=+2>&nbsp;XED Copyright & Homepage</FONT></TD></TR></TABLE><BR>
+Nocash XED editor.<BR>
+Copyright (C) 1993-2003 by Martin Korth.<BR>
+All rights reserved.<BR>
+<BR>
+<B>XED Homepage</B><BR>
+http://www.work.de/nocash/xed.htm<BR>
+<BR>
+<B>Nocash Homepage</B><BR>
+http://www.work.de/nocash/<BR>
+<BR>
+<BR>
+<BR>
+<TABLE WIDTH=100%><TR bgcolor="#cccccc"><TD><A NAME="thea22iassembler"></A><FONT SIZE=+2>&nbsp;The A22i Assembler</FONT></TD></TR></TABLE><BR>
+<B>Online Assembler</B><BR>
+In the debuggers code window, you can directly enter assembler
+instructions and modify the program code. The assembler input box shows
+up automatically when typing the first character of the new instruction.<BR>
+The most basic purpose would be to overwrite an opcode by typing "NOP",
+but you could also enter any other instruction, such like "ADD R0,R0,4"
+when having debug info (.sym file) loaded, you may also use labels as
+parameters, eg. "B mainloop".<BR>
+Note: Aside from translating machine code instructions, the assembler
+input box can be also used to change the value of CPU registers, by
+typing "r0=12345678", or "sp=3007FF0" for example. For curiosity, it also
+parses simple commands such like: run, reload, help, exit, date, etc.<BR>
+<BR>
+<B>Source Code Assembler</B><BR>
+The assembler can be also used to assemble source code files, by using
+the Assemble File function in Utility menu. This function has been
+mostly implemented for my own pleasure, and because I didn't wanted to
+install thirdparty tools on my computer. It's having some nice features,
+but it's also lacking some possibly important functions (see below).<BR>
+<BR>
+<B>A22i Advantages</B><BR>
+It's easy to use, very fast, produces ready-for-use debug info .sym
+files, it understands official ARM syntax, as well as more reasonable
+cleaned-up syntax, and also different assembler dialects, directives,
+and numeric formats, it can be used directly from inside of the debugger
+(and from inside of the editor), and vice-versa, it's able call the
+editor in case of assembly errors.<BR>
+<BR>
+<B>A22i Disadvantages</B><BR>
+The two major problems are: It isn't supporting any macros. And it's
+having only &lt;very&gt; simple maths support, it'd more or less recognize
+expressions such like "100h*8+end-begin" but it'd completely fail on any
+more complicated ones like "3+(4+5)*100h&lt;&lt;2&1ffh".<BR>
+<BR>
+<B>Possible (Dis-)advantages</B><BR>
+If you are wanting to use linkers, make files, project files, header
+files, command files, resource files, script files, libraries, strip
+commands, and object files - forget about it!<BR>
+A22i translates a source code file into a binary file, not more, not less.<BR>
+<BR>
+For more info about instruction set and directives, see:<BR>
+<A HREF="gbatek.htm#cpureference">CPU Reference</A><BR>
+<A HREF="gbatek.htm#pseudoinstructionsanddirectives">Pseudo Instructions and Directives</A><BR>
+<BR>
+<B>Sample Code</B><BR>
+For a source code example, have a look at the Magic Floor game at the
+no$gba webpage, the package includes the binary, source code, with
+comments, and .sym debug info file.<BR>
+http://www.work.de/nocash/magicflr.htm<BR>
+<BR>
+<BR>
+</BODY></HTML>
+

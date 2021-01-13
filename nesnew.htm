@@ -1,0 +1,74 @@
+no$nes release notes
+<PRE>
+<B>23 Oct 2018 - version 1.2</B>
+- web: created no$project patreon page, https://www.patreon.com/martin_korth
+- mapper 218: updated magic floor (ntsc fix, bigger boulder, smaller floors)
+- mapper 218: ported herve couppe's starfight to nes
+- apu: mutes all sound channels on apu reset
+- a22i: refuses bytes >FFh (eg. important range check for 'mov [nn+x],y')
+- xed editor: fixed scrolling upon backspace in first some lines (thanks yuki)
+- apu: fixed PAL sound frequencies (nes_sound_factor) (thanks Dwedit)
+- debug: vram viewer fixed missing invalidate's on each 2nd obj in oam-screen
+- gui: changed icon (higher contrast, inverse/white plug, 12/16/32/48-pix sizes)
+- fixed intcount on F2/F4 breaks (showing correct scanline in debug status bar)
+- emu/help: added mapper 28 emu/specs (action 53 homebrew X-in-1 multicart's)
+- emu/help: added some MMC5 details (irq,chr_bank_msbs + info on sound/multiply)
+- help: added note on Orb-3D glasses (pulfrich effect with dark/clear glasses)
+- added aspect ratio option (square pixels, or real PAL/NTSC ratios)
+- gui: setup uses asia-compatible TabControl instead of unreliable PropertySheet
+- gui: created own help engine (instead of microcrap's suicidal windows .hlp)
+- added donate button in help dropdown, added uforce in controller summary
+
+<B>30 Sep 2012 - version 1.1</B>
+- a22i: assembler sample source code found in magicnes.zip (on nocash webpage)
+- a22i: assembler includes .pc10_xxx directives for generating PC10 games
+- a22i: assembler supports formulas with brackets, ALU ops and boolean stuff
+- arcade: emulates PC10 with Z80 CPU and either secondary monitor or 4-digit LED
+- arcade: emulates VS Unisystem (ppu/palettes, special lightgun variant, etc.)
+- arcade/hotelbox: rougly emulates famicombox (menu only, without games yet)
+- controllers: support PC gamepads (button config, analog inputs, etc)
+- controllers: optionally emulates 0, 1, 2, 3, 4 joypads (both NES and famicom)
+- controllers: support for about 30 different special controllers and add-ons:
+   - none
+   - auto (by ROM checksum)
+   - two keyboard variants
+   - pointing devices (mouse, trackball)
+   - three lightgun variants (zapper, hypershot, vs-system)
+   - all the paddle variants (old and new famicom versions, and nes version)
+   - oeka kids tablet, power pad dance mat and tap-tap mat
+   - push-buttons (hypershot, party-tap, mahjong controller)
+   - analog controllers (power glove, uforce, pachinko, racermate bicycle)
+   - piano keyboards (miracle, doremikko)
+   - barcode readers (battler and datach)
+   - inflatable controllers (boxing bag, top-rider bike)
+   - storage devices (battle box and turbofile)
+   - arcade/hotelbox (coin inputs, rotating-switch, dip switches, etc.)
+   - multitaps (implied in number of joypads option) (nes and famicom variants)
+- help: full specs on all of the above newly emulated controllers
+- help: full specs on further add-ons (r.o.b., data recorder, 3d glasses)
+- help: full specs on PC10, VS System, FamicomBox
+- gui: file menu: memorizes recent_files, and this or that other new detail
+- fixed battery backed sram saving (uses cartname.sav instead xxxx.sav)
+- debug: always executes illegal opcodes (even when warn-on-bad-stuff enabled)
+- speedup: suppresses freshen_video when rewriting -same- CHR-bank values
+- timing: uses 1024hz mmtime (smoother than 18Hz timer) (more CPU load though)
+- sound: optionally dummy stereo mode (for bugged Win98-Realtek-VIA mono-driver)
+- bugfix: MMC3 TQROM (mapper 119) emulates CHR-ROM/CHR-RAM selection
+- bugfix: MMC3 TLSROM (mapper 118) NT-select by bit7 of CHR-bank numbers
+- bugfix: Tengen RAMBO-1 (thanks scott nash for bugreport, kevtris for specs)
+- emu: cpu emulates all stable undoc opcodes, smaller read-modify I/O handlers
+- help/emu: dummy VRAM fetch on palette reads (stored in Port 2007h latch)
+- emu: emulates corrected MMC1 nametable stuff (required for R.C. Pro-Am PRG1)
+- help: added info on MMC1 E000h/Bit4, corrected MMC1 nametable BLK0/BLK1 info
+- emulation: fine-adjusted PAL cycles per scanline (106.56 instead 106.53)
+- help: corrected PAL clocks (osc/16=1.66MHz=50Hz instead osc/15=1.77MHz=53Hz)
+- help: corrected nocash sram circuit exchanged Q0-3 and D0-3 on 74173
+- help: added "Nocash syntax:" notes to each CPU opcode description
+
+<B>03 June 2005 - version 1.0 - first release</B>
+- emulator, debugger, vram viewer, most mappers, famicom disk system
+- everynes.txt and everynes.htm specs
+
+<B>08 Oct 2004</B>
+- no$nes project started
+</PRE>

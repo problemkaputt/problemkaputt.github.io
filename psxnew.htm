@@ -1,0 +1,499 @@
+<FONT SIZE=+2>12 Aug 2017</FONT> no$psx v2.0 <A HREF="no$psx20.zip">[download]</A><BR>
+<LI>- help: added PAL/NTSC Color Mods chapter (with info for older and newer boards)</LI>
+<LI>- help: namco lightgun added U1 chip pinout & link to schematic (thanks nicolas)</LI>
+<LI>- help: namco lightgun added U2 chip part number (BA7071F aka sync separator)   </LI>
+<LI>- help: scph-1150 notes: need delay, no rumble cfg cmds, different motor ctrl   </LI>
+<LI>- help: scph-1150 notes: field of motion 00,00-FF,FF (unlike scph-1200/scph-110)</LI>
+<LI>- help: added/updated chipset/pinouts for scph-1150,scph-1180,scph-1200,scph-110</LI>
+<LI>- emu/reset/init: forces [104Ah].bit6-style joypad reset (needed for deathball) </LI>
+<LI>- bios clone: bugfixed chdir and findfirst functions (needed for deathball)     </LI>
+<LI>- bios clone: workaround on edge-triggered cdrom irqs (needed for deathball)    </LI>
+<LI>- bios clone: re-ordered cdrom cmd=setloc vs task=setloc (more reliable timing) </LI>
+<LI>- bios clone: forces param fifo clearing (after unsupported vcd/secret cmds)    </LI>
+<LI>- bios clone: implemented screen centering option (formerly wasn't functional)  </LI>
+<LI>- xplorer/help: lots of info on Xplorer db25 protocol, memory map, chipset, etc </LI>
+<LI>- datel/help: some more details on Datel db25 protocol, memory map, chipset, etc</LI>
+<LI>- xplorer/datel/help: added FLASH commands, chip IDs, board detection, etc.     </LI>
+<LI>- help: chipless modchips chapter, with circuits/pinouts for pu-7 thru pm-41(2) </LI>
+<LI>- spu/emu: allows reverb-output with DISABLED reverb-writes (raw pcm playback)  </LI>
+<LI>- spu/emu: supports MUTE flag from SPUCNT (mutes SPU audio, and also VCD audio) </LI>
+<LI>- cdrom/help: caution Unsupported GetQ,VCD,SecretUnlock do need clr param fifo  </LI>
+<LI>- bios-clone: forces clearing param fifo (after SecretUnlock and VCD detection) </LI>
+<LI>- bios clone: increased joypad-slot-select-delay (needed for SCPH-1150)         </LI>
+<LI>- bios clone: added video cd VCD software player (monochrome 10fps, 11kHz mono) </LI>
+<LI>- bios clone: uses compression for GUI and VCD player (for 128Kbyte expansion)  </LI>
+<LI>- bios clone: uses tighter flush cache code (with loop instead of unrolled loop)</LI>
+<LI>- cdrom loader: fixed crash upon newer .nrg files (those with "CUEX" chunks)    </LI>
+<LI>- vcd/help: specs for VCD format (iso, mpeg, mp2) (still lacks lowlevel details)</LI>
+<LI>- vcd/help: added pinout and component list for scph-5903 (video cd console)    </LI>
+<LI>- mdec/help: q_scale=0 disables zagzig (can be useful for raw YUV-to-RGB)       </LI>
+<LI>- mdec/help: added note on EOB not being required after full blocks             </LI>
+<LI>- mdec/emu: reproduces zagzig-disable, and eob being not required on full blocks</LI>
+<LI>- gpu/help: added GPU Versions chapter (all known old 160-pin gpu differences)  </LI>
+<LI>- card/help: updated Memory Card Notes (vmem, yaroze, compression, etc.)        </LI>
+<LI>- cdrom/help: added description for "cu2/bin files" (psio cdrom-image format)   </LI>
+<LI>- gui: fixed window positions/fullscr when taskbar at upper/left (thanx joseph) </LI>
+<LI>- mips/mem: emulates main ram waitstates for unaligned mem (lwl/swl/lwr/swr)    </LI>
+<LI>- expansion/kernel: added installer functions in menu, utility, remote access   </LI>
+<LI>- expansion/kernel: new nocash bios clone version for xplorer and datel carts   </LI>
+<LI>- expansion/emu: prevents flash commands to destroy memory at 2AAAh/5555h       </LI>
+<LI>- xplorer: supports Xplorer on 80x86 side (for PC parallel port to PSX) (xboo)  </LI>
+<LI>- xplorer: supports Xplorer on MIPS side (in expansion version of bios clone)   </LI>
+<LI>- gpu/help: added pinouts for old 160-pin GPU, dual-ported VRAM, and RGB chips  </LI>
+<LI>- poc/help: added details on garbage_byte for memory areas without ldrb support </LI>
+<LI>- poc/help: memory access times for ram/flash arm/thumb opcode/data reads       </LI>
+<LI>- poc/help: when rtc paused: rtc irq fires at 4096Hz (instead 1Hz)              </LI>
+<LI>- bios/mem: dynamically allocates psx bios (allows sizes bigger than 512Kbyte)  </LI>
+<LI>- mips/cop: somewhat emulates breakflags in bit0/bit1 of DCIC cop0r7 register   </LI>
+<LI>- snapshot: faster compression (omits large zerofilled areas from look-up-tree) </LI>
+<LI>- gpu: fixed crash on NTSC-auto-center in .INI file (pic.ysiz=0) (thanx ricardo)</LI>
+<LI>- help: added info on joy_mode.bit8 being clk polarity (thanx charles macdonald)
+<P>
+<HR>
+
+<FONT SIZE=+2>28 May 2014</FONT> no$psx v1.9 <A HREF="no$psx19.zip">[download]</A><BR>
+<LI>webpage: moved from http://nocash.emubase.de/ to http://problemkaputt.de/     </LI>
+<LI>hc05: low-level cdrom sub-cpu emulation (motorola mc68hc05 with cdrom bios)   </LI>
+<LI>hc05: setup: allows to select new low-level emu, older/faster high-level emu  </LI>
+<LI>hc05: setup: ignores hc05 low-level option if file MC68HC05.ROM is missing    </LI>
+<LI>hc05: setup: forces reset when changing between low-level and high-level emu  </LI>
+<LI>hc05: setup: prevents skipping mips-bios-intro in low-level cdrom emulation   </LI>
+<LI>hc05: cpu: emulates motorola hc05 opcodes and hc05 onchip I/O ports and timer2</LI>
+<LI>hc05: cpu: switches between mips/hc05 (on interval and on 1F80180xh access)   </LI>
+<LI>hc05: io: emulates servo amplifier and signal processor CX(nn) commands       </LI>
+<LI>hc05: io: emulates servo/signal SENSE result (with SERIAL SENSE on new chips) </LI>
+<LI>hc05: io: emulates decoder cmd/param/reply fifos and sector data transfers    </LI>
+<LI>hc05: io: emulates SUBQ spi bus transfers (for position and table of contents)</LI>
+<LI>hc05: scex: simulates serial scex bitstream (when DISK,near POS0,SINGLE speed)</LI>
+<LI>hc05: scex: simulates new subq channel "encrypted" scex signal (version vC3)  </LI>
+<LI>hc05: disc: creates SUBQ data for TOC (with point A0h,A1h,A2h,01h..NNh)       </LI>
+<LI>hc05: disc: skips nonsense track 0 (lead-in) entries in .nrg "CUES" chunks    </LI>
+<LI>hc05: sled-mech: supports sled move via FastSled and TrackJump commands       </LI>
+<LI>hc05: sled-mech: supports sled brake (with reduced kick and move voltages)    </LI>
+<LI>hc05: sled-mech: computes non-linear sector number versus sled seek distance  </LI>
+<LI>hc05: mech: simulates DOOR OPEN switch period (required to sense disc changes)</LI>
+<LI>hc05: mech: simulates POS0 switch (required for sled reverse lead-in seeking) </LI>
+<LI>hc05: mech: nag feature: simulates GFS=bad on spindle speed change (eg.spinup)</LI>
+<LI>hc05: mech: nag feature: forces GFS=bad and FOK=bad when disc missing         </LI>
+<LI>hc05: audio: forwards xa-adpcm data (on adpmnt) and cd-da data (when demuted) </LI>
+<LI>hc05: tty: logs incoming cmd/param fifo and outgoing irq/reply fifo transfers </LI>
+<LI>hc05: tty: logs CX(nn) commands (with description on known command/params)    </LI>
+<LI>hc05: tty: logs most recent MM:SS:FF alongsides with CX(nn) commands          </LI>
+<LI>hc05: bios: cdrom-image-loader treats 16.5K ".ROM" files as cdrom bios-images </LI>
+<LI>hc05: bios: autodetects chipset and oscillator (via CXDnnnn strings in BIOS)  </LI>
+<LI>hc05: debug: supports f6-key set pc, f4-key break, f7-key trace               </LI>
+<LI>hc05: debug: ctrl+t toggle between MIPS and HC05 debug view (if low level on) </LI>
+<LI>hc05: debug: optional bad I/O warnings (with CODE window moved to fault addr) </LI>
+<LI>hc05: debug: integrated low-level mode in debugger (re_read_io, vac, iomap)   </LI>
+<LI>hc05: snapshots: saves hc05 registers and memory and low-level/chipset type   </LI>
+<LI>hc05: help: added summary of used CX(nn) values for vC1,vC2,vC3 versions      </LI>
+<LI>hc05: help: add notes on sled motor control methods (move, brake, nonlinear)  </LI>
+<LI>hc05: help: add info on vC3 specials (TzcOut, NewScex, CX(nn0000)-padding)    </LI>
+<LI>hc05: help: add info on oscillator clocks, and openbus-reading effects        </LI>
+<LI>hc05: help: add motorola bootstrap info and cdrom bios dumping info/link      </LI>
+<LI>cdrom: doesn't set stat.read/play bits until seek completion (gran turismo 1) </LI>
+<LI>cdrom: slightly more accurate setloc (kept pending after seek_l/seek_p)       </LI>
+<LI>cdrom: computes average time per seek distance (faster than real hw though)   </LI>
+<LI>help: added note on DTL-H2000 using a Sony SPC700 sub-cpu (not Motorola HC05) </LI>
+<LI>setup: allows to select 0,1,2,or 8 memcards (workaround for problem in "One") </LI>
+<LI>debug: optional MIPS and HC05 tracelog function in TTY window (as in no$sns)  </LI>
+<LI>debug: new TTY buffer size option (1/10/100MB limit, with optional stop/wrap) </LI>
+<LI>debug: resolves ASCII datazones and a0h/b0h/c0h jump lists for DTL-H2000 bios </LI>
+<LI>tty: added "tty_force_newline" at begin of auto-generated (non-user) lines    </LI>
+<LI>cdrom: always uses low-level sector buffer (removed high-level buffer relicts)</LI>
+<LI>help: added info on DTL-H2000 memory and atcons/dip/led/etc I/O ports         </LI>
+<LI>help: added 176-pin CXD2941R pinouts (SPU+CDROM+SPU_RAM on PM-41(2) boards)   </LI>
+<LI>help: notes on missing cdrom commands in vC0 (1Dh+1Eh+5xh + 19h,22h..25h/7xh) </LI>
+<LI>help: fixed apu min/max typos, and cpu j/jal F0000000 typo (thanks mitikoro)  </LI>
+<LI>help: note on cache/cop0 info in LR3330/L64360 datasheets (thanks LostTemplar)</LI>
+<LI>a22i: added ".pack_crc32 result,initial" directive (use with ".pack_org")     </LI>
+<LI>a22i: added ".pack_chksum_xor8bit result" and ".pack_chksum_add8bit result"   </LI>
+<LI>snapshot: bugfix: removed duplicated "SECT" chunk name (cdrom sector buffer)  </LI>
+<LI>help: added new "PSX Dev-Board Chipsets" chapter (for DTL-Hnnnn boards, etc)  </LI>
+<LI>debug: fixed tty bios patch for cex-1000 (opcode 0FF019CDh instead 0FF019E1h) </LI>
+<LI>bios: gui doesn't mute cd-audio (eg. required for games like wipeout 2097)    </LI>
+<LI>bios: recognizes GetID result for unlicensed mode2 disks WITH audio tracks    </LI>
+<LI>debug: allows editing values in REGS window (alternately rx=nn in CODE window)</LI>
+<LI>bios clone: sends secret unlock commands (works/tested: boots without modchip)</LI>
+<LI>a22i: added mc68hc05 assembler (for testing/re-assembling cdrom sub-cpu bios) </LI>
+<LI>a22i: resurrected nocash-syntax in online assembler (if disass in nocash mode)</LI>
+<LI>help: hardware numbers: added sony's DTL-Hxxxx developer tool hardware numbers</LI>
+<LI>gpu/dma2: pre-checks linked-list size (and abort/warn if endless-link-chain)  </LI>
+<LI>spu: supports multi-block manual ram write (repeated spucnt=C010h; bios intro)</LI>
+<LI>spu/irq: emulates i_stat edge-triggering (gex,finalfantasy9,tokimekimemorial2)</LI>
+<LI>cdrom/irq: emulates i_stat edge-triggering (though rarely needed in practice) </LI>
+<LI>emu: emulates dirt effects on 8bit/16bit/32bit writes to various I/O ports    </LI>
+<LI>help: added details on multi-block manual spu ram writes, and on spu ram addr </LI>
+<LI>help: extra note on I_STAT bits being edge triggered (was already mentioned)  </LI>
+<LI>help: unpredictable things: added details on 8bit/16bit/32bit write effects   </LI>
+<LI>help: memctrl correction: 1F801020h.16-17 and FFFE0130h.8,11-31 are fully R/W </LI>
+<LI>spu: ignores writes to "read-only" registers (SPUSTAT and ENDX voice flags)   </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>03 Mar 2014</FONT> no$psx v1.8 <A HREF="no$psx18.zip">[download]</A><BR>
+<LI>new: plain gaming-version (miniaturized nonsense emulator without debugger)   </LI>
+<LI>snapshots: doesn't touch cdrom status/door on cdrom-loading (preserve snap)   </LI>
+<LI>sound: currently disabled new zigzag for slow 18900Hz xa-adpcm (eg. dracula)  </LI>
+<LI>dma: fixed crash on num_blks=0 (should act as 10000h) (Where's Derpy spu/dma) </LI>
+<LI>dma: updates dma address/length registers in special sync/chopping modes      </LI>
+<LI>setup/sound: volume slider (optionally hardware/mixer or software/multiply)   </LI>
+<LI>gpu/bugfix: wraps when DisplayBase+DisplayHeight exceeds 512-lines vram size  </LI>
+<LI>disass: shows valatcur for load/store opcodes (now also in native syntax mode)</LI>
+<LI>a22i: recognizes native mips assembler syntax (alternately to nocash syntax)  </LI>
+<LI>a22i: fixed crash on complex numeric expressions with missing close bracket   </LI>
+<LI>a22i: works without space character between labels and greater/less symbols   </LI>
+<LI>a22i: uses predef &lt;opc&gt; in opcode list, refuses 'pop' if SP-load-delay busy   </LI>
+<LI>gpu/speedup: omits rectangle tex-blending on color=808080h (eg. Where's Derpy)</LI>
+<LI>iomap: adds rect/fill/vram2vram time to gpu emu load (formerly only poly/line)</LI>
+<LI>bios clone: dummy A(9D) opcode for "set_conf_without_realloc" (Roll Boss Rush)</LI>
+<LI>help: added info on homebrew "set_conf_without_realloc" bios hack/patch       </LI>
+<LI>snapshots: survives snap loading even if old cdrom-image folder doesn't exist </LI>
+<LI>snapshots: added better (but slower) LZ-based .SNA file compression (optional)</LI>
+<LI>snapshots: includes BIOS ROM (for loading regardless of bios versions/clones) </LI>
+<LI>expansion rom: prevents skip_intro patch on expansions (which may hook intro) </LI>
+<LI>expansion rom: prevents tty_enable patch for caetla (which needs bios chksum) </LI>
+<LI>expansion rom: supports actionreplay and xplorer io ports (namely switch=on)  </LI>
+<LI>expansion rom: supports actionreplay 2x128K mapping and normal xplorer mapping</LI>
+<LI>bios-clone: fixed rename-function (added mov r4,r16)(ridgeracer sav overwrite)</LI>
+<LI>gpu: prevents better-than-real-quads on concave/twisted quads (crashbandicoot)</LI>
+<LI>timers: supports separate dest/overflow events, completion flags, dest changes</LI>
+<LI>help: added specs and cautions on cdrom autopause (or autostop) feature       </LI>
+<LI>cdrom: implemented autopause feature with INT4(stat) on end of track (Rayman) </LI>
+<LI>gpu: CpuToVram wraps from x=3FFh to X=000h with Y=SAME (Alundra memcard save) </LI>
+<LI>gpu: fixed polygon height limit (don't draw if height>=512) (for Spiderman)   </LI>
+<LI>cdrom: implemented authentic 2nd_response timings (Gundam Battle Assault 2)   </LI>
+<LI>help: added 'CDROM - Response Timings' chapters (some min/max/average timings)</LI>
+<LI>help: corrected cdrom GetID description (only one response on DoorOpen/SpinUp)</LI>
+<LI>vram viewer: forces "swap_buffers" after timeout (avoids dracula mem overflow)</LI>
+<LI>cpu: emulates cop0 bpc/bpcm opcode fetch breaks (for cheat device booting)    </LI>
+<LI>help: fixed cop0 debug break description (bpc-then-bpcm, not vice-versa)      </LI>
+<LI>bios-clone: added dummy "add r4,0,385h" opcode at (for Xplorer bios hook)     </LI>
+<LI>bios-clone: moved gui-entrypoint to 80030000h (for Action Replay bios hook)   </LI>
+<LI>cdrom/bugfix: bugfixed new cdrom-dma timing; minus intcount (dino crisis 1-2) </LI>
+<LI>fileloader: allows to load/debug/emulate expansion roms (.rom and .fcd files) </LI>
+<LI>help: new Cheat Devices chapter (code formats, i/o ports, decryption, etc)    </LI>
+<LI>web: new no$psx forum: http://ngemu.com/forums/no-psx-discussion.147/         </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>26 Nov 2013</FONT> no$psx v1.7 <A HREF="no$psx17.zip">[download]</A><BR>
+<LI>gpu/detail: added dithering for tex-blended POLYs (unlike tex-blended RECTs)  </LI>
+<LI>gpu/detail: added dithering for monochrome LINEs (unlike mono POLYs and RECTs)</LI>
+<LI>gpu/detail: faster gouraud rendering when dithering is off (no dummy dither)  </LI>
+<LI>gpu/bugfix: swapped setmask/chkmask in cpu-to-vram transfer (fixes RC Revenge)</LI>
+<LI>gte/detail: supports 32bit rtps/rtpt overflows (fixes R4 Ridge Racer Type 4)  </LI>
+<LI>dma: added delay before DMA1 IRQs (fixes DinoCrisis1+2,FearEffect,Xenogears)  </LI>
+<LI>dma: pauses CPU during DMA (more accurate and releases cpu emulation load)    </LI>
+<LI>dma: accepts non-standard control values (with warning) (instead of rejecting)</LI>
+<LI>mdec: low level IDCT emulation (slow, used only for nonstandard scaletable)   </LI>
+<LI>mdec: accurate RLE emulation (with rounding, saturation, and quant disable)   </LI>
+<LI>mdec: emulates status bit31 (data.out.fifo not empty) (for manual reading)    </LI>
+<LI>dma/mdec: removed pusha/popa pairs (allows to modify mips intcount register)  </LI>
+<LI>help: gpu: corrected dithering info (different cases for polys/lines/rects)   </LI>
+<LI>help: add notes on CPU being stopped during DMA (and resumed between blocks)  </LI>
+<LI>help: added info on the two DMA "start" flags (start/busy and start/trigger)  </LI>
+<LI>help: added list of commonly used DMA control register values for DMA starting</LI>
+<LI>help: added basic info on DMA transfer timings and DRAM hyper page mode       </LI>
+<LI>help: added info on DMA chopping mode (runs CPU during gaps in DMA transfer)  </LI>
+<LI>help: mdec/y_to_mono: supports only max 9bit (bigger values aren't saturated) </LI>
+<LI>help: mdec/idct: added note that scaletable uses upper 13bit only (not 16bit) </LI>
+<LI>help: mdec/idct: low level idct formula (diagonally mirrored matrix multiply) </LI>
+<LI>help: mdec/rle: rle result is rounded up (plus 4 before div 8)                </LI>
+<LI>help: mdec/rle: rle result is saturated to signed 11bit range                 </LI>
+<LI>help: mdec/rle: q_scale=0 forces n*2 instead of n*qt[k], or n*qt[k]*q_scale   </LI>
+<LI>help: fast mdec decoder: simplified idct_core (flipped src/dst instead of x/y)</LI>
+<LI>help: fast mdec decoder: fixed "scalezag" pseudo code (divide entries by 8)   </LI>
+<LI>help: added IC703 "SONY CXA1791N" pinouts (RF Amplifier on PU-18 boards)      </LI>
+<LI>help: added notes on Garbage Area at Address 00000000h (for R-Types/FadeToB)  </LI>
+<LI>debug: profiler supports dma transfer logging (shown as "DMAn.subfunctions")  </LI>
+<LI>debug: iomap resolves timer clock-source, sync-mode, and some timer flags     </LI>
+<LI>debug: tty irq-logging shows dma channel names(s) that have caused dma-irq3   </LI>
+<LI>debug: tty gpu-command-logging (can log more than 1 frame, unlike vram viewer)</LI>
+<LI>screenshot: fixed num_colors entry in truecolor bmp header (1 SHL bpp AND 1FE)</LI>
+<LI>screenshot: fixed auto-generated screenshot filenames (.bmp instead .gif)     </LI>
+<LI>bios: fixed messed-up stack in bios clone's do_exec (fixes developers demo)   </LI>
+<LI>bios: applies [00000004h]=275A0C80h garbage (required for bugged FadeToBlack) </LI>
+<LI>bios: applies [00000000h]=00000003h garbage (required for bugged R-Types)     </LI>
+<LI>bios: skips "patch_missing_cop0r13_nonfunctional" (bugged hitmen/minimum demo)</LI>
+<LI>cd/loader: accepts cue/bin with 920h-byte sectors (eg. pdx-rh.cue demo)       </LI>
+<LI>controls: changed default to digital joypad (avoids incompatibility issues)   </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>11 Oct 2013</FONT> no$psx v1.6 <A HREF="no$psx16.zip">[download]</A><BR>
+<LI>cd/help: added notes on sub-cpu mainloop/response/priority/timing/queue/flags </LI>
+<LI>cd/emu: simplified 1st/2nd/3rd response slots (instead overcomplicated queue) </LI>
+<LI>debug: optional IRQx logging to tty window (plus detailed cdrom INTxx info)   </LI>
+<LI>cd/emu: emulates exact filter/realtime handling for adpcm and data sectors    </LI>
+<LI>cd/help: added notes on data/adpcm sector filtering/delivery on cdrom-reading </LI>
+<LI>cd/help: added almost perfect xa-adpcm zig-zag-interpolation formula/tables   </LI>
+<LI>cd/help: added note on unitialized six-step adpcm interpolation counter       </LI>
+<LI>cd/help: added flowchart for using sound map mode (with random 3-slot caution)</LI>
+<LI>cd/emu: emulates 8bit xa-adpcm decompression (unlike normal 4bit xa-adpcm)    </LI>
+<LI>cd/emu: emulates xa-adpcm zig-zag-interpolation (37.8 to 44.1kHz resampling)  </LI>
+<LI>cd/emu: bugfixed xa-adpcm (did destroy sixstep "extra_offhold" inside of lop) </LI>
+<LI>cd/emu: emulates newly discovered MotorOn command (and its various errors)    </LI>
+<LI>cd/help: added some basic notes and waveform example for xa-emphasis feature  </LI>
+<LI>cd/emu: emulates invalid xa-adpcm filter=4..15 and invalid shift=13..15 values</LI>
+<LI>cd/emu: added basic soundmap emulation (works at least to play one 900h unit) </LI>
+<LI>cd/help: added notes on invalid xa-adpcm filter=4..15 and shift=13..15 values </LI>
+<LI>spu: bugfixed cd.audio.capture buffer (is NOT affected by cd.audio volume)    </LI>
+<LI>cd/help: added notes on newly discovered secret_unlock feature (command 5xh)  </LI>
+<LI>cd/myth/help: eliminated "Standby" myth (actual function of cmd 7 is MotorOn) </LI>
+<LI>cd/help: added notes on peak bytes for Play+Report (and incomplete GetQ peak) </LI>
+<LI>cd/help: added details on purpose/function of all cdrom test commands         </LI>
+<LI>cd/help: discovered more test commands (supported on older PSX consoles only) </LI>
+<LI>cd/help: added specs for CXA1782BR cdrom servo amplifier registers            </LI>
+<LI>cd/help: added specs for CXD2510Q cdrom signal processor registers            </LI>
+<LI>cd/help: added specs for CXD2545Q cdrom combined servo + signal processor     </LI>
+<LI>cd/help: added specs for CXD1199BQ/CXD1815Q cdrom decoder/fifo registers      </LI>
+<LI>cd/help: added specs for MC68HC05 on-chip I/O Ports (and their usage in psx)  </LI>
+<LI>cd/help: added notes on GetID's ATIP byte, and on POS0 flag in sub_func 21h   </LI>
+<LI>cd/help: removed nonsense sub_function numbers from ancient cdinfo.txt        </LI>
+<LI>cd/help: added info on some formerly unknown CD-XA bytes (in the LEN_SU area) </LI>
+<LI>cd/help: added subheader CI coding info bits (adpcm emphasis and 8bit/sample) </LI>
+<LI>cd/help: added notes on more cd-xa fields in primary volume descriptor        </LI>
+<LI>poc/help: added some pocketstation details (LED, mirrors, exceptions, etc)    </LI>
+<LI>help: added notes on PU-7 chipset (different cdrom/spu/gpu/cpu/bios chips)    </LI>
+<LI>bios: added patch_uninstall_early_card_irq_handler_efficient (thanks shendo)  </LI>
+<LI>gui: setup uses asia-compatible TabControl instead of unreliable PropertySheet</LI>
+<LI>dma3/cdrom and dma6/otc: treats len=0 as length=10000h words (=256 kbytes)    </LI>
+<LI>cdrom data fifo: uses [800h-8] or [924h-4] as padding-byte after sector end   </LI>
+<LI>gui: fullscreen mode preserves real aspect ratio (padded with black border)   </LI>
+<LI>gui: fullscreen mode moved to context menu (instead of old setup option)      </LI>
+<LI>gui: created mouse-shape-less No$helpClass (avoid flickering mouse pointer)   </LI>
+<LI>debug: supports MC68HC05.ROM bios loading (16.5K) (for disasm at 50001000h)   </LI>
+<LI>debug: re-arranged gte registers in iomap (fixed overlapping text fields)     </LI>
+<LI>debug: added dummy-mappings: 50000000h=mc68hc05 memory/mc68hc05 disassembler  </LI>
+<LI>debug: added dummy-mappings: 60000000h=vram, and 70000000h=spu-ram            </LI>
+<LI>debug/help: added disassembler and specs for mc68hc05 cpu (cdrom coprocessor) </LI>
+<LI>spu/help: corrected spu-irq description (irq9 does trigger also on spu-dma)   </LI>
+<LI>credits: big thanks to psxdev.ru for cdrom 68hc05 sub-cpu decapping           </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>23 May 2013</FONT> pocketstation emulation released <A HREF="gba.htm">[link]</A><BR>
+released pocketstation emulation (as part of <A HREF="gba.htm">no$gba</A> v2.7)
+(the pocketstation is a PSX memory card with LCD screen; it's emulated in
+no$gba because GBA and pocketstation are both based on ARM processors).
+<P>
+<HR>
+
+<FONT SIZE=+2>25 Apr 2013</FONT> no$psx v1.5 <A HREF="no$psx15.zip">[download]</A><BR>
+<LI>multimachine: implemented cdrom load to "all machines" option (default)       </LI>
+<LI>multimachine: fixed cdrom loader load to "1st/2nd/3rd/4th machine" options    </LI>
+<LI>multimachine: bugfix: doesn't try to use "seed_vals" for newly added machines </LI>
+<LI>multimachine: bugfix: doesn't hang on invalidated windows of removed machines </LI>
+<LI>multimachine: apply autostart/reset only to machines with newly loaded cdroms </LI>
+<LI>multimachine: apply_bios_patches now applied to ALL machines (eg skip intro)  </LI>
+<LI>sizing: added fullscreen mode, and added sizing/maximize in multimachine mode </LI>
+<LI>memcards: now saved as *.mcd in new MEMCARD subdirectory (formerly no$psx.mcN)</LI>
+<LI>memcards: first card: &lt;cdrom_filename&gt;.mcd (auto-excluding "(DiscN)" etc.)    </LI>
+<LI>memcards: others: "_MM_N_X_mcd" (MM=machine1..12, N=slot1/2, X=sub-slotA..D)  </LI>
+<LI>memcards: prevents &lt;cdrom_filename&gt;.mcd creation on sector 03Fh dummy writes  </LI>
+<LI>memcards: added support for multitap memcards (IDs 82h..84h in slot 1..2)     </LI>
+<LI>gpu: help/emu: added textured-rectangle-xyflip feature (thanks William Birkin)</LI>
+<LI>gte: help/emu: reproduced real GTE division inaccuracies (thanks ogamespec)   </LI>
+<LI>cdrom: help/emu: cdrom is initially demuted (fixes missing audio in v1.3+v1.4)</LI>
+<LI>cdrom: ignores nonzero writes to unused bits (without suppressing other bits) </LI>
+<LI>cdrom: removed "cdrom response overkill" warning (some games may survive it)  </LI>
+<LI>spu: emulates spu-capture-buffer interrupt (needed for crash team racing)     </LI>
+<LI>spu: allows glitchless spu-ram-read (as far as [1F801014h].bit24-27=nonzero)  </LI>
+<LI>spu: added "generate_sample_till_now" for updating spustat and endx on reads  </LI>
+<LI>spu: better key_on handling (supporting lead_delay, and forced adpcm start)   </LI>
+<LI>spu: better LOOP-END behaviour (ENDX flag, plus optional mute+release)        </LI>
+<LI>spu: implemented fully functional 8bit/32bit reads from 16bit spu registers   </LI>
+<LI>spu: help/emu: dumped/documented gauss_table and emulated adpcm interpolation </LI>
+<LI>spu: help/emu: tested/documented pitch_modulation effect and emulated it      </LI>
+<LI>spu: help/emu: max adpcm pitch (clip values in range 4000h..FFFFh to fastest) </LI>
+<LI>help: added info on no$psx debug hotkeys and memory access breakpoints        </LI>
+<LI>help: added info on glitchless spu-ram-read (used by Herc's Adventures)       </LI>
+<LI>help: added info on cdrom sector buffer (has 8 slots, but only 2 accessible?) </LI>
+<LI>help: added some basic notes on psx-based arcade cabinets                     </LI>
+<LI>pinouts: added IC106-109,IC202,IC303,IC305,IC307,IC309,IC501,IC701,IC723,ICsss</LI>
+<LI>pinouts: improved IC304,IC602 pinouts (also IC405, but it's still unclear)    </LI>
+<LI>gui: created own help engine (instead of microcrap's suicidal windows .hlp)   </LI>
+<LI>gui: discovered and fixed major resource leak (destroymenu on context menu)   </LI>
+<LI>debug: added user cycle-counter in iomap (profiling purposes), added ctrl+e   </LI>
+<LI>debug: added optional DMA logging in TTY window (shows chn,addr,len,ctrl,name)</LI>
+<LI>bios: tweaked "bizarre_outdated_pad" function to accept joypads in analog mode</LI>
+<LI>vram viewer: bug-fixed "@@app_raw_blend" (test bit0, instead of test "al")    </LI>
+<LI>webpage: updated info on my current monetary stats (small donations welcome)  </LI>
+<LI>webpage: updated txt/htm versions of the psx-spx playstation specifications   </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>19 Mar 2013</FONT> no$psx v1.4 <A HREF="no$psx14.zip">[download]</A><BR>
+<LI>gpu: vram-fill-cmd: fixed size/wrapping/rounding/masking for GP0(02h)         </LI>
+<LI>gpu: vram-copy-cmd: fixed size/wrapping (die hard trilogy 2 uses xsiz=FFFEh)  </LI>
+<LI>cdrom loader: loads some relevant cdrom "root" sectors (with date/region info)</LI>
+<LI>cdrom: for .exe files, forwards region from EXE header to cdrom licence sector</LI>
+<LI>cdrom: produces SCEx string matched to region (from cdrom licence sector)     </LI>
+<LI>cdrom: supports setloc+play (without seek command) (used by Tactics Ogre)     </LI>
+<LI>video: matches game-window-height to pal/ntsc region (and width to 4:3 ratio) </LI>
+<LI>video: allows free game window sizing (with snapping near N*100% zoom factors)</LI>
+<LI>controls: automatic analog/digital joypad mode support (based on iso date)    </LI>
+<LI>controls: emulates analog joypad (with analog axes, config cmds, and L3/R3)   </LI>
+<LI>controls: emulates analog joystick (with ID=5A53h, without L3/R3 buttons)     </LI>
+<LI>controls: emulates namco-guncon-lightgun (via mouse)                          </LI>
+<LI>controls: emulates sony-mouse-controller (via mouse)                          </LI>
+<LI>controls: emulates dancemat (via Q,W,E,A,D,Z,X,C or numeric keypad)           </LI>
+<LI>controls: suppresses L3/R3 buttons in digital joypad mode                     </LI>
+<LI>help: added caution on delay between slot.sel and 1st.cmd.byte (analog pad)   </LI>
+<LI>help: added plugging and unplugging cautions for controllers and memory cards </LI>
+<LI>help: added info on analog joypad range (mechanical/digital/centering areas)  </LI>
+<LI>help: added dance mat specs (as far as known; which leaves many questions)    </LI>
+<LI>help: added notes on unknown mouse bits and on konami lightgun "x0h" byte     </LI>
+<LI>help: added lots of basic info on the different psx fishing controllers       </LI>
+<LI>help: added some basic info on i-mode adpator (part number and list of games) </LI>
+<LI>help: added note on super-early irq10 lightgun patch (hooked 00000080h vector)</LI>
+<LI>help: added multitap specs (memcard access, and two controller access methods)</LI>
+<LI>help: added note on BIOS "buNN:" support (and problems) for multitap slots A-D</LI>
+<LI>help: added note on cdrom auto-pause function for end-of-audio-tracks         </LI>
+<LI>help: added component list/chipset pin-out for multitap and digital/analog pad</LI>
+<LI>help: corrected guncon specs (VERY different as in sporting clays source code)</LI>
+<LI>help: corrected gpu vram fill/copy command specs (size/wrapping/rounding/etc) </LI>
+<LI>help/cdrom: specs and support for older v1 (and v0) .cdz file format versions </LI>
+<LI>controls: allows to assign analog-PC-axis as digital-PSX-button (xbox 360 pad)</LI>
+<LI>debug: added optional joypad-command logging to TTY window (see TTY menu bar) </LI>
+<LI>bios: pad_card_sweep_stuck_ack (when possible sweep stuck ack before access)  </LI>
+<LI>bios: pad_card_timeout_value (prevent hanging on stuck ack during access)     </LI>
+<LI>bios: pad_card_post_sel_delay (for slow devices like mouse and analog joypad) </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>26 Jan 2013</FONT> no$psx v1.3 <A HREF="no$psx13.zip">[download]</A><BR>
+<LI>video: new rendering modes: 32bpp (mostly for MDECs), 8bpp (for old PCs), Auto</LI>
+<LI>video: supports horizontal screen centering and left/right screen borders     </LI>
+<LI>video: matched PAL vertical centering to values used by "majority" of games   </LI>
+<LI>video: fixed lower-border rendering (always using xsiz instead xsiz_div16)    </LI>
+<LI>video: optional forced-automatic-centering (recommended for chaotic PAL games)</LI>
+<LI>video: optional better-than-real rendering with quads instead of triangles    </LI>
+<LI>gpu: supports linestrips with uncommon end-codes (Wild Arms 2 uses 50005000h) </LI>
+<LI>cdrom: supports .sub files (for libcrypt, and for .ccd's without index 0)     </LI>
+<LI>cdrom: supports .cdz files (and optionally deleting them after decompression) </LI>
+<LI>cdrom: supports error on "standby" command (used by Nightmare Creatures 2)    </LI>
+<LI>cdrom: supports (de-)mute (avoid noise during modchip detect in Dino Crisis 1)</LI>
+<LI>cdrom: seek+setloc goto sectors before target (not to target) (tomb raider 2) </LI>
+<LI>cdrom: seek aborts reading (for Wild Arms 1 which lacks preceeding pause cmd) </LI>
+<LI>cdrom: seek updates data for any following getloc (needed for Resident Evil 1)</LI>
+<LI>cdrom: added getloc_l errors during seek (required for legacy of kain intro)  </LI>
+<LI>cdrom: added newly discovered cd xa adpcm-buffer-empty-flag (1F801800h.bit2)  </LI>
+<LI>cdrom: fixed subchannel-Q crc_16_ccitt byte-order (crc must be big-endian)    </LI>
+<LI>cdrom: odd stuff like setloc+read+setloc+read+pause+read+pause+read combos    </LI>
+<LI>vram-viewer: shows logged GPU command origins (CPU PC and DMA start/link)     </LI>
+<LI>vram-viewer: shows laser-arrow for GP0(E3h,E4h,E5h) commands draw area/offset </LI>
+<LI>vram-viewer: allows tree-access after run (fill_3d_poly_tree_if_any_if_needed)</LI>
+<LI>vram-viewer: prevents mishandled ESC-key in hex-gpu-command child window      </LI>
+<LI>debug: dynamic data/break-list allocation (no more limit on .sym datazones)   </LI>
+<LI>bios: added "patch_missing_cop0r13_14opcodes_k0_k1" variant (ridge racer)     </LI>
+<LI>help: added details on gpu-linestrip end-code and various new cdrom details   </LI>
+<LI>help: added "information" on Xe Multi System Emulator's CD Image File Format  </LI>
+<LI>help: added notes on chaotic screen centering values used by most PAL games   </LI>
+<LI>icon: psx button-style icon symbols, at 12x12,16x16,32x32,48x48 pix sizes     </LI>
+<LI>web: uploaded photos of the psx-xboo bios and parallel port upload circuit    </LI>
+<LI>web: added nonazi logo (we are no longer mass-murdering ourselves in germany) </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>06 Jan 2013</FONT> no$psx v1.2 <A HREF="no$psx12.zip">[download]</A><BR>
+<LI>audio: supports 16bit sound output (less noisy on compressed adpcm samples)   </LI>
+<LI>audio: supports mono output or disabled sound output (without crashing emu)   </LI>
+<LI>emu: avoids triggering f8_brk_handler upon sp=FFFFFFFFh (Crash Bandicoot 3)   </LI>
+<LI>emu: avoids warnings on writes to invalid io ports (unless warnings enabled)  </LI>
+<LI>video: supports GP0(35h,37h,3Dh,3Fh) unused-shading commands (castlevania)    </LI>
+<LI>video: added display brightness option (nonlinear bright, or linear dark)     </LI>
+<LI>video: overscan: skips hidden upper scanlines (mainly for NTSC games)         </LI>
+<LI>video: underscan: draws black upper/lower borders (mainly for PAL games)      </LI>
+<LI>debug: memorizes old PC on emulation start (for undo "jump" via cursor left)  </LI>
+<LI>debug: input boxes recognize hi,lo,pc registers (eg. for ctrl+g, goto pc)     </LI>
+<LI>debug: option: allows to disable single, or multi-word disass pseudo opcodes  </LI>
+<LI>debug: added optional cdrom-command logging to TTY window (see other options) </LI>
+<LI>setup: enabled automatic-save-options by default, removed fixed settings      </LI>
+<LI>a22i: rejects overflow-trap-flag (t) on logical commands (via mipass_logi_inj)</LI>
+<LI>bios: fixed "extract_device_name" return value (for castlevania's "sim:")     </LI>
+<LI>bios: fixed "krom_2_offset" calculation: (msb-88h)*BCh+(lsb&lt;7Fh)+lsb-9Fh   </LI>
+<LI>bios: added "patch_install_lightgun_irq_handler_inefficient" (dqm)            </LI>
+<LI>bios: added "patch_uninstall_early_card_irq_handler_inefficient" (raiden dx)  </LI>
+<LI>bios-font: 1st choice: use copy of font from psx-bios.rom (if present) (fast) </LI>
+<LI>bios-font: 2nd choice: use formerly created no$psx.chr (if present) (fast)    </LI>
+<LI>bios-font: 3rd choice: create no$psx.chr from japanese 4Mbyte MS Gothic (slow)</LI>
+<LI>bios-font: 4th choice: otherwise use non-japanese font from Courier New (fast)</LI>
+<LI>bios-font: 5th choice: dummy rectangles (non-blanks required for castlevania) </LI>
+<LI>selftest: shows CPU, GPU, and SPU emulation load (in iomap "timers" window)   </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>28 Dec 2012</FONT> no$psx v1.1 <A HREF="no$psx11.zip">[download]</A><BR>
+<LI>audio: bugfixed right-channel CD-XA stereo decompression (allows xa_mask.bit1)</LI>
+<LI>audio: bugfixed left-channel CD-XA stereo decompression (pushes extra offhold)</LI>
+<LI>gpu: changed initial texcoord fraction (for ff tactics, but isn't perfect yet)</LI>
+<LI>cdrom: supports images with mixed sector sizes (in different tracks/areas)    </LI>
+<LI>cdrom: supports libcrypt subchannel data from .sbi, .m3s, .mdf                </LI>
+<LI>cdrom: supports .cdi (discjuggler) images, supports .ecm file decompression   </LI>
+<LI>cdrom: supports .mds/.mdf (alcohol) and .ccd/.img (clonecd) images            </LI>
+<LI>cleanup: removed "uh" warning on nonstandard/pocketstation memcard commands   </LI>
+<LI>cleanup: removed 'err80h' warning on uncommon/inaccurate seek_p cdrom command </LI>
+<LI>bios: added "patch_optional_pad_output_inefficient_variant" (lemmings)        </LI>
+<LI>debug: bugfixed step-over via f3-key (on call/syscall aka jal/jalr/syscal)    </LI>
+<LI>debug: bugfixed native mips disassembler syntax (use dis_proc_native_retry)   </LI>
+<LI>setup: moved loadbios_firsttime after loadsetup (using Default BIOS option)   </LI>
+<LI>help: added subchannel-image chapter (.sbi, .m3s, .mdf, .sub, .cdi, .nrg)     </LI>
+<LI>help: added .cdi (discjuggler) cd format, and ecm (pseudo-compression) specs  </LI>
+<LI>help: added .mds/.mdf (alcohol) and .ccd/.img/.sub (clonecd) cd format specs  </LI>
+<LI>help: added libcrypt info (16bit key, sectors, crc, cop0regs, example, etc.)  </LI>
+<LI>help: added formerly unknown license strings (JP="Inc.",0Ah, US="Amer  ica")  </LI>
+<LI>keyboard: removed ALT+X=exit hotkey during emulation (conflicted with joypad) </LI>
+<LI>iomap: shows CD-audio playback mode (18900Hz/37800Hz/44100Hz, mono/stereo)    </LI>
+<LI>setup: allows to disable MMX (just for curiosity/testing purposes)            </LI>
+<P>
+<HR>
+
+<FONT SIZE=+2>03 Dec 2012</FONT> no$psx v1.0 <A HREF="no$psx10.zip">[download]</A> first release<BR>
+<B>The Emulation</B> should be complete with all hardware features fully
+  implemented and working, though as by now it's tested with only a dozen
+  of games, so there may be still some problems with other games (bug reports
+  are welcome).<BR>
+<B>The BIOS</B> is emulated via a BIOS-clone, which is free and faster than the
+  original PSX-BIOS. There may be still some compatibilty issues (especially as
+  most PSX games are applying patches the to original BIOS; the BIOS clone is
+  reproducing known patches, but may fail on unknown ones). In case of problems,
+  it may be recommended to use a copy of the original BIOS (with filename
+  PSX-BIOS.ROM in no$psx folder).<BR>
+<B>CDROMs</B> are supported via real CDROM drive, via complete disk images
+  (in .NRG or .CUE+BIN format), via single-track images (.ISO files), or as
+  raw executables (.EXE files).<BR>
+<B>Requirements</B> are 1-2GHz, which is maybe not so fast (other PSX emulators
+  are said to be working at 200MHz). CPU emulation is currently done on the fly
+  (I might get that faster by using pre-compiled code in future versions).
+  Rendering is done by software (I could maybe improve speed by adding dual core
+  processor support) (another way would be using hardware acceleration, but my
+  experiences are that this stuff isn't too pixel accurate, if it's working at
+  all).<BR>
+<B>Debugging/Development</B> functions include disassembler, debugger,
+  breakpoints, assembler, I/O map viewer, VRAM viewer, polygon viewer,
+  TTY console window, and complete PSX hardware specs.<BR>
+<B>Updates</B> are planned, I'd love to spend more months on the PSX. The
+  problem is that I am almost totally broke, eventually I can get through
+  December, but in January I might start needing to borrow money from my
+  parents. That would help me temporarily, but, in long term, I don't want to
+  become <I>"the guy that gets paid by his parents for making emulators"</I>.
+  So far, it would be a <B>big relief</B> if more people would click the
+  donate button - money is scaring me, and I don't need much of it, but I
+  could really need some support. If you like the program and can afford a
+  donation: Please help!<BR>
+  <A HREF="donate.htm"><IMG SRC="donate.gif" WIDTH=62 HEIGHT=31></A>
+<P>
+<HR>
+<FONT SIZE=+2>17 Feb 2008</FONT> no$psx project started<BR>
+<B>The no$psx project</B> was started in 2008. Alltogether it took around
+  12 or 15 months fulltime work until reaching a well working state.
+  Thereafter, I felt pretty much brain-washed, and needed a long break,
+  until finally getting around to adding final details for the first release
+  in 2012.<BR>
+<B>Credits</B> big thanks to doomed for releasing all the TXT files with
+  PSX specs back in late nineties.<BR>
+<HR>
+<P>
+<A HREF="psx.htm">back to no$psx page</A>
